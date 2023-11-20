@@ -15,12 +15,12 @@ const config = {
   onBrokenLinks: 'ignore',
 
   baseUrl: '/klaytn-docs/',
-  url: 'https://localhost:3000',
+  url: 'https://devwriting.com',
 
   organizationName: 'klaytn',
   projectName: 'klaytn-docs',
   deploymentBranch: 'migration-deploy',
-  trailingSlash: false,
+  trailingSlash: true, // was "false"
 
   i18n: {
     defaultLocale: 'en',
@@ -69,9 +69,9 @@ const config = {
     ({
       algolia: {
         contextualSearch: true,
-        appId: 'YOUR_APP_ID',
-        apiKey: 'YOUR_SEARCH_API_KEY',
-        indexName: 'YOUR_INDEX_NAME',
+        appId: '8CTSIJ444T',
+        apiKey: '5d557e0c45ed20f53b1464a9e8bea5a2',
+        indexName: 'my-first-index',
       },
       navbar: {
         title: 'Klaytn Docs',
@@ -81,6 +81,30 @@ const config = {
         },
         items: [
           {
+            to: "docs/learn",
+            position: 'left',
+            sidebarId: 'learnSidebar',
+            label: 'Learn',
+          },
+          {
+            to: "docs/build",
+            position: 'left',
+            sidebarId: 'buildSidebar',
+            label: 'Build',
+          },
+          {
+            to: "docs/nodes",
+            position: 'left',
+            sidebarId: 'nodeSidebar',
+            label: 'Nodes',
+          },
+          {
+            to: "docs/references",
+            position: 'left',
+            sidebarId: 'refSidebar',
+            label: 'References',
+          },
+/*          {
             type: 'doc',
             docId: 'intro',
             position: 'left',
@@ -96,7 +120,7 @@ const config = {
             href: 'https://developer.klaytn.foundation',
             label: 'Dev Hub',
             position: 'left',
-          },
+          },*/
           {
             type: 'docsVersionDropdown',
             position: 'right',
