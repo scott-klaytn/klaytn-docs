@@ -19,11 +19,9 @@ None
 
 **Return Value**
 
-<!--- fix this later
 | Type | Description |
 | --- | --- |
-| QUANTITY | The integer of the network identifier. - `"1001"`: Klaytn Baobab testnet. - `"8217"`: Klaytn Cypress mainnet.|
---->
+| QUANTITY | The integer of the network identifier. <br/>- `"1001"`: Klaytn Baobab testnet. <br/>- `"8217"`: Klaytn Cypress mainnet.|
 
 **Example**
 
@@ -135,11 +133,9 @@ None
 
 **Return Value**
 
-<!--- fix this later
 | Type | Description |
 | --- | --- |
-| QUANTITY | The integer of the klaytn protocol version. - `"1001"`: Klaytn Baobab testnet. - `"8217"`: Klaytn Cypress mainnet.|
---->
+| QUANTITY | The integer of the klaytn protocol version. <br/>- `"1001"`: Klaytn Baobab testnet. <br/>- `"8217"`: Klaytn Cypress mainnet.|
 
 **Example**
 

@@ -1,18 +1,186 @@
 {
   "version.label": {
-    "message": "Next",
+    "message": "최신",
     "description": "The label for version current"
   },
-  "sidebar.tutorialSidebar.category.클레이튼 개요": {
-    "message": "클레이튼 개요",
-    "description": "The label for category 클레이튼 개요 in sidebar tutorialSidebar"
+  "sidebar.learnSidebar.category.트랜잭션": {
+    "message": "트랜잭션",
+    "description": "The label for category 트랜잭션 in sidebar learnSidebar"
   },
-  "sidebar.tutorialSidebar.category.클레이튼 디자인": {
-    "message": "클레이튼 디자인",
-    "description": "The label for category 클레이튼 디자인 in sidebar tutorialSidebar"
+  "sidebar.learnSidebar.category.계산": {
+    "message": "계산",
+    "description": "The label for category 계산 in sidebar learnSidebar"
   },
-  "sidebar.tutorialSidebar.category.클레이튼 2.0": {
+  "sidebar.learnSidebar.category.클레이튼 2.0": {
     "message": "클레이튼 2.0",
-    "description": "The label for category 클레이튼 2.0 in sidebar tutorialSidebar"
+    "description": "The label for category 클레이튼 2.0 in sidebar learnSidebar"
+  },
+  "sidebar.buildSidebar.category.시작하기": {
+    "message": "시작하기",
+    "description": "The label for category 시작하기 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.계정 기본 사항": {
+    "message": "계정 기본 사항",
+    "description": "The label for category 계정 기본 사항 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.스마트 컨트랙트": {
+    "message": "스마트 컨트랙트",
+    "description": "The label for category 스마트 컨트랙트 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.IDE 및 도구": {
+    "message": "IDE 및 도구",
+    "description": "The label for category IDE 및 도구 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.스마트 컨트랙트 배포": {
+    "message": "스마트 컨트랙트 배포",
+    "description": "The label for category 스마트 컨트랙트 배포 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.샘플 컨트랙트": {
+    "message": "샘플 컨트랙트",
+    "description": "The label for category 샘플 컨트랙트 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.튜토리얼": {
+    "message": "튜토리얼",
+    "description": "The label for category 튜토리얼 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.Count dApp 빌드하기": {
+    "message": "Count dApp 빌드하기",
+    "description": "The label for category Count dApp 빌드하기 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.프론트엔드 코드 개요": {
+    "message": "프론트엔드 코드 개요",
+    "description": "The label for category 프론트엔드 코드 개요 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.Klaystagram 빌드": {
+    "message": "Klaystagram 빌드",
+    "description": "The label for category Klaystagram 빌드 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.도구": {
+    "message": "도구",
+    "description": "The label for category 도구 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.지갑": {
+    "message": "지갑",
+    "description": "The label for category 지갑 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.Klaytn Safe": {
+    "message": "Klaytn Safe",
+    "description": "The label for category Klaytn Safe in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.지갑 라이브러리": {
+    "message": "지갑 라이브러리",
+    "description": "The label for category 지갑 라이브러리 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.오라클": {
+    "message": "오라클",
+    "description": "The label for category 오라클 in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.category.블록 탐색기": {
+    "message": "블록 탐색기",
+    "description": "The label for category 블록 탐색기 in sidebar buildSidebar"
+  },
+  "sidebar.nodeSidebar.category.엔드포인트 노드": {
+    "message": "엔드포인트 노드",
+    "description": "The label for category 엔드포인트 노드 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.코어 셀": {
+    "message": "코어 셀",
+    "description": "The label for category 코어 셀 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.코어 셀 설치": {
+    "message": "코어 셀 설치",
+    "description": "The label for category 코어 셀 설치 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.서비스 체인": {
+    "message": "서비스 체인",
+    "description": "The label for category 서비스 체인 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.빠른 시작": {
+    "message": "빠른 시작",
+    "description": "The label for category 빠른 시작 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.서비스 체인 구성": {
+    "message": "서비스 체인 구성",
+    "description": "The label for category 서비스 체인 구성 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.노드 패키지 다운로드": {
+    "message": "노드 패키지 다운로드",
+    "description": "The label for category 노드 패키지 다운로드 in sidebar nodeSidebar"
+  },
+  "sidebar.nodeSidebar.category.노드 레퍼런스": {
+    "message": "노드 레퍼런스",
+    "description": "The label for category 노드 레퍼런스 in sidebar nodeSidebar"
+  },
+  "sidebar.refSidebar.category.RPC API 레퍼런스": {
+    "message": "RPC API 레퍼런스",
+    "description": "The label for category RPC API 레퍼런스 in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.eth": {
+    "message": "eth",
+    "description": "The label for category eth in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.klay": {
+    "message": "klay",
+    "description": "The label for category klay in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.debug": {
+    "message": "debug",
+    "description": "The label for category debug in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.서비스 체인 API 레퍼런스": {
+    "message": "서비스 체인 API 레퍼런스",
+    "description": "The label for category 서비스 체인 API 레퍼런스 in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.RPC 서비스 제공업체": {
+    "message": "RPC 서비스 제공업체",
+    "description": "The label for category RPC 서비스 제공업체 in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.SDK 및 라이브러리": {
+    "message": "SDK 및 라이브러리",
+    "description": "The label for category SDK 및 라이브러리 in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver-js(1.5.0 이상)": {
+    "message": "caver-js(1.5.0 이상)",
+    "description": "The label for category caver-js(1.5.0 이상) in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.API 레퍼런스": {
+    "message": "API 레퍼런스",
+    "description": "The label for category API 레퍼런스 in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver.wallet": {
+    "message": "caver.wallet",
+    "description": "The label for category caver.wallet in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver.transaction": {
+    "message": "caver.transaction",
+    "description": "The label for category caver.transaction in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver.rpc": {
+    "message": "caver.rpc",
+    "description": "The label for category caver.rpc in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver.kct": {
+    "message": "caver.kct",
+    "description": "The label for category caver.kct in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver-js(1.4.1 이하)": {
+    "message": "caver-js(1.4.1 이하)",
+    "description": "The label for category caver-js(1.4.1 이하) in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver.klay": {
+    "message": "caver.klay",
+    "description": "The label for category caver.klay in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.트랜잭션": {
+    "message": "트랜잭션",
+    "description": "The label for category 트랜잭션 in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver-java(1.5.0 이상)": {
+    "message": "caver-java(1.5.0 이상)",
+    "description": "The label for category caver-java(1.5.0 이상) in sidebar refSidebar"
+  },
+  "sidebar.refSidebar.category.caver-java(1.4.0 이하)": {
+    "message": "caver-java(1.4.0 이하)",
+    "description": "The label for category caver-java(1.4.0 이하) in sidebar refSidebar"
   }
 }

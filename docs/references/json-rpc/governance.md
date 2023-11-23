@@ -203,11 +203,10 @@ None
 
 **Return Value**
 
-<!--- fix this later
 | Type   | Description                          |
 | ------ | ------------------------------------ |
-| Vote List  | Node's Voting status in the epoch- `BlockNum`: The block number that this vote is stored- `Casted`: If this vote is stored in a block or not- `Key/Value`: The content of the vote  |
---->
+| Vote List  | Node's Voting status in the epoch.<br/>- `BlockNum`: The block number that this vote is stored.<br/>- `Casted`: If this vote is stored in a block or not.<br/>- `Key/Value`: The content of the vote.  |
+
 
 **Example**
 

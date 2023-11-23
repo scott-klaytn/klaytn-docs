@@ -47,8 +47,7 @@ The [randomHex](https://github.com/frozeman/randomHex) library to generate crypt
 "0x"
 ```
 
-<!--- fix this later
-## _ <a id="_"></a>
+## _ (underscore) <a id="underscore"></a>
 
 ```javascript
 caver.utils._()
@@ -57,7 +56,6 @@ caver.utils._()
 The [underscore](http://underscorejs.org) library for many convenience JavaScript functions.
 
 See the [underscore API reference](http://underscorejs.org) for details.
---->
 
 **Example**
 
@@ -224,7 +222,7 @@ This means arguments will be ABI converted and tightly packed before being hashe
 
 | Name | Type | Description |
 | --- | --- | --- |
-| paramX | Mixed| Any type, or an object with ``{type: 'uint', value: '123456'}`` or ``{t: 'bytes', v: '0xfff456'}``. Basic types are autodetected as follows: - ``String`` non numerical UTF-8 string is interpreted as ``string``. - ``String|Number|BN|HEX`` positive number is interpreted as ``uint256``. - ``String|Number|BN`` negative number is interpreted as ``int256``. - ``Boolean`` as ``bool``. - ``String`` HEX string with leading ``0x`` is interpreted as ``bytes``. - ``HEX`` HEX number representation is interpreted as ``uint256``.|
+| paramX | Mixed | Any type, or an object with ``{type: 'uint', value: '123456'}`` or ``{t: 'bytes', v: '0xfff456'}``. Basic types are autodetected as follows: <br/> - ``String`` non numerical UTF-8 string is interpreted as ``string``.<br/> - ``String\|Number\|BN\|HEX`` positive number is interpreted as ``uint256``.<br/>- ``String\|Number\|BN`` negative number is interpreted as ``int256``.<br/>- ``Boolean`` as ``bool``.<br/>- ``String`` HEX string with leading ``0x`` is interpreted as ``bytes``.<br/>- ``HEX`` HEX number representation is interpreted as ``uint256``.|
 
 **Return Value**
 
@@ -1256,11 +1254,14 @@ This function converts a number to a [Buffer](https://nodejs.org/api/buffer.html
 | Name | Type | Description |
 | --- | --- | --- |
 | input | String &#124; Number &#124; BN | A number to be converted to a Buffer. |
+
 **Return Value**
 | Type | Description |
 | --- | --- |
 | Buffer | The value converted to Buffer type is returned. |
+
 **Examples**
+
 ```javascript
 > caver.utils.numberToBuffer(1)
 <Buffer 01>
@@ -1278,15 +1279,19 @@ caver.utils.isTxHash(input)
 ```
 Returns `true` if input is in transaction hash format, otherwise it returns `false`. This function only looks at the input and determines if it is in the format of a transaction hash.
 **NOTE** caver.klay.isTxHash is supported from **v1.2.0-rc.1**. To use this feature, please install [v1.2.0-rc.1](https://www.npmjs.com/package/caver-js/v/1.2.0-rc.1) or higher.
+
 **Parameters**
 | Name | Type | Description |
 | --- | --- | --- |
 | input | String | The value to be determined if the parameter is in the format of transaction hash or not. |
+
 **Return Value**
 | Type | Description |
 | --- | --- |
 | Boolean | `true` means the input is in format of transaction hash. |
+
 **Examples**
+
 ```javascript
 // with '0x' hex prefix
 > caver.utils.isTxHash('0xe9a11d9ef95fb437f75d07ce768d43e74f158dd54b106e7d3746ce29d545b550')
@@ -1303,15 +1308,19 @@ caver.utils.isTxHashStrict(input)
 ```
 Returns `true` if input is in transaction hash format, otherwise it returns `false`. This function only looks at the input and determines if it is in the format of a transaction hash. Difference to [caver.utils.isTxHash](#istxhash) is that it expects HEX to be prefixed with ``0x``.
 **NOTE** caver.klay.isTxHashStrict is supported from **v1.2.0-rc.1**. To use this feature, please install [v1.2.0-rc.1](https://www.npmjs.com/package/caver-js/v/1.2.0-rc.1) or higher.
+
 **Parameters**
 | Name | Type | Description |
 | --- | --- | --- |
 | input | String | The value to be determined if the parameter is in the format of transaction hash or not. |
+
 **Return Value**
 | Type | Description |
 | --- | --- |
 | Boolean | `true` means the input is in the format of transaction hash. |
+
 **Examples**
+
 ```javascript
 // with '0x' hex prefix
 > caver.utils.isTxHashStrict('0xe9a11d9ef95fb437f75d07ce768d43e74f158dd54b106e7d3746ce29d545b550')

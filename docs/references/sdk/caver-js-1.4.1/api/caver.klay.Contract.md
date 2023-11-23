@@ -279,8 +279,8 @@ The first four bytes of the call data for a function call specifies the function
 It is the first \(left, high-order in big-endian\) four bytes of the Keccak-256 \(SHA-3\) hash of the signature of the function.
 
 The function signature can be made by 2 different methods.  
-`1. caver.klay.abi.encodeFunctionSignature('funcName(paramType1,paramType2,...)')`  
-`2. caver.utils.sha3('funcName(paramType1,paramType2,...)').substr(0, 10)`
+1. `caver.klay.abi.encodeFunctionSignature('funcName(paramType1,paramType2,...)')`  
+2. `caver.utils.sha3('funcName(paramType1,paramType2,...)').substr(0, 10)`
 
 ex\)
 
@@ -742,7 +742,7 @@ Gets past events for this contract.
 | options | Object | \(optional\) The options used for deployment.  See the table below for the details. |
 | callback | Function | \(optional\) This callback will be fired with an array of event logs as the second argument, or an error as the first argument. |
 
-To options object can contain the following:
+The options object can contain the following:
 
 | Name | Type | Description |
 | :--- | :--- | :--- |

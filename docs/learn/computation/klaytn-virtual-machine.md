@@ -107,12 +107,12 @@ Storage fees have a slightly nuanced behavior. To incentivize minimization of th
 The fee schedule `G` is a tuple of 37 scalar values corresponding to the relative costs, in gas, of a number of abstract operations that a transaction may incur. Also, there's gas items to calculate the gas of the precompiled contracts called by `CALL_*` opcodes. For other tables such as `intrinsic gas cost` or `key validation gas cost`, please refer to [this document](../transaction-fees.md)
 
 ##### Scalar values representing `constantGas` of an opcode
-<!--- fix this later
+
 | Name | Value | Name in code | Opcodes |
 | :--- | ---: | ---: | :--- |
-| `G_base` | 2 | GasQuickStep | `ADDRESS`, `ORIGIN`, `CALLER`, `CALLVALUE`, `CALLDATASIZE`,  `CODESIZE`, `GASPRICE`, `COINBASE`, `TIMESTAMP`, `NUMBER`,   `PREVRANDAO(originally it was difficulty)`, `GASLIMIT`, `RETURNDATASIZE`, `POP`, `PC`, `MSIZE`, `GAS`,  `CHAINID(added at istanbul hardfork)`,  `BASEFEE(added at london Hardfork)`,  `PUSH0(added at shanghai Hardfork)` |
+| `G_base` | 2 | GasQuickStep | `ADDRESS`, `ORIGIN`, `CALLER`, `CALLVALUE`, `CALLDATASIZE`,  `CODESIZE`, `GASPRICE`, `COINBASE`, `TIMESTAMP`, `NUMBER`,   `PREVRANDAO`(originally it was difficulty), `GASLIMIT`, `RETURNDATASIZE`, `POP`, `PC`, `MSIZE`, `GAS`,  `CHAINID`(added at istanbul hardfork),  `BASEFEE`(added at london Hardfork),  `PUSH0`(added at shanghai Hardfork) |
 | `G_verylow` | 3 | GasFastestStep | `ADD`, `SUB`, `LT`, `GT`, `SLT`, `SGT`, `EQ`, `ISZERO`, `AND`,  `OR`, `XOR`, `NOT`, `BYTE`, `CALLDATALOAD`,  `MLOAD`, `MSTORE`, `MSTORE8`, `PUSH`, `DUP`, `SWAP` |
-| `G_low` | 5 | GasFastStep | `MUL`, `DIV`, `SDIV`, `MOD`, `SMOD`, `SIGNEXTEND`,  `SELFBALANCE(added at istanbul hardfork)` |
+| `G_low` | 5 | GasFastStep | `MUL`, `DIV`, `SDIV`, `MOD`, `SMOD`, `SIGNEXTEND`,  `SELFBALANCE`(added at istanbul hardfork) |
 | `G_mid` | 8 | GasMidStep | `ADDMOD`, `MULMOD`, `JUMP` |
 | `G_high` | 10 | GasSlowStep | `JUMPI` |
 | `G_selfdestruct` | 5000 | SelfdestructGas | `SELFDESTRUCT` |
@@ -121,7 +121,7 @@ The fee schedule `G` is a tuple of 37 scalar values corresponding to the relativ
 | `G_jumpdest` | 1 | JumpdestGas | `JUMPDEST` |
 | `G_sha3` | 30 | Sha3Gas | `SHA3` |
 | `G_create` | 32000 | CreateGas | `CREATE`, `CREATE2` |
---->
+
 ##### Scalar values used to calculate the gas based on memory and log usage
 | Name | Value | Name in Code | Description |
 | :--- | ---: | ---: | :--- |

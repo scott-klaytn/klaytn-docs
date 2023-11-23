@@ -12,20 +12,19 @@ For more detailed information about log types, you can refer to [log_modules.go]
 If you encounter any abnormal situation, please report it to the klaytn team via [github](https://github.com/klaytn/klaytn/issues), [Klaytn Forum](https://forum.klaytn.foundation/), or [Discord](https://discord.io/KlaytnOfficial).
 
 ## Error Logs
-<!--- fix this later
+
 | Log Type | Node Type | Log Message | Description | Suggested Guide |
 | :--- | :--- | :--- | :--- | :--- |
-| Blockchain | CN/PN/EN |########## BAD BLOCK #########Chain config: %vNumber: %vHash: 0x%x%vError: %v############################## | A bad block occurs when the received receipt and the execution result do not match. If a node stops with bad block log, it could be due to two reasons.  - Case 1. The configuration of the node is wrong such, as the binary version.  - Case 2. There’s a problem with the code. It is very likely that other nodes will also experience the same problem. | This error is critical, so if you see any bad block, please make an issue or report it to the Klaytn GitHub repository. |
+| Blockchain | CN/PN/EN |########## BAD BLOCK #########Chain config: %v<br/><br/>Number: %vHash: 0x%x%v<br/><br/>Error: %v############################## | A bad block occurs when the received receipt and the execution result do not match. If a node stops with bad block log, it could be due to two reasons.  <br/>- Case 1. The configuration of the node is wrong such, as the binary version.  <br/>- Case 2. There’s a problem with the code. It is very likely that other nodes will also experience the same problem. | This error is critical, so if you see any bad block, please make an issue or report it to the Klaytn GitHub repository. |
 | ConsensusIstanbulCore | CN/PN/EN | **Drop an empty message from timeout channel** | It means that the round change timer will expire. This error is printed if the timer closes accidentally. | The error may occur when the downloader is started.  check next log is also printed: `Block synchronisation started`. |
-| NetworksP2P | CN/PN/EN | **Protocol istanbul/64 failed** id=04680a827fa1b240 conn=staticdial err="write tcp 10.117.2.105:34396->10.117.2.27:32323: use of closed etwork connection" **Protocol istanbul/64 failed** err="shutting down" | This log can be printed when the other node is disconnected. It is usually followed by`Disconnected a P2P Peer` log. | Check if the disconnected peer is reconnected again. If it is not reconnected, check the network status or peer connection [admin_peers](https://docs.klaytn.foundation/dapp/json-rpc/api-references/admin#admin_peers) |
-| NodeCN | CN | **fail to SendNewBlockHashes** err="write tcp 10.117.2.124:24108->10.117.2.108:32323: use of closed network connection"  **fail to SendNewBlockHashes** err="shutting down" | same as `Protocol istanbul/64 failed` | same as `Protocol istanbul/64 failed` |
+| NetworksP2P | CN/PN/EN | **Protocol istanbul/64 failed** id=04680a827fa1b240 conn=staticdial err="write tcp 10.117.2.105:34396->10.117.2.27:32323: use of closed etwork connection" <br/><br/>**Protocol istanbul/64 failed** err="shutting down" | This log can be printed when the other node is disconnected. It is usually followed by `Disconnected a P2P Peer` log. | Check if the disconnected peer is reconnected again. If it is not reconnected, check the network status or peer connection [admin_peers](https://docs.klaytn.foundation/dapp/json-rpc/api-references/admin#admin_peers) |
+| NodeCN | CN | **fail to SendNewBlockHashes** err="write tcp 10.117.2.124:24108->10.117.2.108:32323: use of closed network connection"  <br/><br/>**fail to SendNewBlockHashes** err="shutting down" | same as `Protocol istanbul/64 failed` | same as `Protocol istanbul/64 failed` |
 | NodeCN | CN | **fail to SendNewBlock** peer=d35220eccdb0de7b err="shutting down" | same as `Protocol istanbul/64 failed` | same as `Protocol istanbul/64 failed` | 
 | NetworksRPC | EN (mostly) | **FastWebsocketHandler fail to upgrade message** error="websocket: version != 13" | Version issue of WebSocket connection | The header of the request should contain `Sec-Websocket-Version` field with the value set at 13. You may not have used klaytn rpc client. |
---->
+
 
 ## Warn Logs
 
-<!--- fix this later
 | Log Type | Node Type | Log Message | Description | Suggested Guide |
 | :--- | :--- | :--- | :--- | :--- |
 | Blockchain | CN/PN/EN | **Upgrade database version** from=N/A to=3 | It is logged at the beginning of the node start-up | You don't need to handle this. |
@@ -34,8 +33,8 @@ If you encounter any abnormal situation, please report it to the klaytn team via
 | Node | CN/PN/EN | **Failed doConnTypeHandshake** addr=10.117.2.252:28516 conn=inbound conntype=-1 err="read tcp 10.117.2.78:32324->10.117.2.252:28516: i/o timeout | By dialing, the two P2P peers setup a connection. This log is printed if the setup fails. | Check if the disconnected peer is reconnected again. If not, check the network status or peer connection  peer connection check api: [admin_peers](https://docs.klaytn.foundation/dapp/json-rpc/api-references/admin#admin_peers) |
 | NodeCN | PN/EN | **Failed to filter bodies** peer=c02e4b4d471c56b9 lenTxs=1 | A node received the unwanted block header of body when fetching.  - lenTxs: non-requested number of txs | You don't need to handle this. |
 | Work | CN | **Transaction aborted due to time limit** hash= | The block execution time when mining should not exceed 250ms, so the last transaction can be aborted due to this time limit. | Confirm that the transaction enters the block. |
-| Work | CN | **Transaction failed, account skipped** hash=b1b26c...6b220a err="insufficient balance for transfer"Error(before v1.6.2)Warn(after v1.6.2) | When a transaction cannot be executed during mining due to an insufficient balance in the `from` account  (Theoretically, it occurs when the balance was sufficient at the time when the transaction was created and entered the txpool, but not at the actual execution time.) | Check if the `from` account is really out of balance. |
---->
+| Work | CN | **Transaction failed, account skipped** hash=b1b26c...6b220a err="insufficient balance for transfer"<br/><br/>Error(before v1.6.2)<br/>Warn(after v1.6.2) | When a transaction cannot be executed during mining due to an insufficient balance in the `from` account  (Theoretically, it occurs when the balance was sufficient at the time when the transaction was created and entered the txpool, but not at the actual execution time.) | Check if the `from` account is really out of balance. |
+
 
 ## Info Logs
 

@@ -46,8 +46,7 @@ The [randomHex](https://github.com/frozeman/randomHex) library to generate crypt
 '0x'
 ```
 
-<!--- fix this later
-## _ <a href="#_" id="_"></a>
+## _ (underscore) <a href="#underscore" id="underscore"></a>
 
 ```javascript
 caver.utils._()
@@ -56,7 +55,6 @@ caver.utils._()
 The [underscore](http://underscorejs.org) library for many convenient JavaScript functions.
 
 See the [underscore API reference](http://underscorejs.org) for details.
---->
 
 **Example**
 
@@ -211,11 +209,10 @@ Calculates the sha3 of given input parameters in the same way solidity would. Th
 
 **Parameters**
 
-<!--- fix this later
 | Name   | Type  | Description                                                                                                                                                                                                                                                                   |
 | ------ | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| paramX | Mixed | <p>Any type, or an object with <code>{type: 'uint', value: '123456'}</code> or <code>{t: 'bytes', v: '0xfff456'}</code>. Basic types are autodetected as follows:- <code>string</code> non numerical UTF-8 string is interpreted as <code>string</code>.- `string</p> |
---->
+| paramX | Mixed | Any type, or an object with `{type: 'uint', value: '123456'}` or `{t: 'bytes', v: '0xfff456'}`. <br/>Basic types are autodetected as follows:<br/>- `string` non numerical UTF-8 string is interpreted as `string`.<br/>- `string` |
+
 
 **Return Value**
 

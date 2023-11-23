@@ -3,20 +3,24 @@
     "message": "Klaytn Docs",
     "description": "The title in the navbar"
   },
-  "item.label.Documents": {
-    "message": "Documents",
-    "description": "Navbar item with label Documents"
+  "logo.alt": {
+    "message": "Klaytn Logo",
+    "description": "The alt text of navbar logo"
   },
-  "item.label.Dev Forum": {
-    "message": "Dev Forum",
-    "description": "Navbar item with label Dev Forum"
+  "item.label.Learn": {
+    "message": "학습하기",
+    "description": "Navbar item with label Learn"
   },
-  "item.label.Dev Hub": {
-    "message": "Dev Hub",
-    "description": "Navbar item with label Dev Hub"
+  "item.label.Build": {
+    "message": "빌드",
+    "description": "Navbar item with label Build"
   },
-  "item.label.Blog": {
-    "message": "Blog",
-    "description": "Navbar item with label Blog"
+  "item.label.Nodes": {
+    "message": "노드",
+    "description": "Navbar item with label Nodes"
+  },
+  "item.label.References": {
+    "message": "레퍼런스",
+    "description": "Navbar item with label References"
   }
 }

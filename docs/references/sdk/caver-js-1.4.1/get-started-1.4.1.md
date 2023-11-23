@@ -696,7 +696,7 @@ You can easily create an account update transaction using AccountForUpdate creat
 
 There are three types of transactions used to update an account: `ACCOUNT_UPDATE`, `FEE_DELEGATED_ACCOUNT_UPDATE` and `FEE_DELEGATED_ACCOUNT_UPDATE_WITH_RATIO`.
 
-In the example below, `account` is an account that has enough KLAY balance, and `accountForUpdate` is an AccountForUpdate instance that contains the new key and the target account address. `accountForUpdate is created using `caver.klay.accounts.createAccountForUpdate`.
+In the example below, `account` is an account that has enough KLAY balance, and `accountForUpdate` is an AccountForUpdate instance that contains the new key and the target account address. `accountForUpdate` is created using `caver.klay.accounts.createAccountForUpdate`.
 
 The example below demonstrates how to create a transaction using AccountForUpdate and send it to the Klaytn network.
 

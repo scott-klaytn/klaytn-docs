@@ -31,12 +31,11 @@ This is an overall explanation of the transaction fee, and from this point, we w
 ## GasPrice Overview <a id="gas-price-overview"></a>
 Unlike the ethereum, Klaytn used the fixed gas price, called `unitPrice` at first. However, since magma hardfork, Klaytn started to use dynamic gas price which concept is newly redesined by modifying the Ethereum's basefee, so called `Effective Gas Price`. Since there have been many changes about gas price, it can be pretty confusing on what value to set for gasPrice. So, we've made a guide on how to set the gas price below.
 
-<!--- fix this later
 | Network | Before BaseFee | After BaseFee |
 | :--- | :--- | :--- |
-| klaytn | tx parameter gasPrice: network-defined. must be set as the `unitPrice`  gasPrice: use the tx parameter gasPrice | tx parameter gasPrice: user-defined. It means the price the most you can pay  (e.g. suggestGasPrice = 2*latestBlock.baseFee )  gasPrice: dynamic gasPrice, `baseFee`, which is defined by network.|
-| Ethereum | tx parameter gasPrice: user-defined. it means the price the most you can pay.  gasPrice: use the tx parameter gasPrice | tx parameter gasPrice: user-defined. It means the price the most you can pay.  gasPrice: dynamic gasPrice, `baseFee+tip`, which is defined by network. |
---->
+| klaytn | tx parameter gasPrice: network-defined. must be set as the `unitPrice` <br/> <br/> gasPrice: use the tx parameter gasPrice | tx parameter gasPrice: user-defined. It means the price the most you can pay  (e.g. suggestGasPrice = 2*latestBlock.baseFee ) <br/> <br/> gasPrice: dynamic gasPrice, `baseFee`, which is defined by network.|
+| Ethereum | tx parameter gasPrice: user-defined. it means the price the most you can pay. <br/> <br/> gasPrice: use the tx parameter gasPrice | tx parameter gasPrice: user-defined. It means the price the most you can pay. <br/> <br/> gasPrice: dynamic gasPrice, `baseFee+tip`, which is defined by network. |
+
 
 ### Dynamic Gas Fee Mechanism <a id="dynamic-gas-fee-mechanism"></a>
 Since the magma hard fork, a dynamic gas fee mechanism has replaced the existing fixed fee policy. Dynamic gas fee policy provides a stable service to users by preventing network abuse and storage overuse. The gas fee changes according to the network situation. Seven parameters affect the `base fee(gas fee)`:

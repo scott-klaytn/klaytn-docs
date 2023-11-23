@@ -52,11 +52,10 @@ TXPOOL_NONEXEC_SLOTS_ACCOUNT=16384
 
 The configuration file has the following configurable properties. SCN, SPN and SEN configuration files have the same properties.
 
-<!--- fix this later
 | Name | Description |
 | --- | --- |
 | NETWORK | Network name that this node will join.  This value is used when NETWORK_ID is not defined.  ("cypress", "baobab") |
-| NETWORK_ID | Klaytn network ID.  If you create a local private network, you will define the network ID for your own.  Following IDs are reserved for pre-configured networks.  8217 : Cypress (Main network) 1000 : Aspen test network 1001 : Baobab test network |
+| NETWORK_ID | Klaytn network ID.  If you create a local private network, you will define the network ID for your own.  Following IDs are reserved for pre-configured networks.  <br/>8217 : Cypress (Main network) <br/>1000 : Aspen test network <br/>1001 : Baobab test network |
 | PORT | P2P port. (Default: "32323") |
 | SERVER_TYPE | JSON RPC server type.  ("http", "fasthttp") |
 | SYNCMODE | Blockchain sync mode.  ("fast", "full") |
@@ -93,7 +92,7 @@ The configuration file has the following configurable properties. SCN, SPN and S
 | ADDITIONAL | For additional command-line options. e.g) --txpool.nolocals |
 | DATA_DIR | Klaytn blockchain data folder path. |
 | LOG_DIR | Log folder path. |
---->
+
 
 ## CN Configuration File location <a id="cn-configuration-file-location"></a>
 

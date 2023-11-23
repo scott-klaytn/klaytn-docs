@@ -16,10 +16,27 @@
       {
         "url": "https://devwriting.com/klaytn-docs/docs/references/",
         "selectors_key": "ref"
-      }          
+      },
+      {
+        "url": "https://devwriting.com/klaytn-docs/ko/docs/learn/",
+        "selectors_key": "learn-ko"
+      },
+      {
+        "url": "https://devwriting.com/klaytn-docs/ko/docs/build/",
+        "selectors_key": "build-ko"
+      },
+      {
+        "url": "https://devwriting.com/klaytn-docs/ko/docs/nodes/",
+        "selectors_key": "nodes-ko"
+      },
+      {
+        "url": "https://devwriting.com/klaytn-docs/ko/docs/references/",
+        "selectors_key": "ref-ko"
+      }             
     ],
     "sitemap_urls": [
-      "https://devwriting.com/klaytn-docs/sitemap.xml"
+      "https://devwriting.com/klaytn-docs/sitemap.xml",
+      "https://devwriting.com/klaytn-docs/ko/sitemap.xml"
     ],
     "sitemap_alternate_links": true,
     "stop_urls": [ ],
@@ -83,7 +100,67 @@
         "lvl5": "article h5, article td:first-child",
         "lvl6": "article h6",
         "text": "article p, article li, article td:last-child"
-      }      
+      },
+      "learn-ko": {
+        "lvl0": {
+          "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
+          "type": "xpath",
+          "global": true,
+          "default_value": "Documentation"
+        },
+        "lvl1": "header h1",
+        "lvl2": "article h2",
+        "lvl3": "article h3",
+        "lvl4": "article h4",
+        "lvl5": "article h5, article td:first-child",
+        "lvl6": "article h6",
+        "text": "article p, article li, article td:last-child"
+      },
+      "build-ko": {
+        "lvl0": {
+          "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
+          "type": "xpath",
+          "global": true,
+          "default_value": "Documentation"
+        },
+        "lvl1": "header h1",
+        "lvl2": "article h2",
+        "lvl3": "article h3",
+        "lvl4": "article h4",
+        "lvl5": "article h5, article td:first-child",
+        "lvl6": "article h6",
+        "text": "article p, article li, article td:last-child"
+      },
+      "nodes-ko": {
+        "lvl0": {
+          "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
+          "type": "xpath",
+          "global": true,
+          "default_value": "Documentation"
+        },
+        "lvl1": "header h1",
+        "lvl2": "article h2",
+        "lvl3": "article h3",
+        "lvl4": "article h4",
+        "lvl5": "article h5, article td:first-child",
+        "lvl6": "article h6",
+        "text": "article p, article li, article td:last-child"
+      },
+      "ref-ko": {
+        "lvl0": {
+          "selector": "(//ul[contains(@class,'menu__list')]//a[contains(@class, 'menu__link menu__link--sublist menu__link--active')]/text() | //nav[contains(@class, 'navbar')]//a[contains(@class, 'navbar__link--active')]/text())[last()]",
+          "type": "xpath",
+          "global": true,
+          "default_value": "Documentation"
+        },
+        "lvl1": "header h1",
+        "lvl2": "article h2",
+        "lvl3": "article h3",
+        "lvl4": "article h4",
+        "lvl5": "article h5, article td:first-child",
+        "lvl6": "article h6",
+        "text": "article p, article li, article td:last-child"
+      }
     },   
     "strip_chars": " .,;:#",
     "custom_settings": {
