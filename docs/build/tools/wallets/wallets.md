@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Wallets 
 
 Wallets on Klaytn allows for access to accounts controlled by private keys, thus facilitating private key management, signing crypto transactions and also provides an interface to access(i.e send and receive) digital assets. This section provides a list of Klaytn supported wallets. Lets get started!

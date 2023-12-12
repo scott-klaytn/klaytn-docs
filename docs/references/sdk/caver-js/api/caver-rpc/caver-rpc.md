@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # caver.rpc
 
 `caver.rpc` is a package that provides functionality related to rpc call with Klaytn Node.

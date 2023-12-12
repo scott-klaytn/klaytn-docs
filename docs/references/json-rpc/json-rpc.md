@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # RPC API Reference
 
 This document explains how to use Klaytn APIs. Most APIs except Toolkit API support remote protocols \(RPC, Websocket\) and Klaytn JavaScript Console. This document is written with `ken` as an example but most of APIs can be used on `kcn` and `kpn` as well.

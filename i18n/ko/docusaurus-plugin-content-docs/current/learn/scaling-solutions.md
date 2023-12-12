@@ -1,7 +1,3 @@
----
-sidebar_position: 10
----
-
 # 확장 솔루션
 
 ## 서비스 체인 <a id="service-chain"></a>

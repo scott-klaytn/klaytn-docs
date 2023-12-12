@@ -1,7 +1,7 @@
 ---
 description: >-
   A JavaScript wrapper to Klaytn APIs around the namespace 'klay'.
-sidebar_position: 1
+
 ---
 
 # caver.klay

@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # caver.wallet
 
 `caver.wallet` is a package that manages [Keyring](./keyring.md) instances in in-memory wallet. `caver.wallet` accepts all [SingleKeyring](./keyring.md#singlekeyring), [MultipleKeyring](./keyring.md#multiplekeyring), and [RoleBasedKeyring](./keyring.md#rolebasedkeyring), and manages them by address.

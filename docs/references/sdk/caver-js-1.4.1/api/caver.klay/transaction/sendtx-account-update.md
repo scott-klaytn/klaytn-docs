@@ -1,8 +1,4 @@
----
-sidebar_position: 4
----
-
-# Account Update Transaction
+# Account Update
 
 ## sendTransaction (ACCOUNT_UPDATE) <a id="sendtransaction-account_update"></a>
 

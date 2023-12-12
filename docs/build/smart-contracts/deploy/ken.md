@@ -14,7 +14,7 @@ This step by step guide will walk you through the process of launching an Endpoi
 
 > This guide uses the **Baobab** testnet because deploying a smart contract and submitting a transaction require transaction fees in KLAY. For the development purpose, testnet KLAY can be obtained from the [Baobab faucet](https://baobab.wallet.klaytn.foundation/faucet).
 
-## Launch an Endpoint Node
+## Launch an Endpoint Node <a href="#launch-an-en" id="launch-an-en"></a>
 
 ### Download and Initialize an Endpoint Node (EN) <a href="#download-and-initialize-an-endpoint-node-en" id="download-and-initialize-an-endpoint-node-en"></a>
 

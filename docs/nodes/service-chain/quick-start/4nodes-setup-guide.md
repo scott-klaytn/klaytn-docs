@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Install a 4-node service chain
 
 This section covers how to set up a multi-node ServiceChain. We will set up a 4-consensus-node ServiceChain with `chainID` 1002, as you can see in the blue border box in the figure below.

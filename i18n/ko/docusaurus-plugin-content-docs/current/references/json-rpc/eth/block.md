@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Block
 
 ## 기본 블록 매개변수 <a id="the-default-block-parameter"></a>

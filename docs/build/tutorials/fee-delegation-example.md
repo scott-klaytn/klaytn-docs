@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Build Fee Delegation Example
 
 ## Table of Contents <a href="#table-of-contents" id="table-of-contents"></a>

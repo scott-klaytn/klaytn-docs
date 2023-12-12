@@ -1,8 +1,4 @@
----
-sidebar_position: 2
----
-
-# Value Transfer Transaction
+# Value Transfer
 
 ## sendTransaction (VALUE_TRANSFER)
 

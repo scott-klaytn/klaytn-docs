@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Before You Install
 
 ## Download <a id="download"></a>

@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Config
 
 ## eth_coinbase <a id="eth_coinbase"></a>

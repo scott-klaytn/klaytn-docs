@@ -1,8 +1,4 @@
----
-sidebar_position: 1
----
-
-# Legacy Transaction
+# Legacy
 
 ## sendTransaction (Legacy) <a id="sendtransaction-legacy"></a>
 

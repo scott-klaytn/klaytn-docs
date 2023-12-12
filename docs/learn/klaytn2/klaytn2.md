@@ -1,7 +1,3 @@
----
-sidebar_position: 15
----
-
 # Klaytn 2.0
 
 ## We Are Here to Give Power Back to the People <a id="klaytn2"></a>

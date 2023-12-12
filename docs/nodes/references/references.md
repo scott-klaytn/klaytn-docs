@@ -1,5 +1,7 @@
----
-sidebar_position: 7
----
-
 # Node References
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```

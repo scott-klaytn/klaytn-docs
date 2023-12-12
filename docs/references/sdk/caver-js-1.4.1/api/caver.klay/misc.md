@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Miscellaneous
 
 ## sha3 <a id="sha3"></a>

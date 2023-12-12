@@ -1,8 +1,4 @@
----
-sidebar_position: 4
----
-
-# 계정 업데이트 트랜잭션
+# 계정 업데이트
 
 ## sendTransaction (ACCOUNT_UPDATE) <a id="sendtransaction-account_update"></a>
 

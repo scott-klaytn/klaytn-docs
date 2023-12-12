@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Runtime Debugging
 
 **NOTE** All other debug namespace APIs **EXCEPT FOR** the following APIs are restricted with `rpc.unsafe-debug.disable` flag:

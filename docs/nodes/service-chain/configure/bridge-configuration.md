@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Connect to main chain 
 
 In this page, we will describe the steps of connecting a Service Chain to the Main Chain. 

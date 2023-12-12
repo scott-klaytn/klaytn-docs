@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs used to inspect and debug node state and blockchain data at run time.
-sidebar_position: 4
+
 ---
 
 # debug

@@ -24,7 +24,7 @@ caver.wallet은 인메모리 지갑에서 Keyring 인스턴스를 관리하는 �
 
 ### caver.transaction
 
-caver.transaction은 [Transaction](https://docs.klaytn.foundation/klaytn/design/transactions#transactions-overview)과 관련된 기능을 제공하는 패키지입니다.
+caver.transaction은 [Transaction](../../../learn/transactions/transactions.md#transactions-overview)과 관련된 기능을 제공하는 패키지입니다.
 
 - caver-java 1.4.0에서 `caver.transaction`은 `caver.tx`를 대체합니다.
 

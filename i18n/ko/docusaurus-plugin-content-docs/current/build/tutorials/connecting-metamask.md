@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # MetaMask를 클레이튼에 연결하기
 
 ![](/img/build/tutorials/klaytnXmetamask.png)

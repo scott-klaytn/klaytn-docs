@@ -1,7 +1,3 @@
----
-sidebar_position: 10
----
-
 # caver.ipfs
 
 `caver.ipfs`는 IPFS(행성 간 파일 시스템)와 관련된 기능을 제공하는 패키지입니다.

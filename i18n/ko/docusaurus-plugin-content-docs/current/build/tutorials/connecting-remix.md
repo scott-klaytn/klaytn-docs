@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Remix를 클레이튼에 연결하기
 
 ![](/img/build/tutorials/klaytnXremix.png)
@@ -57,8 +53,8 @@ Remix를 사용하여 Klaytn 네트워크에 연결하려면 로컬 플러그인
 
 ## EN(엔드포인트 노드)을 사용하여 클레이튼 - Remix 연결하기 <a href="#connecting-klaytn-remix-using-en" id="connecting-klaytn-remix-using-en"></a>
 
-* [**EN 문서**](https://docs.klaytn.foundation/getting-started/quick-start/launch-an-en)의 지침에 따라 로컬 환경에서 엔드포인트 노드를 설정합니다.
-* [**계정 관리**](https://docs.klaytn.foundation/getting-started/account)의 지침에 따라 계정을 생성합니다.
+* [**EN 문서**](../smart-contracts/deploy/ken.md#launch-an-en)의 지침에 따라 로컬 환경에서 엔드포인트 노드를 설정합니다.
+* [**계정 관리**](../get-started/account/managing-accounts.md)의 지침에 따라 계정을 생성합니다.
 
     > **참고:** 로컬 환경이 아닌 Baobab의 공용 EN을 사용하는 경우, 개인 API가 비활성화되어 있으므로 계정에 연결되지 않습니다.
 * 환경 메뉴에서 \[Caver Provider]를 선택합니다.
@@ -70,7 +66,7 @@ Remix를 사용하여 Klaytn 네트워크에 연결하려면 로컬 플러그인
 
 ## MetaMask를 사용하여 클레이튼 - Remix 연결하기  <a href="#connecting-klaytn-remix-using-metamask" id="connecting-klaytn-remix-using-metamask"></a>
 
-* [MetaMask에 연결하기](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask)를 참고하여 클레이튼과 MetaMask를 연결합니다.
+* [MetaMask에 연결하기](connecting-metamask)를 참고하여 클레이튼과 MetaMask를 연결합니다.
 * Remix 환경 메뉴에서 \[Injected Web3]를 선택합니다.
 
 ![Injected Web3](/img/build/tutorials/env-injected-web3.png)
@@ -89,7 +85,7 @@ Remix를 사용하여 Klaytn 네트워크에 연결하려면 로컬 플러그인
 
 ## 튜토리얼: KlaytnGreeter 컨트랙트 <a href="#tutorial-klaytngreeter-contract" id="tutorial-klaytngreeter-contract"></a>
 
-여기서는 [**KlaytnGreeter**](https://docs.klaytn.foundation/smart-contract/sample-contracts/klaytngreeter) 샘플 컨트랙트를 사용할 것입니다.
+여기서는 [**KlaytnGreeter**](../smart-contracts/samples/klaytngreeter.md) 샘플 컨트랙트를 사용할 것입니다.
 
 * KlaytnGreeter.sol을 추가하고 테스트 코드를 작성합니다.
 

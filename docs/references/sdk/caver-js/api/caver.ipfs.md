@@ -1,7 +1,3 @@
----
-sidebar_position: 10
----
-
 # caver.ipfs
 
 `caver.ipfs` is a package that provides functionality related to IPFS (InterPlanetary File System).

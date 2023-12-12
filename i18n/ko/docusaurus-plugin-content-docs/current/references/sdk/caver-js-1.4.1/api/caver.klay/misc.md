@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # 기타
 
 ## sha3 <a id="sha3"></a>

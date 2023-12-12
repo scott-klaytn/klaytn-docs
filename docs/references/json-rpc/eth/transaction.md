@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Transaction
 
 ## eth_call <a id="eth_call"></a>
@@ -588,6 +584,10 @@ Creates a new message call transaction or a contract creation for signed transac
 If you deployed a contract, use [eth_getTransactionReceipt](#eth_gettransactionreceipt) to get the contract address.
 
 **Example**
+
+```shell
+params: ["0x02f8738203e982022980850ba43b740082f61894a2a8854b1802d8cd5de631e690817c253d6a9153888ac7230489e8000080c001a0493a13b7eb1ad33c0b9043e4de1f2a5e8736407c8f039dd91b8bcba847c6b21ca0060b8063e42f8acc2bcc7d9d2e454491666452f3683cbc0dd768604b27bce6e3"]
+```
 
 ```shell
 // Request

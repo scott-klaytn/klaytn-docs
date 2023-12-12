@@ -1,7 +1,7 @@
 ---
 설명: >-
   클레이튼 노드를 제어하기 위한 API입니다.
-sidebar_position: 5
+
 ---
 
 # admin

@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Install Service Chain
 
 ## Intended Audience <a id="intended-audience"></a>

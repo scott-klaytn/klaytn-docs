@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Install Endpoint Nodes
 
 ## Download <a id="download"></a>

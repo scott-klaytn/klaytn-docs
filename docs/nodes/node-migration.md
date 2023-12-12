@@ -1,10 +1,6 @@
----
-sidebar_position: 6
----
-
 # Node Migration
 
-## Change Chaindata
+## Change Chaindata <a id="disk-management-1"></a>
 
 <aside>
 💡 THIS GUIDE IS BASED ON Amazon Linux 2

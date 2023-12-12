@@ -1,5 +1,4 @@
 ---
-sidebar_position: 5
 sidebar_label: Node Package Downloads
 ---
 
@@ -9,6 +8,7 @@ sidebar_label: Node Package Downloads
 
 You can get the packages for CN, PN, EN, SCN, SPN and SEN.
 
+* [v1.11.1](./v1.11.1.md)
 * [v1.11.0](./v1.11.0.md)
 * [v1.10.2](./v1.10.2.md)
 * [v1.10.1](./v1.10.1.md)
@@ -41,6 +41,7 @@ You can get the packages for CN, PN, EN, SCN, SPN and SEN.
 * [v1.1.1](./v1.1.1.md)
 * [v1.0.0](./v1.0.0.md)
 * [v0.9.6](./v0.9.6.md)
+* [v0.8.2](./v0.8.2.md)
 
 ## Get the Sources <a id="get-the-sources"></a>
 You can retrieve the source code through Git. Documentation is hosted on GoDoc.

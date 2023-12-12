@@ -1,10 +1,12 @@
----
-sidebar_position: 4
----
-
 # Tools
 
 This page contains the list of development tools to help you build Decentralized Applications on Klaytn.
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```
 <!-- # Developer Tools <a id="developer-tools"></a>
 
 #### Kaikas <a id="kaikas"></a>

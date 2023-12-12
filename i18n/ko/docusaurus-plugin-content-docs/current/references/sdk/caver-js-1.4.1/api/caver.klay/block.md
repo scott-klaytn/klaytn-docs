@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Block
 
 ## defaultBlock <a id="defaultblock"></a>

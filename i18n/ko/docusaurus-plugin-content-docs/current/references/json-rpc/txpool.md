@@ -1,7 +1,7 @@
 ---
 설명: >-
   노드에서 트랜잭션 풀을 검사하는 API입니다.
-sidebar_position: 7
+
 ---
 
 # txpool

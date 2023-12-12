@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Count 컴포넌트
 
 `src/components/Count.js`는 다음과 같이 구성됩니다.

@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # VM Tracing
 
 **NOTE** The [JavaScript-based Tracing](#javascript-based-tracing) of VM Tracing APIs is considered unsafe to be opened to public.

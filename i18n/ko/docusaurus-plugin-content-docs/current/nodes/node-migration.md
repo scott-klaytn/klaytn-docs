@@ -1,10 +1,6 @@
----
-sidebar_position: 6
----
-
 # 노드 마이그레이션
 
-## 체인 데이터 변경
+## 체인 데이터 변경 <a id="disk-management-1"></a>
 
 <aside>
 💡 이 가이드는 Amazon Linux 2를 기반으로 합니다.

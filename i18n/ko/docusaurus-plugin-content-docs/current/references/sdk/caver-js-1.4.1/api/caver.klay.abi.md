@@ -1,7 +1,7 @@
 ---
 설명: >-
   ABI 인코딩 및 디코딩과 관련된 caver-js API.
-sidebar_position: 7
+
 ---
 
 # caver.klay.abi

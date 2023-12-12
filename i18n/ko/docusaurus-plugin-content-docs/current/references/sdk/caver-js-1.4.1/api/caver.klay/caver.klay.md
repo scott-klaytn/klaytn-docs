@@ -1,7 +1,7 @@
 ---
 설명: >-
   네임스페이스 `klay`를 둘러싼 Klaytn API에 대한 JavaScript 래퍼입니다.
-sidebar_position: 1
+
 ---
 
 # caver.klay

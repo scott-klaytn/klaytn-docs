@@ -1,8 +1,4 @@
----
-sidebar_position: 3
----
-
-# 밸류 전송 메모 트랜잭션
+# 밸류 전송 메모
 
 ## sendTransaction (VALUE_TRANSFER_MEMO) <a id="sendtransaction-value_transfer_memo"></a>
 

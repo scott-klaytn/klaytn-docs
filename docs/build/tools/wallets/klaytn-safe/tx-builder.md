@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Use Transaction Builder
 
 This is a custom app in Klaytn Safe that is responsible for batching transactions. This means that we you can bundle several transactions together, instead of having to confirm one transaction after the other. You just have to confirm and execute once.

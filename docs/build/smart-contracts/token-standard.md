@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Klaytn Compatible Tokens (KCTs)
 
 Klaytn Compatible Token (KCT) is a special type of smart contract that implements certain technical specifications. Everyone who wants to issue tokens on top of Klaytn must follow the specification.  

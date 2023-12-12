@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Filter
 
 ## klay_getFilterChanges <a id="klay_getfilterchanges"></a>
@@ -378,7 +374,7 @@ If a connection is closed, all subscriptions created over the connection are rem
 
 
 `"newHeads"` notifies you of each block added to the blockchain.
-`"logs"` notifies you of logs included in new blocks. This type requires a second parameter that specifies filter options. For more details, go to [klay_newFilter > parameters](https://docs.klaytn.com/dapp/json-rpc/api-references/klay/filter#klay_newfilter).
+`"logs"` notifies you of logs included in new blocks. This type requires a second parameter that specifies filter options. For more details, go to [klay_newFilter > parameters](#klay_newfilter).
 
 **Return Value**
 

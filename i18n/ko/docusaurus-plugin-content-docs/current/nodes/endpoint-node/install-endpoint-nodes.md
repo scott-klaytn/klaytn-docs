@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # 엔드포인트 노드 설치
 
 ## 다운로드 <a id="download"></a>하기

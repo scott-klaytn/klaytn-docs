@@ -1,8 +1,4 @@
----
-sidebar_position: 7
----
-
-# Cancel Transaction
+# Cancel
 
 ## sendTransaction (CANCEL) <a id="sendtransaction-cancel"></a>
 

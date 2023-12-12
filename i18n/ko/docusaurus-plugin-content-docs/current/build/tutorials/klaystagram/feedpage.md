@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # FeedPage
 
 ![FeedPage](/img/build/tutorials/klaystagram-feedpage.png)

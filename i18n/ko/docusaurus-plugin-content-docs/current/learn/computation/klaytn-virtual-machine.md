@@ -2,9 +2,9 @@
 
 :::note
 
-참고: KLVM은 `Kore` 하드포크로 변경되었습니다. 이전 문서가 필요하신 경우 [이전 문서](klaytn-virtual-machine-previous.md)를 참고하시기 바랍니다.
+KLVM은 `Kore` 하드포크로 변경되었습니다. 이전 문서가 필요하신 경우 [이전 문서](klaytn-virtual-machine-previous.md)를 참고하시기 바랍니다.
 
-코어` 하드포크 블록 번호는 다음과 같습니다.
+`Kore` 하드포크 블록 번호는 다음과 같습니다.
 * Baobab 테스트넷: `#111736800`
 * Cypress 메인넷: `#119750400`
 
@@ -45,7 +45,7 @@ KLVM은 일련의 KLVM 명령어로 구성된 클레이튼 가상머신 코드 \
 
 | 기호 | 설명 |
 | :--- | :--- |
-| `S` | state |
+| `S` | 상태 |
 | `S_system` | 시스템 상태 |
 | `S_machine` | 머신 상태 |
 | `P_modify_state` | 상태를 수정할 수 있는 권한 |
@@ -54,7 +54,7 @@ KLVM은 일련의 KLVM 명령어로 구성된 클레이튼 가상머신 코드 \
 
 | 기호 | 설명 |
 | :--- | :--- |
-| `T` | transactions |
+| `T` | 트랜잭션 |
 | `T_code` | 실행할 머신 코드가 포함된 바이트 배열 |
 | `T_data` | 실행에 대한 입력 데이터를 포함하는 바이트 배열(실행 에이전트가 트랜잭션인 경우 트랜잭션 데이터가 됩니다). |
 | `T_value` | 실행 절차의 일부로 계정에 전달되는 값(peb 단위)으로, 실행 에이전트가 트랜잭션인 경우 트랜잭션 값이 됩니다. |
@@ -64,7 +64,7 @@ KLVM은 일련의 KLVM 명령어로 구성된 클레이튼 가상머신 코드 \
 
 | 기호 | 설명 |
 | :--- | :--- |
-| `G` | gas |
+| `G` | 가스 |
 | `G_rem` | 계산을 위한 잔여 가스 |
 | `G_price` | 실행을 시작한 트랜잭션의 가스 가격 |
 
@@ -72,7 +72,7 @@ KLVM은 일련의 KLVM 명령어로 구성된 클레이튼 가상머신 코드 \
 
 | 기호 | 설명 |
 | :--- | :--- |
-| `A` | address |
+| `A` | 주소 |
 | `A_code_owner` | 실행 코드를 소유한 계정의 주소 |
 | `A_tx_sender` | 현재 실행을 시작한 트랜잭션의 발신자 주소 |
 | `A_code_executor` | 코드 실행을 시작한 계정의 주소(실행 에이전트가 트랜잭션인 경우 트랜잭션 발신자 주소가 됩니다). |
@@ -104,7 +104,7 @@ KLVM은 단순한 스택 기반 아키텍처입니다. 머신의 워드 크기(�
 스토리지 수수료는 약간 미묘한 동작을 합니다. 스토리지 사용을 최소화하도록 장려하기 위해 \(모든 노드에서 더 큰 상태 데이터베이스에 직접적으로 대응하는) 스토리지에서 항목을 지우는 작업의 실행 수수료는 면제될 뿐만 아니라 적격 환불을 유도합니다. 사실 이 환불은 스토리지 위치의 초기 사용 비용이 일반적인 사용보다 훨씬 더 많이 들기 때문에 사실상 미리 지불하는 것과 마찬가지입니다.
 
 #### 수수료 일정 <a id="fee-schedule"></a>
-수수료 스케줄 `G`는 트랜잭션에 발생할 수 있는 여러 추상적 작업의 상대적 비용(가스 단위)에 해당하는 37개의 scalar 값 튜플입니다. 또한 `CALL_*` Opcode로 호출되는 사전 컴파일된 컨트랙트의 가스를 계산하는 가스 항목도 있습니다. '내재 가스 비용' 또는 '키 검증 가스 비용'과 같은 다른 표는 [이 문서](../transaction-fees.md)를 참조하시기 바랍니다.
+수수료 스케줄 `G`는 트랜잭션에 발생할 수 있는 여러 추상적 작업의 상대적 비용(가스 단위)에 해당하는 37개의 scalar 값 튜플입니다. 또한 `CALL_*` Opcode로 호출되는 사전 컴파일된 컨트랙트의 가스를 계산하는 가스 항목도 있습니다. '고유 가스 비용' 또는 '키 검증 가스 비용'과 같은 다른 표는 [이 문서](../transaction-fees.md)를 참조하시기 바랍니다.
 
 ##### 연산 코드의 `constantGas`를 나타내는 scalar 값
 
@@ -184,7 +184,7 @@ Gas = number of signatures * ValidateSenderGas
   * 예: Opcode가 `MUL`인 경우, `G_low`를 가스에 추가합니다.
   * 예: Opcode가 `CREATE2`인 경우, `G_create`를 가스에 추가합니다.
 * 추가적으로 정의된 가스 계산 방법을 통해 계산된 가스를 추가합니다.
-  * N이 [0,1,2,3,4]인 `LOG'N`의 경우, `G_log + memoryGasCost * g_logdata + N x G_logtopic`을 가스값에 추가합니다.
+  * N이 [0,1,2,3,4]인 `LOG'N'`의 경우, `G_log + memoryGasCost * g_logdata + N x G_logtopic`을 가스값에 추가합니다.
   * `EXP` 경우, `G_exp + byteSize(stack.back(1)) x G_expbyte`를 가스 값에 추가합니다.
   * `CALLDATACOPY`, `CODECOPY`, 또는 `RETURNDATACOPY`의 경우, `wordSize(stack.back(2)) x G_copy`를 가스에 추가합니다.
   * `EXTCODECOPY`의 경우,
@@ -193,7 +193,7 @@ Gas = number of signatures * ValidateSenderGas
   * `EXTCODESIZE` 또는 `EXTCODEHASH` 또는 `BALANCE`의 경우,
     * [**_eip2929_**] AccessList에 없는 주소는 accessList에 추가하고 `G_coldSloadCost - G_warmStorageReadCost`를 gas에 추가합니다.
   * 'SHA3'의 경우, `G_sha3 + wordSize(stack.back(1)) x G_sha3word`를 가스값에 추가합니다.
-  * RETURN`, `REVERT`, `MLoad`, `MStore8`, `MStore`의 경우, `memoryGasCost`를 가스 값에 추가합니다.
+  * `RETURN`, `REVERT`, `MLoad`, `MStore8`, `MStore`의 경우, `memoryGasCost`를 가스 값에 추가합니다.
   * 'CREATE'의 경우, 가스값에 '메모리가스비용 + 크기(컨트랙트 코드) x G_codedeposit'을 추가합니다.
   * `CREATE2`의 경우, `memoryGasCost + size(data) x G_sha3word + size(contract.code) x G_codedeposit`을 가스값에 추가합니다.
   * `SSTORE`의 경우,
@@ -261,11 +261,7 @@ where
 
   `S_machine,g' := S_machine,g - C(S_system, S_machine, I)`
 
-  * 즉, `F_apply`를 평가할 때 다음을 수행합니다.
-
-    에서 남은 기체 `S_machine,g`를 추출합니다.
-
-    결과 머신 상태 `S_machine`을 반환합니다.
+  * 이는 `F_apply`를 평가할 때 결과 머신 상태 `S_machine'`에서 남은 가스 `S_machine,g'`를 추출한다는 것을 의미합니다.
 
 따라서 `X`는 `Z`가 true이 되어 현재 상태가 예외적이며 머신을 중지하고 모든 변경 사항을 폐기해야 함을 나타내거나, `H`가 (빈 집합이 아닌) 계열이 되어 머신이 제어된 정지에 도달했음을 나타낼 때까지 (여기서는 재귀적으로) 순환합니다(일반적으로 구현은 단순한 반복 루프를 사용해야 합니다).
 
@@ -278,7 +274,7 @@ where
 `Z`, `H`, `O`를 정의하기 위해 `w`를 현재 실행할 연산으로 정의합니다:
 
 * `w := T_code[S_machine,pc]` if `S_machine,pc < len(T_code)`
-* `w :=STOP` otherwise
+* 그렇지 않으면 `w :=STOP`
 
 ### 인스트럭션 세트 <a id="instruction-set"></a>
 

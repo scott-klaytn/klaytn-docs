@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # caver-java (1.5.0 or later)
 
 ![](/img/references/klaytnXcaver-java.png)

@@ -1,7 +1,3 @@
----
-sidebar_position: 15
----
-
 # 클레이튼 2.0
 
 ## 주권을 다시 사람들에게 <a id="klaytn2"></a>

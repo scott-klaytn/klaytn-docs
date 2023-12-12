@@ -1,7 +1,7 @@
 ---
 description: >-
   클레이튼 거버넌스와 관련된 API입니다.
-sidebar_position: 8
+
 ---
 
 # governance

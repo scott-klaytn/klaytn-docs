@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Block
 
 ## The Default Block Parameter <a id="the-default-block-parameter"></a>

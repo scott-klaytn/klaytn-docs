@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # ethers.js
 
 ![](/img/references/Klaytn-ether.js.png)
@@ -13,16 +9,16 @@ Thus, developers can leverage this compatibility and use the ethers.js library t
 In this guide, you'll learn how to use the ethers.js library to send a transaction, read data from the blockchain and interact with an existing contract on the Klaytn Network.
 
 
-# Prerequisites
+## Prerequisites
 
 * Code-Editor: a source-code editor such as [VS-Code](https://code.visualstudio.com/download).
-* [Metamask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask): used to deploy the contracts, sign transactions and interact with the contracts.
-* RPC Endpoint: you can get this from one of the supported [Endpoint Providers](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en).
+* [Metamask](../../build/tutorials/connecting-metamask#install-metamask): used to deploy the contracts, sign transactions and interact with the contracts.
+* RPC Endpoint: you can get this from one of the supported [Endpoint Providers](../service-providers/public-en.md).
 * Test KLAY from [Faucet](https://baobab.wallet.klaytn.foundation/faucet): fund your account with sufficient KLAY.
 * [NodeJS and NPM](https://nodejs.org/en/)
 
 
-# Setup Project
+## Setup Project
 
 To get started, you need to create a project directory to house the files to be created in this guide.
 
@@ -31,7 +27,7 @@ mkdir ethers-js
 cd ethers-js
 ```
 
-## Install ethers.js
+### Install ethers.js
 
 To install ethers.js, run the following command in your terminal:
 
@@ -39,7 +35,7 @@ To install ethers.js, run the following command in your terminal:
 npm install --save ethers
 ```
 
-## Initialize ethers.js
+### Initialize ethers.js
 
 In this tutorial, we would be creating a bunch of script files to send transactions, read data from the blockchain, and also interact with an existing smart contract. To get started, you need to know how to initialize ethers.js for each of your script files.
 
@@ -64,7 +60,7 @@ const privKey = "Paste Privatekey"
 const signer = new ethers.Wallet(privKey, provider)
 ```
 
-# Reading data from the blockchain
+## Reading data from the blockchain
 
 To read data from the blockchain, create a new `read.js` file in your project folder by running this command:
 
@@ -106,7 +102,7 @@ node read.js
 If the transaction was succesful, you'll see the block number and user’s KLAY balance in your terminal.
 
 
-# Sending a transaction to the blockchain
+## Sending a transaction to the blockchain
 
 To send a transaction to the blockchain, create a new `send.js` file in your project folder by running this command:
 
@@ -158,7 +154,7 @@ If the transaction was succesful, you'll see the transaction receipt been logged
 
 ![](/img/references/send-ethers.png)
 
-# Interact with smart contracts
+## Interact with smart contracts
 
 To interact with an existing smart contract on Klaytn, create a new `interact.js` file in your project folder by running this command:
 
@@ -169,7 +165,7 @@ touch interact.js
 
 After creating this file, initialize ethers as done in the `initialize` section. In this section, you will use ethers.js to interact with a smart contract on Klaytn by instantiating a `Contract` object using the ABI and address of a deployed contract:
 
-For the purpose of this guide, a simple_storage contract was compiled and deployed on [Remix IDE](https://docs.klaytn.foundation/content/dapp/tutorials/connecting-remix). We will be sending a transaction to the contract by calling the `store` function and also reading from it by calling the `retrieve` function.
+For the purpose of this guide, a simple_storage contract was compiled and deployed on [Remix IDE](../../build/tutorials/connecting-remix.md). We will be sending a transaction to the contract by calling the `store` function and also reading from it by calling the `retrieve` function.
 
 
 To see this in action, paste the following code in your `interact.js`.

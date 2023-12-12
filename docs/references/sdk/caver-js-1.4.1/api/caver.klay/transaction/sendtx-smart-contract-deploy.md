@@ -1,8 +1,4 @@
----
-sidebar_position: 5
----
-
-# Smart Contract Deploy Transaction
+# Smart Contract Deploy
 
 ## sendTransaction (SMART_CONTRACT_DEPLOY) <a id="sendtransaction-smart_contract_deploy"></a>
 

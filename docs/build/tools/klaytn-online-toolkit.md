@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Klaytn Online Toolkit
 
 ## What is the Klaytn Online Toolkit? <a id="what-is-the-klaytn-online-toolkit"></a>
@@ -16,6 +12,6 @@ sidebar_position: 1
 Here are the links for `Klaytn Online Toolkit`. Feel free to use it :)
 * [Github Repository](https://github.com/klaytn/klaytn-online-toolkit)
 * [Toolkit Page](https://toolkit.klaytn.foundation)
-* [Klaytn SDK(caver-js)](https://docs.klaytn.foundation/dapp/sdk/caver-js)
+* [Klaytn SDK(caver-js)](../../references/sdk/caver-js/caver-js.md)
 
 ![Klaytn Online Toolkit](/img/build/tools/klaytn-online-toolkit.png)

@@ -1,10 +1,10 @@
-# Internalization
+# Internationalization
 
 KlaytnDocs is available in the following languages:
 
-* [English](https://docs.klaytn.foundation)
-* [한국어](https://ko.docs.klaytn.foundation)
-* [Tiếng Việt](https://vn.docs.klaytn.foundation)
+* [English](https://docs.klaytn.foundation/)
+* [한국어](https://docs.klaytn.foundation/ko/)
+* [Tiếng Việt](https://docs.klaytn.foundation/vi/)
 
 ## Get involved! <a href="#get-involved" id="get-involved"></a>
 

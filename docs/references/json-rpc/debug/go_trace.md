@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Runtime Tracing
 
 ## debug_goTrace <a id="debug_gotrace"></a>

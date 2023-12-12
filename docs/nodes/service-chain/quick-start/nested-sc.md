@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Create nested service chain
 
 This chapter explains how to build ServiceChain networks in a hierarchical structure by adding a new ServiceChain network to the ServiceChain network built in the previous chapter. The ServiceChain network to be added also consists of 4 SCNs in this example. The ServiceChain network constructed in the previous chapter is defined as L2, and the ServiceChain network to be newly constructed is defined as L3. We are going to connect a bridge between L2 and L3 to create a hierarchical structure. The overall structure of the ServiceChain network to be constructed in this chapter is shown in the figure below.

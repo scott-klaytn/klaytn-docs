@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Get KLAY
 
 ## Baobab Testnet and Faucet <a id="baobab-testnet-and-faucet"></a>

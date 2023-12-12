@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Transfer cross-chain value
 
 This section will explain how to enable ERC-20 value transfer between Baobab network and your ServiceChain with the provided test code.

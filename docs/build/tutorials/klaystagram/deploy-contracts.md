@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Deploy smart contracts
 
 ## 1. Clone Klaystagram DApp <a id="2-clone-klaystagram-dapp"></a>

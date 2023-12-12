@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Transaction
 
 ## call <a id="call"></a>

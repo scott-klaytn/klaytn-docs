@@ -4,8 +4,8 @@
 
 TxTypeFeeDelegatedValueTransferWithRatio는 사용자가 KLAY를 전송하고자 할 때 사용됩니다. 클레이튼은 여러 트랜잭션 유형을 제공하여 각 트랜잭션 유형이 하나의 용도로만 사용되도록 하기 때문에, TxTypeFeeDelegatedValueTransferWithRatio는 외부 소유 계정으로 KLAY를 전송하는 데 제한됩니다. 따라서 TxTypeFeeDelegatedValueTransferWithRatio는 `to`가 외부 소유 계정인 경우에만 허용됩니다. 스마트 컨트랙트 계정으로 KLAY를 전송하려면, 대신 [TxTypeFeeDelegatedSmartContractExecutionWithRatio](#txtypefeedelegatedsmartcontractexecutionwithratio)를 사용하세요. 이 트랜잭션 유형에 따라 다음과 같이 변경됩니다.
 
-1. 수수료 납부자의 잔액이 거래 수수료의 지정된 비율만큼 감소합니다.
-2. 발신자의 잔액은 남은 거래 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 납부자가 지불하고, 나머지 70%는 발신자가 지불합니다.
+1. 수수료 납부자의 잔액이 트랜잭션 수수료의 지정된 비율만큼 감소합니다.
+2. 발신자의 잔액은 남은 트랜잭션 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 납부자가 지불하고, 나머지 70%는 발신자가 지불합니다.
 3. 발신자의 nonce가 1 증가합니다.
 4. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
 
@@ -154,8 +154,8 @@ SenderTxHash 4711ed4023e821425968342c1d50063b6bc3176b1792b7075cfeee3656d450f6
 
 사용자가 특정 메시지와 함께 KLAY를 전송하고자 할 때 TxTypeFeeDelegatedValueTransferMemoWithRatio를 사용합니다. TxTypeFeeDelegatedValueTransferMemoWithRatio는 `to`가 외부 소유 계정인 경우에만 허용됩니다. 스마트 컨트랙트 계정으로 KLAY를 전송하려면, 대신 [TxTypeFeeDelegatedSmartContractExecutionWithRatio](#txtypefeedelegatedsmartcontractexecutionwithratio)를 사용하세요. 이 트랜잭션 유형에 따라 다음과 같이 변경됩니다.
 
-1. 수수료 납부자의 잔액은 거래 수수료 금액의 수수료 비율만큼 감소합니다.
-2. 발신자의 잔액은 남은 거래 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 지불자가 지불하고, 나머지 70%는 발신자가 지불합니다.k
+1. 수수료 납부자의 잔액은 트랜잭션 수수료 금액의 수수료 비율만큼 감소합니다.
+2. 발신자의 잔액은 남은 트랜잭션 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 지불자가 지불하고, 나머지 70%는 발신자가 지불합니다.k
 3. 발신자의 nonce가 1 증가합니다.
 4. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
 
@@ -307,8 +307,8 @@ SenderTxHash 2c4e8cd3c68a4aacae51c695e857cfc1a019037ca71d8cd1e8ca56ec4eaf55b1
 
 TxTypeFeeDelegatedSmartContractDeployWithRatio는 스마트 컨트랙트를 배포합니다. 트랜잭션 수수료의 지정된 비율은 수수료 지불자가 지불합니다. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다.
 
-1. 수수료 납부자의 잔액은 거래 수수료 금액의 수수료 비율만큼 감소합니다.
-2. 발신자의 잔액은 남은 거래 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 납부자가 부담하고, 나머지 70%는 발신자가 부담합니다.
+1. 수수료 납부자의 잔액은 트랜잭션 수수료 금액의 수수료 비율만큼 감소합니다.
+2. 발신자의 잔액은 남은 트랜잭션 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 납부자가 부담하고, 나머지 70%는 발신자가 부담합니다.
 3. 발신자의 nonce가 1 증가합니다.
 4. 스마트 컨트랙트가 `input`에 있는 코드와 함께 배포됩니다. 배포된 주소는 영수증에 있는 `contractAddress`를 통해 반환됩니다.
 5. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
@@ -469,7 +469,7 @@ TxTypeFeeDelegatedSmartContractExecution은 `input`에 지정된 데이터로 �
 
 1. `to`가 스마트 컨트랙트 계정인 경우, `input`에 따라 코드가 실행됩니다. 그렇지 않으면 트랜잭션이 거부됩니다.
 2. 수수료 납부자의 잔액은 트랜잭션 수수료 금액의 수수료 비율만큼 감소합니다.
-3. `spender`의 잔액은 남은 거래 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 지불자가 지불하고, 나머지 70%는 `spender`가 지불합니다.
+3. `spender`의 잔액은 남은 트랜잭션 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 지불자가 지불하고, 나머지 70%는 `spender`가 지불합니다.
 4. 발신자의 nonce가 1 증가합니다.
 5. `value`가 제공된 경우, `value` KLAY가 발신자로부터 `to` 스마트 컨트랙트로 전송됩니다. 컨트랙트에는 KLAY를 받기 위한 지불 가능한 폴백 기능이 있어야 합니다.
 
@@ -617,8 +617,8 @@ SenderTxHash d5e22319cbf020d422d8ba3a07da9d99b9300826637af85b4e061805dcb2c1b0
 
 TxTypeFeeDelegatedAccountUpdateWithRatio는 지정된 계정의 키를 업데이트합니다. 트랜잭션 수수료의 지정된 비율은 수수료 납부자가 지불합니다. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 발생합니다.
 
-1. 수수료 납부자의 잔액은 거래 수수료 금액의 수수료 비율만큼 감소합니다.
-2. 발신자의 잔액은 남은 거래 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 납부자가 부담하고, 나머지 70%는 발신자가 부담합니다.
+1. 수수료 납부자의 잔액은 트랜잭션 수수료 금액의 수수료 비율만큼 감소합니다.
+2. 발신자의 잔액은 남은 트랜잭션 수수료만큼 감소합니다. 예: `feeRatio`가 30이면 수수료의 30%는 수수료 납부자가 부담하고, 나머지 70%는 발신자가 부담합니다.
 3. 발신자의 nonce가 1 증가합니다.
 4. 계정의 키가 `key`로 업데이트됩니다.
 5. 이 트랜잭션이 실행되면 이후 계정에서 전송된 트랜잭션은 이 `key`로 유효성을 검사합니다.
@@ -765,7 +765,7 @@ SenderTxHash e1d87538509549f4a1eb418f986bc53dc77b7eec3b2150f75cd787951d3e4b7f
 
 TxTypeFeeDelegatedCancelWithRatio는 트랜잭션 풀에서 동일한 nonce를 가진 트랜잭션의 실행을 취소합니다. 자세한 내용은 [TxTypeCancel](./basic.md#txtypecancel)을 참조하세요.
 
-이 거래 유형에 따라 다음과 같은 변경 사항이 적용됩니다. 1. 수수료 납부자의 잔액이 거래 수수료 금액에 대한 지정된 수수료 비율만큼 감소합니다. 2. 발신자의 잔액은 남은 거래 수수료만큼 감소합니다. 3. 발신자의 nonce가 1 증가합니다.
+이 거래 유형에 따라 다음과 같은 변경 사항이 적용됩니다. 1. 수수료 납부자의 잔액이 트랜잭션 수수료 금액에 대한 지정된 수수료 비율만큼 감소합니다. 2. 발신자의 잔액은 남은 트랜잭션 수수료만큼 감소합니다. 3. 발신자의 nonce가 1 증가합니다.
 
 ### 속성 <a id="attributes"></a>
 

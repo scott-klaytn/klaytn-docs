@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # caver.account
 
 `caver.account`는 계정을 업데이트할 때 사용하는 계정과 관련된 기능을 제공하는 패키지입니다.

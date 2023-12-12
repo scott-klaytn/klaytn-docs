@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Frontend Code Overview
 
 1. `src/index.js` - Entry point of our app  

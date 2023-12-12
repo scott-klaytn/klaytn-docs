@@ -25,8 +25,8 @@ Foundry는 빠르고 모듈화된 스마트 컨트랙트 개발을 가능하게 
 이 튜토리얼을 따르기 위한 전제 조건은 다음과 같습니다:
 
 * 코드 편집기: [VS-Code](https://code.visualstudio.com/download)와 같은 소스 코드 편집기.
-* [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
-* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en) 중 하나에서 얻을 수 있습니다.
+* [MetaMask](../../tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
+* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../../../references/service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
 * [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY 테스트: 충분한 KLAY로 계정에 자금을 충전합니다.
 * [Rust](https://www.rust-lang.org/tools/install) 및 [Foundry](https://github.com/foundry-rs/foundry#installation)를 설치합니다.
 
@@ -142,7 +142,7 @@ forge build
 
 ## 컨트랙트 배포하기
 
-Foundry를 사용하여 컨트랙트를 배포하려면, 컨트랙트를 배포할 계정의 RPC URL과 개인키를 제공해야 합니다. 클레이튼의 [rpc 제공자](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en) 목록을 참고하여 rpc-url을 찾고, [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask)를 사용하여 계정을 생성합니다.
+Foundry를 사용하여 컨트랙트를 배포하려면, 컨트랙트를 배포할 계정의 RPC URL과 개인키를 제공해야 합니다. 클레이튼의 [rpc 제공자](../../../references/service-providers/public-en.md) 목록을 참고하여 rpc-url을 찾고, [MetaMask](../../tutorials/connecting-metamask#install-metamask)를 사용하여 계정을 생성합니다.
 
 **1단계**: 컨트랙트를 Klaytn Baobab 네트워크에 배포하려면, 아래 명령어를 실행합니다:
 
@@ -318,11 +318,12 @@ cast call $oUSDC \
 캐스트 전송을 사용하여 행운의 사용자로부터 앨리스에게 토큰을 전송해 보겠습니다:
 
 ```bash
-cast rpc anvil_impersonateAccount $oUSDCHolder
+cast rpc anvil_impersonateAccount $oUSDCHolder    
 cast send $oUSDC \
+--unlocked \
 --from $oUSDCHolder\
-  "transfer(address,uint256)(bool)" \
-  $BOB \
+ "transfer(address,uint256)(bool)" \
+ $BOB \
  1000000
 ```
 

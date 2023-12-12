@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # ERC-20
 
 ## 소개 <a id="introduction"></a>

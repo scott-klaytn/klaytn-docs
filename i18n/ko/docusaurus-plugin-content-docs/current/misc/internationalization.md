@@ -1,10 +1,10 @@
-# 언어
+# 현지화
 
 KlaytnDocs는 다음 언어를 지원합니다:
 
-* [영어](https://docs.klaytn.foundation)
-* [한국어](https://ko.docs.klaytn.foundation)
-* [한국어](https://vn.docs.klaytn.foundation)
+* [English](https://docs.klaytn.foundation/)
+* [한국어](https://docs.klaytn.foundation/ko/)
+* [Tiếng Việt](https://docs.klaytn.foundation/vi/)
 
 ## 참여하기! <a href="#get-involved" id="get-involved"></a>
 

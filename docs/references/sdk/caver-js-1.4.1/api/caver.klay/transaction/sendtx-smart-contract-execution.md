@@ -1,8 +1,4 @@
----
-sidebar_position: 6
----
-
-# Smart Contract Execution Transaction
+# Smart Contract Execution
 
 ## sendTransaction (SMART_CONTRACT_EXECUTION) <a id="sendtransaction-smart_contract_execution"></a>
 

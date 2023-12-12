@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 sidebar_label: web3.js에서 변환
 ---
 

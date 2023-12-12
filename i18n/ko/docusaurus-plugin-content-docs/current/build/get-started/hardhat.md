@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Hardhat을 사용하여 첫 스마트 컨트랙트 배포하기
 
 ![](/img/build/get-started/Klaytn-hardhat.png)
@@ -28,8 +24,8 @@ Soul-bound token(SBT)은 양도할 수 없는 대체 불가능한 토큰입니�
 이 튜토리얼을 따르기 위한 전제 조건은 다음과 같습니다:
 
 * 코드 편집기: [VS-Code](https://code.visualstudio.com/download)와 같은 소스 코드 편집기.
-* [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
-* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en) 중 하나에서 얻을 수 있습니다.
+* [MetaMask](../tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
+* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../../references/service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
 * [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY 테스트: 충분한 KLAY로 계정에 자금을 충전합니다.
 * [NodeJS 및 NPM](https://nodejs.org/en/)
 
@@ -63,10 +59,10 @@ npm install --save-dev hardhat
 * 다른 종속성을 설치하려면 아래 코드를 붙여넣으세요.
 
 ```bash
-npm install dotenv @nomicfoundation/hardhat-toolbox @klaytn/contracts
+npm install dotenv @klaytn/contracts
 ```
 
-> 참고: 이 프로젝트에 필요한 `hardhat`, `hardhat-toolbox`, `klaytn/contract`, `dotenv` 등의 기타 종속성을 설치합니다.
+> 참고: 이 프로젝트에 필요한 `hardhat`, `klaytn/contract`, `dotenv` 등의 기타 종속성을 설치합니다.
 
 
 **4단계**: Hardhat 프로젝트를 초기화합니다:
@@ -80,6 +76,10 @@ npx hardhat
 
 ![](/img/build/get-started/hardhat-init.png)
 
+![](/img/build/get-started/hardhat-init-ii.png)
+
+> 참고: 프로젝트를 초기화하는 동안 'hardhat-toolbox' 플러그인을 설치하라는 메시지가 표시됩니다. 이 플러그인에는 일반적으로 사용되는 모든 패키지와 Hardhat으로 개발을 시작하는 데 권장되는 Hardhat 플러그인이 번들로 제공됩니다.
+
 Hardhat 프로젝트를 초기화한 후에는 현재 디렉터리에 다음이 포함되어야 합니다:
 
 **contracts/** - 이 폴더에는 스마트 컨트랙트 코드가 포함되어 있습니다.
@@ -88,7 +88,7 @@ Hardhat 프로젝트를 초기화한 후에는 현재 디렉터리에 다음이 
 
 **test/** - 이 폴더에는 스마트 컨트랙트를 테스트하는 모든 단위 테스트가 포함되어 있습니다.
 
-**hardhat.config.ts** - 이 파일에는 Hardhat의 작업과 Soul-bound token 배포에 중요한 구성이 포함되어 있습니다.
+**hardhat.config.js** - 이 파일에는 Hardhat의 작업과 Soul-bound token 배포에 중요한 구성이 포함되어 있습니다.
 
 **5단계**: .env 파일 만들기
 
@@ -107,9 +107,11 @@ touch .env
  PRIVATE_KEY= "your private key copied from MetaMask wallet"
 ```
 
+> 참고: 하드햇에서 제공하는 [구성 변수](https://hardhat.org/hardhat-runner/docs/guides/configuration-variables) 기능을 사용하여 코드 저장소에 포함되지 않아야 하는 변수를 구성할 수도 있습니다.
+
 **6단계**: Hardhat 설정 설정
 
-다음 구성으로 `hardhat.config.ts`를 수정합니다:
+다음 구성으로 `hardhat.config.js`를 수정합니다:
 
 ```js
 require("@nomicfoundation/hardhat-toolbox");
@@ -186,9 +188,9 @@ contract SoulBoundToken is KIP17, Ownable {
 
 이 섹션에서는 일부 컨트랙트 기능을 테스트할 것입니다.
 
-**1단계**: 탐색기 창에서 테스트 폴더를 선택하고 새 파일 버튼을 클릭하여 `sbtTest.ts`라는 이름의 새 파일을 만듭니다.
+**1단계**: 탐색기 창에서 테스트 폴더를 선택하고 새 파일 버튼을 클릭하여 `sbtTest.js`라는 이름의 새 파일을 만듭니다.
 
-**2단계**: 아래 코드를 `sbtTest.ts` 파일에 복사합니다.
+**2단계**: 아래 코드를 `sbtTest.js` 파일에 복사합니다.
 
 ```js
 // This is an example test file. Hardhat will run every *.ts file in `test/`,
@@ -217,15 +219,15 @@ describe("Token contract", function () {
   // Network to that snapshot in every test.
   async function deployTokenFixture() {
     // Get the ContractFactory and Signers here.
-    const sbt = await ethers.getContractFactory("SoulBoundToken");
     const [owner, addr1, addr2] = await ethers.getSigners();
 
-    // To deploy our contract, we just have to call Token.deploy() and await
-    // its deployed() method, which happens onces its transaction has been
+    // To deploy our contract, we just have to call ethers.deployContract() and call the 
+    // waitForDeployment() method, which happens onces its transaction has been
     // mined.
-    const sbtContract = await sbt.deploy();
 
-    await sbtContract.deployed();
+    const sbtContract = await ethers.deployContract("SoulBoundToken");
+
+    await sbtContract.waitForDeployment();
 
     // Fixtures can return anything you consider useful for your tests
     return { sbtContract, owner, addr1, addr2 };
@@ -300,31 +302,29 @@ npx hardhat test test/sbtTest.ts
 
 스크립트는 블록체인 네트워크에 컨트랙트를 배포하는 데 도움이 되는 JavaScripts/Typescript 파일입니다. 이 섹션에서는 스마트 컨트랙트를 위한 스크립트를 생성합니다.
 
-**1단계**: 탐색기 창에서 "scripts" 폴더를 선택하고 새 파일 버튼을 클릭하여 `sbtDeploy.ts`라는 이름의 새 파일을 만듭니다.
+**1단계**: 탐색기 창에서 "scripts" 폴더를 선택하고 새 파일 버튼을 클릭하여 `sbtDeploy.js`라는 이름의 새 파일을 만듭니다.
 
 **2단계**: 파일 안에 다음 코드를 복사하여 붙여넣습니다.
 
 > 참고: '배포자 주소' 변수에 MetaMask 지갑 주소를 입력하세요.
 
 ```js
-import { ethers } from "hardhat";
+const { ethers } = require("hardhat");
 
 async function main() {
 
-    const deployerAddr = "Your Metamask wallet address";
-    const deployer = await ethers.getSigner(deployerAddr);
+  const deployerAddr = "Your Metamask wallet address";
+  const deployer = await ethers.getSigner(deployerAddr);
 
-    console.log(`Deploying contracts with the account: ${deployer.address}`);
-    console.log(`Account balance: ${(await deployer.getBalance()).toString()}`);
-
-  const sbt = await ethers.getContractFactory("SoulBoundToken");
-  const sbtContract = await sbt.deploy();
+  console.log(`Deploying contracts with the account: ${deployer.address}`);
+  console.log(`Account balance: ${(await deployer.provider.getBalance(deployerAddr)).toString()}`);
 
 
-  await sbtContract.deployed();
+  const sbtContract = await ethers.deployContract("SoulBoundToken");
+  await sbtContract.waitForDeployment();
 
 console.log(`Congratulations! You have just successfully deployed your soul bound tokens.`);
-console.log(`SBT contract address is ${sbtContract.address}. You can verify on https://baobab.scope.klaytn.com/account/${sbtContract.address}`);
+console.log(`SBT contract address is ${sbtContract.target}. You can verify on https://baobab.scope.klaytn.com/account/${sbtContract.target}`);
 }
 
 // We recommend this pattern to be able to use async/await everywhere
@@ -338,7 +338,7 @@ main().catch((error) => {
 **3단계**: 터미널에서 다음 명령을 실행하여 Hardhat에 SBT 토큰을 Klaytn 테스트 네트워크(Baobab)에 배포하도록 지시합니다.
 
 ```bash
-npx hardhat run scripts/sbtDeploy.ts --network baobab
+npx hardhat run scripts/sbtDeploy.js --network baobab
 ```
 
 ![](/img/build/get-started/sbtDeploy.png)
@@ -365,9 +365,9 @@ npx hardhat node --fork <YOUR ARCHIVE NODE URL>
 npx hardhat node --fork https://archive-en.cypress.klaytn.net
 ```
 
-Hardhat 네트워크에서 항상 이 작업을 수행하도록 `hardhat.config.ts`를 구성할 수도 있습니다:
+Hardhat 네트워크에서 항상 이 작업을 수행하도록 `hardhat.config.js`를 구성할 수도 있습니다:
 
-```ts
+```
 networks: {
   hardhat: {
     forking: {

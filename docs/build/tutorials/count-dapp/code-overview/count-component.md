@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Count Component
 
 `src/components/Count.js` goes as follows,

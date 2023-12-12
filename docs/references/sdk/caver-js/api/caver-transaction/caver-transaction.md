@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # caver.transaction
 
 `caver.transaction` is a package that provides functionality related to Transaction.

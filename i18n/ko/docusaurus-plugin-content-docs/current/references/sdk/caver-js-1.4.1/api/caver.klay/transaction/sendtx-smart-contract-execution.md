@@ -1,8 +1,4 @@
----
-sidebar_position: 6
----
-
-# 스마트 컨트랙트 실행 트랜잭션
+# 스마트 컨트랙트 실행
 
 ## sendTransaction (SMART_CONTRACT_EXECUTION) <a id="sendtransaction-smart_contract_execution"></a>
 

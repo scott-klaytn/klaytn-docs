@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # BlockNumber 컴포넌트
 
 `src/components/BlockNumber.js`:

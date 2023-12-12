@@ -1,5 +1,7 @@
----
-sidebar_position: 6
----
-
 # Computation
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```

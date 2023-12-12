@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # caver.rpc
 
 caver.rpc`는 클레이튼 노드와의 rpc 호출과 관련된 기능을 제공하는 패키지입니다.

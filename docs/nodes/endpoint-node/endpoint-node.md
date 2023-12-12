@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Endpoint Node
 
 ## Intended Audience <a id="intended-audience"></a>

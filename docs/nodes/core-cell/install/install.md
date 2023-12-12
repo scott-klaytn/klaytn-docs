@@ -1,5 +1,7 @@
----
-sidebar_position: 3
----
-
 # Install Core Cell
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```

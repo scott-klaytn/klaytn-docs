@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Filter
 
 ## eth_getFilterChanges <a id="eth_getfilterchanges"></a>

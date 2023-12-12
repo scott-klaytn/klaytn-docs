@@ -1,6 +1,6 @@
 ---
 설명: 스마트 컨트랙트와 상호작용하는 데 사용되는 caver-js 객체입니다.
-sidebar_position: 4
+
 ---
 
 # caver.klay.Contract

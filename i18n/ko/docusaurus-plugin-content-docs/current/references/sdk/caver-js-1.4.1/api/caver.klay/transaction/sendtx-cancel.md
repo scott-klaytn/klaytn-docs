@@ -1,8 +1,4 @@
----
-sidebar_position: 7
----
-
-# 트랜잭션 취소
+# 취소
 
 ## sendTransaction (CANCEL) <a id="sendtransaction-cancel"></a>
 

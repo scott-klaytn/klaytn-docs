@@ -14,7 +14,7 @@
 
 > 스마트 컨트랙트를 배포하고 트랜잭션을 제출하려면 KLAY에서 트랜잭션 수수료가 필요하기 때문에 본 가이드에서는 **Baobab** 테스트넷을 사용합니다. 개발 목적으로 테스트넷 KLAY는 [Baobab Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 받을 수 있습니다.
 
-## 엔드포인트 노드 시작
+## 엔드포인트 노드 시작 <a href="#launch-an-en" id="launch-an-en"></a>
 
 ### 엔드포인트 노드 다운로드 및 초기화(EN) <a href="#download-and-initialize-an-endpoint-node-en" id="download-and-initialize-an-endpoint-node-en"></a>
 

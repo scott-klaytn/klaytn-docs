@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # 제네시스 파일
 
 이 페이지는 `genesis.json` 파일에 대한 자세한 내용을 설명합니다.

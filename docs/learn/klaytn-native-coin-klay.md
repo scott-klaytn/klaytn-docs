@@ -1,7 +1,3 @@
----
-sidebar_position: 11
----
-
 # Klaytn native coin - KLAY
 
 ## KLAY <a id="klay"></a>

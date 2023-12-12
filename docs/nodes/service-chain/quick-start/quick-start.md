@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Quick Start
 
 This tutorial provides a step-by-step guide for setting up a ServiceChain network and connecting it to the Klaytn Baobab network.

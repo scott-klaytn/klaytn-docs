@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Configuration Files
 
 This document explains the configurable properties of the node. Klaytn node package ships with good defaults and requires very little configuration. If you changed any settings of a running node, you must restart the node to reflect the changes.

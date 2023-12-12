@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # Gas
 
 ## klay_feeHistory<a id="klay_feehistory"></a>

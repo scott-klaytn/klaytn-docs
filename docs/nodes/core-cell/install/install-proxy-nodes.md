@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Install Proxy Nodes
 
 ## Download
@@ -228,9 +224,9 @@ $ systemctl status kpnd.service
    Active: active (running) since Wed 2019-01-09 11:42:39 UTC; 1 months 4 days ago
      Docs: man:systemd-sysv-generator(8)
   Process: 29636 ExecStart=/etc/rc.d/init.d/kpnd start (code=exited, status=0/SUCCESS)
- Main PID: 29641 (kcn)
+ Main PID: 29641 (kpn)
    CGroup: /system.slice/kpnd.service
-           └─29641 /usr/local/bin/kcn --networkid 1000 --datadir /kpnd_home --port 32323 --srvtype fasthttp --metrics --prometheus --verbosity 3 --txpool.global...
+           └─29641 /usr/local/bin/kpn --networkid 1000 --datadir /kpnd_home --port 32323 --srvtype fasthttp --metrics --prometheus --verbosity 3 --txpool.global...
 
 Jan 09 11:42:39 ip-10-11-2-101.ap-northeast-2.compute.internal systemd[1]: Starting (null)...
 Jan 09 11:42:39 ip-10-11-2-101.ap-northeast-2.compute.internal kpnd[29636]: Starting kpnd: [  OK  ]

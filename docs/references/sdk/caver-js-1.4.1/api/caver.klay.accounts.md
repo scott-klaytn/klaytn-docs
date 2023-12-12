@@ -1,7 +1,7 @@
 ---
 description: >-
   caver-js APIs related to managing accounts.
-sidebar_position: 3
+
 ---
 
 # caver.klay.accounts

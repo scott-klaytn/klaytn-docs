@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # Gas
 
 ## eth_feeHistory<a id="eth_feehistory"></a>

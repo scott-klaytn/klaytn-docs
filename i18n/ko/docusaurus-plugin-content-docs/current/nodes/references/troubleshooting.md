@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # 오류 및 문제 해결
 
 ## 클레이튼 바이너리 패키지를 사용하여 실행 중인 클레이튼 노드의 로그 파일은 어디에서 찾을 수 있나요? <a id="where-can-i-find-a-log-file-for-the-running-klaytn-node-using-the-klaytn-binary"></a>

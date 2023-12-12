@@ -1,8 +1,4 @@
----
-sidebar_position: 2
----
-
-# 밸류 전송 트랜잭션
+# 밸류 전송
 
 ## sendTransaction (VALUE_TRANSFER)
 

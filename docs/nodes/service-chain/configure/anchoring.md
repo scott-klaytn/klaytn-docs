@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Use Data Anchoring
 
 As explained in the design section, Service Chain supports the data anchoring feature.

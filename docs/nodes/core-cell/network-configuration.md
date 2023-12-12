@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Network Configuration
 
 A Core Cell can be made up of:

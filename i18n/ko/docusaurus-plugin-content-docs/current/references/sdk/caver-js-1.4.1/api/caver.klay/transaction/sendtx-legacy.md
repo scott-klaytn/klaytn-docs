@@ -1,8 +1,4 @@
----
-sidebar_position: 1
----
-
-# 레거시 트랜잭션
+# 레거시
 
 ## sendTransaction (Legacy) <a id="sendtransaction-legacy"></a>
 

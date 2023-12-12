@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Deploy smart contracts
 
 ## 1. Clone Count DApp <a id="2-clone-count-dapp"></a>

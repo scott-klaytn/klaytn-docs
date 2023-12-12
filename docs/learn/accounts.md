@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Accounts
 
 ## Klaytn Accounts <a id="klaytn-accounts"></a>
@@ -194,7 +190,7 @@ In order for a transaction to be valid for an account associated with AccountKey
 NOTE: The following multiSig validation logic has changed with the `IstanbulEVM` protocol upgrade, or the "hard fork".
 * The invalid signature should not be included in the transaction.
 * The number of signed public keys should be less than the number of weightedPublicKeys.
-If you want the previous document, please refer to [previous document](transaction-fees/transaction-fees-previous.md).
+If you want the previous document, please refer to [previous document](./transaction-fees-previous.md).
 
 `IstanbulEVM` protocol upgrade block number is as follows.
 * Baobab Testnet: `#75373312`
@@ -208,7 +204,7 @@ If you want the previous document, please refer to [previous document](transacti
 | :--- | :--- | :--- |
 | Type | uint8 \(Go\) | The type of AccountKeyWeightedMultiSig. This must be **0x04**. |
 | Threshold | uint \(Go\) | Validation threshold. To be a valid transaction, the weight sum of signatures should be larger than or equal to the threshold. |
-| WeightedPublicKeys | \[\]{uint, \[33\]byte} \(Go\) | A list of weighted public keys. A weighted public key contains a compressed public key and its weight. |
+| WeightedPublicKeys | \[\]\{uint, \[33\]byte} \(Go\) | A list of weighted public keys. A weighted public key contains a compressed public key and its weight. |
 
 #### RLP Encoding <a id="rlp-encoding"></a>
 

@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # 런타임 추적
 
 ## debug_goTrace <a id="debug_gotrace"></a>

@@ -1,6 +1,6 @@
 ---
 description: A caver-js object used to interact with a smart contract for KIP7.
-sidebar_position: 5
+
 ---
 
 # caver.klay.KIP7

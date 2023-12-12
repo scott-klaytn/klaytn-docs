@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Oracles
 
 Blockchain oracles serve as a link between the blockchain and other external data sources. In actuality, the blockchain is a closed system; as such, it is unable to pull data into or out of any external systems (off-chain data) and only has access to data that is already present within the original blockchain context. This creates a blockchain-oracle issue where the blockchain is unable to obtain data from actual occurrences. Smart contracts must, however, connect to a wide range of external data sources in order to fulfill a number of useful functions. As an illustration, a [hybrid smart contract](https://chain.link/education-hub/hybrid-smart-contracts) that uses oracles to give asset prices for finance, weather data for insurance, randomness for gaming, IoT sensors for supply chain management, etc.

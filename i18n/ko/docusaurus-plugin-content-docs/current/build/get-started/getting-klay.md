@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # KLAY 받기
 
 ## Baobab 테스트넷 및 Faucet <a id="baobab-testnet-and-faucet"></a>

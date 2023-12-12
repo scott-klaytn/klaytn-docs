@@ -1,14 +1,10 @@
----
-sidebar_position: 3
----
-
 # 컨트랙트와 상호작용하기
 
 이 섹션에서는 새로 생성한 다중서명 지갑을 사용하여 Baobab에 배포된 간단한 컨트랙트와 상호작용하고 트랜잭션을 전송할 것입니다.
 
 **사전 요구 사항**
 
-* [MetaMask](https://metamask.io/download/) & [클레이튼 MetaMask 설정](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#send-klay)
+* [MetaMask](https://metamask.io/download/) & [클레이튼 MetaMask 설정](../../../tutorials/connecting-metamask#send-klay)
 * [Remix](https://remix.ethereum.org/) & [Klaytn Remix 플러그인](https://klaytn.foundation/using-klaytn-plugin-on-remix/)
 * [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 테스트 KLAY를 받습니다.
 

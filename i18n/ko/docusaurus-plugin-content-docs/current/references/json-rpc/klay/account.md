@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Account
 
 ## klay_accountCreated <a id="klay_accountcreated"></a>

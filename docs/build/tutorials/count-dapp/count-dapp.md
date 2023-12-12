@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Build Count DApp
 
 ## Table of Contents <a href="#table-of-contents" id="table-of-contents"></a>

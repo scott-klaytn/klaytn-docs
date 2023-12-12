@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs to control Klaytn node.
-sidebar_position: 5
+
 ---
 
 # admin

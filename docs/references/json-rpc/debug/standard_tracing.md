@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # VM Standard Tracing
 
 **NOTE** Some debug namespace APIs are unsafe/unappropriate to be opened to public.

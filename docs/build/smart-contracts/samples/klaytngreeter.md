@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # KlaytnGreeter
 
 `KlaytnGreeter` is a simple contract that returns a greeting message. Greeting message is set when the contract is deployed.

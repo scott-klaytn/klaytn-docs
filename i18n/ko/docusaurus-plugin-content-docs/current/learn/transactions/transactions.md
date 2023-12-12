@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # 트랜잭션
 
 ## 트랜잭션 개요 <a id="transactions-overview"></a>

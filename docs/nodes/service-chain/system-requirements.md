@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # System Requirements
 
 The system requirements depend on the performance your need.

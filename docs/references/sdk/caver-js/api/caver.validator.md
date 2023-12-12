@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # caver.validator
 
 The `caver.validator` package provides validation functions that should be used when implementing applications on Klaytn.

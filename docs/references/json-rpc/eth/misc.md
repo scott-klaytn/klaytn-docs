@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # Miscellaneous
 
 ## eth_hashrate <a id="eth_hashrate"></a>

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 2
 sidebar_label: 수수료 위임
 ---
 

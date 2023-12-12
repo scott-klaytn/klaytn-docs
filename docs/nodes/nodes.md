@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # About Klaytn Nodes
 
 The Klaytn network is comprised of three types of nodes:

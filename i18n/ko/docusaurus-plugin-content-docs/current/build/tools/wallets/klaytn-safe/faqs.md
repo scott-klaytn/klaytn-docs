@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # 자주 묻는 질문
 
 ## 금고 생성 후 새 소유자를 추가할 수 있나요? <a id="Can i add new owners after creating a safe"></a>
@@ -114,5 +110,5 @@ sidebar_position: 5
 또한 총 소유자의 51%(예: 3명 중 2명, 5명 중 3명 등)의 임계값을 선택하는 것이 좋습니다.  따라서 한 명의 소유자가 계정에 액세스할 수 없게 되더라도 사용자가 금고에 있는 모든 돈을 즉시 잠그지 않고 다른 소유자가 계속 거래를 수행할 수 있으며, 예를 들어 분실된 소유자 계정을 대체할 수 있습니다. 이것이 복구 메커니즘의 역할을 한다고 주장할 수 있습니다.
 
 **어떤 지갑과 호환되나요?**
-현재 Klaytn Safe는 [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask)와 호환됩니다.
+현재 Klaytn Safe는 [MetaMask](../../../tutorials/connecting-metamask)와 호환됩니다.
 

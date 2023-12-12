@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Auth Component
 
 `src/components/Auth.js`:

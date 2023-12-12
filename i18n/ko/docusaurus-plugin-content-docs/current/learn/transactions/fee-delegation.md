@@ -4,7 +4,7 @@
 
 TxTypeFeeDelegatedValueTransfer는 사용자가 KLAY를 전송하고자 할 때 사용됩니다. 클레이튼은 각 트랜잭션 유형이 하나의 용도로 사용될 수 있도록 여러 트랜잭션 유형을 제공하기 때문에 TxTypeFeeDelegatedValueTransfer는 외부 소유 계정으로 KLAY를 전송하는 것으로 제한됩니다. 따라서 TxTypeFeeDelegatedValueTransfer는 `to`가 외부 소유 계정인 경우에만 허용됩니다. 스마트 컨트랙트 계정으로 KLAY를 전송하려면, 대신 [TxTypeFeeDelegatedSmartContractExecution](#txtypefeedelegatedsmartcontractexecution)을 사용하세요. 이 트랜잭션 유형에 따라 다음과 같이 변경됩니다.
 
-1. 수수료 납부자의 잔액이 거래 수수료만큼 감소합니다.
+1. 수수료 납부자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
 
@@ -150,7 +150,7 @@ SenderTxHash 40f8c94e01e07eb5353f6cd4cd3eabd5893215dd53a50ba4b8ff9a447ac51731
 
 사용자가 특정 메시지와 함께 KLAY를 전송하고자 할 때 TxTypeFeeDelegatedValueTransferMemo를 사용합니다. TxTypeFeeDelegatedValueTransferMemo는 `to`가 외부 소유 계정인 경우에만 허용됩니다. 스마트 컨트랙트 계정으로 KLAY를 전송하려면, 대신 [TxTypeFeeDelegatedSmartContractExecution](#txtypefeedelegatedsmartcontractexecution)을 사용하세요. 이 트랜잭션 유형에 따라 다음과 같이 변경됩니다.
 
-1. 수수료 납부자의 잔액이 거래 수수료만큼 감소합니다.
+1. 수수료 납부자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
 
@@ -300,7 +300,7 @@ SenderTxHash fffaa2b38d4e684ea70a89c78fc7b2659000d130c76ad721d68175cbfc77c550
 
 수수료 위임 스마트 컨트랙트 수수료 위임 스마트 컨트랙트를 배포합니다. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다.
 
-1. 수수료 납부자의 잔액이 거래 수수료만큼 감소합니다.
+1. 수수료 납부자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 스마트 컨트랙트가 `input`에 코드와 함께 배포됩니다. 배포된 주소는 영수증에 있는 `contractAddress`를 통해 반환됩니다.
 4. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
@@ -606,7 +606,7 @@ SenderTxHash 3cd3380f4206943422d5d5b218dd66d03d60d19a109f9929ea12b52a230257cb
 
 TxTypeFeeDelegatedAccountUpdate는 지정된 계정의 키를 업데이트합니다. 트랜잭션 수수료는 수수료 납부자가 지불합니다. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 발생합니다.
 
-1. 수수료 납부자의 잔액이 거래 수수료만큼 감소합니다.
+1. 수수료 납부자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 계정의 키가 `key`로 업데이트됩니다.
 4. 이 유형의 트랜잭션이 실행되면 이후 해당 계정에서 전송되는 트랜잭션은 새로운 `key`로 유효성이 검사됩니다.
@@ -751,7 +751,7 @@ SenderTxHash f56937017bd3b75c637ba5b4ce90df20c166006a2a529b42e808bc806159b98f
 
 TxTypeFeeDelegatedCancel은 트랜잭션 풀에서 동일한 nonce를 가진 트랜잭션의 실행을 취소합니다. 자세한 내용은 [TxTypeCancel](./basic.md#txtypecancel)을 참조하세요.
 
-이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다. 1. 수수료 납부자의 잔액이 거래 수수료만큼 감소합니다. 2. 발신자의 nonce가 1 증가합니다.
+이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다. 1. 수수료 납부자의 잔액이 트랜잭션 수수료만큼 감소합니다. 2. 발신자의 nonce가 1 증가합니다.
 
 ### 속성 <a id="attributes"></a>
 
@@ -759,8 +759,8 @@ TxTypeFeeDelegatedCancel은 트랜잭션 풀에서 동일한 nonce를 가진 트
 | :--- | :--- | :--- |
 | type | uint8 \(Go\) | TxTypeCancel의 유형입니다. 0x39여야 합니다. |
 | nonce | uint64 \(Go\) | 발신자의 트랜잭션을 고유하게 식별하는 데 사용되는 값입니다. 발신자가 동일한 nonce를 가진 두 개의 트랜잭션을 생성한 경우 하나만 실행됩니다. |
-| gasPrice | \*big.Int \(Go\) | 발신자가 거래 수수료로 지불할 `peb` 단위의 가스 단가입니다. 트랜잭션 수수료 금액은 `gas` \* `gasPrice`으로 계산됩니다. 예를 들어, 트랜잭션이 가스 10단위를 소비하고 가스 가격이 10^18이면 트랜잭션 수수료는 10 KLAY가 됩니다. [KLAY 단위]를 참고하세요. |
-| gas | uint64 \(Go\) | 거래에서 사용할 수 있는 최대 거래 수수료 금액입니다. |
+| gasPrice | \*big.Int \(Go\) | 발신자가 트랜잭션 수수료로 지불할 `peb` 단위의 가스 단가입니다. 트랜잭션 수수료 금액은 `gas` \* `gasPrice`으로 계산됩니다. 예를 들어, 트랜잭션이 가스 10단위를 소비하고 가스 가격이 10^18이면 트랜잭션 수수료는 10 KLAY가 됩니다. [KLAY 단위]를 참고하세요. |
+| gas | uint64 \(Go\) | 거래에서 사용할 수 있는 최대 트랜잭션 수수료 금액입니다. |
 | from | common.Address \(Go\) | 발신자의 주소입니다. 자세한 내용은 [트랜잭션의 서명 유효성 검사](./transactions.md#signature-validation-of-transactions)를 참조하세요. |
 | txSignatures | \[\]{\*big.Int, \*big.Int, \*big.Int} \(Go\) | 발신자의 서명. 자세한 내용은 [트랜잭션의 서명 유효성 검사](./transactions.md#signature-validation-of-transactions)를 참조하세요. |
 | feePayer | common.Address \(Go\) | 수수료 납부자의 주소입니다. |
@@ -895,8 +895,8 @@ TxTypeFeeDelegatedChainDataAnchoring은 서비스 체인 데이터를 클레이�
 | :--- | :--- | :--- |
 | type | uint8 \(Go\) | TxTypeFeeDelegatedChainDataAnchoring의 유형입니다. 0x49여야 합니다. |
 | nonce | uint64 \(Go\) | 발신자의 트랜잭션을 고유하게 식별하는 데 사용되는 값입니다. 발신자가 동일한 nonce를 가진 두 개의 트랜잭션을 생성한 경우 하나만 실행됩니다. |
-| gasPrice | \*big.Int \(Go\) | 발신자가 거래 수수료로 지불할 `peb` 단위의 가스 단가입니다. 트랜잭션 수수료 금액은 `gas` \* `gasPrice`으로 계산됩니다. 예를 들어, 트랜잭션이 가스 10단위를 소비하고 가스 가격이 10^18이면 트랜잭션 수수료는 10 KLAY가 됩니다. [KLAY 단위]를 참고하세요. |
-| gas | uint64 \(Go\) | 거래에서 사용할 수 있는 최대 거래 수수료 금액입니다. |
+| gasPrice | \*big.Int \(Go\) | 발신자가 트랜잭션 수수료로 지불할 `peb` 단위의 가스 단가입니다. 트랜잭션 수수료 금액은 `gas` \* `gasPrice`으로 계산됩니다. 예를 들어, 트랜잭션이 가스 10단위를 소비하고 가스 가격이 10^18이면 트랜잭션 수수료는 10 KLAY가 됩니다. [KLAY 단위]를 참고하세요. |
+| gas | uint64 \(Go\) | 거래에서 사용할 수 있는 최대 트랜잭션 수수료 금액입니다. |
 | from | common.Address \(Go\) | 발신자의 주소입니다. 자세한 내용은 [트랜잭션의 서명 유효성 검사](./transactions.md#signature-validation-of-transactions)를 참조하세요. |
 | input | \[\]byte \(Go\) | 서비스 체인의 데이터. |
 | txSignatures | \[\]{\*big.Int, \*big.Int, \*big.Int} \(Go\) | 발신자의 서명. 자세한 내용은 [트랜잭션의 서명 유효성 검사](./transactions.md#signature-validation-of-transactions)를 참조하세요. |

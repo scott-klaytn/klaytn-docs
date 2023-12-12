@@ -4,7 +4,7 @@
 
 TxTypeLegacyTransaction은 클레이튼에 이전에 존재했던 트랜잭션 유형을 나타냅니다. 이 트랜잭션 유형은 호환성을 지원하기 위해 존재하므로, [AccountKeyLegacy](../accounts.md#accountkeylegacy)와 연결된 EOA에서만 작동합니다. 다른 계정 키 유형과 연결된 EOA는 TxTypeValueTransfer, TxTypeSmartContractExecution 등과 같은 다른 트랜잭션 유형을 사용해야 합니다. 이 유형의 트랜잭션은 계정 생성, 토큰 전송, 스마트 컨트랙트 배포, 스마트 컨트랙트 실행, 또는 앞서 언급한 여러 가지 작업을 수행할 수 있습니다. 이 트랜잭션 유형은 다음과 같은 변경을 시작합니다.
 
-1. 발신자의 잔액이 거래 수수료만큼 감소합니다.
+1. 발신자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 클레이튼에 `to`가 존재하지 않는 경우, [AccountKeyLegacy](../accounts.md#accountkeylegacy)와 연관된 EOA가 생성됩니다.
 4. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
@@ -122,7 +122,7 @@ SenderTxHash e434257753bf31a130c839fec0bd34fc6ea4aa256b825288ee82db31c2ed7524
 
 TxTypeValueTransfer는 사용자가 KLAY를 전송하고자 할 때 사용됩니다. 클레이튼은 여러 트랜잭션 유형을 제공하여 각 트랜잭션 유형이 하나의 용도로만 사용될 수 있도록 하기 때문에 TxTypeValueTransfer는 외부 소유 계정으로 KLAY를 전송하는 것으로 제한됩니다. 따라서 `to`가 외부 소유 계정인 경우에만 TxTypeValueTransfer가 허용됩니다. 스마트 컨트랙트 계정으로 KLAY를 전송하려면, 대신 [TxTypeSmartContractExecution](#txtypesmartcontractexecution)을 사용하세요. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다.
 
-1. 발신자의 잔액이 거래 수수료만큼 감소합니다.
+1. 발신자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
 
@@ -238,7 +238,7 @@ SenderTxHash 762f130342569e9669a4d8547f1248bd2554fbbf3062d63a97ce28bfa97aa9d7
 
 사용자가 특정 메시지와 함께 KLAY를 전송하고자 할 때 TxTypeValueTransferMemo를 사용합니다. TxTypeValueTransferMemo는 `to`가 외부 소유 계정인 경우에만 허용됩니다. 스마트 컨트랙트 계정으로 KLAY를 전송하려면, 대신 [TxTypeSmartContractExecution](#txtypesmartcontractexecution)을 사용하세요. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다.
 
-1. 발신자의 잔액이 거래 수수료만큼 감소합니다.
+1. 발신자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
 
@@ -357,7 +357,7 @@ SenderTxHash 6c7ee543c24e5b928b638a9f4502c1eca69103f5467ed4b6a2ed0ea5aede2e6b
 
 TxTypeSmartContract지정된 주소에 스마트 컨트랙트를 배포합니다. 이 트랜잭션 유형에 따라 다음과 같은 변경이 이루어집니다.
 
-1. 발신자의 잔액이 거래 수수료만큼 감소합니다.
+1. 발신자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 스마트 컨트랙트가 `input`에 코드와 함께 배포됩니다. 배포된 주소는 영수증에 있는 `contractAddress`를 통해 반환됩니다.
 4. 발신자에서 수신자에게 `value` KLAY가 전송됩니다.
@@ -603,7 +603,7 @@ SenderTxHash 23bb192bd58d56527843eb63225c5213f3aded95e4c9776f1ff0bdd8ee0b6826
 
 TxTypeAccountUpdate는 지정된 계정의 키를 업데이트합니다. 이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 적용됩니다.
 
-1. 발신자의 잔액이 거래 수수료만큼 감소합니다.
+1. 발신자의 잔액이 트랜잭션 수수료만큼 감소합니다.
 2. 발신자의 nonce가 1 증가합니다.
 3. 계정의 키가 `key`로 업데이트됩니다.
 4. 이 유형의 트랜잭션이 실행되면 이후 해당 계정에서 전송되는 트랜잭션은 새로운 `key`로 유효성을 검사합니다.
@@ -727,7 +727,7 @@ TxTypeCancel은 트랜잭션 풀에서 동일한 nonce를 가진 트랜잭션의
 
 동일한 nonce로 트랜잭션을 대체할 수 있는 트랜잭션은 TxTypeCancel 트랜잭션이 유일합니다. 다른 트랜잭션 유형은 동일한 nonce로 트랜잭션을 대체할 수 없습니다.
 
-이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 발생할 수 있습니다. 1. 발신자의 잔액이 거래 수수료만큼 감소합니다. 2. 발신자의 nonce가 1 증가합니다.
+이 트랜잭션 유형에 따라 다음과 같은 변경 사항이 발생할 수 있습니다. 1. 발신자의 잔액이 트랜잭션 수수료만큼 감소합니다. 2. 발신자의 nonce가 1 증가합니다.
 
 ### 속성 <a id="attributes"></a>
 

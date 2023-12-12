@@ -1,7 +1,7 @@
 ---
 설명: >-
   계정 관리와 관련된 caver-js API입니다.
-sidebar_position: 3
+
 ---
 
 # caver.klay.accounts

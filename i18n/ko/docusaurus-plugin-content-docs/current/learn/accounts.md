@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # 계정
 
 ## 클레이튼 계정 <a id="klaytn-accounts"></a>
@@ -193,7 +189,7 @@ AccountKeyWeightedMultiSig와 연결된 계정에 대해 트랜잭션이 유효�
 참고: 다음 멀티시그 유효성 검사 로직은 `IstanbulEVM` 프로토콜 업그레이드 또는 "하드 포크"로 인해 변경되었습니다.
 * 유효하지 않은 서명이 트랜잭션에 포함되어서는 안 됩니다.
 * 서명된 공개키의 개수는 가중된 공개키의 개수보다 작아야 합니다.
-이전 문서가 필요하신 경우 [이전 문서](transaction-fees/transaction-fees-previous.md)를 참고하시기 바랍니다.
+이전 문서가 필요하신 경우 [이전 문서](transaction-fees-previous.md)를 참고하시기 바랍니다.
 
 `IstanbulEVM` 프로토콜 업그레이드 블록 번호는 다음과 같습니다.
 * Baobab 테스트넷: `#75373312`

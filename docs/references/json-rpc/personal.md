@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs to manage accounts and private keys in the node.
-sidebar_position: 6
+
 ---
 
 # personal

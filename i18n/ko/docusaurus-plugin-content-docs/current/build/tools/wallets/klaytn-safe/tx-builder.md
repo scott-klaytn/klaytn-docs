@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Transaction Builder 사용
 
 트랜잭션 일괄 처리를 담당하는 Klaytn Safe의 커스텀 앱입니다. 즉, 트랜잭션을 하나씩 확인할 필요 없이 여러 트랜잭션을 함께 묶을 수 있습니다. 한 번만 확인하고 실행하면 됩니다.

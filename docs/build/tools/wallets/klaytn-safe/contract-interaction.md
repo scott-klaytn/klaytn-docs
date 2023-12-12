@@ -1,14 +1,10 @@
----
-sidebar_position: 3
----
-
 # Interact with Contracts
 
 In this section, you will be interacting with and sending a transaction to a simple contract deployed on Baobab using our newly created multisig wallet. 
 
 **Pre-requisites**
 
-* [Metamask](https://metamask.io/download/) & [Klaytn Metamask Config](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#send-klay)
+* [Metamask](https://metamask.io/download/) & [Klaytn Metamask Config](../../../tutorials/connecting-metamask#send-klay)
 * [Remix](https://remix.ethereum.org/) & [Klaytn Remix Plugin](https://klaytn.foundation/using-klaytn-plugin-on-remix/)
 * Obtain test KLAY from the [Faucet](https://baobab.wallet.klaytn.foundation/faucet)
 

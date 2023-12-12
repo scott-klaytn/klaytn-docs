@@ -7,24 +7,24 @@ const darkCodeTheme = require('prism-react-renderer/themes/dracula')
 /** @type {import('@docusaurus/types').Config} */
 const config = {
   title: 'Klaytn Docs',
-  tagline: 'Welcome to the Klaytn Docs Sample',
+  tagline: 'Welcome to the Klaytn Docs',
 
   onBrokenMarkdownLinks: 'warn',
   favicon: 'img/favicon.ico',
 
   onBrokenLinks: 'ignore',
 
-  baseUrl: '/klaytn-docs/',
-  url: 'https://devwriting.com',
+  baseUrl: '/klaytn-docs/', // to be '/' on production
+  url: 'https://devwriting.com', // to be ''https://docs.klaytn.foundation' on production
 
-  organizationName: 'klaytn',
-  projectName: 'klaytn-docs',
-  deploymentBranch: 'migration-deploy',
+  organizationName: 'klaytn', //only needed when using `docusaurus deploy`command
+  projectName: 'klaytn-docs', //only needed when using `docusaurus deploy`command
+  deploymentBranch: 'main', //only needed when using `docusaurus deploy`command
   trailingSlash: true, // was "false"
 
   i18n: {
     defaultLocale: 'en',
-    locales: ['en', 'ko'],
+    locales: ['en', 'ko', 'vi'],
     path: 'i18n',
     localeConfigs: {
       en: {
@@ -41,6 +41,13 @@ const config = {
         calendar: 'gregory',
         path: 'ko',
       },
+      vi: {
+        label: 'Tiếng Việt',
+        direction: 'ltr',
+        htmlLang: 'vi',
+        calendar: 'gregory',
+        path: 'vi',
+      },      
     },
   },
 
@@ -54,8 +61,16 @@ const config = {
         },
         docs: {
           sidebarPath: require.resolve('./sidebars.js'),
-          // editUrl:
-          //   'https://github.com/klaytn/klaytn-docs',
+          sidebarCollapsible: true,
+          showLastUpdateTime: true,
+          lastVersion: 'current',
+          versions: {
+            current: {
+              label: 'Current',
+            },
+          },
+          editUrl:
+            'https://github.com/klaytn/klaytn-docs/tree/main/',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -69,9 +84,9 @@ const config = {
     ({
       algolia: {
         contextualSearch: true,
-        appId: '8CTSIJ444T',
-        apiKey: '5d557e0c45ed20f53b1464a9e8bea5a2',
-        indexName: 'my-first-index',
+        appId: '8CTSIJ444T', // For test only. To be replaced with that of klaytn account
+        apiKey: '5d557e0c45ed20f53b1464a9e8bea5a2', // For test only. To be replaced with that of klaytn account
+        indexName: 'my-first-index', // For test only. To be replaced with that of klaytn account
       },
       navbar: {
         title: 'Klaytn Docs',
@@ -124,12 +139,24 @@ const config = {
           {
             type: 'docsVersionDropdown',
             position: 'right',
+            dropdownActiveClassDisabled: true,
+            dropdownItemsAfter: [
+              {
+                href: 'https://klaytn.gitbook.io/',
+                label: 'Legacy',
+              },
+            ],
           },
           {
             type: 'localeDropdown',
             position: 'right',
           },
         ],
+      },
+      docs: {
+        sidebar: {
+          autoCollapseCategories: true,
+        },
       },
       footer: {
         style: 'dark',

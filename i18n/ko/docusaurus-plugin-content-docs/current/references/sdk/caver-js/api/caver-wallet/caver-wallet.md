@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # caver.wallet
 
 `caver.wallet`은 인메모리 지갑에서 [Keyring](./keyring.md) 인스턴스를 관리하는 패키지입니다. `caver.wallet`은 모든 [SingleKeyring](./keyring.md#singlekeyring), [MultipleKeyring](./keyring.md#multiplekeyring), [RoleBasedKeyring](./keyring.md#rolebasedkeyring)을 수용하여 주소별로 관리합니다.

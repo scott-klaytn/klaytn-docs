@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Transfer Value
 
 As explained in the Klaytn design section, Service Chain supports value (KLAY, ERC-20, and ERC-721) transfer between parent chain & child chain.

@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Connect Remix to Klaytn
 
 ![](/img/build/tutorials/klaytnXremix.png)
@@ -57,8 +53,8 @@ You can import keys from **private key** or **Keystore**.
 
 ## Connecting Klaytn - Remix using EN (Endpoint Node) <a href="#connecting-klaytn-remix-using-en" id="connecting-klaytn-remix-using-en"></a>
 
-* Set up an Endpoint Node in the local environment by following the instructions in [**the EN documents**](https://docs.klaytn.foundation/getting-started/quick-start/launch-an-en).
-*   Create an account by following the instructions in [**Account Management**](https://docs.klaytn.foundation/getting-started/account).
+* Set up an Endpoint Node in the local environment by following the instructions in [**the EN documents**](../smart-contracts/deploy/ken.md#launch-an-en).
+*   Create an account by following the instructions in [**Account Management**](../get-started/account/managing-accounts.md).
 
     > **Note:** If you use the Public EN from Baobab, instead of from your local environment, you won't be connected to your account because the personal API is disabled.
 * Select \[Caver Provider] in the Environment menu.
@@ -70,7 +66,7 @@ You can import keys from **private key** or **Keystore**.
 
 ## Connecting Klaytn - Remix using MetaMask <a href="#connecting-klaytn-remix-using-metamask" id="connecting-klaytn-remix-using-metamask"></a>
 
-* Connect Klaytn with MetaMask by referring to the [**Connecting to MetaMask**](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask).
+* Connect Klaytn with MetaMask by referring to the [**Connecting to MetaMask**](connecting-metamask).
 * Select \[Injected Web3] on the Remix Environment menu.
 
 ![Injected Web3](/img/build/tutorials/env-injected-web3.png)
@@ -89,7 +85,7 @@ You can import keys from **private key** or **Keystore**.
 
 ## Tutorial: KlaytnGreeter Contract <a href="#tutorial-klaytngreeter-contract" id="tutorial-klaytngreeter-contract"></a>
 
-We will be using the [**KlaytnGreeter**](https://docs.klaytn.foundation/smart-contract/sample-contracts/klaytngreeter) sample contract.
+We will be using the [**KlaytnGreeter**](../smart-contracts/samples/klaytngreeter.md) sample contract.
 
 * Add KlaytnGreeter.sol and write the testing code.
 

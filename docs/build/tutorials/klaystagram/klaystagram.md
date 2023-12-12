@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Build Klaystagram
 
 ## Table of Contents <a href="#table-of-contents" id="table-of-contents"></a>
@@ -11,10 +7,10 @@ sidebar_position: 2
 * [Directory structure](./directory-structure.md)
 * [Code Overview](./code-overview.md)
 * [FeedPage components](./feedpage.md)
-  * [7-1. Connect Contract to Frontend](./feedpage.md#1-connect-contract-to-frontend)
-  * [7-2. UploadPhoto Component](./feedpage.md#2-uploadphoto-component)
-  * [7-3. Feed Component](./feedpage.md#3-feed-component)
-  * [7-4. TransferOwnership Component](./feedpage.md#4-transferownership-component)
+  * [Connect Contract to Frontend](./feedpage.md#1-connect-contract-to-frontend)
+  * [UploadPhoto Component](./feedpage.md#2-uploadphoto-component)
+  * [Feed Component](./feedpage.md#3-feed-component)
+  * [TransferOwnership Component](./feedpage.md#4-transferownership-component)
 
 ## Testing Environment <a href="#testing-environment" id="testing-environment"></a>
 

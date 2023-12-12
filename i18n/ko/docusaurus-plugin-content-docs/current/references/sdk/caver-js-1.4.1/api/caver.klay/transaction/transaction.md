@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # 트랜잭션
 
 ## call <a id="call"></a>

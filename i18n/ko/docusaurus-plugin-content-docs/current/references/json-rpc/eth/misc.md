@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # 기타
 
 ## eth_hashrate <a id="eth_hashrate"></a>

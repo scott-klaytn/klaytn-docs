@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # Multi-Channel
 
 A Klaytn node can be run with **Multi-channel**.

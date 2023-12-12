@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 시스템 요구 사항
 
 ## H/W 사양 <a id="h-w-specification"></a>

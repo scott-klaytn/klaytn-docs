@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # Migrate Ethereum App to Klaytn
 
 ## Table of Contents <a href="#table-of-contents" id="table-of-contents"></a>

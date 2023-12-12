@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 로깅
 
 ## debug_backtraceAt <a id="debug_backtraceat"></a>

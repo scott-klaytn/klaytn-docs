@@ -1,7 +1,3 @@
----
-sidebar_position: 9
----
-
 # Klaytn Network Identifier
 
 **KNI (Klaytn Network Identifier)** is a URL scheme to identify a Klaytn node. Its syntax is shown below:

@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 sidebar_label: 일부 수수료 위임
 ---
 
@@ -32,7 +31,7 @@ caver.transaction.feeDelegatedValueTransferWithRatio.create(transactionObject)
 | from | String | 발신자의 주소입니다. |
 | to | String | 전송된 값을 받을 계정 주소입니다. |
 | gas | String | 트랜잭션이 사용할 수 있는 최대 트랜잭션 수수료 금액입니다. |
-| feeRatio | String | 수수료 지불자가 부담하게 될 거래 수수료의 비율을 구성하는 비율입니다. 이 비율의 유효한 범위는 1에서 99 사이입니다. 비율 0 또는 100 이상은 허용되지 않습니다. |
+| feeRatio | String | 수수료 지불자가 부담하게 될 트랜잭션 수수료의 비율을 구성하는 비율입니다. 이 비율의 유효한 범위는 1에서 99 사이입니다. 비율 0 또는 100 이상은 허용되지 않습니다. |
 | signatures | Array | (선택 사항) 서명의 배열입니다. |
 | feePayerSignatures | Array | (선택 사항) 수수료 납부자 서명의 배열입니다. |
 | feePayer | String | (선택 사항) 수수료 납부자의 주소입니다. |
@@ -162,7 +161,7 @@ caver.transaction.feeDelegatedAccountUpdateWithRatio.create(transactionObject)
 | from | String | 발신자의 주소입니다. |
 | account | [Account] | 계정을 업데이트하는 데 필요한 정보가 포함된 [Account] 인스턴스입니다. |
 | gas | String | 트랜잭션이 사용할 수 있는 최대 트랜잭션 수수료 금액입니다. |
-| feeRatio | String | 수수료 납부자가 부담하게 될 거래 수수료의 비율을 구성하는 비율입니다. 이 비율의 유효한 범위는 1에서 99 사이입니다. 0 또는 100 이상의 비율은 허용되지 않습니다.
+| feeRatio | String | 수수료 납부자가 부담하게 될 트랜잭션 수수료의 비율을 구성하는 비율입니다. 이 비율의 유효한 범위는 1에서 99 사이입니다. 0 또는 100 이상의 비율은 허용되지 않습니다.
 | signatures | Array | (선택 사항) 서명의 배열입니다. |
 | feePayerSignatures | Array | (선택 사항) 수수료 납부자 서명의 배열입니다. |
 | feePayer | String | (선택 사항) 수수료 납부자의 주소입니다. |

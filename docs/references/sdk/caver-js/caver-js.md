@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # caver-js (1.5.0 or later)
 
 ![](/img/references/klaytnXcaver-js.png)

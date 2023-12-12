@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Account
 
 ## eth_accounts <a id="eth_accounts"></a>

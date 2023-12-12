@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Connect MetaMask to Klaytn
 
 ![](/img/build/tutorials/klaytnXmetamask.png)

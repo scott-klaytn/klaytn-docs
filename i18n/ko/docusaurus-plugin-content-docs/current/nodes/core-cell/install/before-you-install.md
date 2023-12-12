@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 설치에 앞서
 
 ## 다운로드 <a id="download"></a>하기

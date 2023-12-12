@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Core Cell
 
 ## Intended Audience  <a id="intended-audience"></a>

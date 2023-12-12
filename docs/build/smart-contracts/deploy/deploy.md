@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Deploy Smart Contracts
 
 There are various ways of deploying a smart contract on Klaytn. This document provides a step-by-step guide to deploy a sample contract using various tools. We assume that you have a Klaytn account with enough KLAY to pay the transaction fee. To create an account, please visit [Klaytn Wallet](../../tools/wallets/klaytn-wallet.md).

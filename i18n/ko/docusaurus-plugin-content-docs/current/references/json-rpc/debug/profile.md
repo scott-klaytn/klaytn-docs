@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # 프로파일링
 
 ## debug_blockProfile <a id="debug_blockprofile"></a>

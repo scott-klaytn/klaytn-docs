@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Count dApp 빌드하기
 
 ## 목차 <a href="#table-of-contents" id="table-of-contents"></a>

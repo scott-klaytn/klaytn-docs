@@ -1,6 +1,6 @@
 ---
 description: caver-js utility APIs.
-sidebar_position: 9
+
 ---
 
 # caver.utils

@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Frontend Code Overview
 
 1. Overview
@@ -187,7 +183,7 @@ export const removeWallet = () => (dispatch) => {
 }
 ```
 
-cf. For further information about caver's `privateKeyToAccount` API, see [caver.klay.accounts.privateKeyToAccount](https://docs.klaytn.foundation/dapp/sdk/caver-js/v1.4.1/api-references/caver.klay.accounts#privatekeytoaccount).
+cf. For further information about caver's `privateKeyToAccount` API, see [caver.klay.accounts.privateKeyToAccount](../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#privatekeytoaccount).
 
 **3. Render the page** Redux will initialize `isLoggedIn` state to true or false, depending on whether walletInstance exists in the session storage
 

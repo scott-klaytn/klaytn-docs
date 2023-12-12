@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # caver.abi
 
 The `caver.abi` package allows you to decode and encode parameters with an ABI (Application Binary Interface). This will be used for calling functions of a deployed smart contracts.

@@ -1,6 +1,6 @@
 ---
 description: A caver-js object used to interact with a smart contract.
-sidebar_position: 4
+
 ---
 
 # caver.klay.Contract

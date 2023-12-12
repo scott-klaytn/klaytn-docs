@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # 엔드포인트 노드
 
 ## 대상 독자 <a id="intended-audience"></a>

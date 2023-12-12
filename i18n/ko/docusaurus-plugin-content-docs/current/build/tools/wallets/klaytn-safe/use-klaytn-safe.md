@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Klaytn Safe 사용
 
 ## 금고 만들기
@@ -10,7 +6,7 @@ sidebar_position: 2
 
 **1단계**: [Klaytn Safe 앱](https://safe.klaytn.foundation/)으로 이동합니다. 웹 브라우저에서 애플리케이션으로 이동하면 Klaytn Safe의 기능을 살펴볼 수 있습니다.
 
-**2단계**: [지갑](https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/)을 연결합니다. 현재 Klaytn Safe는 [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask) 지갑을 지원합니다. MetaMask 지갑에 클레이튼 네트워크([Cypress](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#connect-to-klaytn-cypress-network-mainnet) 또는 [Baobab](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#connect-to-klaytn-baobab-network-testnet))가 추가되어 있는지 확인해야 성공적으로 연결할 수 있습니다.
+**2단계**: [지갑](https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/)을 연결합니다. 현재 Klaytn Safe는 [MetaMask](../../../tutorials/connecting-metamask) 지갑을 지원합니다. MetaMask 지갑에 클레이튼 네트워크([Cypress](../../../tutorials/connecting-metamask#connect-to-klaytn-cypress-network-mainnet) 또는 [Baobab](../../../tutorials/connecting-metamask#connect-to-klaytn-baobab-network-testnet))가 추가되어 있는지 확인해야 성공적으로 연결할 수 있습니다.
 
 ![](/img/build/tools/1_safeConnect.gif)
 
@@ -143,7 +139,7 @@ NFT 전송에 대한 자세한 내용은 OpenSea에서 제공하는 [가이드](
 
 Klaytn Safe 사용 시 유의해야 할 사항은 다음과 같습니다:
 
-### 거래 수수료 <a id="Transaction Fees"></a>
+### 트랜잭션 수수료 <a id="Transaction Fees"></a>
 
 자산 전송이든 컨트랙트 트랜잭션이든 Klaytn 세이프 트랜잭션에는 트랜잭션을 실행하는 서명자(일반적으로 필요한 서명 임계값에 도달한 마지막 서명자)가 지불하는 수수료가 발생합니다.
 

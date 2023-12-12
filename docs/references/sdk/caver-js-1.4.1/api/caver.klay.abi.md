@@ -1,7 +1,7 @@
 ---
 description: >-
   caver-js APIs related to ABI encoding and decoding.
-sidebar_position: 7
+
 ---
 
 # caver.klay.abi

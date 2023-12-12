@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Filter
 
 ## getFilterChanges <a id="getfilterchanges"></a>

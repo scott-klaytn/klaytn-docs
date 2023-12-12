@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Connect to Baobab
 
 This section covers how to connect your 4-node ServiceChain network to the Baobab network.

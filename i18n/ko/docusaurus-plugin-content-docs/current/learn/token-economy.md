@@ -1,7 +1,3 @@
----
-sidebar_position: 13
----
-
 # 토큰 이코노미
 
 ## 개요 <a id="overview"></a>

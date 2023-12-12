@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs related to the Klaytn Governance.
-sidebar_position: 8
+
 ---
 
 # governance

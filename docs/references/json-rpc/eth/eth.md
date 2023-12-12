@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # eth
 
 The namespace `eth` provides functions related to accounts, blocks, transactions,

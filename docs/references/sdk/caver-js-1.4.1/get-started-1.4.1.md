@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Getting Started
 
 ## Prerequisites <a id="prerequisites"></a>
@@ -970,7 +966,7 @@ Sample projects for development of dApps \(Decentralized Applications\) using ca
 
 
 
-[caver.klay.Contract]: api/caver.klay.contract.md
+[caver.klay.Contract]: api/caver.klay.Contract.md
 [caver.klay.accounts]: api/caver.klay.accounts.md
 [caver.klay.accounts.signTransaction]: api/caver.klay.accounts.md#signtransaction
 [caver.klay.getTransactionReceipt]: api/caver.klay/transaction/transaction.md#gettransactionreceipt

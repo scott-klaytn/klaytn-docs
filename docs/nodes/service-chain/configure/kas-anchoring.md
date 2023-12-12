@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Use Data Anchoring with KAS
 
 As explained in the design section, you can anchor your service chain data to Klaytn main chain.

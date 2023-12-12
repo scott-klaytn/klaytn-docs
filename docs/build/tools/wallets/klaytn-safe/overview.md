@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Klaytn Safe Design
 
 Currently, Klaytn Safe is a collection of tools to create and manage multi-signature wallets, viz:

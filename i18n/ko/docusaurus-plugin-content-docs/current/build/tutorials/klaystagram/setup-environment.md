@@ -1,10 +1,6 @@
----
-sidebar_position: 1
----
-
 # 환경 설정
 
-> 이 튜토리얼에서는 환경 설정 시 [첫 페이지](https://docs.klaytn.foundation/dapp/tutorials/count-dapp#testing-environment)에 명시된 버전을 따라야 합니다. caver-js.**를 다운로드하기 전에 nvm을 사용하여 노드 버전을 10.16.0으로 변경하시기 바랍니다.
+> 이 튜토리얼에서는 환경 설정 시 [첫 페이지](klaystagram.md#testing-environment)에 명시된 버전을 따라야 합니다. caver-js.**를 다운로드하기 전에 nvm을 사용하여 노드 버전을 10.16.0으로 변경하시기 바랍니다.
 
 
 ## 1. Node.js npm <a id="1-install-node-js-npm"></a>을 설치합니다.

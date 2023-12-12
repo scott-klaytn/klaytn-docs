@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # 블록체인 검사
 
 **참고:** 아래 API를 **제외한** 모든 디버그 네임스페이스 API는 `rpc.unsafe-debug.disable` 플래그로 제한됩니다:

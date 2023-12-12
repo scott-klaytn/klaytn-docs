@@ -1,7 +1,3 @@
----
-sidebar_position: 13
----
-
 # Token Economy
 
 ## Overview <a id="overview"></a>

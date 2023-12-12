@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Genesis File
 
 This page describes the details of `genesis.json` file.

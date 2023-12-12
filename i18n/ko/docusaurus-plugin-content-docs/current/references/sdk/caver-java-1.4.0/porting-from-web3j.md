@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # web3j에서 포팅하기
 
 caver-java는 이식성을 위해 [web3j](https://github.com/web3j/web3j)와 최대한 유사하게 만들었습니다. 아래 코드 스니펫은 web3j로 작성된 애플리케이션을 caver-java로 포팅하는 방법을 보여줍니다.

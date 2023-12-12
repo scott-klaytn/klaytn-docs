@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # caver.account
 
 `caver.account` is a package that provides functionality related to Account that is used when updating an account.

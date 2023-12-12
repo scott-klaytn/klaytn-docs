@@ -1,8 +1,6 @@
----
-sidebar_position: 2
----
-
 # 왜 클레이튼인가?
+
+주요 설계 원칙에 따라 Klaytn이 어떻게 다른지 설명합니다.
 
 ## 메타버스의 신뢰 레이어로서의 클레이튼 <a id="klaytn-as-a-trust-layer-of-metaverse"></a>
 
@@ -30,7 +28,7 @@ sidebar_position: 2
 - 샤딩이나 롤업과 같은 다른 확장성 솔루션도 가까운 시일 내에 제공될 예정입니다.
 
 ### 저렴한 비용 <a id="low-cost"></a>
-- 최종 사용자는 기존 시스템에서 요구하는 것 이상으로 높은 거래 수수료를 부담해서는 안 됩니다.
+- 최종 사용자는 기존 시스템에서 요구하는 것 이상으로 높은 트랜잭션 수수료를 부담해서는 안 됩니다.
 - 트랜잭션 수수료는 안정적이어야 하며, 주변 요인이 아닌 트랜잭션 복잡성 자체에 따라 결정되어야 합니다.
 - [합리적인 스마트 컨트랙트 실행 비용](computation/klaytn-smart-contract.md#affordable-smart-contract-execution-cost) 및 [트랜잭션 수수료](./transaction-fees.md)를 참조하세요. 가스 가격이 250 ston인 경우, KLAY 전송에는 0.00525 KLAY의 고정 비용이 발생합니다. (21,000 KLAY 전송 gas x (250 x 10^-9) == 0.00525 KLAY)
 
@@ -47,13 +45,13 @@ sidebar_position: 2
 
 ### 향상된 사용자 경험 <a id="enhanced-user-experience"></a>
 #### 트랜잭션 사용성 <a id="usability-in-transaction"></a>
-- 사용자의 거래 수수료를 애플리케이션으로 이체하는 기능
+- 사용자의 트랜잭션 수수료를 애플리케이션으로 이체하는 기능
 - [수수료 위임](./transactions/transactions.md#fee-delegation)을 참조하십시오. 애플리케이션 운영자는 각 트랜잭션에 대한 보조금 금액을 조정하고 부분 유료화 또는 구독과 같은 보다 유연한 비즈니스 모델을 구현할 수 있습니다. 수수료 위임은 사용자 확보 장벽을 효과적으로 낮출 수 있습니다.
 
 
 ### 풀-스위트, 프로토콜 수준의 에코 펀드 <a id="contribution-reward"></a>
-- 클레이튼은 생태계를 지원하는 인센티브가 온체인 프로토콜 토큰노믹스에 인코딩된 최초이자 최대 규모의 사례입니다. 새로 발행되는 토큰의 66%가 생태계에 재투자됩니다.
-- [클레이튼 개선 준비금](./token-economy.md#klaytn-improvement-reserve) 및 [클레이튼 성장 기금](./token-economy.md#klaytn-growth-fund)을 참고하세요.
+- 클레이튼은 생태계를 지원하는 인센티브가 온체인 프로토콜 토큰노믹스로 인코딩된 최초이자 최대 규모의 사례입니다. 새로 발행되는 토큰의 50%는 생태계에 재투자됩니다.
+- [클레이튼 커뮤니티 기금](token-economy.md#klaytn-community-fund) 및 [클레이튼 재단 기금](token-economy.md#klaytn-foundation-fund)을 참고하세요.
 
 
 ### 커뮤니티 공동 구축 <a id="community-co-building"></a>

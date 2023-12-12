@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # IDE and Tools
 
 This page contains the list of development tools that is available to help smart contract development on Klaytn.

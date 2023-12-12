@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Use Klaytn Safe
 
 ## Create a Safe
@@ -10,7 +6,7 @@ Here you will see how to create a Safe and evaluate its benefits on the Klaytn N
 
 **Step 1:** Navigate to [Klaytn Safe App](https://safe.klaytn.foundation/). By navigating to the application on your web browser, you can explore the functionality of Klaytn Safe.
 
-**Step 2:** Connect your [wallet](https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/). At the moment, Klaytn Safe has support for [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask) wallet. Make sure you have Klaytn networks([Cypress](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#connect-to-klaytn-cypress-network-mainnet) or [Baobab](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#connect-to-klaytn-baobab-network-testnet)) added to your MetaMask wallet to connect successfully.
+**Step 2:** Connect your [wallet](https://docs.ethhub.io/using-ethereum/wallets/intro-to-ethereum-wallets/). At the moment, Klaytn Safe has support for [MetaMask](../../../tutorials/connecting-metamask) wallet. Make sure you have Klaytn networks([Cypress](../../../tutorials/connecting-metamask#connect-to-klaytn-cypress-network-mainnet) or [Baobab](../../../tutorials/connecting-metamask#connect-to-klaytn-baobab-network-testnet)) added to your MetaMask wallet to connect successfully.
 
 ![](/img/build/tools/1_safeConnect.gif)
 

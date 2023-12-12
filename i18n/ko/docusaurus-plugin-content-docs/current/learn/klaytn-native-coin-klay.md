@@ -1,7 +1,3 @@
----
-sidebar_position: 11
----
-
 # 클레이튼 네이티브 코인 - KLAY
 
 ## KLAY <a id="klay"></a>

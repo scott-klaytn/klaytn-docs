@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # 런타임 디버깅
 
 **참고** 다른 모든 디버그 네임스페이스 API **제외** 다음 API는 `rpc.unsafe-debug.disable` 플래그로 제한됩니다:

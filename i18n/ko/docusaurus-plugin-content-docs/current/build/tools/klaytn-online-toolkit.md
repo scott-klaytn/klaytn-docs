@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 클레이튼 온라인 툴킷
 
 ## 클레이튼 온라인 툴킷이란 무엇인가요? <a id="what-is-the-klaytn-online-toolkit"></a>
@@ -16,6 +12,6 @@ sidebar_position: 1
 '클레이튼 온라인 툴킷'의 링크입니다. 자유롭게 사용해보세요.
 * [GitHub 리포지토리](https://github.com/klaytn/klaytn-online-toolkit)
 * [툴킷 페이지](https://toolkit.klaytn.foundation)
-* [클레이튼 SDK(caver-js)](https://docs.klaytn.foundation/dapp/sdk/caver-js)
+* [클레이튼 SDK(caver-js)](../../references/sdk/caver-js/caver-js.md)
 
 ![클레이튼 온라인 툴킷](/img/build/tools/klaytn-online-toolkit.png)

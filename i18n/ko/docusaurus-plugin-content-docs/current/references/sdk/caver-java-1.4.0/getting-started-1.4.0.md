@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 시작하기
 
 ## 전제 조건 <a id="prerequisites"></a>

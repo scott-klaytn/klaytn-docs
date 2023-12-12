@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Transfer value between sibling service chains
 
 This section will explain how to enable value transfer between ServiceChain networks.

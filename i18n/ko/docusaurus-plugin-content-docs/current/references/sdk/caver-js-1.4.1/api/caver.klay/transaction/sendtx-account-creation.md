@@ -6,7 +6,7 @@
 caver.klay.sendTransaction(transactionObject [, callback])
 ```
 
-[계정 생성](../../../../../learn/transactions/basic.md) 트랜잭션을 네트워크에 전송합니다.
+[계정 생성](../../../../../../learn/transactions/basic.md) 트랜잭션을 네트워크에 전송합니다.
 
 **Parameters**
 

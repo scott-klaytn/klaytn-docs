@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # web3.js
 
 ![](/img/references/klaytn-web3js.png)
@@ -13,16 +9,16 @@ sidebar_position: 6
 이 가이드에서는 web3.js 라이브러리를 사용하여 트랜잭션을 전송하고, 블록체인에서 데이터를 읽고, 클레이튼 네트워크의 기존 컨트랙트와 상호작용하는 방법을 배워보겠습니다.
 
 
-# 전제 조건
+## 전제 조건
 
 * 코드 편집기: [VS-Code](https://code.visualstudio.com/download)와 같은 소스 코드 편집기.
-* [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
-* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en) 중 하나에서 얻을 수 있습니다.
+* [MetaMask](../../build/tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
+* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
 * [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY 테스트: 충분한 KLAY로 계정에 자금을 충전합니다.
 * [NodeJS 및 NPM](https://nodejs.org/en/)
 
 
-# 프로젝트 설정
+## 프로젝트 설정
 
 시작하려면 이 가이드에서 생성할 파일을 저장할 프로젝트 디렉터리를 만들어야 합니다.
 
@@ -31,7 +27,7 @@ mkdir web3-js
 cd web3-js
 ```
 
-## Web3.js 설치
+### Web3.js 설치
 
 터미널에서 다음 명령을 실행하여 web3.js를 설치합니다:
 
@@ -39,7 +35,7 @@ cd web3-js
 npm install web3
 ```
 
-## Web3.js 초기화하기
+### Web3.js 초기화하기
 
 이 튜토리얼에서는 트랜잭션을 전송하고, 블록체인에서 데이터를 읽고, 기존 스마트 컨트랙트와 상호작용하기 위해 여러 스크립트 파일을 만들 것입니다. 시작하려면 각 스크립트 파일에 대해 web3.js를 초기화하는 방법을 알아야 합니다.
 
@@ -62,7 +58,7 @@ const web3 = new Web3(url);
 const privateKey = "Paste private key";
 ```
 
-# 블록체인에서 데이터 읽기
+## 블록체인에서 데이터 읽기
 
 블록체인에서 데이터를 읽으려면 다음 명령을 실행하여 프로젝트 폴더에 새 `read.js` 파일을 생성합니다:
 
@@ -107,7 +103,7 @@ node read.js
 
 트랜잭션이 성공했다면, 블록 번호와 사용자의 KLAY 잔액이 터미널에 기록된 것을 확인할 수 있습니다.
 
-# 블록체인으로 트랜잭션 보내기
+## 블록체인으로 트랜잭션 보내기
 
 블록체인에 트랜잭션을 전송하려면 다음 명령을 실행하여 프로젝트 폴더에 새 `send.js` 파일을 생성합니다:
 
@@ -159,7 +155,7 @@ node send.js
 
 ![](/img/references/send-web3.png)
 
-# 스마트 컨트랙트와 상호작용하기
+## 스마트 컨트랙트와 상호작용하기
 
 클레이튼의 기존 스마트 컨트랙트와 상호작용하려면 다음 명령을 실행하여 프로젝트 폴더에 `interact.js` 파일을 새로 생성합니다:
 
@@ -169,7 +165,7 @@ touch interact.js
 
 이 파일을 생성한 후 '초기화' 섹션에서 설명한 대로 `web3`를 초기화합니다. 이 섹션에서는 배포된 컨트랙트의 ABI와 주소를 사용하여 `Contract` 객체를 인스턴스화하여 Klaytn의 스마트 컨트랙트와 상호작용하기 위해 web3.js를 사용하겠습니다.
 
-이 가이드의 목적을 위해, [Remix IDE](https://docs.klaytn.foundation/content/dapp/tutorials/connecting-remix)에 simple_storage 컨트랙트를 컴파일하고 배포했습니다. `store` 함수를 호출하여 컨트랙트에 트랜잭션을 전송하고 `retrieve` 함수를 호출하여 컨트랙트에서 트랜잭션을 읽어올 것입니다.
+이 가이드의 목적을 위해, [Remix IDE](../../build/tutorials/connecting-remix.md)에 simple_storage 컨트랙트를 컴파일하고 배포했습니다. `store` 함수를 호출하여 컨트랙트에 트랜잭션을 전송하고 `retrieve` 함수를 호출하여 컨트랙트에서 트랜잭션을 읽어올 것입니다.
 
 
 실제로 작동하는 모습을 보려면 `interact.js`에 다음 코드를 붙여넣으세요.

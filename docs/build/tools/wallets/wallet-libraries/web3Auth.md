@@ -1,5 +1,4 @@
 ---
-sidebar_position: 1
 sidebar_label: Web3Auth
 ---
 
@@ -17,7 +16,7 @@ As a wallet infrastructure, it provides out-of-the-box support for all social lo
 
 * A working react project (by executing `npx create-react-app project-name`)
 * Install the necessary wallets ([Coinbase Wallet](https://www.coinbase.com/wallet/downloads), [Metamask](https://metamask.io/download/)). 
-* RPC Endpoint: you can get this from one of the supported [endpoint providers](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en).
+* RPC Endpoint: you can get this from one of the supported [endpoint providers](../../../../references/service-providers/public-en.md).
 * Test KLAY from [Faucet](https://baobab.wallet.klaytn.foundation/faucet): fund your account with sufficient KLAY.
 * Get your Client ID from [Web3Auth Dashboard](https://dashboard.web3auth.io/).
 

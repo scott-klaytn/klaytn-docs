@@ -24,7 +24,7 @@
 
 
 ## What is Klaytn? <a id="what-is-klaytn"></a>
-Klaytn is the Layer 1 blockchain platform with low latency, high TPS and immediate finality. It is the optimal blockchain for building games and realizing the [metaverse](https://docs.klaytn.foundation/klaytn2/metaverse-package).
+Klaytn is the Layer 1 blockchain platform with low latency, high TPS and immediate finality. It is the optimal blockchain for building games and realizing the [metaverse](../learn/klaytn2/metaverse-package).
 
 
 ## What is Klaytn 2.0? <a id="what-is-klaytn-2.0"></a>
@@ -44,11 +44,11 @@ To provide maximum convenience for dApp developers, Klaytn has devised a way to 
 
 
 ## Where can I start dApp development with Klaytn? <a id="dapp-development"></a>
-Whether you are migrating from Ethereum, or building on Klaytn from scratch, we support all the necessary tools and infrastructure. You can test your smart contracts on [Remix IDE](https://docs.klaytn.foundation/dapp/tutorials/connecting-remix) using Klaytn Plugin or connect to [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask) wallet and [Kaikas](https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi). Klaytn’s sdk `caver` is available as [caver-js](https://github.com/klaytn/caver-js) You can refer to our [tutorials](https://docs.klaytn.foundation/dapp/tutorials) to try building a dApp on Klaytn.
+Whether you are migrating from Ethereum, or building on Klaytn from scratch, we support all the necessary tools and infrastructure. You can test your smart contracts on [Remix IDE](../build//tutorials/connecting-remix) using Klaytn Plugin or connect to [MetaMask](../build/tutorials/connecting-metamask) wallet and [Kaikas](https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi). Klaytn’s sdk `caver` is available as [caver-js](https://github.com/klaytn/caver-js) You can refer to our [tutorials](../build/tutorials/tutorials.md) to try building a dApp on Klaytn.
 
 
 ## Is Klaytn Open Source? <a id="is-klaytn-open-source"></a>
-Klaytn is most certainly open source! Take a look at our [Github Organisation](https://github.com/klaytn) and you can start [contributing](https://github.com/klaytn/klaytn-docs/blob/master/CONTRIBUTING.md) to our Klaytn Documentation. Read more about our open-source policies [here](https://docs.klaytn.foundation/misc/opensource).
+Klaytn is most certainly open source! Take a look at our [Github Organisation](https://github.com/klaytn) and you can start [contributing](https://github.com/klaytn/klaytn-docs/blob/master/CONTRIBUTING.md) to our Klaytn Documentation. Read more about our open-source policies [here](opensource).
 
 
 ## How can I initially fund my account? <a id="fund-my-acconut"></a>
@@ -57,7 +57,7 @@ You may purchase KLAY on the exchange. The list of available exchanges can be fo
 
 
 ## Any Klaytn’s Public Node Providers for testing and development? <a id="node-providers"></a>
-Refer to this [list](https://docs.klaytn.foundation/dapp/json-rpc/public-en#public-json-rpc-endpoint-providers) for Klaytn’s Public Node Providers and the network domains.
+Refer to this [list](../references/service-providers/public-en#public-json-rpc-endpoint-providers) for Klaytn’s Public Node Providers and the network domains.
 
 
 ## Are there faucets to get test KLAY? <a id="are-there-faucets"></a>
@@ -135,7 +135,7 @@ If you are new to Truffle, see [Testing Guide](../build/smart-contracts/testing-
 
 ## Where can I get a browser extension wallet like Metamask? <a id="where-can-i-get-a-browser-extension-wallet"></a>
 
-Klaytn's web brower extension wallet [Kaikas](https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=en). Kaikas is a non-custodial wallet with which you can make KLAY transactions and create accounts. 
+Klaytn's web browser extension wallet [Kaikas](https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi?hl=en). Kaikas is a non-custodial wallet with which you can make KLAY transactions and create accounts. 
 
 
 
@@ -158,6 +158,7 @@ See the [JavaScript code snippet](https://gist.github.com/w3kim/64a3cf5da5825047
 
 [Sending a transaction with multiple signer](../references/sdk/caver-js-1.4.1/get-started-1.4.1.md#sending-a-transaction-with-multiple-signer) gives a good explanation about two different ways of collecting signatures.
 Relevant caver-js APIs are as follows. Take a look at the code examples in the API description.
+
 - [caver.klay.accounts.signTransaction](../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#signtransaction)
 - [caver.klay.accounts.feePayerSignTransaction](../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#feepayersigntransaction)
 - [caver.klay.accounts.combinesignatures](../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#combinesignatures)

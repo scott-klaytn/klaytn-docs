@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Frequently Asked Questions
 
 ## Can I add new owners after creating a safe? <a id="Can i add new owners after creating a safe"></a>
@@ -115,4 +111,4 @@ A Safe's threshold is the minimum number of owner accounts that must approve a t
 Additionally, it is recommended to choose a threshold of 51% of the total owners, e.g., 2 out of 3, 3 out of 5, etc.  Because of this, even if one owner loses access to their account, users are not immediately locked out of all of their money in the Safe; instead, the other owners can still perform transactions and, for example, replace that lost owner account. One can contend that this serves as a recovery mechanism.
  
 **What wallets are compatible?**
-At the moment, Klaytn Safe is compatible with [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask).
+At the moment, Klaytn Safe is compatible with [MetaMask](../../../tutorials/connecting-metamask).

@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Errors & Troubleshooting
 
 ## Where can I find a log file for the running Klaytn node using the Klaytn binary package? <a id="where-can-i-find-a-log-file-for-the-running-klaytn-node-using-the-klaytn-binary"></a>

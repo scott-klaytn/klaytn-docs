@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Service Chain
 
 ## Intended Audience <a id="intended-audience"></a>

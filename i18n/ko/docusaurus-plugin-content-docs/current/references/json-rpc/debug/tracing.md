@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # VM 추적
 
 **참고** VM 추적 API의 [JavaScript 기반 추적](#javascript-based-tracing)은 일반에 공개하기에는 안전하지 않은 것으로 간주됩니다.

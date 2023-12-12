@@ -1,7 +1,7 @@
 ---
 description: >-
   계정, 블록, 트랜잭션, 노드와 관련된 API입니다.
-sidebar_position: 2
+
 ---
 
 # klay

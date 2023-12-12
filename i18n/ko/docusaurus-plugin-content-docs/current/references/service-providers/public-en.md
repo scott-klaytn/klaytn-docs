@@ -58,16 +58,16 @@
 ## 유용한 리소스
 
 - 월렛: Kaikas는 클레이튼 네트워크의 브라우저 확장 지갑입니다.
-[Kaikas](https://docs.klaytn.foundation/dapp/developer-tools/kaikas)
+[Kaikas](../../build/tools/wallets/kaikas.md)
 
 - Faucet: Baobab 테스트 네트워크에 대한 테스트 KLAY를 얻을 수 있습니다.
-[Faucet](https://docs.klaytn.foundation/dapp/developer-tools/klaytn-wallet#how-to-receive-baobab-testnet-klay)
+[Faucet](../../build/tools/wallets/klaytn-wallet.md#how-to-receive-baobab-testnet-klay)
 
 - 탐색기: Klaytnscope는 클레이튼 네트워크의 블록 탐색기입니다.
-[Klaytnscope](https://docs.klaytn.foundation/dapp/developer-tools/klaytnscope)
+[Klaytnscope](../../build/tools/block-explorers/klaytnscope.md)
 
 - ChainID : Baobab: 1001 (0x3E9), Cypress: 8217 (0x2019)
 
-- 가스 가격: [25, 750] 범위 내에서 동적으로 조정됩니다. 범위는 온체인 거버넌스를 통해 변경할 수 있습니다. 자세한 내용은 [Governance](https://docs.klaytn.foundation/content/dapp/json-rpc/api-references/governance)를 참조하세요.
-[거래 수수료](https://docs.klaytn.com/klaytn/design/transaction-fees)
+- 가스 가격: [25, 750] 범위 내에서 동적으로 조정됩니다. 범위는 온체인 거버넌스를 통해 변경할 수 있습니다. 자세한 내용은 [Governance](../json-rpc/governance.md)를 참조하세요.
+[트랜잭션 수수료](../../learn/transaction-fees.md)
 

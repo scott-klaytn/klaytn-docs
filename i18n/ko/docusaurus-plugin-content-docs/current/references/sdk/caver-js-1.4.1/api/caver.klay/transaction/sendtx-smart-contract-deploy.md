@@ -1,8 +1,4 @@
----
-sidebar_position: 5
----
-
-# 스마트 컨트랙트 배포 트랜잭션
+# 스마트 컨트랙트 배포
 
 ## sendTransaction (SMART_CONTRACT_DEPLOY) <a id="sendtransaction-smart_contract_deploy"></a>
 

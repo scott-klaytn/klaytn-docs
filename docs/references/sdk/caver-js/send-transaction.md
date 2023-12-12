@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Sending a sample transaction
 
 Let's try sending a transaction as a simple warm-up. In this short example, we will be creating a keystore, connecting to Klaytn node, as well as creating a transaction - all of this using caver-js!

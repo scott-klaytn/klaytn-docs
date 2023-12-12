@@ -1800,7 +1800,7 @@ caver.rpc.klay.getTransactionBySenderTxHash(senderTxHash [, callback])
 
 | 이름 | 유형 | 설명 |
 | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| senderTxHash | String | 발신자 트랜잭션 해시입니다. 자세한 내용은 [SenderTxHash](../../../learn/transactions/transactions.md#sendertxhash)를 참조하세요. |
+| senderTxHash | String | 발신자 트랜잭션 해시입니다. 자세한 내용은 [SenderTxHash](../../../../../learn/transactions/transactions.md#sendertxhash)를 참조하세요. |
 | callback | Function | (선택 사항) 선택적 콜백으로, 첫 번째 매개변수로 오류 객체를 반환하고 두 번째 매개변수로 결과를 반환합니다.                |
 
 **리턴 값**
@@ -1877,7 +1877,7 @@ caver.rpc.klay.getTransactionReceipt(transactionHash [, callback])
 | logs | Array | 이 트랜잭션이 생성한 로그 객체의 배열입니다.                                                                                                                                                                                 |
 | logsBloom | String | 라이트 클라이언트가 관련 로그를 빠르게 검색할 수 있는 블룸 필터입니다.                                                                                                                                                                        |
 | nonce | String | 이 트랜잭션 이전에 발신자가 만든 트랜잭션의 수입니다.                                                                                                                                                                        |
-| senderTxHash       | string| 보낸 사람만 서명한 트랜잭션의 해시(선택 사항). [SenderTxHash](../../../learn/transactions/transactions.md#sendertxhash)를 참조하세요. 이 값은 수수료 위임이 아닌 트랜잭션의 경우 항상 '트랜잭션 해시'와 동일합니다. |
+| senderTxHash       | string| 보낸 사람만 서명한 트랜잭션의 해시(선택 사항). [SenderTxHash](../../../../../learn/transactions/transactions.md#sendertxhash)를 참조하세요. 이 값은 수수료 위임이 아닌 트랜잭션의 경우 항상 '트랜잭션 해시'와 동일합니다. |
 | signatures | Array | 서명 개체의 배열입니다. 서명 객체에는 세 개의 필드(V, R, S)가 포함됩니다. V에는 ECDSA 복구 ID가 포함됩니다. R에는 ECDSA 서명 r이 포함되고 S에는 ECDSA 서명 s가 포함됩니다.                                                   |
 | status | String | 트랜잭션이 성공했다면 `0x1`, Klaytn 가상 머신이 트랜잭션을 되돌렸다면 `0x0`입니다.                                                                                                                                  |
 | txError | String | (선택 사항) `status`가 `0x0`일 경우 상세 오류 코드.                                                                                                                                                                           |
@@ -1960,7 +1960,7 @@ caver.rpc.klay.getTransactionReceiptBySenderTxHash(senderTxHash [, callback])
 
 | 이름 | 유형 | 설명 |
 | ------------ | -------- | ------------------------------------------------------------------------------------------------------------------------- |
-| senderTxHash | String | 발신자 트랜잭션 해시입니다. 자세한 내용은 [SenderTxHash](../../../learn/transactions/transactions.md#sendertxhash)를 참조하세요. |
+| senderTxHash | String | 발신자 트랜잭션 해시입니다. 자세한 내용은 [SenderTxHash](../../../../../learn/transactions/transactions.md#sendertxhash)를 참조하세요. |
 | callback | Function | (선택 사항) 선택적 콜백으로, 첫 번째 매개변수로 오류 객체를 반환하고 두 번째 매개변수로 결과를 반환합니다.                |
 
 **리턴 값**

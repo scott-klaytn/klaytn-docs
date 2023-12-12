@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs related to accounts, blocks, transactions, and nodes.
-sidebar_position: 2
+
 ---
 
 # klay

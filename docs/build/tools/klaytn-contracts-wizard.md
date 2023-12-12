@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Klaytn Contracts Wizard
 
 ## Introduction
@@ -58,8 +54,8 @@ Let’s get started!
 To follow along in this tutorial, the prerequisites are highlighted below:
 * Make sure to have [foundry](https://book.getfoundry.sh/getting-started/installation) installed. 
 * Clone the [klaytn-foundry-starterkit](https://github.com/ayo-klaytn/klaytn-foundry-starterkit) code.
-* [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask): used to deploy the contracts, sign transactions and interact with the contracts.
-* RPC Endpoint: you can get this from one of the supported [endpoint providers](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en).
+* [MetaMask](../tutorials/connecting-metamask#install-metamask): used to deploy the contracts, sign transactions and interact with the contracts.
+* RPC Endpoint: you can get this from one of the supported [endpoint providers](../../references/service-providers/public-en.md).
 * Test KLAY from [Faucet](https://baobab.wallet.klaytn.foundation/faucet): fund your account with sufficient KLAY.
 
 ### Getting Started
@@ -450,6 +446,6 @@ In this tutorial, you learned about the Klaytn contracts wizard, its functionali
 
 Further, we deployed the generated contracts to Klaytn Baobab Testnet using Foundry solidity scripting. You can make use of Remix IDE or any smart contract development environment to deploy smart contract derived or customized using from Klaytn Contracts Wizard. You can find corresponding tutorials in the following links:
 
-* [Connecting to Remix](https://docs.klaytn.foundation/content/dapp/tutorials/connecting-remix#connecting-klaytn-remix-using-metamask) 
-* [Deploying smart contract using Hardhat](https://docs.klaytn.foundation/content/getting-started/hardhat)
-* [Deploying smart contract using Truffle](https://docs.klaytn.foundation/content/smart-contract/sample-contracts/erc-20/2-erc20#2-2-deploying-smart-contract-using-truffle)
+* [Connecting to Remix](../tutorials/connecting-remix.md#connecting-klaytn-remix-using-metamask) 
+* [Deploying smart contract using Hardhat](../get-started/hardhat.md)
+* [Deploying smart contract using Truffle](../smart-contracts/samples/erc-20.md#2-2-deploying-smart-contract-using-truffle)

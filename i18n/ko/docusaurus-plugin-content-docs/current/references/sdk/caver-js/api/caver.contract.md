@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # caver.contract
 
 `caver.contract` 객체를 사용하면 Klaytn 블록체인 플랫폼에서 스마트 컨트랙트와 쉽게 상호작용할 수 있습니다. 새로운 컨트랙트 객체를 생성할 때 해당 스마트 컨트랙트에 대한 JSON 인터페이스를 제공해야 하며, caver-js는 JavaScript로 된 컨트랙트 객체와의 모든 호출을 RPC를 통해 저수준 ABI 호출로 자동 변환해줍니다.

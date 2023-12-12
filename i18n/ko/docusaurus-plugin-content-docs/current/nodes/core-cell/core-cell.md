@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # 코어 셀
 
 ## 대상 독자 <a id="intended-audience"></a>

@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs used to query network configuration.
-sidebar_position: 3
+
 ---
 
 # net

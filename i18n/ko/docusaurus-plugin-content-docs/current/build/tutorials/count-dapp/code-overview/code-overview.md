@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # 프론트엔드 코드 개요
 
 1. `src/index.js` - 앱의 진입점

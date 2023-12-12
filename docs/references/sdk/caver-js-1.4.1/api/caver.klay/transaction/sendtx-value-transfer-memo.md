@@ -1,8 +1,4 @@
----
-sidebar_position: 3
----
-
-# Value Transfer Memo Transaction
+# Value Transfer Memo
 
 ## sendTransaction (VALUE_TRANSFER_MEMO) <a id="sendtransaction-value_transfer_memo"></a>
 

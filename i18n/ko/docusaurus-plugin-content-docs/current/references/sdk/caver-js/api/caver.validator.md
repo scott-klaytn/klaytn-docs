@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # caver.validator
 
 `caver.validator` 패키지는 클레이튼에서 애플리케이션을 구현할 때 사용해야 하는 유효성 검사 함수를 제공합니다.

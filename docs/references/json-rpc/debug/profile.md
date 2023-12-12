@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Profiling
 
 ## debug_blockProfile <a id="debug_blockprofile"></a>

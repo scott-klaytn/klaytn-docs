@@ -1,7 +1,7 @@
 ---
 description: >-
   네임스페이스 'net'을 둘러싼 Klaytn API에 대한 JavaScript 래퍼입니다.
-sidebar_position: 2
+
 ---
 
 # caver.klay.net

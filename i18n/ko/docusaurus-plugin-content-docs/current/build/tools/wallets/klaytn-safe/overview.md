@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Klaytn Safe 설계
 
 현재 Klaytn Safe는 다중서명 지갑을 생성하고 관리하기 위한 도구 모음입니다:

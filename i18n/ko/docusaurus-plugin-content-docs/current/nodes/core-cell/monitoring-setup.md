@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # 코어 셀 모니터링
 
 ## 개요 <a id="overview"></a>

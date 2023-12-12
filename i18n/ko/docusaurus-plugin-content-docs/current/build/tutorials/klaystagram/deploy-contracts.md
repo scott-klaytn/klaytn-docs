@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # 스마트 컨트랙트 배포
 
 ## 1. Klaystagram dApp 클론하기 <a id="2-clone-klaystagram-dapp"></a>

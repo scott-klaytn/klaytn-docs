@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Porting from web3j
 
 We made caver-java as similar as possible to [web3j](https://github.com/web3j/web3j) for portability. The below code snippets show how to port an application written in web3j to caver-java.

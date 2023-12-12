@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Transaction Types
 
 ## Working with Klaytn Transaction Types

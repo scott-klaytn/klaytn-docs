@@ -1,8 +1,4 @@
----
-sidebar_position: 12
----
-
-# 거래 수수료
+# 트랜잭션 수수료
 
 :::note
 
@@ -14,7 +10,7 @@ sidebar_position: 12
 
 :::
 
-한 거래의 거래 수수료는 다음과 같이 계산됩니다:
+한 거래의 트랜잭션 수수료는 다음과 같이 계산됩니다:
 
 ```text
 Transaction fee := (Gas used) x (GasPrice)
@@ -26,7 +22,7 @@ Transaction fee := (Gas used) x (GasPrice)
 
 다시 합산하여 계산된 트랜잭션 수수료는 발신자 또는 수수료 납부자의 계정에서 차감됩니다. 단, 수수료는 트랜잭션이 klay_sendTransaction/eth_sendTransaction에 의해 생성된 경우에만 잔액에서 차감할 수 있습니다. 다른 트랜잭션은 블록에 포함될 수 없기 때문에 상태를 변경할 수 없습니다. 이는 어떤 방식으로든 시뮬레이션일 뿐입니다.
 
-이것은 거래 수수료에 대한 전반적인 설명이며, 이 시점에서 gas 가격이 어떻게 결정되고 gas가 어떻게 계산되는지에 대해 자세히 설명하겠습니다.
+이것은 트랜잭션 수수료에 대한 전반적인 설명이며, 이 시점에서 gas 가격이 어떻게 결정되고 gas가 어떻게 계산되는지에 대해 자세히 설명하겠습니다.
 
 ## Gas 가격 개요 <a id="gas-price-overview"></a>
 이더리움과 달리 클레이튼은 처음에는 `unitPrice`라는 고정 gas 가격을 사용했습니다. 그러나 Magma 하드포크 이후 클레이튼은 이더리움의 기본 수수료를 수정하여 개념을 새롭게 정의한 동적 gas 가격, 즉 '유효 gas 가격'을 사용하기 시작했습니다. gas 가격에 대한 많은 변화가 있었기 때문에 gas 가격을 어떤 값으로 설정해야 할지 꽤 혼란스러울 수 있습니다. 그래서 아래에 gas 가격을 설정하는 방법에 대한 가이드를 만들었습니다.
@@ -83,7 +79,7 @@ IntrinsicGasCost = KeyCreationGas + KeyValidationGas + PayloadGas + TxTypedGas
 
 자세히 알아보기 전에, 모든 키 유형에 키gas(`KeyCreationGas` 및 `KeyValidationGas`)가 적용되는 것은 아니라는 점을 기억하세요.
 
-| keytype | 해당 키가 적용되나요? |
+| 키 유형 | 해당 키가 적용되나요? |
 | :--- | :--- |
 | 없음 | 아니요 |
 | Legacy | 아니요 |

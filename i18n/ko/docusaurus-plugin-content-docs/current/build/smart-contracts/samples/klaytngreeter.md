@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # KlaytnGreeter
 
 `KlaytnGreeter`는 인사말 메시지를 반환하는 간단한 컨트랙트입니다. 인사말 메시지는 컨트랙트가 배포될 때 설정됩니다.

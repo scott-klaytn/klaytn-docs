@@ -1,5 +1,4 @@
 ---
-sidebar_position: 3
 sidebar_label: Convert from web3.js
 ---
 

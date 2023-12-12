@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # System Requirements
 
 ## H/W Specification <a id="h-w-specification"></a>

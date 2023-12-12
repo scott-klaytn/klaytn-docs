@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # Auth 컴포넌트
 
 `src/components/Auth.js`:

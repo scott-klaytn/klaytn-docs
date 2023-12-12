@@ -1,10 +1,6 @@
----
-sidebar_position: 1
----
-
 # Set up environment
 
-> **\[MUST\] For this tutorial, you must follow the versions specified on the [first page](https://docs.klaytn.foundation/dapp/tutorials/count-dapp#testing-environment) when you are setting up the environment. Please change the node version to 10.16.0 by using nvm before downloading caver-js.**
+> **\[MUST\] For this tutorial, you must follow the versions specified on the [first page](klaystagram.md#testing-environment) when you are setting up the environment. Please change the node version to 10.16.0 by using nvm before downloading caver-js.**
 
 
 ## 1. Install Node.js \(npm\) <a id="1-install-node-js-npm"></a>

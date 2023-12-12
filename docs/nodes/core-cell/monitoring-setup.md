@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Monitor Core Cell
 
 ## Overview <a id="overview"></a>

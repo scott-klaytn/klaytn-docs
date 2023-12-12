@@ -1,7 +1,3 @@
----
-sidebar_position: 6
----
-
 # Filter
 
 ## klay_getFilterChanges <a id="klay_getfilterchanges"></a>
@@ -17,11 +13,11 @@ sidebar_position: 6
 **리턴 값**
 
 `Array`- 로그 객체의 배열, 또는 마지막 폴링 이후 변경된 사항이 없는 경우 빈 배열입니다.
-- [klay_newBlockFilter](#klay_getfilterlogs)로 생성된 필터의 경우, 반환값은 블록 해시(32-byte DATA)입니다.
+- [klay_newBlockFilter](#klay_newblockfilter)로 생성된 필터의 경우, 반환값은 블록 해시(32-byte DATA)입니다.
   *e.g.*, `["0x3454645634534..."]`.
-- [klay_newPendingTransactionFilter](#klay_getfilterlogs)로 생성된 필터의 경우, 반환은 트랜잭션
+- [klay_newPendingTransactionFilter](#klay_newpendingtransactionfilter)로 생성된 필터의 경우, 반환은 트랜잭션
   해시(32-byte DATA), *예: *, `["0x6345343454645..."]`입니다.
-- [klay_newFilter](#klay_getfilterlogs)로 생성된 필터의 경우, 로그는 다음과 같은 파라미터를 가진 객체입니다:
+- [klay_newFilter](#klay_newfilter)로 생성된 필터의 경우, 로그는 다음과 같은 파라미터를 가진 객체입니다:
 
 | 이름 | 유형 | 설명
 | --- | --- | --- |
@@ -77,7 +73,7 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 **리턴 값**
 
-[klay_getFilterChanges](#klay_getfilterlogs)를 참조하세요.
+[klay_getFilterChanges](#klay_getfilterchanges)를 참조하세요.
 
 **예시**
 
@@ -118,8 +114,8 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 | 이름 | 유형 | 설명
 | --- | --- | --- |
-| fromBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](#klay_getfilterchanges)에서와 같이 `"earliest"`, `"latest"` 또는 ``pending`` 문자열입니다. |
-| toBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개 변수](#klay_getfilterchanges)에 있는 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
+| fromBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 ``pending`` 문자열입니다. |
+| toBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개 변수](block.md#the-default-block-parameter)에 있는 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
 | address | 20-byte DATA &#124; Array | (선택 사항) 컨트랙트 주소 또는 로그가 시작될 주소 목록입니다.
 | topics | DATA Array | (선택 사항) 32바이트 데이터 토픽 배열입니다. 토픽은 순서에 따라 달라집니다. 각 토픽은 "또는" 옵션이 있는 DATA 배열일 수도 있습니다. |
 | blockHash | 32-byte DATA | (선택 사항) 반환되는 로그를 32바이트 해시 블록Hash를 사용하여 단일 블록으로 제한하는 필터 옵션입니다. 블록해시를 사용하는 것은 블록해시가 블록해시인 블록 번호를 fromBlock = toBlock으로 사용하는 것과 동일합니다. 필터 조건에 blockHash가 있으면 fromBlock이나 toBlock 모두 허용되지 않습니다. |
@@ -132,7 +128,7 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 **리턴 값**
 
-[klay_getFilterChanges](#klay_getfilterlogs)를 참조하세요.
+[klay_getFilterChanges](#klay_getfilterchanges)를 참조하세요.
 
 **예시**
 
@@ -254,7 +250,7 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"kl
 ## klay_newBlockFilter <a id="klay_newblockfilter"></a>
 
 노드에 필터를 생성하여 새 블록이 도착할 때 알림을 보냅니다.
-상태가 변경되었는지 확인하려면 [klay_getFilterChanges](#klay_getfilterlogs)를 호출하세요.
+상태가 변경되었는지 확인하려면 [klay_getFilterChanges](#klay_getfilterchanges)를 호출하세요.
 
 **매개변수**
 
@@ -284,9 +280,9 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 ## klay_newFilter <a id="klay_newfilter"></a>
 
 필터 옵션에 따라 필터 객체를 생성하여 상태가 변경될 때 알림(로그)을 보냅니다.
-- 상태가 변경되었는지 확인하려면 [klay_getFilterChanges](#klay_getfilterlogs)를 호출합니다.
+- 상태가 변경되었는지 확인하려면 [klay_getFilterChanges](#klay_getfilterchanges)를 호출합니다.
 - `klay_newFilter`로 생성한 필터와 일치하는 모든 로그를 가져오려면 다음과 같이 호출합니다.
-  [klay_getFilterLogs](#klay_getfilterchanges)를 호출합니다.
+  [klay_getFilterLogs](#klay_getfilterlogs)를 호출합니다.
 
 **토픽 필터 지정 시 참고 사항: **주제 필터 지정 시 참고 사항
 토픽은 순서에 따라 달라집니다. 토픽이 `[A, B]`인 로그가 있는 트랜잭션은 다음 토픽 필터에 의해 일치됩니다:
@@ -302,8 +298,8 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 | 이름 | 유형 | 설명
 | --- | --- | --- |
-| fromBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](#klay_getfilterchanges)에서와 같이 `"earliest"`, `"latest"` 또는 ``pending`` 문자열입니다. |
-| toBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](#klay_getfilterchanges)에 있는 ``earliest``, ``latest`` 또는 ``pending`` 문자열입니다. |
+| fromBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 ``pending`` 문자열입니다. |
+| toBlock | QUANTITY &#124; TAG | (선택 사항, 기본값: `"latest"`) 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](block.md#the-default-block-parameter)에 있는 ``earliest``, ``latest`` 또는 ``pending`` 문자열입니다. |
 | address | 20-byte DATA &#124; Array | (선택 사항) 컨트랙트 주소 또는 로그가 시작될 주소 목록입니다.
 | topics | DATA Array | (선택 사항) 32바이트 데이터 토픽 배열입니다. 토픽은 순서에 따라 달라집니다. 각 토픽은 "또는" 옵션이 있는 DATA 배열일 수도 있습니다. |
 
@@ -333,7 +329,7 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"kl
 ## klay_newPendingTransactionFilter <a id="klay_newpendingtransactionfilter"></a>
 
 노드에 필터를 생성하여 새로운 보류 트랜잭션이 도착할 때 알림을 보냅니다.
-상태가 변경되었는지 확인하려면 [klay_getFilterChanges](#klay_getfilterlogs)를 호출하세요.
+상태가 변경되었는지 확인하려면 [klay_getFilterChanges](#klay_getfilterchanges)를 호출하세요.
 
 **매개변수**
 
@@ -374,7 +370,7 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 
 `"newHeads"`는 블록체인에 추가된 각 블록을 알려줍니다.
-`"logs"`는 새 블록에 포함된 로그를 알려줍니다. 이 유형은 필터 옵션을 지정하는 두 번째 매개변수가 필요합니다. 자세한 내용은 [klay_newFilter > 매개변수](#klay_getfilterchanges)를 참조하세요.
+`"logs"`는 새 블록에 포함된 로그를 알려줍니다. 이 유형은 필터 옵션을 지정하는 두 번째 매개변수가 필요합니다. 자세한 내용은 [klay_newFilter > 매개변수](#klay_newfilter)를 참조하세요.
 
 **리턴 값**
 
@@ -385,7 +381,7 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 **예시**
 
-이 API는 웹소켓 도구인 [`wscat`](https://docs.klaytn.com/dapp/json-rpc/api-references/klay/filter#klay_newfilter)과 함께 사용하기에 적합합니다.
+이 API는 웹소켓 도구인 [`wscat`](https://www.npmjs.com/package/wscat)과 함께 사용하기에 적합합니다.
 
 ```shell
 // Request
@@ -411,7 +407,7 @@ wscat -c http://localhost:8552
 ## klay_uninstallFilter <a id="klay_uninstallfilter"></a>
 
 지정된 아이디를 가진 필터를 제거합니다. 감시가 더 이상 필요하지 않을 때 항상 호출해야 합니다.
-또한 일정 기간 동안 [klay_getFilterChanges](#klay_getfilterlogs)로 요청하지 않으면 필터가 타임아웃됩니다.
+또한 일정 기간 동안 [klay_getFilterChanges](#klay_getfilterchanges)로 요청하지 않으면 필터가 타임아웃됩니다.
 
 **매개변수**
 
@@ -460,7 +456,7 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 **예시**
 
-이 API는 웹소켓 도구인 [`wscat`](https://docs.klaytn.com/dapp/json-rpc/api-references/klay/filter#klay_newfilter)과 함께 사용하기에 적합합니다.
+이 API는 웹소켓 도구인 [`wscat`](https://www.npmjs.com/package/wscat)과 함께 사용하기에 적합합니다.
 
 ```shell
 // Request

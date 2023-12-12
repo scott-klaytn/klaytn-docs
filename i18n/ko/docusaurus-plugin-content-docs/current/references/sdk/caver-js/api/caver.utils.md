@@ -1,6 +1,6 @@
 ---
 설명: caver-js 유틸리티 API.
-sidebar_position: 9
+
 ---
 
 # caver.utils

@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # 서비스 체인 설치
 
 ## 대상 독자 <a id="intended-audience"></a>

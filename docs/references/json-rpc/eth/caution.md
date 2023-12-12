@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Cautions when using eth namespace APIs in Klaytn.
 
 Klaytn supports `eth` namespace APIs, so developers using Ethereum based SDKs or tools now can easily migrate their

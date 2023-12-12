@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # 구성
 
 ## klay_chainID <a id="klay_chainid"></a>

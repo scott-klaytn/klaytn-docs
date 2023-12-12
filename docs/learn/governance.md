@@ -1,7 +1,3 @@
----
-sidebar_position: 14
----
-
 # Governance
 
 ## Overview <a id="overview"></a>
@@ -40,15 +36,6 @@ The initial governance process proceeds in the following order: proposal introdu
 Those who have the right to introduce proposals can make sure each proposal is voted on by introducing it. Once the proposal is introduced, the advisors must conduct expert analysis on the proposal and submit a statement of opinion with their results.
 
 During the initial phase of Klaytn governance, the Klaytn Governance Council members will have the right to vote on the introduced proposals and will reference the advisors' statements of opinion to vote on what they believe to be the best option. If the number of votes passes the threshold, the proposal will pass; if not, the proposal will be dismissed. In its initial phase, the voting process may be replaced by a discussion process facilitated by the Klaytn foundation. The follow-up measures for an approved proposal will be led by the chairman, and the chairman has the responsibility to carry out all the proposals that have been passed by the council during his or her term. 
-
-### Klaytn Improvement Reserve Review Process <a id="klaytn-improvement-reserve-review-process"></a>
-
-
-The KIR Proposal review will be decided through the voting of the Governance Council members, and the proposal will be rejected if half of the committee or more vote against(rejected) the proposal. For more details on the KIR Proposal review, refer to the following.
-
-![kir_process](/img/learn/kir_process.png)
-
-For more information, visit [KIR Forum](https://kir.klaytn.foundation/).
 
 ## Governance Roadmap <a id="governance-roadmap"></a>
 

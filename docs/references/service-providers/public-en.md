@@ -58,15 +58,15 @@ Since we cannot guarantee uptime and stability of the endpoints, do not use them
 ## Useful Resources 
 
 - Wallet: Kaikas is a browser extension wallet for the Klaytn Network.
-[Kaikas](https://docs.klaytn.foundation/dapp/developer-tools/kaikas)
+[Kaikas](../../build/tools/wallets/kaikas.md)
 
 - Faucet: You can obtain test KLAY for the Baobab test network. 
-[Faucet](https://docs.klaytn.foundation/dapp/developer-tools/klaytn-wallet#how-to-receive-baobab-testnet-klay)
+[Faucet](../../build/tools/wallets/klaytn-wallet.md#how-to-receive-baobab-testnet-klay)
 
 - Explorer: Klaytnscope is the block explorer for the Klaytn Network.
-[Klaytnscope](https://docs.klaytn.foundation/dapp/developer-tools/klaytnscope)
+[Klaytnscope](../../build/tools/block-explorers/klaytnscope.md)
 
 - ChainID : Baobab: 1001 (0x3E9), Cypress: 8217 (0x2019)
 
-- Gas price: dynamically adjusted within the range [25, 750]. The range can be changed via on-chain governance. For more information, refer to [governance](https://docs.klaytn.foundation/content/dapp/json-rpc/api-references/governance).
-[Transaction Fees](https://docs.klaytn.com/klaytn/design/transaction-fees)
+- Gas price: dynamically adjusted within the range [25, 750]. The range can be changed via on-chain governance. For more information, refer to [governance](../json-rpc/governance.md).
+[Transaction Fees](../../learn/transaction-fees.md)

@@ -1,7 +1,3 @@
----
-sidebar_position: 2
----
-
 # 스마트 컨트랙트 배포
 
 ## 1. Count dApp 클론 <a id="2-clone-count-dapp"></a>

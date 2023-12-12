@@ -1,7 +1,3 @@
----
-sidebar_position: 8
----
-
 # 기타
 
 ## klay_sha3 <a id="klay_sha3"></a>
@@ -74,7 +70,7 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"klay
 
 메시지 서명에서 서명자 주소를 반환합니다.
 메시지가 주어진 계정으로 서명되었는지 검증합니다.
-클레이튼에는 여러 가지 [accountKey](https://docs.klaytn.foundation/content/klaytn/design/accounts#account-key) 타입이 있습니다.
+클레이튼에는 여러 가지 [accountKey](../../../learn/accounts.md#account-key) 타입이 있습니다.
 따라서 주소(계정) 인자에 AccountKeyWeightedMultisig와 같은 복합 계정키가 있고
 와 같은 복합 계정키가 있고 서명이 계정의 멤버 개인키에 의해 생성된 경우,
 계정 주소가 아닌 회원의 개인키와 쌍을 이룬 주소를 얻게 됩니다.

@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # Import Ethereum Contracts
 
 In most cases, you can use Ethereum contracts on Klaytn without any modification.

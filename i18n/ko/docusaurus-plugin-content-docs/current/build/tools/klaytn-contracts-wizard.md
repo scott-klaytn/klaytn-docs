@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Klaytn Contracts Wizard
 
 ## 소개
@@ -58,8 +54,8 @@ Klaytn Contracts Wizard의 여러 부분을 살펴봤다면 이제 원하는 컨
 이 튜토리얼을 따라하기 위한 사전 요구 사항은 아래에 강조 표시되어 있습니다:
 * [Foundry](https://book.getfoundry.sh/getting-started/installation)가 설치되어 있는지 확인합니다.
 * [klaytn-foundry-starterkit](https://github.com/ayo-klaytn/klaytn-foundry-starterkit) 코드를 복제합니다.
-* [MetaMask](https://docs.klaytn.foundation/dapp/tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고 트랜잭션에 서명하고 컨트랙트와 상호작용하는 데 사용됩니다.
-* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](https://docs.klaytn.foundation/content/dapp/json-rpc/public-en) 중 하나에서 얻을 수 있습니다.
+* [MetaMask](../tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고 트랜잭션에 서명하고 컨트랙트와 상호작용하는 데 사용됩니다.
+* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../../references/service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
 * [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY 테스트: 충분한 KLAY로 계정에 자금을 충전합니다.
 
 ### 시작하기
@@ -450,6 +446,6 @@ forge script script/KIP37MultiToken.s.sol:KIP37MultiTokenDeployScript --rpc-url 
 
 또한, 생성된 컨트랙트를 Foundry Solidity 스크립팅을 사용하여 클레이튼 Baobab 테스트넷에 배포했습니다. Remix IDE 또는 다른 스마트 컨트랙트 개발 환경을 사용하여 Klaytn Contracts Wizard를 통해 파생되거나 커스터마이징된 스마트 컨트랙트를 배포할 수 있습니다. 다음 링크에서 해당 튜토리얼을 찾을 수 있습니다:
 
-* [Remix에 연결하기](https://docs.klaytn.foundation/content/dapp/tutorials/connecting-remix#connecting-klaytn-remix-using-metamask)
-* [Hardhat을 이용한 스마트 컨트랙트 배포하기](https://docs.klaytn.foundation/content/getting-started/hardhat)
-* [Truffle을 이용한 스마트 컨트랙트 배포하기](https://docs.klaytn.foundation/content/smart-contract/sample-contracts/erc-20/2-erc20#2-2-deploying-smart-contract-using-truffle)
+* [Remix에 연결하기](../tutorials/connecting-remix.md#connecting-klaytn-remix-using-metamask)
+* [Hardhat을 이용한 스마트 컨트랙트 배포하기](../get-started/hardhat.md)
+* [Truffle을 이용한 스마트 컨트랙트 배포하기](../smart-contracts/samples/erc-20.md#2-2-deploying-smart-contract-using-truffle)

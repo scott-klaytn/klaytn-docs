@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # 빌드 수수료 위임 예시
 
 ## 목차 <a href="#table-of-contents" id="table-of-contents"></a>

@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # Test Smart Contracts
 
 In this section, we'll introduce how to test smart contracts. Because any transaction on the blockchain is not reversible, testing your smart contract is crucial before you deploy the contract.

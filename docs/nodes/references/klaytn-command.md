@@ -1,7 +1,3 @@
----
-sidebar_position: 3
----
-
 # Klaytn Command
 
 ## How to find the Klaytn Directory (Normally “Klaytn DIR”)

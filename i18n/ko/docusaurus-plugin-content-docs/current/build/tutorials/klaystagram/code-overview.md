@@ -1,7 +1,3 @@
----
-sidebar_position: 4
----
-
 # 프론트엔드 코드 개요
 
 1. 개요
@@ -187,7 +183,7 @@ export const removeWallet = () => (dispatch) => {
 }
 ```
 
-참고) caver의 `privateKeyToAccount` API에 대한 자세한 내용은 [caver.klay.accounts.privateKeyToAccount](https://docs.klaytn.foundation/dapp/sdk/caver-js/v1.4.1/api-references/caver.klay.accounts#privatekeytoaccount)를 참고하세요.
+참고) caver의 `privateKeyToAccount` API에 대한 자세한 내용은 [caver.klay.accounts.privateKeyToAccount](../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#privatekeytoaccount)를 참고하세요.
 
 **3. 페이지 렌더링** Redux는 세션 스토리지에 지갑 인스턴스가 존재하는지 여부에 따라 `isLoggedIn` 상태를 참 또는 false으로 초기화합니다.
 

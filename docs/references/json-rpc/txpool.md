@@ -1,7 +1,7 @@
 ---
 description: >-
   APIs to inspect transaction pools in the node.
-sidebar_position: 7
+
 ---
 
 # txpool

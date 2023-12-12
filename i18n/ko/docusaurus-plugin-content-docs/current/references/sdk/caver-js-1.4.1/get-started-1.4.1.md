@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # 시작하기
 
 ## 전제 조건 <a id="prerequisites"></a>
@@ -970,7 +966,7 @@ caver-js를 사용하여 dApp \(분산 애플리케이션\)을 개발하는 샘�
 
 
 
-[caver.klay.Contract]: api/caver.klay.contract.md
+[caver.klay.Contract]: api/caver.klay.Contract.md
 [caver.klay.accounts]: api/caver.klay.accounts.md
 [caver.klay.accounts.signTransaction]: api/caver.klay.accounts.md#signtransaction
 [caver.klay.getTransactionReceipt]: api/caver.klay/transaction/transaction.md#gettransactionreceipt

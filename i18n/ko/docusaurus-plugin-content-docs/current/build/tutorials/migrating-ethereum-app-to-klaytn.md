@@ -1,7 +1,3 @@
----
-sidebar_position: 7
----
-
 # 이더리움 앱을 클레이튼으로 마이그레이션하기
 
 ## 목차 <a href="#table-of-contents" id="table-of-contents"></a>
