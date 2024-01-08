@@ -1,13 +1,13 @@
-# 상태 마이그레이션(State Migration)
+# State Migration
 
-블록체인에 블록이 추가될수록 체인 데이터도 쌓이게 됩니다. 체인 데이터는 노드 운영에 필요하기 때문에 노드 스토리지에 트라이라는 데이터 구조로 저장되고, 최종적으로는 레벨DB라는 데이터베이스에 저장됩니다. 따라서 블록이 많아질수록 스토리지에 저장되는 체인 데이터도 많아지고 비용도 증가하게 됩니다. 따라서 클레이튼은 필요한 저장공간을 줄일 수 있는 상태 마이그레이션이라는 기능을 제공합니다.
+As more blocks are added to the blockchain, chain data also pile up. Chain data are necessary for node operation, so they are stored in the node storage as a data structure called trie, and ultimately in a database called LevelDB. So with more blocks, comes more chain data in the storage, along with increasing cost. Klaytn, therefore, provides a feature called State Migration that allows you to reduce the amount of required storage space.
 
-상태 마이그레이션은 체인 데이터의 대부분을 구성하는 상태 트라이(state trie)를 대상으로 합니다. 새 블록을 처리하는 데 필요하지 않은 상태 시도 노드를 삭제합니다. 특정 블록의 상태 시도 루트에서 도달할 수 있는 상태 시도 노드만 남깁니다. 상태 마이그레이션 후에는 노드 동기화에 필요한 최신 데이터만 남게 되며, 이는 대상 블록의 상태 트라이 노드와 새로 추가된 블록으로 구성됩니다.
+State Migration targets state tries, which comprise most of the chain data. It deletes state trie nodes that are not required for processing new blocks. It only leaves the state trie nodes that are reachable from the state trie root of a specific block. After State Migration, you are only left with the latest data required for node synchronization, consisting of state trie nodes of the target block as well as newly added blocks.
 
-노드는 상태 마이그레이션 후 대상 블록 이전의 블록에서 이전 상태를 읽을 수 없습니다. 즉, 이전 블록 번호의 잔액은 `klay_getBalance` API를 사용하여 반환할 수 없습니다.
+Note that a node can't read old states from blocks previous to the target block after State Migration. In other words, you can't return the balance from an old block number using the `klay_getBalance` API.
 
-상태 마이그레이션의 메커니즘에 대한 자세한 내용은 아래에서 확인할 수 있습니다:
-[클레이튼 v1.5.0 상태 마이그레이션: 노드 스토리지 절약](https://medium.com/klaytn/klaytn-v1-5-0-state-migration-saving-node-storage-1358d87e4a7a)
-[클레이튼 상태 마이그레이션: 블록체인 데이터를 줄이는 효율적인 방법](https://medium.com/klaytn/klaytn-state-migration-an-efficient-way-to-reduce-blockchain-data-6615a3b36523)
+More details on the mechanism of State Migration can be found below:
+[Klaytn v1.5.0 State Migration: Saving Node Storage](https://medium.com/klaytn/klaytn-v1-5-0-state-migration-saving-node-storage-1358d87e4a7a)
+[Klaytn State Migration: An Efficient Way to Reduce Blockchain Data](https://medium.com/klaytn/klaytn-state-migration-an-efficient-way-to-reduce-blockchain-data-6615a3b36523)
 
-상태 마이그레이션을 사용하려면 운영 가이드의 [`체인데이터 마이그레이션`](../../misc/operation/chaindata-migration.md) 페이지를 참고하세요.
+To use State Migration, please refer to [`Chaindata Migration`](../../misc/operation/chaindata-migration.md) page of Operation Guide.
