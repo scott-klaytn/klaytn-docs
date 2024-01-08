@@ -1,15 +1,13 @@
-# ken CLI 명령어
-
-'켄'은 클레이튼 엔드포인트 노드를 위한 명령줄 인터페이스입니다.
+# ken CLI Commands
 
 ```bash
 USAGE:
    ken [options] command [command options] [arguments...]
 ```
 
-## 명령어 <a id="commands"></a>
+## Commands
 
-`ken`에는 다음과 같은 명령이 있습니다.
+`ken`has the following commands.
 
 ```bash
 COMMANDS:
@@ -24,7 +22,7 @@ COMMANDS:
    help, h     Shows a list of commands or help for one command
 ```
 
-각 명령에 대한 자세한 사용 지침을 보려면 `-h` 옵션을 입력합니다.
+To get a detailed usage guideline for each command, give -h option.
 
 ```bash
 $ ken account -h
@@ -57,9 +55,9 @@ participating.
  ...
 ```
 
-## JavaScript 콘솔 <a id="javascript-console"></a>
+## JavaScript Console
 
-클레이튼 엔드포인트 노드는 JavaScript 콘솔과 함께 제공됩니다. 콘솔 명령줄에서 EN에 클레이튼 API 호출의 일부를 시작할 수 있습니다. JavaScript 콘솔에 접속하려면 다음 명령을 실행하세요.
+Klaytn Endpoint Node comes with JavaScript console. From the console command line, you can initiate part of Klaytn API calls to your EN. To attach to the JavaScript console, execute the following command.
 
 ```bash
 $ ken attach ~/kend_home/klay.ipc
@@ -72,16 +70,16 @@ Welcome to the Klaytn JavaScript console
  >
 ```
 
-`attach` 명령은 실행 중인 노드에 연결하고, `console` 명령은 노드를 시작하여 노드에 연결합니다.  
+attach command connects to the running node, while console command launches a node and connects to it.
 
 ```bash
    attach      Start an interactive JavaScript environment (connect to node)
    console     Start an interactive JavaScript environment
 ```
 
-### 모듈 API <a id="module-apis"></a>
+### Module APIs
 
-콘솔 프롬프트에 모듈 이름을 입력하면 해당 모듈의 사용 가능한 프로퍼티와 함수를 확인할 수 있습니다. 함수에 대한 자세한 내용은 [Klaytn API](../../references/json-rpc/json-rpc.md)를 참고하세요.  
+If you type the module name on the console prompt, you will see the available properties and functions of the module. For the details of functions, please see [Klaytn API](../../references/json-rpc/json-rpc.md).
 
 ```javascript
 > personal
