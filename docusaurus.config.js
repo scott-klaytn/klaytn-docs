@@ -18,8 +18,8 @@ const config = {
 
   onBrokenLinks: 'ignore',
 
-  baseUrl: '/',
-  url: 'https://docs.klaytn.foundation',
+  baseUrl: '/klaytn-docs/',
+  url: 'https://devwriting.com',
 
   organizationName: 'klaytn', //only needed when using `docusaurus deploy`command
   projectName: 'klaytn-docs', //only needed when using `docusaurus deploy`command
@@ -128,7 +128,7 @@ const config = {
         contextualSearch: true,
         appId: '3JXBTKO6ZU',
         apiKey: '3ae6c772dbecf845225e7ef3f4ac18be',
-        indexName: 'klaytn',
+        indexName: 'klaytndocs',
       },
       navbar: {
         title: 'Klaytn Docs',
