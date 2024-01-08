@@ -2,32 +2,32 @@
 
 ![](/img/build/tools/klaytnXkaikas.png)
 
-Kaikas는 클레이튼 네트워크를 위한 브라우저 확장 지갑입니다. 구글 크롬에서 사용할 수 있는 Kaikas는 웹 브라우저를 통해 클레이튼 네트워크와 상호작용할 수 있는 안전하고 사용하기 쉬운 수단을 제공합니다. Kaikas를 사용하면 KLAY와 클레이튼 기반 토큰을 저장하고 거래할 수 있습니다. 또한 웹 기반 dApp(탈중앙 애플리케이션)의 요청에 서명할 수 있습니다.
-실시간으로.
+Kaikas is a browser extension wallet for the Klaytn Network. Available in Google Chrome, Kaikas provides a secure and usable means to interact with the Klaytn network via web browser. With Kaikas, you are able to store and transact with your KLAY and Klaytn-based tokens. You are also able to sign requests from web-based dApps (Decentralized Applications) in
+realtime.
 
-* Chrome 웹 스토어에서 다운로드하세요: [링크](https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi)
+- Download from Chrome Web Store: [link](https://chrome.google.com/webstore/detail/kaikas/jblndlipeogpafnldhgmapagcccfchpi)
 
-개발자의 경우, [https://docs.kaikas.io](https://docs.kaikas.io)에서 Kaikas를 사용하여 dApp을 개발하는 방법을 알아보세요.
+For developers, please visit [https://docs.kaikas.io](https://docs.kaikas.io) to learn how you can develop dApps using Kaikas.
 
-## PC 웹 브라우저 기반 탈중앙화 HD 지갑
+## PC web browser based decentralized HD wallet
 
-Kaikas는 Chrome에서 사용할 수 있는 웹 브라우저 확장 프로그램입니다. Kaikas는 데스크톱 환경에 최적화되어 있습니다.
+Kaikas is a web browser extension available in Chrome. Kaikas is optimized for the desktop environment.
 
-Kaikas는 사용자 계정과 키를 관리할 수 있는 기능을 제공합니다. 모든 트랜잭션은 클레이튼 블록체인에 투명하게 기록되며, 누구나 [Klaytnscope]를 통해 트랜잭션 내역에 접근할 수 있습니다.
+Kaikas offers manageability of user accounts and keys. All transactions are transparently recorded on the Klaytn blockchain, so anybody can access the transaction history by using [Klaytnscope].
 
-Kaikas는 계층적 결정론(Hierarchical Deterministic, HD) 지갑으로, 하나의 시드 문구에서 개인/공개 키의 계층적 트리와 같은 구조를 무한정 생성한다는 의미입니다. 시드 구문은 니모닉 코드 단어로 구성되므로 임의의 영숫자로 구성된 구문보다 기억하기 쉽습니다. 사용자의 개인 키는 암호화되어 브라우저에 저장됩니다.
+Kaikas is a Hierarchical Deterministic (HD) wallet, meaning that it generates a hierarchical tree-like structure of private/public keys indefinitely from a single seed phrase. The seed phrase consists of mnemonic code words, which makes it easier to remember than phrases made of random alphanumerics. Users' private keys are encrypted and stored in their browsers.
 
-위에서 설명한 기능을 통해 Kaikas는 현재 블록체인 경험의 보안, 투명성, 사용자 친화성을 개선했습니다. 하지만 사용자가 자신의 개인 계정을 관리할 책임이 있다는 점은 중요합니다. 예를 들어, 사용자가 시드 문구를 기억하지 못하는 경우 계정을 복원할 수 있는 다른 방법이 없습니다.
+With the features described above, Kaikas has improved the security, transparency, and user-friendliness of the current blockchain experience. However, it is vital for users to be responsible for managing their personal accounts. For example, if a user couldn't remember his/her seed phrase, there would be no other way to restore his/her accounts.
 
-## 다양한 클레이튼 네트워크와 토큰 지원
+## Supporting various Klaytn networks and tokens
 
-Kaikas에서는 KLAY를 포함한 모든 클레이튼 기반 토큰을 보관하고 거래할 수 있습니다. 기본적으로 로드되지 않는 토큰은 컨트랙트 주소에 붙여넣기하여 삽입할 수 있습니다. 여러분만의 클레이튼 기반 커스텀 토큰을 Kaikas에 저장하고 거래할 수도 있습니다!
+Kaikas allows you to store and transact with all Klaytn-based tokens including KLAY. Tokens that are not loaded by default can be inserted by pasting in their contract address. You can even store and transact your own Klaytn-based custom tokens on Kaikas!
 
-Kaikas는 클레이튼의 Baobab 테스트넷과 Cypress 메인넷을 지원합니다. 또한, Kaikas는 프라이빗 네트워크에서 커스텀 토큰을 유통하고자 하는 클레이튼 기반 dApp 개발자들을 위한 프라이빗 체인도 지원합니다.
+Kaikas supports Klaytn's Baobab testnet as well as the Cypress mainnet. Moreover, Kaikas supports the private chains for Klaytn-based dApp developers who may wish to circulate custom tokens in their private network.
 
-## 웹 기반 dApp 트랜잭션 서명하기
+## Signing web-based dApp transactions
 
-Kaikas는 여러분과 dApp 사이의 간극을 메워주며, 여러분이 Kaikas 계정으로 dApp에서 여러분에게 전송되는 트랜잭션/데이터에 서명할 수 있도록 지원합니다.
-Kaikas는 개발자가 [FeeDelegatedTransaction](../../../learn/transactions/transactions.md#fee-delegation)을 처리하는 데 유용한 유틸리티이기도 합니다. Kaikas를 사용하면 트랜잭션 발신자와 수수료 납부자 모두 수수료 위임 트랜잭션에 빠르게 서명할 수 있습니다.
+Kaikas simply bridges the gap between you and dApps, empowering you to sign transactions/data flowing to you from dApps with Kaikas account.
+Kaikas is also an aidful utility for developers to handle [fee-delegated transactions](../../../learn/transactions/transactions.md#fee-delegation). Using Kaikas, both transaction senders and fee payers can swiftly sign the fee-delegated transactions.
 
 [Klaytnscope]: ../block-explorers/klaytnscope.md
