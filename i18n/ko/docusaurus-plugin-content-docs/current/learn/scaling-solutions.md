@@ -1,30 +1,47 @@
-# 확장 솔루션
+# Scaling Solutions
 
-## 서비스 체인 <a id="service-chain"></a>
-클레이튼의 서비스체인은 클레이튼 메인체인과는 독립적인 보조 블록체인으로, 특별한 노드 구성, 맞춤형 보안 수준 또는 메인체인에 dApp을 배포하는 것이 불편하거나 경제적으로 실현 불가능할 정도로 높은 처리량을 필요로 하는 개별 디앱을 위해 맞춤화되었습니다.
+## Service Chain <a id="service-chain"></a>
 
-완전히 탈중앙화된 확장 솔루션이 있지만, 챌린지나 퇴장과 같은 어려운 인터페이스와 즉각적인 완결성이 없다는 단점이 있지만, 클레이튼 서비스체인에서는 더 나은 사용성, 즉각적인 완결성, 고성능, 고가용성을 위해 완전한 탈중앙화를 희생하는 다른 접근 방식을 취하고 있습니다.
+Service chains in Klaytn are auxiliary blockchains independent from the Klaytn main chain,
+tailored for individual dApp requiring special node configurations, customized security levels,
+or exceptionally high throughput that makes deploying the dApp on the main chain inconvenient or economically infeasible.
 
-클레이튼 서비스체인은 다양한 서비스별 목적으로 사용될 수 있으며, 데이터 앵커링(노드 수가 적어 서비스체인의 보안성이 떨어지는 것을 보완하기 위해 주기적으로 서비스체인의 블록 해시를 메인체인에 저장) 또는 밸류 전송(클레이튼의 기본 가치 단위인 KLAY와 dApp이 발행한 토큰의 체인 간 전송) 등 여러 이유로 메인체인에 연결할 수 있습니다.
+While there are fully-decentralized scaling solutions, due to their difficult interfaces such as challenge or exit and non-immediate finality,
+we take a different approach in Klaytn’s Service Chain by sacrificing the full decentralization for better usability,
+instant finality, high performance, and high availability.
 
-## 네트워크 <a id="network"></a>
-클레이튼 메인체인에 연결된 서비스체인을 통칭하여 서비스체인 네트워크라고 합니다.
-서비스체인과 메인체인 간의 연결 방식은 Klaytn의 향후 반복 작업에서 변경될 수 있습니다.
+Klaytn service chains may be used for various service-specific goals,
+and can connect to the main chain for multiple reasons including data anchoring (periodic storing of block hashes
+from the service chain onto the main chain to compensate for the decreased security of the service chain due to the smaller number of nodes) or
+value transfer (interchain transfer of KLAY, Klaytn’s native unit of value, and the tokens
+issued by dApps).
 
-![그림 1. 클레이튼 메인체인과 서비스체인](/img/learn/mainchain_servicechain.png)
+## Network <a id="network"></a>
 
-그림 1은 다양한 비즈니스 요구를 충족하기 위해 사용되는 서비스 체인의 네트워크 토폴로지를 보여줍니다. 클레이튼 메인체인과 연결되어 클레이튼 네트워크를 확장하고 있습니다.
+Service chains connected to Klaytn main chain are collectively called Service Chain Network.
+Note that the method of connection between service chains and the main chain may change in Klaytn’s future iterations.
 
-![그림 2. 메인/서브 브리지 모델을 사용한 메인 체인 및 서비스 체인 연결](/img/learn/sc_connection.png)
+![Figure 1. Klaytn Main Chain and Service Chain](/img/learn/mainchain_servicechain.png)
 
-그림 2는 클레이튼 메인체인의 EN(엔드포인트 노드)과 직접 연결된 SCN(서비스체인 컨센서스 노드)의 예시입니다.
-메인/서브 브리지 모델을 사용하여 서비스 체인의 기능을 사용하는 예시입니다.
- 
-## 기능 <a id="features"></a>
-서비스체인은 데이터 무결성 메커니즘을 제공하고 서로 다른 체인 간의 토큰 전송을 지원함으로써 Klaytn을 확장하고 강화합니다.
+Figure 1 shows the network topology of service chains being used to meet various business needs, connected
+with Klaytn main chain to expand the Klaytn network.
 
-### 데이터 앵커링 <a id="data-anchoring"></a>
-데이터 무결성을 위해 서비스체인은 모든 서비스체인 블록 해시를 특수 트랜잭션으로 메인 체인에 자동으로 앵커링할 수 있습니다. 이 데이터 앵커링은 서비스 체인의 데이터가 생성된 후에는 변경할 수 없음을 서비스 사용자에게 보장할 수 있습니다.
+![Figure 2. Main Chain and Service Chain Connection using Main/Sub-Bridge Model](/img/learn/sc_connection.png)
 
-### 밸류 전송 <a id="value-transfer"></a>
-서비스 공급자(SP)가 서비스 사용자와 가치를 체인 간에 쉽게 마이그레이션할 수 있도록 지원합니다. 클레이튼의 기본 가치 단위인 KLAY와 dApp이 발행한 클레이튼 토큰과 같은 토큰을 다른 체인으로 전송할 수 있도록 지원합니다. 사용자는 브릿지 컨트랙트라고 하는 특별한 컨트랙트에 트랜잭션을 전송하여 다른 체인으로 토큰 전송을 쉽게 요청할 수 있습니다.
+Figure 2 shows an example of SCN (Service Chain Consensus Node) connected directly with Klaytn main chain’s EN (Endpoint Node)
+using a main/sub-bridge model in using the service chain’s features.
+
+## Features <a id="features"></a>
+
+Service Chain expands and augments Klaytn by providing a data integrity mechanism and supporting token transfers between different chains.
+
+### Data Anchoring <a id="data-anchoring"></a>
+
+For data integrity, Service Chain can automatically anchor every service chain block hash as a special transaction to the main chain.
+This data anchoring can ensure to the service users that the data in the service chain cannot be altered once it is created.
+
+### Value Transfer <a id="value-transfer"></a>
+
+To help the service providers (SPs) to easily migrate service users and values across chains,
+transferring tokens, such as KLAY (Klaytn's native unit of value) and Klaytn tokens issued by dApps, between different chains can be enabled.
+Users can easily request to transfer tokens to other chains by sending a transaction to a special contract, called bridge contract.
