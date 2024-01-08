@@ -1,38 +1,39 @@
-# VM 추적
+# VM Tracing
 
-**참고** VM 추적 API의 [JavaScript 기반 추적](#javascript-based-tracing)은 일반에 공개하기에는 안전하지 않은 것으로 간주됩니다.
-VM 추적 API를 일반에 제공하려면 VM 추적 API에 대해
-`rpc.unsafe-debug.disable` 플래그를 설정하여 [JavaScript 기반 추적](#javascript-based-tracing)을 비활성화하고
-를 비활성화하고 [사전 정의 tracer](#tracing-options)만 허용하도록 설정하는 것이 좋습니다.
+**NOTE** The [JavaScript-based Tracing](#javascript-based-tracing) of VM Tracing APIs is considered unsafe to be opened to public.
+If you want to provide VM Tracing APIs to the public, we strongly recommend you to set the
+`rpc.unsafe-debug.disable` flag which will disable the [Javascript-based Tracing](#javascript-based-tracing)
+and only allow [pre-defined tracers](#tracing-options).
 
 ## debug_traceBadBlock <a id="debug_tracebadblock"></a>
 
-`traceBadBlock` 메서드는 이 블록에 포함된 모든 트랜잭션의 호출된 전체 스택 추적을 반환합니다.
-호출된 모든 트랜잭션의 전체 스택 추적을 반환합니다.
+The `traceBadBlock` method will return a full stack trace of all invoked
+opcodes of all transactions that were included in this block.
 
-**참고**: 이 블록의 부모가 존재해야 하며, 그렇지 않으면 실패합니다.
+**NOTE**: the parent of this block must be present or it will fail.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|-----------------------------------------------------------|
-| 콘솔 | `debug.traceBadBlock(hash, [options])` |
-| RPC | `{"method":"debug_traceBadBlock", "params":[hash, {}]}` |
+|  Client | Method Invocation                                         |
+| :-----: | --------------------------------------------------------- |
+| Console | `debug.traceBadBlock(hash, [options])`                    |
+|   RPC   | `{"method": "debug_traceBadBlock", "params": [hash, {}]}` |
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| hash | 32-byte DATA | 블록의 해시.
-| options | Object | [추적 옵션](#tracing-options) 참조.
+| Name    | Type         | Description                              |
+| ------- | ------------ | ---------------------------------------- |
+| hash    | 32-byte DATA | Hash of a block.                         |
+| options | object       | See [tracing options](#tracing-options). |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
 
-**예시**
+**Example**
 
-콘솔
+Console
+
 ```javascript
 > debug.traceBadBlock("0x1d5ba00e313a81ae6d409d459c153327072665d9ea2f47608369722baf0cfbb6")
 [{
@@ -53,6 +54,7 @@ VM 추적 API를 일반에 제공하려면 VM 추적 API에 대해
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceBadBlock","params":["0x1d5ba00e313a81ae6d409d459c153327072665d9ea2f47608369722baf0cfbb6"],"id":1}' https://public-en-baobab.klaytn.net
 {"jsonrpc":"2.0","id":1,"result":[{"result":{"gas":67100,"failed":false,"returnValue":"","structLogs":[]}},{"result":{"gas":195179,"failed":false,"returnValue":"","structLogs":[{"pc":0,"op":"PUSH1","gas":9975680,"gasCost":3,"depth":1,"stack":[],"memory":[],"storage":{}},{"pc":2,"op":"PUSH1","gas":9975677,"gasCost":3,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080"],"memory":[],"storage":{}},{"pc":4,"op":"MSTORE","gas":9975674,"gasCost":12,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080","0000000000000000000000000000000000000000000000000000000000000040"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000"],"storage":{}},{"pc":5,"op":"PUSH1","gas":9975662,"gasCost":3,"depth":1,"stack":[],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000080"],"storage":{}},{"pc":7,"op":"CALLDATASIZE","gas":9975659,"gasCost":2,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000004"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000080"],"storage":{}},
@@ -60,37 +62,37 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ,{"pc":853,"op":"STOP","gas":9804821,"gasCost":0,"depth":1,"stack":["000000000000000000000000000000000000000000000000000000007818097c"],"memory":["0000000000000000000000000000000000000000000000000000000000000002","0000000000000000000000000000000000000000000000000000000000000005","00000000000000000000000000000000000000000000000000000000000001c0","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000006","000000000000000000000000500a2e58ae232c5e91bcdcf82c5d6d2165572599","00000000000000000000000000000000000000000000021e19e0c9bab2400000","0000000000000000000000000000000000000000000000000000000000000000","00000000000000000000000081d390a4e469b45642341d6ad111062c24984b37","0000000000000000000000000000000000000000000000000000000000000160","0000000000000000000000000000000000000000000000000000000000000001","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000001","00000000000000000000000081d390a4e469b45642341d6ad111062c24984b37","0000000000000000000000000000000000000000000000000000000000000006","000000000000000000000000500a2e58ae232c5e91bcdcf82c5d6d2165572599","00000000000000000000000000000000000000000000021e19e0c9bab2400000","0000000000000000000000000000000000000000000000000000000000000000","00000000000000000000000000000000000000000000000000000000000000a0","0000000000000000000000000000000000000000000000000000000000000001","00000000000000000000000081d390a4e469b45642341d6ad111062c24984b37"],"storage":{"0000000000000000000000000000000000000000000000000000000000000004":"0000000000000000000000000000000000000000000000000000000000000003","5997abbe896cd022932fc8703dbed777f0bf0d6ed28b2444cb4b79da2805e9a5":"00000000000000000000000081d390a4e469b45642341d6ad111062c24984b37","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c2090733a":"0000000000000000000000000000000000000000000000000000000000000006","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c2090733b":"000000000000000000000000500a2e58ae232c5e91bcdcf82c5d6d2165572599","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c2090733c":"00000000000000000000000000000000000000000000021e19e0c9bab2400000","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c2090733d":"0000000000000000000000000000000000000000000000000000000000000000","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c2090733e":"00000000000000000000000081d390a4e469b45642341d6ad111062c24984b37","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c2090733f":"0000000000000000000000000000000000000000000000000000000000000001","89832631fb3c3307a103ba2c84ab569c64d6182a18893dcd163f0f1c20907340":"0000000000000000000000000000000000000000000000000000000000000001"}}]}}]}
 ```
 
-
 ## debug_traceBlock <a id="debug_traceblock"></a>
 
-`traceBlock` 메서드는 호출된 모든 Opcode의 전체 스택 추적을 반환합니다.
-의 전체 스택 추적을 반환합니다.
+The `traceBlock` method will return a full stack trace of all invoked opcodes
+of all transactions that were included in this block.
 
-**참고**: 이 블록의 부모가 존재해야 하며, 그렇지 않으면 실패합니다.
+**NOTE**: the parent of this block must be present or it will fail.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|-------------------------------------------------------------|
-| 콘솔 | `debug.traceBlock(blockRlp, [options])` |
-| RPC | `{"method":"debug_traceBlock", "params":[blockRlp, {}]}` |
+|  Client | Method Invocation                                          |
+| :-----: | ---------------------------------------------------------- |
+| Console | `debug.traceBlock(blockRlp, [options])`                    |
+|   RPC   | `{"method": "debug_traceBlock", "params": [blockRlp, {}]}` |
 
-참조: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
+References: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| blockRlp | String | RLP 인코딩된 블록입니다.
-| options | Object | [추적 옵션](#tracing-options) 참조.
+| Name     | Type   | Description                              |
+| -------- | ------ | ---------------------------------------- |
+| blockRlp | string | The RLP-encoded block.                   |
+| options  | object | See [tracing options](#tracing-options). |
 
-**반환 값**
+**Return Value**
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
 
-**예시**
+**Example**
 
-콘솔
+Console
+
 ```javascript
 > debug.traceBlock("0xblock_rlp")
 [{
@@ -104,6 +106,7 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceBlock","params":["0xblock_rlp"],"id":1}' https://public-en-baobab.klaytn.net
 {"jsonrpc":"2.0","id":1,"result":[{"result":{"gas":247922,"failed":false,"returnValue":"60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","structLogs":[{"pc":0,"op":"PUSH1","gas":891344,"gasCost":3,"depth":1,"stack":[],"memory":[],"storage":{}},{"pc":2,"op":"PUSH1","gas":891341,"gasCost":3,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080"],"memory":[],"storage":{}},{"pc":4,"op":"MSTORE","gas":891338,"gasCost":12,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080","0000000000000000000000000000000000000000000000000000000000000040"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000"],"storage":{}},{"pc":5,"op":"CALLVALUE","gas":891326,"gasCost":2,"depth":1,"stack":[],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000080"],"storage":{}},
@@ -111,32 +114,33 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ,{"pc":322,"op":"RETURN","gas":865278,"gasCost":0,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000236","0000000000000000000000000000000000000000000000000000000000000000"],"memory":["60806040526004361061004c576000357c010000000000000000000000000000","0000000000000000000000000000900463ffffffff16806341c0e1b514610051","578063cfae321714610068575b600080fd5b34801561005d57600080fd5b5061","00666100f8565b005b34801561007457600080fd5b5061007d610168565b6040","5180806020018281038252838181518152602001915080519060200190808383","60005b838110156100bd5780820151818401526020810190506100a2565b5050","5050905090810190601f1680156100ea5780820380516001836020036101000a","031916815260200191505b509250505060405180910390f35b60008090549061","01000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffff","ffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffff","ffffffffffffff161415610166573373ffffffffffffffffffffffffffffffff","ffffffff16ff5b565b6060600180546001816001161561010002031660029004","80601f0160208091040260200160405190810160405280929190818152602001","828054600181600116156101000203166002900480156102005780601f106101","d557610100808354040283529160200191610200565b82019190600052602060","0020905b8154815290600101906020018083116101e357829003601f16820191","5b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6","c4e54ad49014e2faa152e49e7f9d927c932c7287002900000000000000000000"],"storage":{"0000000000000000000000000000000000000000000000000000000000000000":"000000000000000000000000b0945862f63b832849a5f20b19e9f8188eb2230a","0000000000000000000000000000000000000000000000000000000000000001":"0000000000000000000000000000000000000000000000000000000000000000"}}]}}]}
 ```
 
-
 ## debug_traceBlockByHash <a id="debug_traceblockbyhash"></a>
-[debug_traceBlock](#debug_traceblock)과 유사하게, `traceBlockByHash`는 블록 해시를 받아
-블록 해시를 받아 데이터베이스에 이미 존재하는 블록을 재생합니다.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|--------------------------------------------------------------|
-| 콘솔 | `debug.traceBlockByHash(hash, [options])` |
-| RPC | `{"method":"debug_traceBlockByHash", "params":[hash, {}]}` |
+Similar to [debug_traceBlock](#debug_traceblock), `traceBlockByHash` accepts a
+block hash and will replay the block that is already present in the database.
 
-**매개변수**
+|  Client | Method Invocation                                            |
+| :-----: | ------------------------------------------------------------ |
+| Console | `debug.traceBlockByHash(hash, [options])`                    |
+|   RPC   | `{"method": "debug_traceBlockByHash", "params": [hash, {}]}` |
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| hash | 32-byte DATA | 블록의 해시.
-| options | Object | [추적 옵션](#tracing-options)을 참조하세요.
+**Parameters**
 
-**리턴 값**
+| Name    | Type         | Description                              |
+| ------- | ------------ | ---------------------------------------- |
+| hash    | 32-byte DATA | Hash of a block.                         |
+| options | object       | See [tracing options](#tracing-options). |
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+**Return Value**
 
-**예시**
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
 
-콘솔
+**Example**
+
+Console
+
 ```javascript
 > debug.traceBlockByHash("0x244acf3f11f0999b93616cb156dc1b43ee87e27c9625a7170cf6de447189d890")
 [{
@@ -150,39 +154,41 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceBlockByHash","params":["0x244acf3f11f0999b93616cb156dc1b43ee87e27c9625a7170cf6de447189d890", {}],"id":1}' https://public-en-baobab.klaytn.net {"jsonrpc":"2.0","id":1,"result":[{"result":{"gas":247922,"failed":false,"returnValue":"60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","structLogs":[{"pc":0,"op":"PUSH1","gas":891344,"gasCost":3,"depth":1,"stack":[],"memory":[],"storage":{}},{"pc":2,"op":"PUSH1","gas":891341,"gasCost":3,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080"],"memory":[],"storage":{}},{"pc":4,"op":"MSTORE","gas":891338,"gasCost":12,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080","0000000000000000000000000000000000000000000000000000000000000040"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000"],"storage":{}},{"pc":5,"op":"CALLVALUE","gas":891326,"gasCost":2,"depth":1,"stack":[],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000080"],"storage":{}},
 ...
 ,{"pc":322,"op":"RETURN","gas":865278,"gasCost":0,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000236","0000000000000000000000000000000000000000000000000000000000000000"],"memory":["60806040526004361061004c576000357c010000000000000000000000000000","0000000000000000000000000000900463ffffffff16806341c0e1b514610051","578063cfae321714610068575b600080fd5b34801561005d57600080fd5b5061","00666100f8565b005b34801561007457600080fd5b5061007d610168565b6040","5180806020018281038252838181518152602001915080519060200190808383","60005b838110156100bd5780820151818401526020810190506100a2565b5050","5050905090810190601f1680156100ea5780820380516001836020036101000a","031916815260200191505b509250505060405180910390f35b60008090549061","01000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffff","ffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffff","ffffffffffffff161415610166573373ffffffffffffffffffffffffffffffff","ffffffff16ff5b565b6060600180546001816001161561010002031660029004","80601f0160208091040260200160405190810160405280929190818152602001","828054600181600116156101000203166002900480156102005780601f106101","d557610100808354040283529160200191610200565b82019190600052602060","0020905b8154815290600101906020018083116101e357829003601f16820191","5b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6","c4e54ad49014e2faa152e49e7f9d927c932c7287002900000000000000000000"],"storage":{"0000000000000000000000000000000000000000000000000000000000000000":"000000000000000000000000b0945862f63b832849a5f20b19e9f8188eb2230a","0000000000000000000000000000000000000000000000000000000000000001":"0000000000000000000000000000000000000000000000000000000000000000"}}]}}]}
 ```
 
-
 ## debug_traceBlockByNumber <a id="debug_traceblockbynumber"></a>
-[debug_traceBlock](#debug_traceblock)과 유사하게, `traceBlockByNumber`는 블록 번호로
-블록 번호를 받아 데이터베이스에 이미 있는 블록을 재생합니다.
-데이터베이스에 이미 존재하는 블록을 재생합니다.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|------------------------------------------------------------------|
-| 콘솔 | `debug.traceBlockByNumber(number, [options])` |
-| RPC | `{"method":"debug_traceBlockByNumber", "params":[number, {}]}` |
+Similar to [debug_traceBlock](#debug_traceblock), `traceBlockByNumber` accepts
+a block number and will replay the block that is already present in the
+database.
 
-**매개변수**
+|  Client | Method Invocation                                                |
+| :-----: | ---------------------------------------------------------------- |
+| Console | `debug.traceBlockByNumber(number, [options])`                    |
+|   RPC   | `{"method": "debug_traceBlockByNumber", "params": [number, {}]}` |
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| number | int | 블록 번호입니다.
-| options | Object | [추적 옵션](#tracing-options)을 참조하세요.
+**Parameters**
 
-**리턴 값**
+| Name    | Type   | Description                              |
+| ------- | ------ | ---------------------------------------- |
+| number  | int    | The block number.                        |
+| options | object | See [tracing options](#tracing-options). |
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+**Return Value**
 
-**예시**
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
 
-콘솔
+**Example**
+
+Console
+
 ```javascript
 > debug.traceBlockByNumber(1449)
 [{
@@ -196,6 +202,7 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceBlockByNumber","params":["0x5a9", {}],"id":1}' https://public-en-baobab.klaytn.net
 {"jsonrpc":"2.0","id":1,"result":[{"result":{"gas":247922,"failed":false,"returnValue":"60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","structLogs":[{"pc":0,"op":"PUSH1","gas":891344,"gasCost":3,"depth":1,"stack":[],"memory":[],"storage":{}},{"pc":2,"op":"PUSH1","gas":891341,"gasCost":3,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080"],"memory":[],"storage":{}},{"pc":4,"op":"MSTORE","gas":891338,"gasCost":12,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080","0000000000000000000000000000000000000000000000000000000000000040"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000"],"storage":{}},{"pc":5,"op":"CALLVALUE","gas":891326,"gasCost":2,"depth":1,"stack":[],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000080"],"storage":{}},
@@ -205,33 +212,34 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 
 ## debug_traceBlockByNumberRange <a id="debug_traceblockbynumberrange"></a>
 
-두 블록(시작 포함) 사이에 EVM을 실행하는 동안 생성된 구조화된 로그를 JSON 객체로 반환합니다.
-즉, 총 종료-시작+1 블록에 대한 추적 결과가 반환됩니다.
+Returns the structured logs created during the execution of EVM between two blocks (including start) as a JSON object.
+That is, the result of tracing for a total of end-start+1 blocks is returned.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|------------------------------------------------------------------|
-| 콘솔 | `debug.traceBlockByNumberRange(number, number, [options])` |
-| RPC | `{"method":"debug_traceBlockByNumberRange", "params": [number, number, {}]}` |
+|  Client | Method Invocation                                                             |
+| :-----: | ----------------------------------------------------------------------------- |
+| Console | `debug.traceBlockByNumberRange(number, number, [options])`                    |
+|   RPC   | `{"method": "debug_traceBlockByNumberRange", "params": [number, number, {}]}` |
 
-**참고**: 동시에 너무 많은 블록을 추적하면 컴퓨터 리소스를 과도하게 사용할 수 있으므로 주의하세요.
+**NOTE**: Don't trace too many blocks at the same time as it can overuse machine resources.
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| number | int | 추적 시작 블록 번호.
-| number | int | 추적 종료 블록 번호입니다.
-| options | Object | [추적 옵션](#tracing-options) 참조.
+| Name    | Type   | Description                              |
+| ------- | ------ | ---------------------------------------- |
+| number  | int    | Tracing start block number.              |
+| number  | int    | Tracing end block number.                |
+| options | object | See [tracing options](#tracing-options). |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명 |
-| --- | --- |
-| map(키: 블록 번호. 값: JSON string) | 값에는 KLVM 실행 중에 생성된 구조화된 로그가 포함됩니다.
+| Type                                                          | Description                                                              |
+| ------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| map(key: block number. value: JSON string) | Value contains the structured logs created during the execution of KLVM. |
 
-**예시**
+**Example**
 
-콘솔
+Console
+
 ```javascript
 > debug.traceBlockByNumberRange(21, 30, {})
 {
@@ -254,6 +262,7 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceBlockByNumberRange","params":[21, 30, {}],"id":1}' http://localhost:8551
 {"jsonrpc":"2.0","id":1,"result":{"21":{"block":"0x15","hash":"0x24b0a90822e63295623e6d8f5a8e5d47cead5c8d5854e44db00dc42d28e0850e","traces":[{"txHash":"0x43ed7e441db8e90f377d74b5d61c6d7d8b85ffd277b965c9f275ce7e93fb1090","result":{"gas":21000,"failed":false,"returnValue":"","structLogs":[]}},{"txHash":"0x1a448049b21d39cd4320ab95f18b8e91d687bfc7136268f50e041e439181fa0d","result":{"gas":21000,"failed":false,"returnValue":"","structLogs":[]}}]},
@@ -263,40 +272,42 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 
 ## debug_traceBlockFromFile <a id="debug_traceblockfromfile"></a>
 
-[debug_traceBlock](#debug_traceblock)과 유사하게, `traceBlockFromFile`은
-블록의 RLP가 포함된 파일을 받습니다.
+Similar to [debug_traceBlock](#debug_traceblock), `traceBlockFromFile` accepts
+a file containing the RLP of the block.
 
-**참고**: 파일에는 `0x`가 없는 연결된 16진수 문자열이 포함되어야 합니다.
+**NOTE**: the file must include the associated hexadecimal string without `0x`.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|--------------------------------------------------------------------|
-| 콘솔 | `debug.traceBlockFromFile(fileName, [options])` |
-| RPC | `{"method":"debug_traceBlockFromFile", "params":[fileName, {}]}` |
+|  Client | Method Invocation                                                  |
+| :-----: | ------------------------------------------------------------------ |
+| Console | `debug.traceBlockFromFile(fileName, [options])`                    |
+|   RPC   | `{"method": "debug_traceBlockFromFile", "params": [fileName, {}]}` |
 
-참조: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
+References: [RLP](https://github.com/ethereum/wiki/wiki/RLP)
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| fileName | String | 블록의 RLP가 포함된 파일 이름입니다.
-| options | Object | [추적 옵션](#tracing-options) 참조.
+| Name     | Type   | Description                                        |
+| -------- | ------ | -------------------------------------------------- |
+| fileName | string | The file name which contains the RLP of the block. |
+| options  | object | See [tracing options](#tracing-options).           |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
 
-**예시**
+**Example**
 
-실행 중인 노드에 `block.rlp` 파일의 내용이 다음과 같이 출력되었습니다.
+The contents of the `block.rlp` file was printed on the running node as follows.
+
 ```
 $ cat block.rlp
 f90399f90394a05a825207c8396b848fefc73e442db004adee6596309af27630871b6a3d424758a01dcc4de8dec75d7aab85b567b6ccd41ad312451b948a7413f0a142fd40d49347940000000000000000000000000000000000000000940000000000000000000000000000000000000000a0b2ff1e4173123faa241fb93d83860e09f9e1ca1cfaf24c40c9e963e65c0b0317a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421a056e81f171bcc55a6ff8345e692c0f86e5b48e01b996cadc001622fb5e363b421b9010000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000016485e8d4a50fff80845bb9e92eb90187d7820401846b6c617988676f312e31302e33856c696e75780000000000000000f90164f854943b215ed129645b949722d4efbd9c749838d85bf0947050164b7718c667c9661afd924f6c0c5e5d4a01947f303b360063efc575e99cf2f7602efa034e832e94f38624dba0e106aa6a79335f77d3fd6409f9e4d8b84126d1ae355905704d8ffcc50599a8a051ac7c50ed6fc6d7caf6510cf0329b56cf3e3babfe45cc95143074ca0385627ea3b6ac3f6ad7961b60f23e32965d3b0c2900f8c9b841c3423ecb41ee86b193dbb98bf74e0c1b8e0c475503a8f5ef37ef7566af34443c77b492a1f92e5a7411c36efeae08ebc698d02353c38f07a3d5c32168243ab7e901b841ec6558f4e5d123b9dc240e77db493f1e5e2f55f108d3c4f9b39e10dbca39ad7b3fc2dd5d27a7a3d92938ad4245bef5a914377fb2b92cbe342067a9963ab121b700b841f34ed94f29cd0aefd841cc8aba9dcc9d4c2fe14795f3a661e8ce92c2014c2099327e5f4285e1d1821e55f297cf5252bafed521ab49906b9b596a3187ce1e529c00a063746963616c2062797a616e74696e65206661756c7420746f6c6572616e6365880000000000000000c0c0
 ```
 
-콘솔
+Console
+
 ```javascript
 > debug.traceBlockFromFile("block.rlp")
 [{
@@ -310,6 +321,7 @@ f90399f90394a05a825207c8396b848fefc73e442db004adee6596309af27630871b6a3d424758a0
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceBlockFromFile","params":["block.rlp", {}],"id":1}' https://public-en-baobab.klaytn.net
 {"jsonrpc":"2.0","id":1,"result":[{"result":{"gas":247922,"failed":false,"returnValue":"60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","structLogs":[{"pc":0,"op":"PUSH1","gas":891344,"gasCost":3,"depth":1,"stack":[],"memory":[],"storage":{}},{"pc":2,"op":"PUSH1","gas":891341,"gasCost":3,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080"],"memory":[],"storage":{}},{"pc":4,"op":"MSTORE","gas":891338,"gasCost":12,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080","0000000000000000000000000000000000000000000000000000000000000040"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000"],"storage":{}},{"pc":5,"op":"CALLVALUE","gas":891326,"gasCost":2,"depth":1,"stack":[],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000080"],"storage":{}},
@@ -317,35 +329,35 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ,{"pc":322,"op":"RETURN","gas":865278,"gasCost":0,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000236","0000000000000000000000000000000000000000000000000000000000000000"],"memory":["60806040526004361061004c576000357c010000000000000000000000000000","0000000000000000000000000000900463ffffffff16806341c0e1b514610051","578063cfae321714610068575b600080fd5b34801561005d57600080fd5b5061","00666100f8565b005b34801561007457600080fd5b5061007d610168565b6040","5180806020018281038252838181518152602001915080519060200190808383","60005b838110156100bd5780820151818401526020810190506100a2565b5050","5050905090810190601f1680156100ea5780820380516001836020036101000a","031916815260200191505b509250505060405180910390f35b60008090549061","01000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffff","ffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffff","ffffffffffffff161415610166573373ffffffffffffffffffffffffffffffff","ffffffff16ff5b565b6060600180546001816001161561010002031660029004","80601f0160208091040260200160405190810160405280929190818152602001","828054600181600116156101000203166002900480156102005780601f106101","d557610100808354040283529160200191610200565b82019190600052602060","0020905b8154815290600101906020018083116101e357829003601f16820191","5b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6","c4e54ad49014e2faa152e49e7f9d927c932c7287002900000000000000000000"],"storage":{"0000000000000000000000000000000000000000000000000000000000000000":"000000000000000000000000b0945862f63b832849a5f20b19e9f8188eb2230a","0000000000000000000000000000000000000000000000000000000000000001":"0000000000000000000000000000000000000000000000000000000000000000"}}]}}]}
 ```
 
-
 ## debug_traceTransaction <a id="debug_tracetransaction"></a>
 
-`traceTransaction` 디버깅 메서드는 트랜잭션을 네트워크에서 실행된 것과 동일한 방식으로
-트랜잭션을 실행하려고 시도합니다. 이 트랜잭션 이전에 실행되었을 수 있는 모든
-이 트랜잭션 이전에 실행되었을 수 있는 모든 트랜잭션을 재생한 후
-마지막으로 주어진 해시에 해당하는 트랜잭션을 실행하려고 시도합니다.
+The `traceTransaction` debugging method will attempt to run the transaction in
+the exact same manner as it was executed on the network. It will replay any
+transaction that may have been executed prior to this one before it will
+finally attempt to execute the transaction that corresponds to the given hash.
 
-| 클라이언트 | 메서드 호출 |
-|:-------:|----------------------------------------------------------------|
-| 콘솔 | `debug.traceTransaction(txHash, [options])` |
-| RPC | `{"method":"debug_traceTransaction", "params":[txHash, {}]}` |
+|  Client | Method Invocation                                              |
+| :-----: | -------------------------------------------------------------- |
+| Console | `debug.traceTransaction(txHash, [options])`                    |
+|   RPC   | `{"method": "debug_traceTransaction", "params": [txHash, {}]}` |
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| txHash | String | 트랜잭션의 해시입니다.
-| options | Object | [추적 옵션](#tracing-options)을 참조하세요.
+| Name    | Type   | Description                              |
+| ------- | ------ | ---------------------------------------- |
+| txHash  | string | The hash of the transaction.             |
+| options | object | See [tracing options](#tracing-options). |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
 
-**예시**
+**Example**
 
-콘솔
+Console
+
 ```javascript
 > debug.traceTransaction("0x07f6057bc93aca52e53cdbfac9b9830f6a9cae2b3f48f0b47e4cb54959143d09")
 {
@@ -417,7 +429,9 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
   }]
 }
 ```
+
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceTransaction","params":["0x07f6057bc93aca52e53cdbfac9b9830f6a9cae2b3f48f0b47e4cb54959143d09"],"id":1}' https://public-en-baobab.klaytn.net
 {"jsonrpc":"2.0","id":1,"result":{"gas":247922,"failed":false,"returnValue":"60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","structLogs":[{"pc":0,"op":"PUSH1","gas":891344,"gasCost":3,"depth":1,"stack":[],"memory":[],"storage":{}},{"pc":2,"op":"PUSH1","gas":891341,"gasCost":3,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080"],"memory":[],"storage":{}},{"pc":4,"op":"MSTORE","gas":891338,"gasCost":12,"depth":1,"stack":["0000000000000000000000000000000000000000000000000000000000000080","0000000000000000000000000000000000000000000000000000000000000040"],"memory":["0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000","0000000000000000000000000000000000000000000000000000000000000000"],"storage":{}},
@@ -426,30 +440,33 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 ```
 
 ## debug_traceCall <a id="debug_tracecall"></a>
-`traceCall`은 주어진 블록 실행 컨텍스트 내에서 KLAY호출을 실행하여 추적 결과를 반환합니다.
 
-**매개변수**
+The `traceCall` returns the tracing result by executing a klay call within the context of the given block execution.
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| callObject | Object | 트랜잭션 호출 객체. 객체의 속성은 다음 표를 참조하세요.
-| blockNumberOrHash | QUANTITY \| TAG \| HASH| 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](../eth/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열, 또는 블록 해시.
-| options | Object | [추적 옵션](#tracing-options)을 참조하세요.
+**Parameters**
 
-**리턴 값**
+| Name              | Type                    | Description                                                                                                                                                                                 |
+| ----------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| callObject        | Object                  | The transaction call object.  See the next table for the object's properties.                                                                                                               |
+| blockNumberOrHash | QUANTITY \| TAG \| HASH | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in the [default block parameter](../eth/block.md#the-default-block-parameter), or block hash. |
+| options           | object                  | See [tracing options](#tracing-options).                                                                                                                                                    |
 
-| 유형 | 설명 |
-| --- | --- |
-| JSON string | KLVM 실행 중에 생성된 구조화된 로그입니다.
+**Return Value**
 
-**예시**
-콘솔
+| Type        | Description                                               |
+| ----------- | --------------------------------------------------------- |
+| JSON string | The structured logs created during the execution of KLVM. |
+
+**Example**
+Console
+
 ```javascript
 > debug.traceCall({from: "0xB2da01761B494F5F257fD3bA626fBAbFaE104313", to: "0xB2da01761B494F5F257fD3bA626fBAbFaE104313", input: "0x6057361d0000000000000000000000000000000000000000000000000000000000000003"}, "latest", {tracer:"revertTracer"})
 "this is the revert reason for this tracecall" 
 ```
 
 HTTP RPC
+
 ```shell
 $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceCall","params":[{"from": "0xB2da01761B494F5F257fD3bA626fBAbFaE104313", "to": "0xB2da01761B494F5F257fD3bA626fBAbFaE104313", "input": "0x6057361d0000000000000000000000000000000000000000000000000000000000000003"}, "latest", {"tracer":"revertTracer"}],"id":1}' http://localhost:8551
 "this is the revert reason for this tracecall" 
@@ -457,19 +474,20 @@ $ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"de
 
 ## debug_traceChain <a id="debug_tracechain"></a>
 
-두 블록(시작 제외) 사이에 EVM을 실행하는 동안 생성된 구조화된 로그를 JSON 객체로 반환합니다. 이 엔드포인트는 다음과 같이 debug_subscribe를 통해 호출해야 합니다:
+Returns the structured logs created during the execution of EVM between two blocks (excluding start) as a JSON object. This endpoint must be invoked via debug_subscribe as follows:
 
-**참고**: 동시에 너무 많은 블록을 추적하면 컴퓨터 리소스를 과도하게 사용할 수 있으므로 주의하세요.
+**NOTE**: Don't trace too many blocks at the same time as it can overuse machine resources.
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-| --- | --- | --- |
-| number | int | 추적 시작 블록 번호.
-| number | int | 추적 종료 블록 번호입니다.
-| options | Object | [추적 옵션](#tracing-options) 참조.
+| Name    | Type   | Description                              |
+| ------- | ------ | ---------------------------------------- |
+| number  | int    | Tracing start block number.              |
+| number  | int    | Tracing end block number.                |
+| options | object | See [tracing options](#tracing-options). |
 
-**예제**
+**Example**
+
 ```
 wscat -c ws://localhost:8552
 > {"id": 1, "method": "debug_subscribe", "params": ["traceChain", 21, 30, {}]}
@@ -480,35 +498,35 @@ wscat -c ws://localhost:8552
 >
 ```
 
-## 추적 옵션 <a id="tracing-options"></a>
+## Tracing Options <a id="tracing-options"></a>
 
-추적 API 함수에 보조 옵션 인수를 지정할 수 있습니다.
-옵션을 지정할 수 있습니다. 가능한 옵션은 다음과 같습니다:
+You may give trace API function a secondary optional argument, which specifies
+the options for this specific call. The possible options are:
 
-- `disableStorage`: `BOOL`. 이 값을 true로 설정하면 저장소 캡처가 비활성화됩니다(기본값 = false).
-- `disableMemory`: `BOOL`. true로 설정하면 메모리 캡처가 비활성화됩니다(기본값 = false).
-- `disableStack`: `BOOL`. true로 설정하면 스택 캡처가 비활성화됩니다(기본값 = false).
-- `timeout`: `STRING`. JavaScript 기반 추적 호출에 대한 기본 시간 제한인 5초를 재정의합니다. 유효한 값은 [여기](https://golang.org/pkg/time/#ParseDuration)에 설명되어 있습니다.
-- `tracer`: `STRING`. 이 값을 설정하면 [다음 섹션](#javascript-based-tracing)에 설명된 JavaScript 기반 트랜잭션 추적이 활성화됩니다. 이 값을 설정하면 이전 4개의 인수가 무시됩니다. 사전 정의된 tracer는 다음 표와 같이 사용할 수도 있습니다.
+- `disableStorage`: `BOOL`. Setting this to true will disable storage capture (default = false).
+- `disableMemory`: `BOOL`. Setting this to true will disable memory capture (default = false).
+- `disableStack`: `BOOL`. Setting this to true will disable stack capture (default = false).
+- `timeout`: `STRING`. Overrides the default timeout of 5 seconds for JavaScript-based tracing calls. Valid values are described [here](https://golang.org/pkg/time/#ParseDuration).
+- `tracer`: `STRING`. Setting this will enable JavaScript-based transaction tracing, described in the [next section](#javascript-based-tracing). If set, the previous four arguments will be ignored. The predefined tracers can also be used as the following table.
 
-Tracer 이름 | 설명
--- | --
-4byteTracer | 4byteTracer는 4바이트 식별자를 검색하고 후처리를 위해 수집합니다. 제공된 데이터의 크기와 함께 메서드 식별자를 수집하므로 데이터의 크기와 역서명을 일치시킬 수 있습니다.
-callTracer | callTracer는 트랜잭션이 수행한 모든 내부 호출을 유용한 정보와 함께 추출하여 보고하는 본격적인 트랜잭션 tracer입니다.
-fastCallTracer | fastCallTracer는 callTracer의 Go 네이티브 버전입니다. JavaScript 가상머신에서 실행되지 않기 때문에 callTracer에 비해 10배 이상의 속도 향상을 보여줍니다. 성능이 최우선적으로 중요한 경우 callTracer 대신 fastCallTracer를 사용하시기 바랍니다.
-evmdisTracer | evmdisTracer는 evmdis 스타일의 디스어셈블리를 수행하기에 충분한 정보를 트레이스에서 반환합니다.
-noopTracer | noopTracer는 트랜잭션 tracer로 사용할 수 있도록 JavaScript 객체에서 필요한 베어본 상용구 코드일 뿐입니다.
-opcountTracer | opcountTracer는 트랜잭션이 종료되기 전에 KLVM이 실행한 명령어 수를 세는 샘플 트레이서입니다.
-prestateTracer | prestateTracer는 사용자 정의 어셈블된 제네시스 블록에서 트랜잭션의 로컬 실행을 생성하기에 충분한 정보를 출력합니다.
-revertTracer | revertTracer는 REVERT의 오류 문자열을 출력합니다. 실행이 되돌리지 않으면 빈 문자열을 출력합니다.
-unigramTracer | unigramTracer는 각 연산 코드의 발생 횟수를 반환합니다.
-bigramTracer | bigramTracer는 연속된 두 개의 Opcode 발생 횟수를 반환합니다.
-trigramTracer | trigramTracer는 연속된 세 개의 Opcode 발생 횟수를 반환합니다.
+| Tracer Name    | Description                                                                                                                                                                                                                                                      |
+| -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 4byteTracer    | 4byteTracer searches for 4byte-identifiers, and collects them for post-processing. It collects the methods identifiers along with the size of the supplied data, so a reversed signature can be matched against the size of the data.                            |
+| callTracer     | callTracer is a full-blown transaction tracer that extracts and reports all the internal calls made by a transaction, along with any useful information.                                                                                                         |
+| fastCallTracer | fastCallTracer is a Go-native version of callTracer. Since it is not executed on JavaScript VM, it shows more than 10x speedup compared to callTracer. Please use fastCallTracer instead of callTracer if the performance is the matter of the first importance. |
+| evmdisTracer   | evmdisTracer returns sufficient information from a trace to perform evmdis-style disassembly.                                                                                                                                                                    |
+| noopTracer     | noopTracer is just the barebone boilerplate code required from a JavaScript object to be usable as a transaction tracer.                                                                                                                                         |
+| opcountTracer  | opcountTracer is a sample tracer that just counts the number of instructions executed by the KLVM before the transaction terminated.                                                                                                                             |
+| prestateTracer | prestateTracer outputs sufficient information to create a local execution of the transaction from a custom assembled genesis block.                                                                                                                              |
+| revertTracer   | revertTracer outputs the error string of REVERT. If the execution is not reverted, it outputs an empty string.                                                                                                                                                   |
+| unigramTracer  | unigramTracer returns the number of occurrences of each opcode.                                                                                                                                                                                                  |
+| bigramTracer   | bigramTracer returns the number of occurrences of two consecutive opcodes.                                                                                                                                                                                       |
+| trigramTracer  | trigramTracer returns the number of occurrences of three consecutive opcodes.                                                                                                                                                                                    |
 
+**Example**
 
-**예시**
+Console
 
-콘솔
 ```javascript
 > debug.traceTransaction("0x07f6057bc93aca52e53cdbfac9b9830f6a9cae2b3f48f0b47e4cb54959143d09", {tracer: "callTracer"})
 {
@@ -527,6 +545,7 @@ trigramTracer | trigramTracer는 연속된 세 개의 Opcode 발생 횟수를 �
 ```
 
 HTTP RPC
+
 ```shell
 curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debug_traceTransaction","params":["0x07f6057bc93aca52e53cdbfac9b9830f6a9cae2b3f48f0b47e4cb54959143d09", {"tracer": "callTracer"}],"id":1}' https://public-en-baobab.klaytn.net
 {"jsonrpc":"2.0","id":1,"result":{"type":"CREATE","from":"0xb0945862f63b832849a5f20b19e9f8188eb2230a","to":"0x98cf8b777dab0137b47a7fdaad1378ec93a7b80b","value":"0x0","gas":"0xd99d0","gasUsed":"0x22002","input":"0x608060405234801561001057600080fd5b5060405161037a38038061037a83398101806040528101908080518201929190505050336000806101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055508060019080519060200190610089929190610090565b5050610135565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106100d157805160ff19168380011785556100ff565b828001600101855582156100ff579182015b828111156100fe5782518255916020019190600101906100e3565b5b50905061010c9190610110565b5090565b61013291905b8082111561012e576000816000905550600101610116565b5090565b90565b610236806101446000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","output":"0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610168565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180910390f35b6000809054906101000a900473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff163373ffffffffffffffffffffffffffffffffffffffff161415610166573373ffffffffffffffffffffffffffffffffffffffff16ff5b565b606060018054600181600116156101000203166002900480601f0160208091040260200160405190810160405280929190818152602001828054600181600116156101000203166002900480156102005780601f106101d557610100808354040283529160200191610200565b820191906000526020600020905b8154815290600101906020018083116101e357829003601f168201915b50505050509050905600a165627a7a72305820f4e74ca2266a24aabd6a8ee6c4e54ad49014e2faa152e49e7f9d927c932c72870029","time":"2.510754ms"}}
@@ -535,38 +554,38 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"debu
 {"jsonrpc":"2.0","id":1,"result":"reverted due to XXX"}
 ```
 
+## JavaScript-based Tracing <a id="javascript-based-tracing"></a>
 
-## JavaScript 기반 추적 <a id="javascript-based-tracing"></a>
+**NOTE** The JavaScript-based Tracing allows the user to run arbitrary JS code,
+which is **unsafe**. If you want to provide debug namespace APIs to the public,
+we strongly recommend to set the `rpc.unsafe-debug.disable` flag when running
+the EN, so the JavaScript-based Tracing can be disabled.
 
-**참고** JavaScript 기반 추적은 사용자가 임의의 JS 코드를 실행할 수 있게 합니다.
-이는 **안전하지 않습니다**. 디버그 네임스페이스 API를 공개하려면
-실행할 때 `rpc.unsafe-debug.disable` 플래그를 설정할 것을 강력히 권장합니다. 이로써 JavaScript 기반 추적을 비활성화할 수 있습니다.
+Specifying the `tracer` option in the second argument enables JavaScript-based tracing. In this mode, `tracer` is interpreted as a JavaScript expression that is expected to evaluate to an object with (at least) two methods, named `step` and `result`.
 
-두 번째 인수에 `tracer` 옵션을 지정하면 JavaScript 기반 추적이 활성화됩니다. 이 모드에서 `tracer`는 `step` 및 `result`라는 두 가지 메서드가 있는 객체에 대해 평가할 것으로 예상되는 JavaScript 표현식으로 해석됩니다.
+`step` is a function that takes two arguments, `log` and `db`, and is called
+for each step of the KLVM, or when an error occurs, as the specified
+transaction is traced.
 
-`step`은 `log`와 `db`라는 두 개의 인자를 받는 함수로, KLVM의 각 단계마다 또는
-호출되며, KLVM의 각 단계마다 또는 오류가 발생할 때 지정된
-트랜잭션이 추적될 때 호출됩니다.
+`log` has the following fields:
 
-`log`에는 다음과 같은 필드가 있습니다:
+| Field Name | Type                                                               | Description                                                 |
+| ---------- | ------------------------------------------------------------------ | ----------------------------------------------------------- |
+| `pc`       | Number                                                             | The current program counter.                                |
+| `op`       | Object                                                             | An OpCode object representing the current opcode.           |
+| `gas`      | Number                                                             | The amount of gas remaining.                                |
+| `gasPrice` | Number                                                             | The cost in peb of each unit of gas.                        |
+| `memory`   | Object                                                             | A structure representing the contract's memory space.       |
+| `stack`    | array[big.Int] | The KLVM execution stack.                                   |
+| `depth`    | Number                                                             | The execution depth.                                        |
+| `account`  | String                                                             | The address of the account executing the current operation. |
+| `err`      | String                                                             | If an error occurred, information about the error.          |
 
-필드 이름 | 유형 | 설명
---|--|--|
-`pc`| number | 현재 프로그램 카운터입니다.
-`op`| object | 현재 연산 코드를 나타내는 연산 코드 개체입니다.
-`gas`| number | 남은 가스 양입니다.
-`gasPrice`| number | 각 가스 단위의 원화 비용입니다.
-`memory`| object | 컨트랙트의 메모리 공간을 나타내는 구조체입니다.
-`stack`| array[big.Int] | KLVM 실행 스택입니다.
-`depth`| number | 실행 깊이.
-`account`| string | 현재 작업을 실행하는 계정의 주소입니다.
-`err`| string | 오류가 발생한 경우, 오류에 대한 정보입니다.
+If `err` is non-null, all other fields should be ignored.
 
-`err`가 null이 아닌 경우 다른 모든 필드는 무시해야 합니다.
-
-효율성을 위해 각 실행 단계에서 동일한 `log` 객체가 재사용되며, 현재 값으로 업데이트됩니다.
-현재 호출 이후에도 보존할 값을 복사해야 합니다.
-값을 복사해야 합니다. 예를 들어, 이 단계 함수는 작동하지 않습니다:
+For efficiency, the same `log` object is reused on each execution step, updated
+with current values; make sure to copy values you want to preserve beyond the
+current call. For instance, this step function will not work:
 
 ```javascript
 function(log) {
@@ -574,7 +593,7 @@ function(log) {
 }
 ```
 
-하지만 아래 단계 함수는 작동할 것입니다:
+But this step function will:
 
 ```javascript
 function(log) {
@@ -582,46 +601,53 @@ function(log) {
 }
 ```
 
-`log.op`에는 다음과 같은 메서드가 있습니다:
+`log.op` has the following methods:
 
-메서드 이름 | 설명
---|--
-`isPush()` | 연산 코드가 `PUSHn`이면 참을 반환합니다.
-`toString()` | 연산 코드의 문자열 표현을 반환합니다.
-`toNumber()` | 연산 코드의 숫자를 반환합니다.
+| Method Name  | Description                                      |
+| ------------ | ------------------------------------------------ |
+| `isPush()`   | Returns true if the opcode is a `PUSHn`.         |
+| `toString()` | Returns the string representation of the opcode. |
+| `toNumber()` | Returns the opcode's number.                     |
 
-`log.memory`에는 다음과 같은 메서드가 있습니다:
+`log.memory` has the following methods:
 
-메서드 이름 | 설명
---|--
-`slice(start, stop)` | 지정된 메모리 세그먼트를 바이트 슬라이스로 반환합니다.
-`length()` | 메모리의 길이를 반환합니다.
+| Method Name          | Description                                              |
+| -------------------- | -------------------------------------------------------- |
+| `slice(start, stop)` | Returns the specified segment of memory as a byte slice. |
+| `length()`           | Returns the length of the memory.                        |
 
-`log.stack`에는 다음과 같은 메서드가 있습니다:
+`log.stack` has the following methods:
 
-메서드 이름 | 설명
---|--
-`peek(idx)` | 스택의 맨 위(0은 최상위 요소)에서 idx번째 요소를 `big.Int`로 반환합니다.
-length()` | 스택에 있는 요소의 수를 반환합니다.
+| Method Name | Description                                                                                                        |
+| ----------- | ------------------------------------------------------------------------------------------------------------------ |
+| `peek(idx)` | Returns the idx-th element from the top of the stack (0 is the topmost element) as a `big.Int`. |
+| `length()`  | Returns the number of elements in the stack.                                                                       |
 
-`db`에는 다음과 같은 메서드가 있습니다:
+`db` has the following methods:
 
-메서드 이름 | 설명
---|--
-`getBalance(address)` | 지정한 계정의 잔액이 포함된 `big.Int`를 반환합니다.
-`getNonce(address)` | 지정한 계정의 nonce가 포함된 숫자를 반환합니다.
-`getCode(address)` | 지정한 계정의 코드가 포함된 바이트 슬라이스를 반환합니다.
-`getState(address, hash)` | 지정한 계정과 지정한 해시의 상태 값을 반환합니다.
-`exists(address)` | 지정한 주소가 존재하면 참을 반환합니다.
+| Method Name               | Description                                                               |
+| ------------------------- | ------------------------------------------------------------------------- |
+| `getBalance(address)`     | Returns a `big.Int` with the specified account's balance.                 |
+| `getNonce(address)`       | Returns a Number with the specified account's nonce.                      |
+| `getCode(address)`        | Returns a byte slice with the code for the specified account.             |
+| `getState(address, hash)` | Returns the state value for the specified account and the specified hash. |
+| `exists(address)`         | Returns true if the specified address exists.                             |
 
-두 번째 함수인 `result`는 인수를 받지 않으며, RPC 호출자에게 반환할
-JSON 직렬화 가능한 값을 반환할 것으로 예상됩니다.
+The second function, `result`, takes no arguments, and is expected to return a
+JSON-serializable value to return to the RPC caller.
 
-`step` 함수가 예외를 던지거나 잘못된 연산을 실행하는 경우 더 이상의 VM 단계에서 호출되지 않으며, 호출자에게 오류가 가 호출자에게 반환됩니다.
+If the `step` function throws an exception or executes an illegal operation at
+any point, it will not be called on any further VM steps, and the error will be
+returned to the caller.
 
-몇몇 값은 자바스크립트 숫자나 JS 빅인트가 아닌 Golang `big.Int` 객체라는 점에 유의하세요. 따라서 이들은 godoc에 설명된 것과 동일한 인터페이스를 갖습니다. JSON으로의 기본 직렬화는 자바스크립트 숫자로 이루어지며, 큰 숫자를 정확하게 직렬화하려면 `.String()`을 호출하세요. 편의를 위해 `big.NewInt(x)`가 제공되며, uint를 Golang `big.Int`로 변환합니다.
+Note that several values are Golang `big.Int` objects, not JavaScript numbers
+or JS bigints. As such, they have the same interface as described in the
+godocs. Their default serialization to JSON is as a Javascript number; to
+serialize large numbers accurately call `.String()` on them. For convenience,
+`big.NewInt(x)` is provided, and will convert a uint to a Golang `big.Int`.
 
-아래 사용 예시에서는 각 CALL 연산자 코드에서 스택의 최상위 요소만 반환합니다:
+As an usage example below, it returns the top element of the stack at each CALL
+opcode only:
 
 ```javascript
 debug.traceTransaction(txhash, {tracer: '{data: [], step: function(log) { if(log.op.toString() == "CALL") this.data.push(log.stack.peek(0)); }, result: function() { return this.data; }}'});
