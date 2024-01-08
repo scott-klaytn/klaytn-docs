@@ -1,38 +1,37 @@
-# Count dApp 빌드하기
+# Build Count DApp
 
-## 목차 <a href="#table-of-contents" id="table-of-contents"></a>
+## Table of Contents <a href="#table-of-contents" id="table-of-contents"></a>
 
-* [환경 설정](./setup-environment.md)
-* [스마트 컨트랙트 배포](./deploy-contracts.md)
-* [디렉터리 구조](./directory-structure.md)
-* [프론트엔드 코드 개요](./code-overview/code-overview.md)
-  * [BlockNumber 컴포넌트](./code-overview/blocknumber-component.md)
-  * [Auth 컴포넌트](./code-overview/auth-component.md)
-  * [Count 컴포넌트](./code-overview/count-component.md)
+- [Set up environment](./setup-environment.md)
+- [Deploy smart contracts](./deploy-contracts.md)
+- [Directory structure](./directory-structure.md)
+- [Frontend Code Overview](./code-overview/code-overview.md)
+  - [BlockNumber Component](./code-overview/blocknumber-component.md)
+  - [Auth Component](./code-overview/auth-component.md)
+  - [Count Component](./code-overview/count-component.md)
 
+## Testing Environment <a href="#testing-environment" id="testing-environment"></a>
 
-## 테스트 환경 <a href="#testing-environment" id="testing-environment"></a>
+Count DApp is tested in the following environment.
 
-Count dApp은 다음 환경에서 테스트되었습니다.
+- MacOS Mojave 10.14.5
+- Node 10.16.0 (LTS)
+- npm 6.9.0
+- Python 2.7.10
 
-* MacOS Mojave 10.14.5
-* Node 10.16.0(LTS)
-* npm 6.9.0
-* Python 2.7.10
+## Introduction <a href="#introduction" id="introduction"></a>
 
-## 소개 <a href="#introduction" id="introduction"></a>
+![intro](/img/build/tutorials/tutorial-1intro.gif)
 
-![인트로](/img/build/tutorials/tutorial-1intro.gif)
+This tutorial is intended to give a step by step guide to build a Klaytn dApp. No previous Klaytn experience is needed. We will make a simple web app interacting with a basic smart contract, `Count`.\
+Any user who has a Klaytn account can increase and decrease the current value as shown in the above gif.
 
-이 튜토리얼은 클레이튼 dApp을 빌드하는 방법을 단계별로 안내하기 위한 것입니다. 클레이튼에 대한 사전 경험이 없어도 됩니다. 기본적인 스마트 컨트랙트인 `Count`와 상호작용하는 간단한 웹앱을 만들겠습니다.
-클레이튼 계정이 있는 사용자라면 누구나 위 그림과 같이 현재 값을 늘리거나 줄일 수 있습니다.
+> **Source Code**\
+> Complete source code can be found on GitHub at [https://github.com/klaytn/countbapp](https://github.com/klaytn/countbapp)
 
-> **소스코드**\
-> 전체 소스 코드는 GitHub에서 [https://github.com/klaytn/countbapp](https://github.com/klaytn/countbapp)에서 확인할 수 있습니다.
+## Intended Audience <a href="#intended-audience" id="intended-audience"></a>
 
-## 대상 독자 <a href="#intended-audience" id="intended-audience"></a>
+Anyone who wants to learn how to build a Blockchain Application on Klaytn. We will build a web application that interacts with smart contracts. To complete this tutorial, the audience is expected to be familiar with the following concepts.
 
-클레이튼에서 블록체인 애플리케이션을 구축하는 방법을 배우고 싶은 분이라면 누구나 참여 가능합니다. 스마트 컨트랙트와 상호작용하는 웹 애플리케이션을 만들어 보겠습니다. 이 튜토리얼을 완료하려면 다음 개념에 익숙해야 합니다.
-
-* [React](https://reactjs.org/) 및 [Redux](https://redux.js.org/)에 대한 기본 지식이 있다고 가정합니다. 이 강좌는 완전 초보자를 위한 강좌가 아닙니다.
-* Solidity 개발에 대한 기본 지식과 경험이 있는 분을 권장합니다. 하지만, SW 개발 경험이 있는 개발자라면 본 튜토리얼의 단계별 가이드에 따라 작업을 완료할 수 있습니다.
+- We assume that you have basic knowledge on [React](https://reactjs.org/) and [Redux](https://redux.js.org/). This course is not for absolute beginners.
+- Basic knowledge and experience in Solidity development are recommended. However, any experienced SW developer should be able to complete the task by following the step-by-step guideline of this tutorial.
