@@ -1,16 +1,16 @@
-# 클레이튼 호환 토큰(KCT)
+# Klaytn Compatible Tokens (KCTs)
 
-클레이튼 호환 토큰(KCT)은 특정 기술 사양을 구현하는 특별한 유형의 스마트 컨트랙트입니다. 클레이튼 위에서 토큰을 발행하고자 하는 사람은 누구나 이 사양을 따라야 합니다.  
+Klaytn Compatible Token (KCT) is a special type of smart contract that implements certain technical specifications. Everyone who wants to issue tokens on top of Klaytn must follow the specification.
 
-토큰 표준은 [KIP-7](https://kips.klaytn.foundation/KIPs/kip-7), [KIP-17](https://kips.klaytn.foundation/KIPs/kip-17) 등 Klaytn에 정의되어 있습니다.
+Token standards are defined in Klaytn such as [KIP-7](https://kips.klaytn.foundation/KIPs/kip-7) and [KIP-17](https://kips.klaytn.foundation/KIPs/kip-17).
 
-특정 기술 사양을 충족하기 위해 다른 KCT를 정의할 수 있습니다. 다른 토큰 표준이 필요하신 분은 [Klaytn Improvement Proposal](https://github.com/klaytn/KIPs)을 방문하여 새로운 토큰 표준을 제안해 주세요.
+Other KCTs can be defined to meet certain technical specifications. If anyone needs other token standards, please visit [Klaytn Improvement Proposal](https://github.com/klaytn/KIPs) and propose a new token standard.
 
-## 대체 가능한 토큰 표준 \(KIP-7\) <a id="fungible-token-standard-kip-7"></a>
+## Fungible Token Standard (KIP-7) <a id="fungible-token-standard-kip-7"></a>
 
-대체 가능한 토큰은 균일성과 분할성이라는 속성을 가진 토큰입니다. 모든 대체 가능한 토큰은 각 토큰 단위가 동일한 가치를 가지므로 상호 교환이 가능합니다. 모든 달러 지폐의 가치가 1달러인 것처럼 말이죠. 대체 가능성은 대부분의 경우 암호화폐의 필수적인 특징이기 때문에 블록체인 토큰의 상당수가 대체 가능한 토큰입니다.
+Fungible tokens are tokens that have properties of uniformity and divisibility. Every fungible token is interchangeable as each unit of token possesses the same value. Just like every dollar bill has the same value of one dollar. Since fungibility is essential feature to crypto currency in most cases, large proportion of blockchain tokens are fungible tokens.
 
-스마트 컨트랙트로 이러한 속성을 구현하기 위해 KIP-7 토큰 표준을 사용할 수 있습니다. KIP-7 호환 토큰은 다음과 같은 인터페이스를 구현합니다. [KIP-13](https://kips.klaytn.foundation/KIPs/kip-13)을 함께 구현해야 한다는 점에 유의하시기 바랍니다. 지갑 애플리케이션의 경우 [지갑 인터페이스](https://kips.klaytn.foundation/KIPs/kip-7#wallet-interface)를 구현할 수 있습니다.
+To implement these properties with smart contracts, KIP-7 token standard can be used. KIP-7-compatible tokens implement the following interface. Please note that [KIP-13](https://kips.klaytn.foundation/KIPs/kip-13) must be implemented together. For wallet applications, [wallet interface](https://kips.klaytn.foundation/KIPs/kip-7#wallet-interface) can be implemented.
 
 ```solidity
 // IKIP7
@@ -55,19 +55,19 @@ function addPauser(address _account) external;
 function renouncePauser() external;
 ```
 
-위의 인터페이스를 기반으로 개발자는 새로운 기능과 로직을 추가하여 토큰을 커스터마이징하고 Klaytn 네트워크에 배포할 수 있습니다.
+Based on the interface above, developers may customize tokens by adding new features and logics, and deploy them on Klaytn network.
 
-자세한 내용은 공식 [KIP-7 문서](https://kips.klaytn.foundation/KIPs/kip-7)를 참조하세요.
+For more information, refer to the official [KIP-7 documentation](https://kips.klaytn.foundation/KIPs/kip-7).
 
-* 구현 예제는 [https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP7/KIP7.sol](https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP7/KIP7.sol)에서 확인할 수 있습니다.
+- An example implementation is available at [https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP7/KIP7.sol](https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP7/KIP7.sol).
 
-## 대체 불가능한 토큰 표준 \(KIP-17\) <a id="non-fungible-token-standard-kip-17"></a>
+## Non-fungible Token Standard (KIP-17) <a id="non-fungible-token-standard-kip-17"></a>
 
-대체 불가능한 토큰 \(NFT\)는 고유한 자산을 나타내는 특수한 유형의 토큰입니다. 대체불가형이라는 이름에서 알 수 있듯이 모든 토큰은 고유하고 분할할 수 없습니다. 대체 불가능한 토큰의 이러한 고유성은 자산 디지털화의 새로운 지평을 열어줍니다. 예를 들어 디지털 아트, 게임 아이템 또는 모든 종류의 고유한 자산을 표현하고 사람들이 이를 거래할 수 있도록 하는 데 사용할 수 있습니다.
+Non-fungible token (NFT) is a special type of token that represents a unique asset. As the name non-fungible implies, every single token is unique and non-divisible. This uniqueness of non-fungible token opens up new horizons of asset digitization. For example, it can be used to represent digital art, game items, or any kind of unique assets and allow people to trade them.
 
-예를 들어, 블록체인 수집 게임인 [Cryptokitties](https://www.cryptokitties.co/)는 서로 다른 유전 정보를 가진 다양한 고양이를 표현하기 위해 대체 불가능한 토큰을 구현합니다. 모든 고양이는 고유하고 서로 교환할 수 없기 때문에 고양이 토큰마다 가치가 달라집니다.
+For example, a blockchain collection game [Cryptokitties](https://www.cryptokitties.co/) implements non-fungible token to represent different kitties that have different genetic information. Every kitty is unique and non-interchangeable, resulting in different values for different kitty tokens.
 
-대체 불가능한 토큰을 구현하기 위해 [KIP-17](https://kips.klaytn.foundation/KIPs/kip-17)을 사용할 수 있습니다. KIP-17 토큰 컨트랙트는 다음과 같은 인터페이스를 구현합니다. [KIP-13](https://kips.klaytn.foundation/KIPs/kip-13)이 함께 구현되어야 함을 유의하시기 바랍니다. 지갑 애플리케이션의 경우, [지갑 인터페이스](https://kips.klaytn.foundation/KIPs/kip-17#wallet-interface)를 구현할 수 있습니다.
+To implement non-fungible token, [KIP-17](https://kips.klaytn.foundation/KIPs/kip-17) can be used. KIP-17 token contracts implement the following interface. Please note that [KIP-13](https://kips.klaytn.foundation/KIPs/kip-13) must be implemented together. For wallet applications, [wallet interface](https://kips.klaytn.foundation/KIPs/kip-17#wallet-interface) can be implemented.
 
 ```solidity
 // IKIP17
@@ -121,17 +121,18 @@ function addPauser(address _account) public;
 function renouncePauser() public;
 ```
 
-위의 인터페이스를 기반으로 개발자는 새로운 기능과 로직을 추가하여 토큰을 커스터마이징하고 Klaytn 네트워크에 배포할 수 있습니다.
+Based on the interface above, developers may customize tokens by adding new features and logics, and deploy them on Klaytn network.
 
-자세한 내용은 공식 [KIP-17 문서](https://kips.klaytn.foundation/KIPs/kip-17)를 참조하세요.
+For more information, refer to the official [KIP-17 documentation](https://kips.klaytn.foundation/KIPs/kip-17).
 
-* 구현 예제는 [https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP17/KIP17.sol](https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP17/KIP17.sol)에서 확인할 수 있습니다.
+- An example implementation is available at [https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP17/KIP17.sol](https://github.com/klaytn/klaytn-contracts/blob/main/contracts/KIP/token/KIP17/KIP17.sol).
 
-## 클레이튼 서비스체인을 위한 토큰 표준 <a id="token-standards-for-klaytn-service-chain"></a>
+## Token Standards for Klaytn Service Chain <a id="token-standards-for-klaytn-service-chain"></a>
 
-서비스체인이란 클레이튼의 메인 블록체인 네트워크에 앵커링되는 클레이튼의 사이드체인을 의미합니다. 서비스체인을 구현할 때, 메인체인과 서비스체인 간의 밸류 전송을 지원하기 위해 특별한 유형의 컨트랙트가 사용됩니다. 이러한 컨트랙트는 현재 개발 중이며, 준비가 완료되면 클레이튼 서비스체인을 위한 토큰 사양이 KlaytnDocs에 제공될 예정입니다.
+Service chain refers to Klaytn's side chain that anchors to Klaytn's main blockchain network. When implementing a service chain, special type of contracts are used to support value transfer between the main chain and the service chain. These contracts are currently under development, and when they are ready, the token specifications for Klaytn service chain will be provided on KlaytnDocs.
 
-## ERC-20 및 ERC-721에 대한 참고사항 <a id="notes-on-erc-20-and-erc-721"></a>
-Klaytn은 토큰 표준으로 KIP-7과 KIP-17을 발표했기 때문에, 대체 가능한 토큰과 대체 불가능한 토큰 컨트랙트는 각각 ERC-20과 ERC-721을 따르기보다는 KIP-7과 KIP-17에 따라 구현할 것을 권장합니다.
-KIP-7과 KIP-17은 ERC-20과 ERC-721을 기반으로 하지만, 클레이튼에 맞게 조정되었기 때문에 클레이튼 생태계에 더 적합합니다. 그러나 ERC-20과 ERC-721은 여전히 Klaytn 네트워크에서 지원되지만, 클레이튼 생태계의 다양한 도구와 호환되지 않을 수 있습니다.
-토큰 표준의 차이점에 대한 자세한 내용은 [KIP-7](https://kips.klaytn.foundation/KIPs/kip-7#differences-with-erc-20) 및 [KIP-17](https://kips.klaytn.foundation/KIPs/kip-17#differences-from-erc-721)을 참고하시기 바랍니다.
+## Notes on ERC-20 and ERC-721 <a id="notes-on-erc-20-and-erc-721"></a>
+
+Since Klaytn published KIP-7 and KIP-17 as its token standards, it is recommended to implement fungible and non-fungible token contracts according to KIP-7 and KIP-17, respectively, rather than following ERC-20 and ERC-721.
+KIP-7 and KIP-17 are based on ERC-20 and ERC-721, but they are tailored for Klaytn and thus more suitable on Klaytn ecosystem. Yet ERC-20 and ERC-721 are still supported on Klaytn network, they may not be compatible with various tools in Klaytn ecosystem.
+For more information about the differences on token standards, please visit [KIP-7](https://kips.klaytn.foundation/KIPs/kip-7#differences-with-erc-20) and [KIP-17](https://kips.klaytn.foundation/KIPs/kip-17#differences-from-erc-721).
