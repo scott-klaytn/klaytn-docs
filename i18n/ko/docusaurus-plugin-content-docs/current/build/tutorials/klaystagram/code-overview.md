@@ -1,13 +1,13 @@
-# 프론트엔드 코드 개요
+# Frontend Code Overview
 
-1. 개요
+1. Overview
 2. `src/App.js`
 3. `src/pages`
-4. 무엇을 배울까요?
+4. What we are going to learn?
 
-## 개요 <a id="1-overview"></a>
+## Overview <a id="1-overview"></a>
 
-이 섹션에서는 프론트엔드를 빌드하겠습니다. 이 튜토리얼의 주요 목적은 컨트랙트를 프론트엔드 코드와 연결하는 방법을 배우는 것입니다. 따라서 React 코드를 간략하게 설명하고, Klaytn에 배포된 컨트랙트와 상호작용하는 API 함수에 집중하겠습니다.
+In this section, we are going to build front-end. This tutorial's main purpose is to learn how to connect contract with front-end code. We will thus briefly explain React codes and focus on the API functions interacting with contract deployed on Klaytn.
 
 ```text
 |-- src
@@ -28,37 +28,37 @@
     |-- App.js
 ```
 
-`src/klaytn`: 클레이튼 블록체인과 상호작용하는 데 도움이 되는 파일들이 들어 있습니다.
+`src/klaytn`: Contains files that help interact with Klaytn blockchain.
 
-* `src/klaytn/caver.js`: 설정된 설정 내에서 caver를 인스턴스화합니다.  
+- `src/klaytn/caver.js`: Instantiates caver within configured setting.
 
-  cf\) caver-js는 클레이튼 노드에 연결하여 노드 또는 클레이튼에 배포된 스마트 컨트랙트와 상호작용하는 RPC 라이브러리입니다.
+  cf) caver-js is a RPC library which makes a connection to Klaytn node, interacting with node or smart contract deployed on klaytn.
 
-* `src/klaytn/Klaystagram.js`: caver-js API를 사용하여 컨트랙트 인스턴스를 생성합니다. 인스턴스를 통해 컨트랙트와 상호작용할 수 있습니다.
+- `src/klaytn/Klaystagram.js`: Creates an instance of contract using caver-js API. You can interact with contract through the instance.
 
-`src/redux`: 컨트랙트와 상호작용하는 API 함수를 생성하고 결과 데이터를 추적합니다.
+`src/redux`: Creates API functions that interact with contract and keeps tracks of consequent data.
 
-* `redux/actions/auth.js`
-* `redux/actions/photos.js`
+- `redux/actions/auth.js`
+- `redux/actions/photos.js`
 
-`src/pages`: Klaystagram 앱을 구성하는 두 개의 페이지 파일을 포함합니다.
+`src/pages`: Contains two page files that compose Klaystagram app.
 
-* `src/pages/AuthPage.js`: 가입 및 로그인 양식을 포함합니다. 가입 양식에서 개인키를 생성하여 앱 로그인 시 사용할 수 있습니다.
-* `src/pages/FeedPage.js`: 컨트랙트에서 읽은 사진을 표시하고 사용자에게 보여주며 업로드 기능을 제공합니다.
+- `src/pages/AuthPage.js`: Contains sign up and login form. You can generate private key in the sign up form, and use it to login on the app.
+- `src/pages/FeedPage.js`: Shows read photos from the contract, shows them to users, and provides upload feature.
 
-`src/components`: 페이지를 구성하는 컴포넌트 파일을 포함합니다.
+`src/components`: Contains component files that compose page.
 
-* `src/components/Feed.js`: 컨트랙트에서 데이터를 읽어와 사진을 표시합니다.
-* `src/components/UploadPhoto.js`: 컨트랙트에 트랜잭션을 전송하여 사진을 업로드합니다. 
-* `src/components/TransferOwnership.js`: 트랜잭션을 전송하여 사진의 소유권을 이전합니다.
+- `src/components/Feed.js`: Reads data from contract and displays photos.
+- `src/components/UploadPhoto.js`: Uploads photo by sending transaction to contract.
+- `src/components/TransferOwnership.js`: Transfers the ownership of photo by sending transaction.
 
-`src/App.js`: 튜토리얼 앱의 전체 컴포넌트를 위한 루트 컴포넌트 파일입니다.
+`src/App.js`: Our tutorial app's root component file for overall components.
 
 ## App.js <a id="1-app-js"></a>
 
-`App.js`는 전체 컴포넌트의 루트 컴포넌트 파일입니다. 사용자의 로그인 상태에 따라 두 개의 페이지를 렌더링합니다. 각 페이지에는 컨트랙트와 상호작용하는 함수가 있습니다. 트랜잭션을 블록체인에 전송하려면 caver에 지갑 인스턴스를 추가해야 합니다. 코드를 간략하게 살펴보며 개요를 살펴봅시다.
+`'App.js'` is root component file for overall components. It renders two pages depending on user's login status. Each page has functions that interact with contract. You must add wallet instance to caver to send transactions to blockchain. Let’s briefly look at the code for overview.
 
-참고) caver-js\(또는 코드에서 `cav`)는 클레이튼 블록체인과 상호작용하기 위한 라이브러리입니다. 다음 챕터인 [7-1. 컨트랙트를 프론트엔드에 연결하기](./feedpage.md#7-1-connect-contract-to-frontend)에서 자세히 알아보겠습니다.
+cf. caver-js(or `cav` in the code) is a library for interacting with Klaytn blockchain. We are going to learn in detail in the next chapter - [7-1. Connect Contract to Frontend](./feedpage.md#7-1-connect-contract-to-frontend)
 
 ```javascript
 // src/App.js
@@ -138,16 +138,16 @@ const mapDispatchToProps = (dispatch) => ({
 export default connect(mapStateToProps, mapDispatchToProps)(App)
 ```
 
-참고) `walletInstance` 세션이 JSON string로 저장되므로 `JSON.parse`가 필요합니다.
+cf) `JSON.parse` is needed since `walletInstance` session is stored as JSON string.
 
-**1. `isLoggedIn` 상태 초기화하기**  
-`isLoggedIn` 상태를 초기화하기 위해 앱 컴포넌트에서 `constructor` 생명주기 메서드를 사용합니다. 컴포넌트가 마운트되기 전에 브라우저의 세션스토리지에 `walletInstance` 세션이 있는지 확인합니다.
+**1. Initialize `isLoggedIn` state**\
+To initialize state `isLoggedIn`, we use `constructor` life cycle method on App component. It checks for `walletInstance` session in browser's sessionStorage before component is mounted.
 
-**2. 지갑 삽입/제거**  
-한 번도 로그인한 적이 없다면 `walletInstance` 세션이 존재하지 않을 수 있습니다. 그렇지 않은 경우, 세션스토리지에 `walletInstance` 세션이 JSON string로 존재할 수 있습니다.
+**2. Inject/Remove wallet**\
+If you have never logged in before, `walletInstance` session may not exist. Otherwise, `walletInstance` session may exist as JSON string in the sessionStorage.
 
-1. 삽입 - 세션스토리지에 지갑 인스턴스가 존재한다면, caver와 리덕스 스토어에 지갑 인스턴스를 추가해 보세요.  
-2. 제거 - 세션스토리지에 있는 지갑 인스턴스가 유효하지 않으면 caver의 지갑과 리덕스 스토어에서 제거합니다.  
+1. Inject - If wallet instance exists in sessionStorage, try adding wallet instance to caver and redux store.
+2. Remove - If wallet instance in sessionStorage is invalid, remove it from caver's wallet and redux store.
 
 ```javascript
 // redux/actions/auth.js
@@ -183,30 +183,30 @@ export const removeWallet = () => (dispatch) => {
 }
 ```
 
-참고) caver의 `privateKeyToAccount` API에 대한 자세한 내용은 [caver.klay.accounts.privateKeyToAccount](../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#privatekeytoaccount)를 참고하세요.
+cf. For further information about caver's `privateKeyToAccount` API, see [caver.klay.accounts.privateKeyToAccount](../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#privatekeytoaccount).
 
-**3. 페이지 렌더링** Redux는 세션 스토리지에 지갑 인스턴스가 존재하는지 여부에 따라 `isLoggedIn` 상태를 참 또는 false으로 초기화합니다.
+**3. Render the page** Redux will initialize `isLoggedIn` state to true or false, depending on whether walletInstance exists in the session storage
 
 ## `src/pages` <a id="2-src-pages"></a>
 
-[위](#1-overview)에서 설명한 것처럼 `src/pages`에는 두 개의 페이지 파일이 포함되어 있습니다. 이 두 페이지 중 하나는 사용자의 로그인 여부에 따라 앱에서 렌더링됩니다.
+As we described in [above](#1-overview), `src/pages` contains two page files. One of these two pages will be renderded on the app depending on whether the user is logged in or not.
 
-* `AuthPage.js`: 가입 및 로그인 양식을 포함합니다. 가입 양식에서 개인키를 생성하여 앱에서 로그인할 때 사용할 수 있습니다.
-* `FeedPage.js`: 컨트랙트에서 사진 데이터를 읽어와 사용자에게 보여줍니다. 사용자가 사진을 업로드할 수도 있습니다.
+- `AuthPage.js`: Contains sign up and login form. You can generate private key in the signup form, and use it to login on the app.
+- `FeedPage.js`: Reads photo data from the contract and shows them to users. Users can also upload their pictures.
 
-## 무엇을 배울까요? <a id="3-what-we-are-going-to-learn"></a>
+## What we are going to learn? <a id="3-what-we-are-going-to-learn"></a>
 
-블록체인 기반 앱에서 컨트랙트와 상호작용하는 방법에는 두 가지가 있습니다.
+In blockchain based app, there are two ways of interacting with contracts.
 
-1\) 컨트랙트에서 데이터 **읽기**\
-2\) 컨트랙트에 데이터 **쓰기**
+1\) **Reading** data from contract.\
+2\) **Writing** data to contract.
 
-컨트랙트에서 데이터를 읽는 것은 비용이 들지 않습니다.  
-반면에 컨트랙트에 데이터를 쓰는 \(트랜잭션 보내기\) 작업에는 비용이 발생합니다. 따라서 데이터를 쓰기 위해서는 반드시 KLAY를 보유하고 있는 클레이튼 계정이 있어야 합니다.
+Reading data from contract is cost-free.\
+On the otherhand, there is cost for writing data to contract (Sending a transaction). For this reason, in order to write data, you must have Klaytn account that has some KLAY to pay for it.
 
-AuthPage에서 `SignupForm`을 통해 클레이튼 계정 \(개인키\)를 생성할 수 있습니다. 그 후 개인키로 로그인하고 트랜잭션 수수료를 결제할 수 있습니다.
+In AuthPage, `SignupForm` helps you to create a Klaytn account (private key). After that, you can log in with the private key and pay for the transaction fee.
 
-두 가지 로그인 방법 \(개인키/키스토어\)에 대해 더 자세히 알고 싶으시다면,  
-[5.2. Auth 컴포넌트](../count-dapp/code-overview/auth-component.md) 페이지를 참고하시기 바랍니다.
+If you want to learn more about the two different login methods (private key / keystore),\
+please refer to the [5.2. Auth Component](../count-dapp/code-overview/auth-component.md) page.
 
-이 튜토리얼에서는 애플리케이션이 컨트랙트와 **데이터를 어떻게 읽고 쓰는지** 알아볼 수 있도록 `FeedPage`에 집중하겠습니다.
+In this tutorial, we are going to focus on `FeedPage`, so that we can learn how application **reads and writes data** from/to contracts.
