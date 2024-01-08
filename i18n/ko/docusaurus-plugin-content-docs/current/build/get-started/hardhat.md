@@ -1,117 +1,119 @@
-# Hardhat을 사용하여 첫 스마트 컨트랙트 배포하기
+# Deploy your first smart contract using Hardhat
 
 ![](/img/build/get-started/Klaytn-hardhat.png)
 
-## 소개
+## Introduction
 
-이 섹션에서는 [Hardhat](https://hardhat.org/)을 사용하여 클레이튼 Baobab 네트워크에 Soul-bound token을 배포하는 방법을 안내합니다.
+This section will guide you through deploying a Soulbound Token to the Klaytn Baobab Network using [Hardhat](https://hardhat.org/).
 
-Hardhat은 여러분을 도와줄 스마트 컨트랙트 개발 환경입니다:
-* 스마트 컨트랙트 개발 및 컴파일.
-* 스마트 컨트랙트 및 dApp 디버깅, 테스트, 배포.
+Hardhat is a smart-contract development environment that will help you:
 
-Soul-bound token(SBT)은 양도할 수 없는 대체 불가능한 토큰입니다. 즉, 한 번 획득하면 다른 사용자에게 판매하거나 양도할 수 없습니다. SBT의 작동 방식과 사용 사례에 대해 자세히 알아보시려면 비탈릭 부테린이 작성한 [참고 문서](https://vitalik.ca/general/2022/01/26/soulbound.html)를 확인하시기 바랍니다.
+- Develop and compile smart contracts.
+- Debug, test, and deploy smart contracts and dApps.
 
-이 가이드가 끝나면 여러분은 다음을 할 수 있을 것입니다:
-* 클레이튼에서 Hardhat 프로젝트를 설정합니다.
-* 간단한 Soul-bound token 생성하기.
-* Hardhat을 사용하여 스마트 컨트랙트 컴파일하기.
-* Hardhat을 사용하여 스마트 컨트랙트 테스트, 배포 및 상호작용하기.
-* Hardhat 포크 기능 살펴보기.
+Soul-bound tokens(SBTs) are non-transferable NFTs. Meaning once acquired, they cannot be sold or transferred to another user. To learn more about SBTs, how it works and their use case, you can check out this [reference article](https://vitalik.ca/general/2022/01/26/soulbound.html) published by Vitalik Buterin.
 
-## 사전 요구 사항
+By the end of this guide you will be able to:
 
-이 튜토리얼을 따르기 위한 전제 조건은 다음과 같습니다:
+- Set up a Hardhat project on Klaytn.
+- Create a simple soul-bound token.
+- Compile your smart contract using Hardhat.
+- Test, deploy, and interact with your smart contract using Hardhat.
+- Explore Hardhat forking feature.
 
-* 코드 편집기: [VS-Code](https://code.visualstudio.com/download)와 같은 소스 코드 편집기.
-* [MetaMask](../tutorials/connecting-metamask#install-metamask): 컨트랙트를 배포하고, 트랜잭션에 서명하고, 컨트랙트와 상호 작용하는 데 사용됩니다.
-* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../../references/service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
-* [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY 테스트: 충분한 KLAY로 계정에 자금을 충전합니다.
-* [NodeJS 및 NPM](https://nodejs.org/en/)
+## Pre-requisites
 
-## 개발 환경 설정하기
+To follow this tutorial, the following are the prerequisites:
 
-Hardhat을 사용하려면 개발 환경을 설정하고 Hardhat을 설치해야 합니다. 다음 단계를 통해 이를 수행해 보겠습니다:
+- Code editor: a source-code editor such [VS-Code](https://code.visualstudio.com/download).
+- [Metamask](../tutorials/connecting-metamask#install-metamask): used to deploy the contracts, sign transactions and interact with the contracts.
+- RPC Endpoint: you can get this from one of the supported [Endpoint Providers](../../references/service-providers/public-en.md).
+- Test KLAY from [Faucet](https://baobab.wallet.klaytn.foundation/faucet): fund your account with sufficient KLAY.
+- [NodeJS and NPM](https://nodejs.org/en/)
 
-**1단계**: 프로젝트 디렉터리 만들기
+## Setting Up Your Development Environment
+
+To make use of hardhat, we need to set up our development environment and get hardhat installed. Let's do this in the following steps:
+
+**Step 1**: Create a project directory
 
 ```bash
 mkdir soulbound-tokens
 cd soulbound-tokens
 ```
 
-**2단계**: npm 프로젝트 초기화
+**Step 2**: Initialize an npm project
 
-터미널에 다음 명령을 붙여넣어 package.json 파일을 만듭니다.
+Paste this command in your terminal to create a package.json file
 
 ```bash
 npm init -y
 ```
 
-**3단계**: Hardhat 및 기타 종속성을 설치합니다:
+**Step 3**: Install hardhat and other dependencies:
 
-* 터미널에 아래 코드를 붙여넣어 Hardhat을 설치하세요.
+- Paste the code below in your terminal to install hardhat
 
 ```bash
 npm install --save-dev hardhat
 ```
 
-* 다른 종속성을 설치하려면 아래 코드를 붙여넣으세요.
+- Paste the code below to install other dependencies
 
 ```bash
 npm install dotenv @klaytn/contracts
 ```
 
-> 참고: 이 프로젝트에 필요한 `hardhat`, `klaytn/contract`, `dotenv` 등의 기타 종속성을 설치합니다.
+> Note: This installs other dependencies needed for this project ranging from `hardhat`, `klaytn/contract`, `dotenv` et al.
 
+**Step 4**: Initialise a hardhat project:
 
-**4단계**: Hardhat 프로젝트를 초기화합니다:
-
-아래 명령을 실행하여 Hardhat 프로젝트를 시작하세요.
+Run the command below to initiate an hardhat project
 
 ```bash
 npx hardhat
 ```
-이 가이드에서는 아래와 같이 TypeScript 프로젝트를 선택하겠습니다:
+
+For this guide, you'll be selecting a typescript project as seen below:
 
 ![](/img/build/get-started/hardhat-init.png)
 
 ![](/img/build/get-started/hardhat-init-ii.png)
 
-> 참고: 프로젝트를 초기화하는 동안 'hardhat-toolbox' 플러그인을 설치하라는 메시지가 표시됩니다. 이 플러그인에는 일반적으로 사용되는 모든 패키지와 Hardhat으로 개발을 시작하는 데 권장되는 Hardhat 플러그인이 번들로 제공됩니다.
+> Note: While initializing the project, you will get a prompt to install `hardhat-toolbox` plugin. The plugin bundles all the commonly used packages and Hardhat plugins recommended to start developing with Hardhat.
 
-Hardhat 프로젝트를 초기화한 후에는 현재 디렉터리에 다음이 포함되어야 합니다:
+After initializing a hardhat project, your current directory should include:
 
-**contracts/** - 이 폴더에는 스마트 컨트랙트 코드가 포함되어 있습니다.
+**contracts/** – this folder contains smart contract code.
 
-**scripts/** - 이 폴더에는 블록체인 네트워크에 컨트랙트를 배포하는 코드가 포함되어 있습니다.
+**scripts/** – this folder contains code that deploys your contracts on the blockchain network.
 
-**test/** - 이 폴더에는 스마트 컨트랙트를 테스트하는 모든 단위 테스트가 포함되어 있습니다.
+**test/** – this folder contains all unit tests that test your smart contract.
 
-**hardhat.config.js** - 이 파일에는 Hardhat의 작업과 Soul-bound token 배포에 중요한 구성이 포함되어 있습니다.
+**hardhat.config.js** – this file contains configurations important for the work of Hardhat and the deployment of the soul-bound token.
 
-**5단계**: .env 파일 만들기
+**Step 5**: Create a .env file
 
-이제 프로젝트 폴더에 .env 파일을 생성합니다. 이 파일은 .env 파일에서 프로세스.env로 환경 변수를 로드하는 데 도움이 됩니다.
+Now create your .env file in the project folder. This file helps us load environment variables from an .env file into process.env.
 
-* 터미널에 다음 명령을 붙여넣어 .env 파일을 생성합니다.
+- Paste this command in your terminal to create a .env file
 
 ```bash
 touch .env
 ```
 
-* 파일을 생성한 후 다음과 같이 .env 파일을 구성해 보겠습니다:
+- After creating our file, let's configure our .env file to look like this:
 
 ```js
  KLAYTN_BAOBAB_URL= "Your Baobab RPC link"
  PRIVATE_KEY= "your private key copied from MetaMask wallet"
 ```
 
-> 참고: 하드햇에서 제공하는 [구성 변수](https://hardhat.org/hardhat-runner/docs/guides/configuration-variables) 기능을 사용하여 코드 저장소에 포함되지 않아야 하는 변수를 구성할 수도 있습니다.
+> Note: You can also choose to use the [configuration variable](https://hardhat.org/hardhat-runner/docs/guides/configuration-variables) functionality provided by hardhat to configure variables that shouldn't be included in the code repository.
 
-**6단계**: Hardhat 설정 설정
+**Step 6**: Setup Hardhat Configs
 
-다음 구성으로 `hardhat.config.js`를 수정합니다:
+Modify your `hardhat.config.js` with the following configurations:
 
 ```js
 require("@nomicfoundation/hardhat-toolbox");
@@ -132,17 +134,17 @@ module.exports = {
 
 ```
 
-이제 개발 환경이 모두 준비되었으니, 이제 Soul-bound token 스마트 컨트랙트를 작성해 보겠습니다.
+Now that we have our development environment all set, let's get into writing our soul-bound token  smart contract.
 
-## SBT 스마트 컨트랙트 생성
+## Creating SBT Smart Contract
 
-이 섹션에서는 커뮤니티에서 검증된 코드의 견고한 토대 위에 구축된 안전한 스마트 컨트랙트 개발을 위한 라이브러리인 [Klaytn 컨트랙트](https://github.com/klaytn/klaytn-contracts)를 사용하게 됩니다. 이것은 오픈 제플린 컨트랙트의 포크입니다.
+In this section, you will use the [Klaytn Contracts](https://github.com/klaytn/klaytn-contracts): a library for secure smart contract development built on a solid foundation of community-vetted code. It is a fork of open zeppelin contracts.
 
-> 참고: '개발 환경 설정' 섹션의 **3단계**에서 이미 이 라이브러리를 설치했습니다.
+> Note: You already installed this library in **step 3** of the `Setting Development Environment` section.
 
-**1단계**: 탐색기 창에서 contracts 폴더를 선택하고 새 파일 버튼을 클릭한 후 `SBT.sol`이라는 이름의 새 파일을 만듭니다.
+**Step 1**: Select the contracts folder in the Explorer pane, click the New File button and create a new file named `SBT.sol`
 
-**2단계**: 파일을 열고 다음 코드를 붙여넣습니다:
+**Step 2**: Open the file and paste the following code:
 
 ```js
 // SPDX-License-Identifier: MIT
@@ -176,21 +178,21 @@ contract SoulBoundToken is KIP17, Ownable {
 }
 ```
 
-**코드 연습**
+**Code Walkthrough**
 
-이것이 스마트 컨트랙트입니다. **1줄**은 Hardhat이 Solidity 버전 0.8.7 이상을 사용한다는 것을 보여줍니다. 그 외에는 KIP17.sol 및 기타 지원 컨트랙트를 가져옵니다. **6~12줄**에서는 KIP17을 계승하는 스마트 컨트랙트가 생성되었습니다. 또한 생성자에서 토큰 이름과 심볼이 전달되었습니다.
+This is your smart contract. **line 1** shows that Hardhat uses the Solidity version 0.8.7 or greater. Other than that, it imports KIP17.sol and other supporting contracts. From **lines 6-12**, a smart contract that inherits KIP17 is been created. Also, the token name and symbol was passed in the constructor.
 
-위 코드에서 볼 수 있듯이 토큰 이름과 심볼은 각각 **SoulBoundToken**과 **SBT**로 설정되어 있습니다. 토큰 이름과 심볼은 원하는 대로 변경할 수 있습니다.
+As you can see in the code above, the token name and symbol have been set to **SoulBoundToken** and **SBT** respectively. You can change the token name and symbol to anything you desire.
 
-이 컨트랙트에서 가장 중요한 것은 토큰 양도를 금지하여 발행된 토큰을 소울본드로 만든다는 것입니다.
+One major thing in this contract is that it prohibits token transfer, which makes the issued tokens soulbond.
 
-## SBT 스마트 컨트랙트 테스트
+## Testing SBT Smart Contract
 
-이 섹션에서는 일부 컨트랙트 기능을 테스트할 것입니다.
+In this section, we would be testing some of our contract functionalities.
 
-**1단계**: 탐색기 창에서 테스트 폴더를 선택하고 새 파일 버튼을 클릭하여 `sbtTest.js`라는 이름의 새 파일을 만듭니다.
+**Step 1**: In the Explorer pane, select the test folder and click the New File button to create a new file named `sbtTest.js`
 
-**2단계**: 아래 코드를 `sbtTest.js` 파일에 복사합니다.
+**Step 2**: Copy the code below in the `sbtTest.js` file.
 
 ```js
 // This is an example test file. Hardhat will run every *.ts file in `test/`,
@@ -281,14 +283,14 @@ describe("Token contract", function () {
 })
 ```
 
-방금 복사한 코드에서 7번째 줄과 12번째 줄은 [Chai](https://www.chaijs.com/api/bdd/) 및 [loadFixture](https://hardhat.org/tutorial/testing-contracts#reusing-common-test-setups-with-fixtures)에서 Hardhat 네트워크 헬퍼의 기대값을 가져온 것을 보여줍니다.
+In the code you just copied, line 7 & 12 shows you imported expect from [Chai](https://www.chaijs.com/api/bdd/) and [loadFixture](https://hardhat.org/tutorial/testing-contracts#reusing-common-test-setups-with-fixtures) from hardhat-network-helpers.
 
-위의 테스트는 다음을 확인합니다:
+The tests above check the following:
 
-* 특정 토큰 ID의 소유자가 토큰이 발행된 사람과 동일한가요?
-* 계정 간 토큰 전송을 금지하나요?
+- Is the owner of a particular token id the same as who it was minted to?
+- Did it prohibit transfer of tokens between accounts?
 
-**3단계**: 테스트를 실행하려면 아래 명령을 실행합니다:
+**Step 3**: To run your test, run the command below:
 
 ```bash
 npx hardhat test test/sbtTest.ts 
@@ -296,17 +298,17 @@ npx hardhat test test/sbtTest.ts
 
 ![](/img/build/get-started/sbtTest.png)
 
-테스트에 대한 자세한 안내는 [Hardhat 테스트](https://hardhat.org/hardhat-runner/docs/guides/test-contracts)를 참조하세요.
+For more in-depth guide on testing, please check [Hardhat testing](https://hardhat.org/hardhat-runner/docs/guides/test-contracts).
 
-## 스마트 컨트랙트 배포하기
+## Deploying the smart contract
 
-스크립트는 블록체인 네트워크에 컨트랙트를 배포하는 데 도움이 되는 JavaScripts/Typescript 파일입니다. 이 섹션에서는 스마트 컨트랙트를 위한 스크립트를 생성합니다.
+Scripts are JavaScript/Typescript files that help you deploy contracts to the blockchain network. In this section, you will create a script for the smart contract.
 
-**1단계**: 탐색기 창에서 "scripts" 폴더를 선택하고 새 파일 버튼을 클릭하여 `sbtDeploy.js`라는 이름의 새 파일을 만듭니다.
+**Step 1**: In the Explorer pane, select the "scripts" folder and click the New File button to create a new file named `sbtDeploy.js`.
 
-**2단계**: 파일 안에 다음 코드를 복사하여 붙여넣습니다.
+**Step 2**: Copy and paste the following code inside the file.
 
-> 참고: '배포자 주소' 변수에 MetaMask 지갑 주소를 입력하세요.
+> Note: input your MetaMask wallet address in the `deployerAddr` variable.
 
 ```js
 const { ethers } = require("hardhat");
@@ -335,7 +337,7 @@ main().catch((error) => {
 });
 ```
 
-**3단계**: 터미널에서 다음 명령을 실행하여 Hardhat에 SBT 토큰을 Klaytn 테스트 네트워크(Baobab)에 배포하도록 지시합니다.
+**Step 3**: In the terminal, run the following command which tells Hardhat to deploy your SBT token on the Klaytn Test Network (Baobab)
 
 ```bash
 npx hardhat run scripts/sbtDeploy.js --network baobab
@@ -343,21 +345,21 @@ npx hardhat run scripts/sbtDeploy.js --network baobab
 
 ![](/img/build/get-started/sbtDeploy.png)
 
-**4단계**: [Klaytnscope](https://baobab.scope.klaytn.com/)를 열어 SBT 토큰이 성공적으로 배포되었는지 확인합니다.
+**Step 4**: Open [Klaytnscope](https://baobab.scope.klaytn.com/) to check if the SBT token has been deployed successfully.
 
-**5단계**: 검색 필드에 배포된 컨트랙트 주소를 복사하여 붙여넣고 Enter 키를 누릅니다. 최근에 배포된 컨트랙트가 표시됩니다.
+**Step 5**: Copy and paste the deployed contract address in the search field and press Enter. You should see the recently deployed contract.
 
 ![](/img/build/get-started/sbtKS.png)
 
-## Hardhat 포크
+## Hardhat Forking
 
-Hardhat은 개발자에게 메인넷(특정 블록)을 로컬 개발 네트워크에서 시뮬레이션할 수 있는 기능을 제공합니다. 이 기능의 주요 이점 중 하나는 개발자가 배포된 컨트랙트와 상호 작용하고 복잡한 케이스에 대한 테스트를 작성할 수 있다는 것입니다.  
- 
-이 기능이 효과적으로 작동하려면 아카이브 노드에 연결해야 합니다. 이 기능에 대한 자세한 내용은 [여기](https://hardhat.org/hardhat-network/docs/guides/forking-other-networks#forking-other-networks)에서 확인할 수 있습니다.
+Hardhat provides developers the functionality of simulating the mainnet (at any given block) to a local development network. One of the major benefit of this feature is that it enables developers to interact with deployed contract and also write test for complex cases.
 
-### 메인넷 포크
+For this feature to work effectively, you need to connect to an archive node. You can read more about this feature [here](https://hardhat.org/hardhat-network/docs/guides/forking-other-networks#forking-other-networks)
 
-이제 Hardhat 프로젝트를 설정했으니 Hardhat을 사용하여 Klaytn 메인넷을 포크해 보겠습니다.  터미널을 열고 다음 명령을 실행합니다.
+### Forking Mainnet
+
+Now that we have our Hardhat project set up let’s fork the Klaytn Mainnet using Hardhat.  Open your terminal and run this command
 
 ```bash
 npx hardhat node --fork <YOUR ARCHIVE NODE URL>
@@ -365,7 +367,7 @@ npx hardhat node --fork <YOUR ARCHIVE NODE URL>
 npx hardhat node --fork https://archive-en.cypress.klaytn.net
 ```
 
-Hardhat 네트워크에서 항상 이 작업을 수행하도록 `hardhat.config.js`를 구성할 수도 있습니다:
+You can also configure `hardhat.config.js` - Hardhat Network to always do this:
 
 ```
 networks: {
@@ -377,27 +379,27 @@ networks: {
 }
 ```
 
-**출력**
+**Output**
 
 ![](/img/build/get-started/hardhat-fork.png)
 
-이 명령을 성공적으로 실행하면 터미널이 위 이미지와 같이 표시됩니다.  10,000개의 테스트 토큰이 사전 충전된 20개의 개발 계정을 갖게 됩니다.
+After successfully running this command, your terminal looks like the above image.  You'll have 20 development accounts that are pre-funded with 10,000 test tokens.
 
-포크된 체인의 RPC 서버는 `http://127.0.0.1:8545/`에서 수신 대기 중입니다.  최신 블록 번호를 쿼리하여 포크된 네트워크를 확인할 수 있습니다. 블록 번호를 얻기 위해 RPC에 대한 cURL을 만들어 보겠습니다.  새 터미널 창을 열고 다음 명령을 사용합니다:
+The forked chain's RPC server is listening at `http://127.0.0.1:8545/`.  You can verify the forked network by querying the latest block number. Let's try to make a cURL to the RPC to get the block number.  Open a new terminal window and use the following command:
 
 ```bash
 curl --data '{"method":"eth_blockNumber","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545 
 ```
 
-**출력**
+**Output**
 
 ![](/img/build/get-started/hardhat-fork-bn.png)
 
-출력은 위와 같이 16진수입니다. 16진수에서 블록 번호를 얻으려면 이 [도구](https://www.rapidtables.com/convert/number/hex-to-decimal.html)를 사용하여 16진수를 10진수로 변환합니다. 네트워크를 포크한 시점의 최신 블록 번호를 얻어야 합니다. 블록 번호는 [klaytnscope](https://scope.klaytn.com/)에서 확인할 수 있습니다.
+The output is an hexadecimal as seen above. To get the block number from the hex, convert the hex to a decimal using this [tool](https://www.rapidtables.com/convert/number/hex-to-decimal.html). You should get the latest block number from the time you forked the network. You can confirm the block number on [klaytnscope](https://scope.klaytn.com/).
 
-### 블록에서 포크하기
+### Forking at a Block
 
-Hardhat을 사용하면 특정 블록에서 메인넷을 포크할 수 있습니다.  이 경우 블록 번호 `105701850`에서 체인을 포크해 보겠습니다.
+With hardhat, you can fork the mainnet at a particular block.  In that case, let’s fork the chain at block number `105701850`.
 
 ```bash
 npx hardhat node --fork <YOUR ARCHIVE NODE URL> --fork-block-number 105701850
@@ -405,7 +407,7 @@ npx hardhat node --fork <YOUR ARCHIVE NODE URL> --fork-block-number 105701850
 npx hardhat node --fork https://archive-en.cypress.klaytn.net --fork-block-number 105701850
 ```
 
-명시된 블록에서 분기된 체인을 확인하려면 새 터미널 창을 열고 다음 명령을 사용합니다:
+To confirm the forked chain at the stated block, open a new terminal window and use the following command:
 
 ```bash
 curl --data '{"method":"eth_blockNumber","params":[],"id":1,"jsonrpc":"2.0"}' -H "Content-Type: application/json" -X POST localhost:8545 
@@ -413,6 +415,6 @@ curl --data '{"method":"eth_blockNumber","params":[],"id":1,"jsonrpc":"2.0"}' -H
 
 ![](/img/build/get-started/hardhat-fork-bnII.png)
 
-출력은 16진수를 반환하며, 이 [도구](https://www.rapidtables.com/convert/number/hex-to-decimal.html)를 사용하여 변환하면 `105701850`과 같아야 합니다.
+The output returns hexadecimal which when converted using this [tool](https://www.rapidtables.com/convert/number/hex-to-decimal.html) should be equal to `105701850`.
 
-Hardhat에 대한 더 자세한 가이드는 [Hardhat 문서](https://hardhat.org/hardhat-runner/docs/getting-started)를 참조하세요. 또한 이 가이드의 전체 코드 구현은 [GitHub](https://github.com/klaytn/examples/tree/main/hardhat/soulbound-tokens)에서 확인할 수 있습니다.
+For more in-depth guide on Hardhat, please refer to [Hardhat Docs](https://hardhat.org/hardhat-runner/docs/getting-started). Also, you can find the full implementation of the code for this guide on [GitHub](https://github.com/klaytn/examples/tree/main/hardhat/soulbound-tokens)
