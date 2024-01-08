@@ -1,24 +1,31 @@
-# 최종성 및 개선 사항
+# Finality and Improvements
 
-## 즉각 완결성을 비롯한 광범위한 개선 사항
+## Vast Improvements with uncompromised instant finality <a id="vast-improvements-with-uncompromised-finality"></a>
 
-### 1초 완결성 <a id="vast-improvements-with-uncompromised-finality"></a>
-더 많은 합의 노드, 더 나은 성능, 수많은 기능 개선에도 불구하고 Klaytn은 1초 블록 완결성을 유지하여 절대 되돌릴 수 없는 빠른 트랜잭션을 보장할 것입니다.
+### 1-second Finality <a id="finality"></a>
 
-### 처리량(TPS) <a id="finality"></a>
-네트워크 업그레이드와 레이어 2 솔루션의 조합을 통해 클레이튼의 성능은 더욱 향상되어 엄청난 수의 트랜잭션을 처리할 수 있게 될 것입니다.
+Even with more consensus nodes, better performance and numerous feature enhancements, Klaytn will maintain 1-second block finality to ensure speedy transactions that will never be reversed.
 
-### 확장성 <a id="throughput"></a>
-Klaytn 2.0은 쉽게 커스터마이징하고 배포할 수 있는 L2 솔루션인 서비스체인을 통해 확장성을 다룰 것입니다. 샤딩이나 롤업과 같은 다른 솔루션도 향후 계획 중입니다.
+### Throughput (TPS) <a id="throughput"></a>
 
-### 계층 네트워크 <a id="scalability"></a>
-Klaytn의 계층화된 구조는 워크로드를 분산시켜 트랜잭션을 컨센서스 노드에 효과적으로 전달하여 안정성을 높입니다. 또한 클레이튼 노드는 원활한 운영을 위해 지속적으로 강화되고 있습니다.
+Klaytn’s performance will be further boosted through a combination of network upgrades and layer 2 solutions, allowing it to handle a massive number of transactions.
 
-### 상호운용성 <a id="tiered-network"></a>
-클레이튼에서 다양한 생태계(DEX, Bridge, Oracle 등)가 번성할 것입니다. 클레이튼과 다른 블록체인 간의 자산 전송이나 교환이 훨씬 쉬워질 것입니다.
+### Scalability <a id="scalability"></a>
 
-### 사용자 경험 <a id="interoperability"></a>
-클레이튼은 모바일 환경에 적합한 빠른 트랜잭션 처리, 노출된 키를 업데이트하여 위험을 완화하는 기능, 트랜잭션 수수료 부담을 이전하는 수수료 위임 기능을 제공하여 우수한 최종 사용자 경험을 제공합니다.
+Klaytn 2.0 will address scalability through service chains, our easily customizable and deployable L2 solution. Other solutions, such as sharding or rollups, are also being planned for the future.
 
-### 개발자 경험 <a id="user-experience"></a>
-Klaytn은 이더리움 개발 도구의 전체 스택에 대한 액세스를 제공하고 이더리움 프로젝트를 손쉽게 마이그레이션할 수 있는 이더리움 동등성을 지원합니다. 또한 스마트 컨트랙트를 구현할 필요 없이 프로토콜 수준에서 빠르고 저렴한 다중 서명 기능도 지원합니다.
+### Tiered Network <a id="tiered-network"></a>
+
+Klaytn’s tiered structure delivers transactions to the consensus nodes effectively by distributing the workload for greater stability. Our nodes are also continuously fortified to ensure seamless operation.
+
+### Interoperability <a id="interoperability"></a>
+
+Various ecosystems (such as DEX, Bridge, Oracle, etc) will flourish on Klaytn. The asset transfer or exchange between Klaytn and other blockchains will be much easier.
+
+### User Experience <a id="user-experience"></a>
+
+Klaytn delivers a superior end-user experience by providing fast transaction processing suitable for mobile environments, the ability to update exposed keys to mitigate risks, and fee delegation to transfer the transaction fee burden.
+
+### Developer Experience <a id="developer-experience"></a>
+
+Klaytn supports Ethereum equivalence, which provides access to the complete stack of Ethereum development tools and enables effortless migration of Ethereum projects. In addition, fast and inexpensive multi-signature functionality is also supported at a protocol level without requiring a smart contract implementation.
