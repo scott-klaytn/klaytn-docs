@@ -1,70 +1,74 @@
 {
   "version.label": {
-    "message": "최신",
+    "message": "Current",
     "description": "The label for version current"
   },
   "sidebar.learnSidebar.category.Transactions": {
-    "message": "트랜잭션",
+    "message": "Transactions",
     "description": "The label for category Transactions in sidebar learnSidebar"
   },
   "sidebar.learnSidebar.category.Computation": {
-    "message": "계산",
+    "message": "Computation",
     "description": "The label for category Computation in sidebar learnSidebar"
   },
   "sidebar.learnSidebar.category.Storage Layer": {
-    "message": "스토리지 레이어",
+    "message": "Storage Layer",
     "description": "The label for category Storage Layer in sidebar learnSidebar"
   },
   "sidebar.learnSidebar.category.Klaytn 2.0": {
-    "message": "클레이튼 2.0",
+    "message": "Klaytn 2.0",
     "description": "The label for category Klaytn 2.0 in sidebar learnSidebar"
   },
+  "sidebar.learnSidebar.category.Operation Guide": {
+    "message": "Operation Guide",
+    "description": "The label for category Operation Guide in sidebar learnSidebar"
+  },
   "sidebar.buildSidebar.category.Get Started": {
-    "message": "시작하기",
+    "message": "Get Started",
     "description": "The label for category Get Started in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Account Basics": {
-    "message": "계정 기본 사항",
+    "message": "Account Basics",
     "description": "The label for category Account Basics in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Smart Contracts": {
-    "message": "스마트 컨트랙트",
+    "message": "Smart Contracts",
     "description": "The label for category Smart Contracts in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.IDE and Tools": {
-    "message": "IDE 및 도구",
+    "message": "IDE and Tools",
     "description": "The label for category IDE and Tools in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Deploy Smart Contracts": {
-    "message": "스마트 컨트랙트 배포",
+    "message": "Deploy Smart Contracts",
     "description": "The label for category Deploy Smart Contracts in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Sample Contracts": {
-    "message": "샘플 컨트랙트",
+    "message": "Sample Contracts",
     "description": "The label for category Sample Contracts in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Tutorials": {
-    "message": "튜토리얼",
+    "message": "Tutorials",
     "description": "The label for category Tutorials in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Build Count DApp": {
-    "message": "Count dApp 빌드하기",
+    "message": "Build Count DApp",
     "description": "The label for category Build Count DApp in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Frontend Code Overview": {
-    "message": "프론트엔드 코드 개요",
+    "message": "Frontend Code Overview",
     "description": "The label for category Frontend Code Overview in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Build Klaystagram": {
-    "message": "Klaystagram 빌드하기",
+    "message": "Build Klaystagram",
     "description": "The label for category Build Klaystagram in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Tools": {
-    "message": "도구",
+    "message": "Tools",
     "description": "The label for category Tools in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Wallets": {
-    "message": "지갑",
+    "message": "Wallets",
     "description": "The label for category Wallets in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Klaytn Safe": {
@@ -72,59 +76,71 @@
     "description": "The label for category Klaytn Safe in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Wallet Libraries": {
-    "message": "지갑 라이브러리",
+    "message": "Wallet Libraries",
     "description": "The label for category Wallet Libraries in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Oracles": {
-    "message": "오라클",
+    "message": "Oracles",
     "description": "The label for category Oracles in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Indexers": {
-    "message": "인덱서",
+    "message": "Indexers",
     "description": "The label for category Indexers in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Cross-chain": {
-    "message": "크로스 체인",
+    "message": "Cross-chain",
     "description": "The label for category Cross-chain in sidebar buildSidebar"
   },
   "sidebar.buildSidebar.category.Block Explorers": {
-    "message": "블록 탐색기",
+    "message": "Block Explorers",
     "description": "The label for category Block Explorers in sidebar buildSidebar"
   },
+  "sidebar.buildSidebar.category.Operation Guide": {
+    "message": "Operation Guide",
+    "description": "The label for category Operation Guide in sidebar buildSidebar"
+  },
+  "sidebar.buildSidebar.link.Klaytnfinder": {
+    "message": "Klaytnfinder",
+    "description": "The label for link Klaytnfinder in sidebar buildSidebar, linking to https://www.klaytnfinder.io/"
+  },
+  "sidebar.buildSidebar.doc.Verify Contracts": {
+    "message": "Verify Contracts",
+    "description": "The label for the doc item Verify Contracts in sidebar buildSidebar, linking to the doc build/tutorials/verifying-contracts"
+  },
   "sidebar.nodeSidebar.category.Endpoint Node": {
-    "message": "엔드포인트 노드",
+    "message": "Endpoint Node",
     "description": "The label for category Endpoint Node in sidebar nodeSidebar"
   },
   "sidebar.nodeSidebar.category.Core Cell": {
-    "message": "코어 셀",
+    "message": "Core Cell",
     "description": "The label for category Core Cell in sidebar nodeSidebar"
   },
   "sidebar.nodeSidebar.category.Install Core Cell": {
-    "message": "코어 셀 설치",
+    "message": "Install Core Cell",
     "description": "The label for category Install Core Cell in sidebar nodeSidebar"
   },
   "sidebar.nodeSidebar.category.Service Chain": {
-    "message": "서비스 체인",
+    "message": "Service Chain",
     "description": "The label for category Service Chain in sidebar nodeSidebar"
   },
   "sidebar.nodeSidebar.category.Quick Start": {
-    "message": "빠른 시작",
+    "message": "Quick Start",
     "description": "The label for category Quick Start in sidebar nodeSidebar"
   },
   "sidebar.nodeSidebar.category.Configure Service Chain": {
-    "message": "서비스 체인 구성",
+    "message": "Configure Service Chain",
     "description": "The label for category Configure Service Chain in sidebar nodeSidebar"
   },
   "sidebar.nodeSidebar.category.Node Package Downloads": {
-    "message": "노드 패키지 다운로드",
+    "message": "Node Package Downloads",
     "description": "The label for category Node Package Downloads in sidebar nodeSidebar"
   },
-  "sidebar.nodeSidebar.category.Node References": {
-    "message": "노드 레퍼런스",
-    "description": "The label for category Node References in sidebar nodeSidebar"
+  "sidebar.nodeSidebar.category.Operation Guide": {
+    "message": "Operation Guide",
+    "description": "The label for category Operation Guide in sidebar nodeSidebar"
   },
   "sidebar.refSidebar.category.RPC API Reference": {
-    "message": "RPC API 레퍼런스",
+    "message": "RPC API Reference",
     "description": "The label for category RPC API Reference in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.eth": {
@@ -140,23 +156,27 @@
     "description": "The label for category debug in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.Service Chain API Reference": {
-    "message": "서비스 체인 API 레퍼런스",
+    "message": "Service Chain API Reference",
     "description": "The label for category Service Chain API Reference in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.RPC Service Providers": {
-    "message": "RPC 서비스 제공업체",
+    "message": "RPC Service Providers",
     "description": "The label for category RPC Service Providers in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.SDKs and Libraries": {
-    "message": "SDK 및 라이브러리",
+    "message": "SDKs and Libraries",
     "description": "The label for category SDKs and Libraries in sidebar refSidebar"
   },
+  "sidebar.refSidebar.category.caver": {
+    "message": "caver",
+    "description": "The label for category caver in sidebar refSidebar"
+  },
   "sidebar.refSidebar.category.caver-js (1.5.0 or later)": {
-    "message": "caver-js(1.5.0 이상)",
+    "message": "caver-js (1.5.0 or later)",
     "description": "The label for category caver-js (1.5.0 or later) in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.API References": {
-    "message": "API 레퍼런스",
+    "message": "API References",
     "description": "The label for category API References in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.caver.wallet": {
@@ -171,12 +191,8 @@
     "message": "caver.rpc",
     "description": "The label for category caver.rpc in sidebar refSidebar"
   },
-  "sidebar.refSidebar.category.caver.kct": {
-    "message": "caver.kct",
-    "description": "The label for category caver.kct in sidebar refSidebar"
-  },
   "sidebar.refSidebar.category.caver-js (1.4.1 or earlier)": {
-    "message": "caver-js(1.4.1 이하)",
+    "message": "caver-js (1.4.1 or earlier)",
     "description": "The label for category caver-js (1.4.1 or earlier) in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.caver.klay": {
@@ -184,47 +200,23 @@
     "description": "The label for category caver.klay in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.Transaction": {
-    "message": "트랜잭션",
+    "message": "Transaction",
     "description": "The label for category Transaction in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.caver-java (1.5.0 or later)": {
-    "message": "caver-java(1.5.0 이상)",
+    "message": "caver-java (1.5.0 or later)",
     "description": "The label for category caver-java (1.5.0 or later) in sidebar refSidebar"
   },
   "sidebar.refSidebar.category.caver-java (1.4.0 or earlier)": {
-    "message": "caver-java(1.4.0 이하)",
+    "message": "caver-java (1.4.0 or earlier)",
     "description": "The label for category caver-java (1.4.0 or earlier) in sidebar refSidebar"
   },
-  "sidebar.buildSidebar.link.Klaytnfinder": {
-    "message": "Klaytnfinder",
-    "description": "The label for link Klaytnfinder in sidebar buildSidebar, linking to https://www.klaytnfinder.io/"
-  },
-  "sidebar.buildSidebar.doc.Verify Contracts": {
-    "message": "컨트랙트 검증하기",
-    "description": "The label for the doc item Verify Contracts in sidebar buildSidebar, linking to the doc build/tutorials/verifying-contracts"
+  "sidebar.refSidebar.category.Operation Guide": {
+    "message": "Operation Guide",
+    "description": "The label for category Operation Guide in sidebar refSidebar"
   },
   "sidebar.refSidebar.link.API References": {
-    "message": "API 레퍼런스",
+    "message": "API References",
     "description": "The label for link API References in sidebar refSidebar, linking to https://javadoc.io/doc/com.klaytn.caver/core/"
-  },
-  "sidebar.learnSidebar.category.Operation Guide": {
-    "message": "운영 가이드",
-    "description": "The label for category Operation Guide in sidebar learnSidebar"
-  },
-  "sidebar.buildSidebar.category.Operation Guide": {
-    "message": "운영 가이드",
-    "description": "The label for category Operation Guide in sidebar buildSidebar"
-  },
-  "sidebar.nodeSidebar.category.Operation Guide": {
-    "message": "운영 가이드",
-    "description": "The label for category Operation Guide in sidebar nodeSidebar"
-  },
-  "sidebar.refSidebar.category.caver": {
-    "message": "caver",
-    "description": "The label for category caver in sidebar refSidebar"
-  },
-  "sidebar.refSidebar.category.Operation Guide": {
-    "message": "운영 가이드",
-    "description": "The label for category Operation Guide in sidebar refSidebar"
   }
 }
