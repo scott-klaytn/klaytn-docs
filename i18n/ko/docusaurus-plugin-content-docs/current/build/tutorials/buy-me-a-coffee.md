@@ -1,79 +1,83 @@
-# Buy-Me-A-Coffee dApp 구축하기
+# Build a Buy-Me-A-Coffee dApp
 
-## 목차 <a href="#table-of-contents" id="table-of-contents"></a>
+## Table of Contents <a href="#table-of-contents" id="table-of-contents"></a>
 
-* [1. 프로젝트 설정](#1-project-setup)
-* [2. 커피 구매 스마트 컨트랙트 생성하기](#2-creating-a-buy-me-a-coffee-smart-contract)
-* [3. 스크립트를 사용하여 컨트랙트 기능 테스트하기](#3-testing-the-contracts-functionalities-using-scripts)
-* [4. 클레이튼 테스트넷에 BMC 스마트 컨트랙트 배포하기](#4-deploying-bmc-smart-contract)
-* [5. 리액트와 Web3Onbaord로 BMC 프론트엔드 구축하기](#5-building-the-bmc-frontend-with-react-and-web3onboard)
-* [6. Fleek을 사용하여 IPFS에 프론트엔드 코드 배포하기](#6-deploying-frontend-code-on-ipfs-using-fleek)
-* [7. 결론](#7-conclusion)
+- [1. Project Setup](#1-project-setup)
+- [2. Creating a Buy Me A Coffee Smart Contract](#2-creating-a-buy-me-a-coffee-smart-contract)
+- [3. Testing the contract’s functionalities using scripts](#3-testing-the-contracts-functionalities-using-scripts)
+- [4. Deploying BMC Smart contract to Klaytn Testnet ](#4-deploying-bmc-smart-contract)
+- [5. Building the BMC Frontend with React and Web3Onboard](#5-building-the-bmc-frontend-with-react-and-web3onboard)
+- [6. Deploying Frontend code on IPFS using Fleek](#6-deploying-frontend-code-on-ipfs-using-fleek)
+- [7. Conclusion](#7-conclusion)
 
-## 소개 <a href="#1-introduction" id="1-introduction"></a>
-Buy Me a Coffee(BMC)는 크리에이터가 팬이나 시청자로부터 금전적 지원과 기부를 받을 수 있는 플랫폼입니다. 이러한 크리에이터는 작가, 아티스트, 음악가, 동영상 제작자 등이 될 수 있습니다. 이 플랫폼의 도움으로 팬은 크리에이터의 성공 스토리에 중요한 역할을 할 수 있고, 시청자는 크리에이터가 성취한 작업에 감사를 표할 수 있으며, 크리에이터는 자신의 작업으로 수익을 창출할 수 있습니다.
+## Introduction <a href="#1-introduction" id="1-introduction"></a>
 
-크게 보면, Buy-me-a-Coffee는 크리에이터의 결제 수락 프로세스를 간소화하고 크리에이터와 시청자 간의 상호작용을 강화합니다. 이 외에도 BMC 플랫폼의 흥미로운 기능 중 일부는 다음과 같습니다. 긍정적인 측면에서 이 플랫폼을 블록체인에 적용한다고 상상해 보세요. 이제 크리에이터는 다음과 같은 더 많은 혜택을 누릴 수 있습니다:
+Buy Me a Coffee (BMC) is a platform where creators get monetary support and donations from their fans or audience. These creators could be writers, artists, musicians, video creators, et al. With the help of this platform, fans may play a significant role in the success stories of creators, audiences can express their appreciation for the job that creators accomplish, and creators can monetize their work.
 
-- 크리에이터가 받은 후원금에 대해 5%의 수수료를 부과하는 기존 BMC와 달리 완전한 결제가 가능합니다.
-- 모든 거래가 블록체인에 기록되므로 투명성이 보장됩니다.
-- 중개자 없이 팬으로부터 직접 후원금을 받을 수 있습니다.
-- 탈중앙화, 즉 플랫폼을 통제하는 중앙 기관이 없습니다.
+On a high level, Buy-me-a-Coffee simplifies the process of accepting payments for creators and enhances interactions between creators and audiences. These and more are some of the exciting features on the BMC platform. On the bright side, imagine this platform on the blockchain. Creators will now get access to more benefits, such as:
 
-이 튜토리얼에서는 탈중앙화된 버전의 Buy Me a Coffee(BMC) 플랫폼(프런트엔드 + 스마트 컨트랙트)을 구축하게 됩니다. 이 플랫폼은 서포터가 팁을 줄 수 있는 기존 BMC 플랫폼을 최소한으로 구현한 것으로, 여러분은 컨트랙트의 소유자로서 BMC 스마트 컨트랙트로 전달된 팁을 인출할 수 있습니다. 서포터들은 이 사이트를 사용하여 커피 거래에서 테스트 KLAY와 러블리 메시지를 함께 보낼 수 있습니다.
+- Complete payment, as opposed to traditional BMC, which charges 5% on any support received by the creator.
+- Transparency because all transactions are recorded on the blockchain.
+- Directly receive support fees from fans without any intermediary.
+- Decentralization, i.e., there is no central authority controlling the platform.
 
-이 가이드가 끝날 때까지 다음을 사용하여 이 dApp을 만들 수 있습니다:
-- Solidity: BMC 스마트 컨트랙트를 작성하기 위해
-- NextJs와 Tailwind: BMC dApp을 위한 프론트엔드 웹사이트 구축용
-- Web3Onboard: 클레이튼 테스트넷 Baobab에 여러 지갑을 연결할 수 있도록 합니다.
-- Fleek: Fleek을 사용하면 IPFS에서 BMC dApp을 호스팅할 수 있습니다.
+In this tutorial. you will build a decentralized version of the Buy Me a Coffee (BMC) platform (frontend + smart contract). This platform will be a minimalistic implementation of the traditional BMC platform where supporters can tip you, and you will be able to withdraw any tips that are delivered to the BMC smart contract as the contract's owner. Supporters will be able to send test KLAY and lovely messages together in a coffee transaction using this site.
 
-## 전제 조건 <a href="#2-prerequisites" id="2-prerequisites"></a>
-이 튜토리얼을 완료하려면 다음이 필요합니다:
+By the end of this guide, you will have used the following to create this dApp:
+
+- Solidity: to write the BMC smart contract
+- NextJs and Tailwind: for building a frontend website for our BMC dApp
+- Web3Onboard: to enable multiple wallet connections to Klaytn Testnet Baobab.
+- Fleek: with Fleek we can host our BMC dApp on IPFS.
+
+## Prerequisites <a href="#2-prerequisites" id="2-prerequisites"></a>
+
+To complete this tutorial, you will need:
+
 - [Node.js](https://nodejs.org/en/download/package-manager)
-- 후크 등과 같은 JavaScript 및 React 기본 사항에 익숙해야 합니다.
-- [Coinbase Wallet](https://www.coinbase.com/wallet/downloads), [MetaMask 월렛](https://metamask.io/download/) 등 필요한 월렛 설치
-- [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY를 테스트합니다.
-- RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../../references/service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
-- [Fleek](https://app.fleek.co/)에서 계정을 생성합니다.
+- Familiarity with Javascript and React basics such as hooks etc
+- Installation of  the necessary wallets, such as [Coinbase Wallet](https://www.coinbase.com/wallet/downloads), and [Metamask Wallet](https://metamask.io/download/)
+- Test KLAY from [Faucet](https://baobab.wallet.klaytn.foundation/faucet).
+- RPC Endpoint: you can obtain this from one of the supported [endpoint providers](../../references/service-providers/public-en.md).
+- Creation of an account on [Fleek](https://app.fleek.co/).
 
-## 1. 프로젝트 설정 <a id="1-project-setup"></a>
+## 1. Project Setup <a id="1-project-setup"></a>
 
-이 섹션에서는 프로젝트 폴더를 초기화하겠습니다. 이 폴더에는 두 개의 별도 폴더가 포함됩니다:
+In this section, we will initialize our project folder. This folder will contain two separate folders:
 
-1. frontend 폴더 - dApp의 프론트엔드 구현을 위한 코드가 들어 있습니다.
-2. smart-contract 폴더 - BMC dApp의 스마트 컨트랙트 코드가 들어 있습니다.
+1. frontend folder - which contains the code for the frontend implementation of our dApp
+2. smart-contract folder - which contains the smart contract code for our BMC dApp.
 
-프로젝트 폴더를 만들려면 터미널에 다음 코드를 붙여넣으세요.
+To create our project folder, paste this code in your terminal
 
 ```bash
 mkdir BuyMeACoffee
 cd BuyMeACoffee
 ```
 
-### 1.1. frontend 폴더
+### 1.1. Frontend folder
 
-이 폴더에는 프로젝트 프론트엔드 웹사이트를 구축하기 위한 도구가 들어 있습니다. 이 가이드에서는 Next의 [create-next-app](https://nextjs.org/docs/api-reference/create-next-app) 유틸리티를 사용하여 Next.js 및 Tailwind CSS 프로젝트를 부트스트랩하겠습니다. 아래 단계에 따라 필요한 종속 요소를 설치하고 frontend 폴더를 생성합니다:
+This folder contains the tools to build our project frontend website. For the sake of this guide, we will be using Next's [create-next-app](https://nextjs.org/docs/api-reference/create-next-app) utility to bootstrap our Next.js and Tailwind CSS project. Follow the steps below to install the necessary dependencies and get our frontend folder created:
 
-#### 1단계 - frontend 폴더 만들기
+#### Step 1 - Creating a frontend folder
 
-다음 앱 생성 유틸리티를 사용하여 프런트엔드 폴더를 생성하려면 BuyMeACoffee 폴더에 아래 코드를 붙여넣으세요:
+Paste the code below in your BuyMeACoffee folder to create a frontend folder using create-next-app utility:
 
 ```bash
 npx create-next-app frontend
 cd frontend
 ```
 
-#### 2단계 - Tailwind 종속성 다운로드 및 구성 설정하기
+#### Step 2 - Downloading the Tailwind dependencies and setting up its config
 
 ```bash
 npm install -D tailwindcss postcss autoprefixer
 npx tailwindcss init -p
 ```
 
-#### 3단계 - `tailwind.config.js` 수정하기
+#### Step 3 - Modifying `tailwind.config.js`
 
-`tailwind.config.js` 파일로 이동하여 아래 코드로 바꿉니다:
+Navigate to the `tailwind.config.js` file and replace with the code below:
 
 ```js
 module.exports = {
@@ -88,9 +92,9 @@ module.exports = {
 }
 ```
 
-#### 4단계 - styles/global.css에서 코드 바꾸기
+#### Step 4 - Replacing the code in styles/global.css
 
-styles/global.css 파일로 이동하여 아래 코드로 바꿉니다:
+Navigate to the styles/global.css file and replace with the code below:
 
 ```css
 @tailwind base;
@@ -98,14 +102,15 @@ styles/global.css 파일로 이동하여 아래 코드로 바꿉니다:
 @tailwind utilities;
 ```
 
-프론트엔드 프로젝트 폴더를 성공적으로 설정했습니다. 자세한 내용은 나중에 설명하겠습니다. 다음 단계는 smart-contract 폴더를 설정하는 것입니다.
+We have successfully set up our frontend project folder. More will be discussed later on. The next step is to set up the smart contract folder.
 
-### 1.2. smart-contract 폴더
+### 1.2. Smart Contract Folder
 
-이 폴더에는 BuyMeACoffee 기능을 위한 스마트 컨트랙트가 들어 있습니다. 아래 단계에 따라 필요한 종속 요소를 설치하고 smart-contract 폴더를 생성하세요:
+This folder contains the smart contract for our BuyMeACoffee functionality. Follow the steps below to install the necessary dependencies and get our smart contract folder created:
 
-#### 1단계 - smart-contract 폴더 만들기
-이 폴더를 생성하려면 프로젝트 디렉터리로 이동합니다: BuyMeACoffee로 이동하고 아래 명령을 실행하여 smart-contract 폴더를 생성합니다:
+#### Step 1 - Creating the smart contract folder
+
+To create this folder, navigate to the project directory: BuyMeACoffee and create a smart-contract folder by running the command below:
 
 ```bash
 cd ..
@@ -113,14 +118,15 @@ mkdir smart-contract
 cd smart-contract
 ```
 
-#### 2단계 - Hardhat 프로젝트 템플릿 생성하기
+#### Step 2 - Generating a hardhat project template
 
-이 템플릿은 스마트 컨트랙트를 작성, 테스트 및 배포하는 데 적합합니다. 먼저 터미널에서 아래 코드를 실행하여 새 npm 프로젝트를 시작합니다:
+This template is suitable for writing, testing and deploying smart contracts. Firstly, start a new npm project  by running the code below in your terminal:
 
 ```bash
 npm init -y
 ```
-이렇게 하면 다음과 같은 package.json 파일이 생성됩니다:
+
+This should create a package.json file for you that looks like this:
 
 ```json
 {
@@ -136,7 +142,8 @@ npm init -y
   "license": "ISC"
 }
 ```
-그런 다음, hardhat과 hardhat-toolbox 및 dotenv와 같은 기타 종속성을 설치합니다. 이렇게 하려면 package.json 파일을 아래 코드로 바꾸세요:
+
+Then, install hardhat and other dependencies such as hardhat-toolbox and dotenv. To do so, replace your package.json file with the code below:
 
 ```json
 {
@@ -150,28 +157,30 @@ npm init -y
   }
 }
 ```
-마지막으로 터미널에서 `npm install`을 실행합니다.
 
-모든 종속성(hardhat, hardhat-toolbox, dotenv)을 성공적으로 설치한 후 다음을 통해 Hardhat 설치를 확인할 수 있습니다:
+Finally, run `npm install` in your terminal.
 
-a. 현재 버전을 확인합니다:
+After successfully installing all the dependencies(hardhat, hardhat-toolbox, dotenv), you can confirm hardhat installation by:
+
+a. Checking the current version:
 
 ```bash
  npx hardhat --version 
 ```
-콘솔에 현재 설치된 버전(이 경우 **2.14.0.**)이 출력되어야 합니다.
 
-b. 프로젝트 디렉터리 보기. 현재 디렉터리에는 다음이 포함되어야 합니다:
+Your console should print out the current version installed which in our case is **2.14.0.**
 
-- **contracts/** - 스마트 컨트랙트가 들어있는 폴더입니다.
-- **scripts/** - 이 폴더에는 블록체인 네트워크에 컨트랙트를 배포하는 코드가 들어 있습니다.
-- **test/** - 이 폴더에는 스마트 컨트랙트를 테스트하는 모든 단위 테스트가 포함되어 있습니다.
-- **hardhat.config.ts** - 이 파일에는 Hardhat의 작업과 스마트 컨트랙트 배포에 중요한 구성이 포함되어 있습니다.
-스마트 컨트랙트 배포에 중요한 설정이 포함되어 있습니다.
+b. Viewing your project directory. Your current directory should include:
 
-## 2. Buy Me A Coffee 스마트 컨트랙트 만들기 <a id="creating-a-buy-me-a-coffee-contract"></a>
+- **contracts/** – this is the folder containing the smart contract.
+- **scripts/** – this folder contains code that deploys your contracts on the blockchain network
+- **test/** – this folder contains all unit tests that test your smart contract
+- **hardhat.config.ts** – this file contains configurations important for the work of Hardhat and
+  the deployment of smart contracts.
 
-이 섹션에서는 BMC 기능이 포함된 스마트 컨트랙트를 생성하겠습니다. 시작하려면 **contracts** 폴더로 이동하여 `BuyMeACoffee.sol`이라는 새 파일을 생성하고 아래에 이 코드를 붙여넣으세요:
+## 2. Creating a Buy Me A Coffee Smart Contract <a id="creating-a-buy-me-a-coffee-contract"></a>
+
+In this section we will be creating the smart contract that houses the BMC functionality. To get started, navigate to your **contracts** folder, create a new file named `BuyMeACoffee.sol` and paste this code below:
 
 ```solidity
 // SPDX-License-Identifier: UNLICENSED
@@ -233,27 +242,28 @@ contract BuyMeACoffee {
     }
 }
 ```
-각 코드 줄이 무엇을 하는지 빠르게 살펴보겠습니다:
 
-**NewCoffee** 이벤트는 buyCoffee 함수가 실행될 때 발생합니다. 발신자 주소, 발신자 이름, 전송된 메시지, 타임스탬프를 로그아웃합니다.
+Let's quickly go over what each line of code does:
 
-다음은 컨트랙트 배포자를 나타내는 **owner** 변수입니다. 그런 다음 생성자에서 **msg.sender**를 컨트랙트의 소유자로 설정합니다.
+The **NewCoffee** event is emitted when a buyCoffee function is executed. It logs out the address of the sender, the name of the sender, the message sent, and the timestamp.
 
-**coffeeId**는 생성된 커피 거래를 추적하기 위해 생성되었습니다.
+Next is the **owner** variable, which represents the contract deployer. We then set the **msg.sender** to be the owner of the contract in our constructor.
 
-그 후 커피 거래와 관련된 모든 데이터(주소 발신자, 문자열 이름, 정수 타임스탬프, 문자열 메시지)를 저장하는 **buyMeACoffee struct**를 선언했습니다. 그런 다음 이 구조체를 **idToBuyCoffee** 변수를 사용하여 아이디에 매핑했습니다.
+The **coffeeId** was created to keep track of the coffee transaction created.
 
-buyCoffee 함수는 BMC 스마트 컨트랙트의 핵심 구현입니다. 이 함수는 발신자의 이름과 주소라는 두 가지 매개변수를 받는 지불 가능한 함수입니다. 이 함수는 전송된 KLAY 금액이 0보다 큰지 확인합니다. 다음으로 coffeeId를 증가시킨 다음 커피 트랜잭션 또는 정보를 블록체인에 추가합니다. 마지막으로 커피 트랜잭션의 세부 정보를 포함하는 NewCoffee 이벤트를 발생시킵니다.
+Subsequently we declared a **buyMeACoffee struct**, which stores all the data related to a coffee transaction; address sender, string name, uint timestamp, string message. We then mapped this struct to an id using the **idToBuyCoffee** variable.
 
-컨트랙트의 총 잔액(`address(this).balance`)을 소유자에게 인출하는 **withdraw()** 함수를 만들었습니다.
+The buyCoffee function is the core implementation of BMC smart contract. It is a payable function which takes in two parameters, the name and address of the sender. It checks if the KLAY amount sent in is greater than zero. Next it increments the coffeeId, then  it adds the coffee tx or info to the blockchain. Finally it emits a NewCoffee event, which entails the details of the coffee tx.
 
-마지막으로 **getAllCoffee()** 함수가 생성되었습니다. 이 함수는 시간외에 생성된 모든 커피 트랜잭션을 반환합니다.
- 
-이제 BMC 스마트 컨트랙트 작성을 마쳤으니 다음 단계는 스마트 컨트랙트의 기능을 테스트하고, **Klaytn 테스트넷 Baobab**에서 스마트 컨트랙트를 배포하고 상호작용하는 것입니다.
+We created a **withdraw()** function to withdraw the total balance of the contract (`address(this).balance`) to the owner.
 
-## 3. 스크립트를 사용하여 컨트랙트의 기능 테스트하기 <a id="testing-bmc-contract-using-scripts"></a>
+Finally, a **getAllCoffee()** function was created. It returns all the coffee transactions created overtime.
 
-이 섹션에서는 스마트 컨트랙트의 기능을 테스트하기 위한 스크립트를 작성하겠습니다. 시작하려면 스크립트 폴더로 이동하여 `bmc-sample.js`라는 새 파일을 생성하고 다음 코드를 붙여넣습니다:
+Now that we have completed writing our BMC smart contract, the next step is to test the functionalities of our smart contract, deploy and interact with the smart contract on **Klaytn Testnet Baobab**.
+
+## 3. Testing the contract’s functionalities using scripts <a id="testing-bmc-contract-using-scripts"></a>
+
+In this section, we will be writing scripts to test the functionality of our smart contract . To get started, navigate to your scripts folder, create a new file named `bmc-sample.js` and paste the following code in it:
 
 ```js
 const hre = require("hardhat");
@@ -323,26 +333,27 @@ main().catch((error) => {
 });
 ```
 
-항상 그렇듯이 각 코드 줄이 무엇을 하는지 살펴보겠습니다:
+As always, lets go over what each line of code does:
 
-코드 상단에는 단일 주소와 여러 주소의 잔액을 가져오는 몇 가지 도우미 함수가 있음을 알 수 있습니다. 또한 코드에는 스마트 컨트랙트를 테스트하는 기능을 포함하는 메인 함수도 존재합니다.
+You will notice that at the top of the code, there exist some helper functions for getting the balances of both a single address and multiple addresses. Also in the code exists the main function which houses the functionality of testing our smart contract.
 
-**main()** 함수의 코드를 살펴보겠습니다.
+Let's do a walk through of the code in the **main()** function.
 
-먼저 `await hre.ethers.getSigners()`를 호출하여 테스트 목적으로 계정 목록(소유자, 팁퍼1, 팁퍼2, 팁퍼3)을 설정합니다.
+First we set the list of accounts (owner, tipper1, tipper2, tipper3) for test purposes by calling `await hre.ethers.getSigners()`
 
-다음으로 컨트랙트 인스턴스를 생성하고 배포했습니다. 이 경우에는 BuyMeACoffee.sol 컨트랙트입니다.
+Next we created a contract instance and deployed it. In this case the BuyMeACoffee.sol contract.
 
-그런 다음 수취인 목록을 설정하고 **getBalances()** 함수를 사용하여 잔액을 확인했습니다. 그런 다음 세 개의 다른 인스턴스에서 **buyCoffee** 함수를 호출했습니다. 다음으로 커피 거래 후 각 주소의 잔액을 확인했습니다.
+Then, we set a list of addressees, checked their balances using the **getBalances()** function. We then called the **buyCoffee** function on three different instances. Next we checked each addresses balance after the coffee transaction.
 
-그런 다음 **withdraw** 함수를 호출하여 모든 자금을 소유자 주소로 출금했습니다. 다음으로 출금 후 주소 잔액을 확인했습니다.
+That said, we then called the **withdraw** function to withdraw all funds to the owner address. Next we checked the addresses balance after withdrawal.
 
-마지막으로 **getAllCoffee()** 함수를 호출하여 스마트 컨트랙트의 모든 커피 트랜잭션을 가져왔습니다. 스크립트가 실제로 작동하는지 확인하려면 아래 명령을 실행하세요:
+Finally, we got all the coffee transactions in the smart contract by calling the **getAllCoffee()** function. To see the script in action, run the command below:
 
 ```bash
 npx hardhat run scripts/bmc-coffee.js
 ```
-터미널에 다음과 같은 출력이 표시되어야 합니다:
+
+You should have an output in your terminal that looks like this:
 
 ```bash
 Ayomitans-MacBook-Pro:smart-contract oxpampam$ npx hardhat run scripts/bmc-sample.js
@@ -365,30 +376,32 @@ At 1686307886, Bob, with 0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC, said: "Hi A
 At 1686307887, Japhet, with 0x90F79bf6EB2c4f870365E785982E1f101E93b906, said: "Hi Ox"
 ```
 
-## 4. BMC 스마트 컨트랙트 배포
+## 4. Deploying BMC Smart contract
 
-### 4.1 클레이튼 테스트넷에 BMC 스마트 컨트랙트 배포하기 <a id="deploying-bmc-contract"></a>
+### 4.1 Deploying BMC Smart contract to Klaytn Testnet  <a id="deploying-bmc-contract"></a>
 
-BMC 스마트 컨트랙트의 기능을 성공적으로 테스트했다면, 다음 단계에 따라 Klaytn 테스트넷 Baobab에 배포해 보겠습니다:
+After successfully testing the functionalities of our BMC smart contract, let’s proceed to deploy to the Klaytn Testnet Baobab in the following steps:
 
-#### 1단계 - .env 파일 만들기
+#### Step 1 - Creating a .env file
 
-이제 프로젝트 폴더에 .env 파일을 생성합니다. 이 파일은 .env 파일에서 프로세스.env로 환경 변수를 로드하는 데 도움이 됩니다.
+Now create your .env file in the project folder. This file helps us load environment variables from a .env file into process.env.
 
-터미널에 다음 명령을 붙여넣어 .env 파일을 만듭니다.
+Paste this command in your terminal to create a .env file
 
 ```bash
 touch .env
 ```
-파일을 생성한 후 다음과 같이 .env 파일을 구성해 보겠습니다:
+
+After creating your file, lets configure our .env file to look like this:
 
 ```bash
 BAOBAB_URL= "Your RPC URL"
 PRIVATE_KEY= "your private key copied from metamask wallet"
 ```
-#### 2단계 - Hardhat 구성 설정하기
 
-이 구성을 hardhat.config.js 파일에 붙여넣으세요.
+#### Step 2 - Setting up Hardhat Configs
+
+Paste this configurations in your hardhat.config.js file
 
 ```
 require("@nomicfoundation/hardhat-toolbox");
@@ -407,9 +420,10 @@ module.exports = {
   }
 };
 ```
-#### 3단계 - 배포 스크립트 만들기
 
-이 스마트 컨트랙트를 지정된 네트워크에 배포하는 새 배포 스크립트를 만들려면, scripts/deploy.js 파일을 새로 만들고 아래 코드에 붙여넣습니다:
+#### Step 3 - Creating deployment scripts
+
+To create a new deployment script that deploys this smart contract to a specified network, create a new file scripts/deploy.js and paste in the code below:
 
 ```js
 const hre = require("hardhat");
@@ -426,21 +440,24 @@ main().catch((error) => {
   process.exitCode = 1;
 });
 ```
-이제 모든 설정이 완료되었으므로 아래 명령어를 실행하여 Klaytn 테스트넷 Baobab에 배포해 보겠습니다:
+
+Now that we have our configurations all set, let’s deploy to Klaytn Testnet Baobab by running the command below:
 
 ```bash
 npx hardhat run scripts/deploy.js --network baobab
 ```
-컨트랙트가 성공적으로 배포되면, 터미널은 다음과 같이 보일 것입니다:
+
+Once the contract deploys successfully, your terminal should look like this:
 
 ```bash
 BuyMeACoffee Contract Address 0x0bEd1ed7B205d8c18e38A20b5BaB6e265A96d1AC
 ```
-클레이튼 Baobab 네트워크에 BMC 스마트 컨트랙트를 배포한 것을 축하드립니다! 검색창에 주소를 붙여넣으면 Klaytnscope에서 이 트랜잭션을 확인할 수 있습니다.
 
-### 4.2 BMC 스마트 컨트랙트와 상호작용하기 <a id="interacting-with-bmc-contract"></a>
+Congratulations on deploying your BMC smart contract on Klaytn Baobab Network! You can verify this transaction on Klaytnscope  by pasting your address in the search field.
 
-이 섹션에서는 Hardhat 스크립트를 사용해 스마트 컨트랙트로 전송된 커피 팁을 인출하는 방법을 알아볼 것입니다. 시작하려면 스크립트 폴더에 `withdraw.js` 파일을 새로 생성하고 아래 코드를 붙여넣으세요:
+### 4.2 Interacting with BMC Smart Contract  <a id="interacting-with-bmc-contract"></a>
+
+In this section, you will learn how to use hardhat scripts to withdraw the coffee tips sent into the smart contract. To get started, create a new file `withdraw.js` in your scripts folder and paste the code below:
 
 ```js
 const hre = require("hardhat");
@@ -491,16 +508,18 @@ main().catch((error) => {
   process.exitCode = 1;
 });
 ```
-위의 코드에서 볼 수 있듯이 BMC 컨트랙트를 인스턴스화한 후 스크립트는 컨트랙트 잔액이 0보다 클 때만 withdrawCoffeTips 함수를 실행합니다.  이해가 되시나요?  
 
-예! 컨트랙트에 자금이 없는 경우 "출금할 자금 없음"이라는 메시지가 표시되므로 컨트랙트 호출로 인한 가스를 절약할 수 있습니다.
+As you can see from the code above, having instantiated the BMC contract, the scripts will execute the withdrawCoffeTips function only when the contract balance is greater than zero.  Makes sense right?
 
-실제로 작동하는 모습을 보려면 아래 스크립트를 실행해 보세요:
+Yes! In the event where the contract has no funds, it prints "No funds to withdraw" hence saving us some gas from contract invocation.
+
+To see this in action, lets run the script below:
 
 ```bash
 npx hardhat run scripts/withdraw.js --network baobab
 ```
-스크립트가 성공적으로 실행되면 터미널은 다음과 같이 보일 것입니다:
+
+On successful execution of the scripts, your terminal should look like this:
 
 ```bash
 Ayomitans-MacBook-Pro:smart-contract oxpampam$ npx hardhat run scripts/withdraw.js --network baobab
@@ -509,51 +528,57 @@ Contract balance before withdrawing tips:  2.0 KLAY
 withdrawing funds..
 Owner balance after withdrawing tips 157.83298835 KLAY
 ```
-출력에서 커피 팁을 인출한 후 소유자 잔액이 2 KLAY 증가한 것을 확인할 수 있습니다.
 
-이제 컨트랙트를 배포하고 모든 기능을 테스트했으니 이제 프론트엔드를 구축할 차례입니다.
+You can see from the output that the owner balance increased by 2 KLAY after withdrawing the coffee tips.
 
-프론트엔드에서 BMC 기능을 사용할 수 있습니다. 즉, 이제 BMC 스마트 컨트랙트와 상호작용하는 방식을 시각화할 수 있습니다.
+Now that we have our contract deployed and all functionalities tested, it is time to build out the frontend.
 
-## 5. React 및 Web3Onboard로 BMC 프론트엔드 구축하기 <a id="builidng-bmc-frontend-with-react-and-web3onboard"></a>
+The frontend will bring the BMC functionality to live i.e we can now visualize how we interact with the BMC smart contract.
 
-이 섹션에서는 Next.js와 Web3Onbaord를 사용하여 dApp 프론트엔드 웹사이트를 구축하겠습니다. 시작하려면 이전에 생성한 frontend 폴더로 이동해야 합니다.
+## 5. Building the BMC Frontend with React and Web3Onboard <a id="builidng-bmc-frontend-with-react-and-web3onboard"></a>
+
+In this section, we will be building our dApp frontend website with Next.js and Web3Onbaord. To get started, you have to navigate to the frontend folder previously created.
 
 ```bash
 cd ..
 cd frontend 
 ```
-다음 단계는 BMC 프론트엔드 웹사이트를 실행하는 데 필요한 종속성을 설치하는 것입니다.  설치해야 할 패키지는 다음과 같습니다:
 
-1. Web3Onbaord 패키지: Web3-Onboard는 클레이튼 블록체인과 같은 EVM 호환 네트워크에 구축된 dApp에서 멀티월렛 호환성을 지원하는 체인에 구애받지 않는 지갑 라이브러리입니다.
-2. ethers.js: [ethers.js](https://docs.ethers.org/v6/), [web3.js](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html)와 같은 라이브러리와 함께 사용할 수 있는 Web3-Onboard 공급자. 이 가이드에서는 ethers.js를 사용하여 사용자 계정 가져오기, 잔액 가져오기, 트랜잭션 서명, 트랜잭션 보내기, 스마트 컨트랙트 읽기 및 쓰기와 같은 Klaytn 블록체인 호출을 해보겠습니다.
+The next step is to install the necessary dependencies to get our BMC frontend website up and running.  The following are the packages to be installed:
 
-중요: 프론트엔드/페이지 폴더에서 2개의 파일을 편집해야 합니다.
+1. Web3Onboard packages: Web3-Onboard is a chain-agnostic wallet library that supports multi-wallet compatibility in your dApp built on EVM-compatible networks like Klaytn Blockchain.
+2. ethers.js: Web3-Onboard provider can be used with libraries like [ethers.js](https://docs.ethers.org/v6/) and[web3.js](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html). In this guide, we will use ethers.js to make Klaytn blockchain calls like getting the user's account, fetch balance, sign transaction, send transaction, read from and write to the smart contract.
+
+Important Note: We need to edit 2 files in the  frontend/pages folder
+
 - **_app.js**
 - **index.js**
 
-### 5.1 Web3Onboard 공급자 및 지갑 모듈 설정하기 <a id="setting-up-web3onboard-provider-and-wallet-modules"></a>
+### 5.1 Setting up Web3Onboard Provider and Wallet Modules <a id="setting-up-web3onboard-provider-and-wallet-modules"></a>
 
-#### 1단계 - @web3-onboard/react 설치하기
+#### Step 1 - Installing @web3-onboard/react
 
 ```bash
 npm install @web3-onboard/react
 ```
-`_app.js` 파일에서 web3OnboardProvider와 init 함수를 가져옵니다. 자세한 내용은 나중에 설명하겠습니다.
+
+In your `_app.js` file, import the web3OnboardProvider and init function. More to be discussed later.
 
 ```js
 import { Web3OnboardProvider, init } from '@web3-onboard/react'
 ```
 
-#### 2단계 - 지갑 모듈 설치 및 인스턴스화
-이 단계에서는 지갑 모듈을 사용하여 dApp에서 지원할 지갑을 얼마든지 추가할 수 있습니다. 하지만 이 가이드에서는 Web3-Onboard 구현에 Coinbase Wallet, WalletConnect, Injected Wallet을 추가하겠습니다.
+#### Step 2 - Installing and Instantiating Wallet Modules
+
+In this step, you can add as many wallets to be supported in your dApp using the wallet modules. But for this guide, you will add Coinbase Wallet, WalletConnect, Injected Wallets to your web3-Onboard implementation.
 
 ```bash
 npm install @web3-onboard/coinbase // Coinbase Wallet
 npm install @web3-onboard/walletconnect // WalletConnect
 npm install @web3-onboard/injected-wallets  // Used to connect to Metamask
 ```
-`_app.js` 파일에서 지갑 모듈을 가져와 인스턴스화하여 dApp과 통합합니다. 각 모듈에는 폴백 JSON RPC URL 또는 기본 체인 ID와 같은 고유한 옵션 매개변수를 전달할 수 있습니다.
+
+In your `_app.js` file, import and instantiate the wallet modules to integrate with your dApp. Note that each module has its own unique options parameters to pass in, such as a fallback JSON RPC URL or default chain ID.
 
 ```js
 import coinbaseWalletModule from "@web3-onboard/coinbase";
@@ -564,18 +589,20 @@ const walletConnect = walletConnectModule();
 const injected = injectedModule();
 const modules = [coinbaseWalletSdk, walletConnect, injected];
 ```
-#### 3단계 - ethers 설치
+
+#### Step 3 - Installing ethers
 
 ```bash
 npm install --save ethers
 ```
-#### 4단계 - Web3OnboardProvider를 사용하여 Web3Onboard 인스턴스화하기
 
-Web3OnboardProvider는 글로벌 상태를 관리하는 더 나은 방법을 제공합니다. 이 기능을 사용하면 공급자 객체를 앱에 간단하게 래핑할 수 있으며 초기화된 Web3Onboard 인스턴스를 모든 하위 컴포넌트에서 사용할 수 있습니다.
+#### Step 4 - Instantiating Web3Onboard using the Web3OnboardProvider
 
-Init 함수는 Web3-Onboard를 초기화하여 모든 후크가 사용할 수 있도록 합니다.
+Web3OnboardProvider provides a better way to manage global state. It simplifies wrapping the provider object around your App and the initialized Web3Onboard instance will be available in all children components.
 
-실제로 작동하는 모습을 보려면 `_app.js` 파일에 이전 코드 아래에 코드를 붙여넣으세요:
+Init function initializes web3-Onboard and makes it available for all hooks to use.
+
+To see this in action, paste the code below the previous code in your `_app.js `file:
 
 ```js
 const ETH_MAINNET_RPC_URL = `https://ethereum-mainnet-rpc.allthatnode.com/1d322388ZEPI2cs0OHloJ6seI4Wfy36N`;
@@ -627,11 +654,11 @@ export default function App({ Component, pageProps }) {
 }
 ```
 
-앱에 모든 하위 컴포넌트에서 사용할 수 있는 공급자 객체와 web3Onboard 인스턴스를 부여하는 _app.js 파일을 설정했으면 이제 `index.js` 파일에 프런트엔드 로직을 구축해야 합니다.
+Having set up our _app.js file which grants our  App a provider object  and  web3Onboard instance available in all children components, next is to build out front-end logic in our `index.js` file
 
 - Index.js
 
-이 페이지는 컨트랙트 배포자가 출금할 BMC 스마트 컨트랙트에 대한 지갑 연결과 커피 전송을 처리합니다.
+This page handles wallet connection and sending of coffee to the BMC smart contract which is to be withdrawn by the contract deployer.
 
 ```js
 import React, { useEffect, useState } from 'react';
@@ -773,91 +800,93 @@ export default function Home() {
 }
 ```
 
-### 위 코드의 중요 참고 사항
-1. contract ABI를 가져옵니다:  contract ABI는 스마트 컨트랙트에서 호출할 수 있는 함수를 프론트엔드 코드에 지정합니다. contract ABI를 가져오려면 smart-contract 폴더로 이동하여 **artifacts/contracts/BuyMeACoffee.sol/BuyMeACoffee.json** 경로를 따라 이 파일의 텍스트를 복사합니다.  다음으로 **frontend/src** 폴더에 유틸리티 폴더를 생성했습니다. 그런 다음 새로 생성한 파일에 BuyMeACoffee.json 파일이라는 이름으로 붙여넣습니다.
+### Important notes from the code above
 
-2. BMC 컨트랙트 주소를 BMC 배포된 컨트랙트의 주소로 변경합니다.
+1. Get your contract ABI:  The contract ABI specifies to the frontend code what functions are available to call on the smart contract. To get your contract abi, navigate to your smart-contract folder and copy the text  in this file following this path **artifacts/contracts/BuyMeACoffee.sol/BuyMeACoffee.json**.  Next we created a utils folder in the **frontend/src** folder. Then pasted it in a newly created file named BuyMeACoffee.json file.
 
-이제 앱이 아직 실행 중이 아니라면 셸로 이동하여 `npm run dev`를 사용하여 로컬 서버를 시작하여 변경 사항을 테스트할 수 있습니다. 몇 초 안에 웹 사이트가 로드되고 UI가 다음과 같이 표시되어야 합니다:
+2. Change BMC Contract address to the address of your BMC deployed contract.
 
-지갑 연결 페이지:
+Now if the app isn't already running, you can go to the shell and use `npm run dev` to start a local server to test out your changes. The website should load in a few seconds and UI should look like this:
+
+Connect Wallet Page:
 
 ![](/img/build/tutorials/bmc-cw.png)
 
 ![](/img/build/tutorials/bmc-connect.png)
 
-
-커피를 보내는 프론트엔드 웹사이트:
+Frontend website to send coffee:
 
 ![](/img/build/tutorials/bmc-frontend.png)
 
-이제 웹사이트와 코드를 살펴보겠습니다.
+Now let's explore through our website and the code.
 
-위의 스크린샷에서 dApp을 처음 방문하면 지갑을 연결하라는 메시지가 표시되는 것을 이미 보셨을 것입니다.  다음으로 Web3Onboard 인스턴스에서 초기화된 사용 가능한 지갑 목록이 표시됩니다.
+You can already see from the above screenshot that when you first visit the dApp, it will ask you to connect a wallet.  Next it pops up the list of available wallets initialized in the Web3Onboard instance.
 
-그런 다음 원하는 지갑을 선택합니다. 위 이미지에서는 MetaMask를 선택했습니다. 지갑을 연결하면 웹사이트 오른쪽 상단에 연결된 지갑의 세부 정보가 포함된 UI 구성 요소가 표시됩니다. 또한 페이지에는 송금자의 이름과 메시지가 포함된 커피 거래 양식과 다른 방문자가 스마트 컨트랙트로 지불한 이전 커피가 표시됩니다.
+Then you select the wallet of your choice; from the image above, we selected MetaMask. Once you have connected your wallet, you get to see a UI component on the upper right of your website which contains the details of the connected wallet. Also on the page, you will  see the coffee transaction form which contains the name and message of the sender, as well as the previous coffee paid into the smart contract by other visitors.
 
-## 6. Fleek을 사용하여 IPFS에 프론트엔드 코드 배포하기 <a id="deploying-bmc-frontend-to-ipfs-using-fleek"></a>
+## 6. Deploying Frontend code on IPFS using Fleek <a id="deploying-bmc-frontend-to-ipfs-using-fleek"></a>
 
-Fleek은 IPFS에서 최신 사이트와 앱을 구축할 수 있는 인프라입니다. Fleek을 사용하면 사이트나 앱이 무허가, 무신뢰, 검열 저항성을 가지며 중앙 집중식 게이트키퍼가 필요 없게 됩니다. 이 튜토리얼에서는 Vercel과 같은 기존 플랫폼이 아닌 Fleek에 Next js 앱을 배포할 것입니다.
-알겠습니다! 탈중앙화 애플리케이션을 탈중앙화 호스팅 플랫폼에 배포하고 있습니다!
+Fleek is an infrastructure that enables us to build modern sites and apps on IPFS. With fleek your sites or app becomes permissionless, trustless, censorship resistant, and free of centralized gatekeepers. In this tutorial we will be deploying our Next js app to Fleek other than the traditional platforms like Vercel.
+Yeah you got it! We are deploying a decentralized application to a decentralized hosting platform!
 
-다음은 BMC dApp을 Fleek에 배포하는 단계입니다:
+The following are the steps to deploy your BMC dApp to Fleek:
 
-1. 프론트엔드 코드에서 이러한 구성을 확인합니다:
+1. Make sure to confirm these configurations in your frontend code:
 
-    a. package.json을 열고 다음 스크립트를 추가합니다:
+   a. Open package.json and add in the following scripts:
 
-    ```js
-		"scripts": {
-   		 "dev": "next",
-   		 "build": "next build",
-		  "start": "next start",
-    		  "export": "next export"  
-		}
-	```
-	b. 루트 디렉터리의 next.config.js 파일에 아래 코드를 붙여넣습니다:
+   ```js
+   	"scripts": {
+   	 "dev": "next",
+   	 "build": "next build",
+   	  "start": "next start",
+   		  "export": "next export"  
+   	}
+   ```
 
-	```js
-		module.exports = {
-  			exportTrailingSlash: true,
-		};
-	```
-자세한 내용은 이 [가이드](https://blog.fleek.co/posts/fleek-nextJS)를 참조하세요.
+   b. Paste the code below in your next.config.js file in the root directory:
 
-2. Fleek의 대시보드로 이동하여 **Add new Site**를 클릭합니다.
+   ```js
+   	module.exports = {
+   		exportTrailingSlash: true,
+   	};
+   ```
+
+For more information, visit this [guide](https://blog.fleek.co/posts/fleek-nextJS)
+
+2. Navigate to your dashboard on Fleek and click on **Add new Site**
 
 ![](/img/build/tutorials/fleek-addsite.png)
 
-3. 리포지토리에 액세스하려면 GitHub 계정을 연결합니다.
+3. Connect your GitHub account to access your repositories.
 
 ![](/img/build/tutorials/fleek-cg.png)
 
-4. 배포하려는 리포지토리를 선택합니다.
+4. Select the repository you intend to deploy.
 
-5. 다음 페이지에서 **Basic build setting** 탭에서 **Next Js** 프레임워크를 선택하면 Fleek이 다른 필드를 자동으로 채웁니다.
-6. 배포 사이트를 클릭합니다.
-7. 아래 이미지와 같이 **npm WARN EBADENGINE 지원되지 않는 엔진**이 표시될 경우 배포 사이트를 클릭합니다:
+5. On the next page,select the **Next Js** framework  in the **Basic build setting** tab, and Fleek will automatically populate the other fields.
+
+6. Click deploy site
+
+7. In the event of an **npm WARN EBADENGINE Unsupported engine** as shown in the image below:
 
 ![](/img/build/tutorials/fleek-err.png)
 
-
-**Deploy** 탭의 **Deploy setting**으로 이동하여 아래 이미지와 같이 **Docker image Name**을 **node:latest**로 변경합니다:
+Head over to **Deploy setting** in the **Deploy** tab and change the **Docker image Name** to **node:latest** as shown in the image below:
 
 ![](/img/build/tutorials/fleek-err-fix.png)
 
-8. 이제 사이트를 쉽게 빌드하고 IPFS에 배포할 수 있습니다.
-9. 생성된 링크를 클릭하여 웹사이트를 확인합니다.
+8. Now your site should build and deploy to IPFS easily.
+9. Click the link generated to view your website.
 
 ![](/img/build/tutorials/fleek-site-url.png)
 
-짜잔! BMC dApp을 IPFS에 배포하고 호스팅했습니다.
+Voila! We have our BMC dApp deployed and hosted on IPFS.
 
-## 7. 결론 <a id="conclusion"></a>
+## 7. Conclusion <a id="conclusion"></a>
 
-여기까지 읽어보셨다면 축하드립니다! 이 튜토리얼에서는 Solidity, NextJs, Web3Onbaord, Fleek을 사용해 풀스택 Buy Me A Coffee dApp을 만드는 방법을 배웠습니다. 이는 탈중앙화 플랫폼에서 호스팅되는 탈중앙화 애플리케이션을 만드는 첫 번째 단계입니다.
+If you’ve made it this far, congratulations! In this tutorial, you have learned how to create a full stack Buy Me A Coffee dApp using Solidity, NextJs, Web3Onboard and Fleek. This is the first step in creating a decentralized application hosted on a decentralized platform.
 
-여기에서 프런트엔드에서 정적으로 1 KLAY를 보내는 것 외에 커피 양을 입력하는 새로운 입력 필드를 추가하는 등 다른 옵션도 살펴볼 수 있습니다. 전체 코드베이스는 [github](https://github.com/ayo-klaytn/buy-me-a-coffee)에서 확인할 수 있으며, 이 [링크](https://spring-fog-0605.on.fleek.co/)를 사용하여 웹사이트를 테스트할 수도 있습니다.
+From here, you could  also explore some other options in your frontend like adding a new input field for the amount of coffee to be sent other than sending 1 KLAY statically. You can have access to the full codebase here on [github](https://github.com/ayo-klaytn/buy-me-a-coffee) and also test the website using this [link](https://spring-fog-0605.on.fleek.co/).
 
-더 자세한 내용은 [클레이튼 문서](https://docs.klaytn.foundation/), [Web3Onbaord 문서](https://onboard.blocknative.com/docs/modules/react), [Fleek 문서](https://docs.fleek.co/tutorials/hosting/)를 참고하시기 바랍니다. 궁금한 점이 있으시면 [Klaytn 포럼](https://forum.klaytn.foundation/)를 참조하세요.
-
+If you want more information, visit [Klaytn Docs](https://docs.klaytn.foundation/), [Web3Onboard Docs](https://onboard.blocknative.com/docs/modules/react), and [Fleek Docs](https://docs.fleek.co/tutorials/hosting/). If you have any questions, visit [Klaytn Forum](https://forum.klaytn.foundation/).
