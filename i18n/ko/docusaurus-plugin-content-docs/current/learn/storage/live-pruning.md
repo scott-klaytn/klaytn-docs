@@ -1,27 +1,27 @@
-# StateDB 라이브 프루닝
+# StateDB Live Pruning
 
-StateDB 라이브 프루닝은 [상태 마이그레이션](state-migration.md)과 동일한 문제(상태 트라이의 데이터가 계속 누적되는 문제)를 해결하기 위한 새로운 기법입니다.
+StateDB Live Pruning is a new technique to resolve the same problem as [State Migration](state-migration.md) (data in the state trie keeps accumulating).
 
-StateDB에서 데이터는 StateTrie라는 데이터 구조에 저장됩니다. 블록에서 상태 데이터가 변경되면 트라이 내의 여러 노드가 수정되고 새로운 데이터 또는 업데이트된 데이터가 저장됩니다. Klaytn 네트워크가 계속 확장됨에 따라 데이터의 양은 그에 따라 증가합니다. 이러한 문제는 오래된 데이터를 지속적으로 삭제하여 저장 공간을 절약하는 스테이트 마이그레이션을 통해 완화할 수 있습니다. 하지만 스테이트 마이그레이션은 전체 트라이를 탐색해야 하고 수동으로 트리거해야 한다는 단점이 있습니다. 이러한 한계를 극복하기 위해 StateDB 라이브 프루닝 기법이 도입되었습니다.
+In StateDB, data is stored in a data structure known as StateTrie. When state data is altered in a block, multiple nodes within the Trie are modified, and the new or updated data is then stored. As the Klaytn network continues to expand, the volume of data correspondingly increases. This challenge has been mitigated through State Migration, which involves the continuous deletion of old data, thereby conserving storage spaces. Nonetheless, State Migration has its own drawbacks, as it requires traversing the entire Trie and must be triggered manually. To counteract these limitations, the StateDB Live Pruning technique was introduced.
 
-전체 StateTrie를 탐색하지 않고도 기록 데이터를 효과적으로 제거하기 위해서는 특정 시점의 TrieNode가 오래된 것인지 아닌지를 확인하는 것이 필수적입니다. 원래의 StateTrie 구조에서는 하나의 트리노드가 여러 개의 스테이트트리에 포함될 수 있었습니다. 따라서 특정 시점에 특정 블록의 상태가 업데이트되더라도 일부 트라이노드가 중복으로 사용되어 쉽게 삭제되지 않을 수 있습니다. 이 문제를 해시 중복 문제라고 합니다.
+To effectively eliminate historical data without having to traverse the entire StateTrie, it is imperative to ascertain whether a TrieNode is outdated or not at a specific time. In the original StateTrie structure, a single TrieNode could be part of multiple StateTries. Consequently, even if the state of a specific block is updated at a given point in time, some TrieNodes may be redundantly used and cannot be readily deleted. This issue is referred to as the hash duplication problem.
 
-스테이트DB 라이브 프루닝은 32바이트 해시 뒤에 7바이트의 고유한 직렬 인덱스를 추가하여 스테이트 트라이의 이러한 문제를 해결합니다. 이렇게 하면 모든 스테이트 트라이의 모든 노드가 고유하고 특정 블록 전에 스테이트 트라이를 안전하게 삭제할 수 있습니다.
+StateDB Live Pruning resolves this problem of State Trie by adding a unique 7-byte serial index after the 32-byte Hash, thus solving this challenge. This ensures that all nodes of any state trie are unique and can safely delete StateTrie before a specific block.
 
 ```
-Hash: Keccak256 - 32바이트 해시 키
-ExtHash: Keccak256 - 32바이트 해시 키 + 7바이트 시리얼 인덱스
+Hash: Keccak256 - 32-byte Hash key
+ExtHash: Keccak256 - 32-byte Hash Key + 7-byte Serial index
 ```
 
-또한 확장 해시에서 원래 해시값을 계산하기 때문에 블록에서 StateRoot는 변경되지 않습니다. 스테이트 루트 값을 얻기 위해 ExtHash에 추가된 7바이트 시리얼 인덱스가 제거되고, 이전과 동일한 스테이트 루트 값을 얻기 위해 해시가 다시 계산되므로 이전 버전과 호환됩니다. 
+Furthermore, the StateRoot is not be changed in a block since we still calculate original hash value from extended hash. In order to obtain the State Root value, the 7-byte Serial index added to ExtHash is removed, and the Hash is recalculated to obtain the same State Root value as before, making it backward compatible.
 
-자세한 내용은 이 [미디엄 블로그](https://medium.com/klaytn/strong-efficient-management-of-blockchain-data-capacity-with-statedb-live-pruning-strong-6aaa09b05f91)를 참조하세요.
+For more information, see this [medium blog](https://medium.com/klaytn/strong-efficient-management-of-blockchain-data-capacity-with-statedb-live-pruning-strong-6aaa09b05f91).
 
-StateDB 라이브 프루닝은 정보 변경 후 48시간(기본값) 후에 데이터를 삭제하므로 과거 계정 잔액, 오래된 블록에 대한 컨트랙트 실행 등 StateDB 조회와 관련된 기능은 지원되지 않습니다. StateDB 라이브 프루닝 기능을 활성화하기 전에 운영 중인 노드의 용도를 신중하게 고려하시기 바랍니다.
+StateDB Live Pruning deletes data 48 hours (default) after the information has changed, so features related to querying StateDB are not supported such as past accounts balance, contract execution on outdated blocks, etc. Please carefully consider the purpose of the node you are operating before deciding to activate the StateDB Live Pruning feature.
 
-StateDB 라이브 프루닝을 사용하려면 다음과 같은 환경이 설정되어 있어야 합니다:
+To use StateDB Live Pruning, the following environment should be set up:
 
-1. klaytn v1.11.0 이상의 바이너리를 사용합니다.
-2. 제네시스 블록의 모든 블록을 동기화하지 않으려면 이 [링크](https://packages.klaytn.net/cypress/pruning-chaindata/)에서 정리된 DB 스냅샷을 다운로드하세요.
-3. (선택 사항) 최근 상태가 유지되는 기간에 대한 플래그 `--state.live-pruning-retention <value>`를 추가합니다. 기본값은 172800(48시간)입니다.
-4. [체인데이터 변경](../../misc/operation/chaindata-change.md) 섹션을 참고하여 DB 위치를 설정하고 여기에 `--state.live-pruning`을 추가하여 노드를 재시작합니다.
+1. Use a binary of klaytn v1.11.0 or higher.
+2. Please download the pruned DB snapshot from this [link](https://packages.klaytn.net/cypress/pruning-chaindata/) if you don't want to synchronize all blocks from the genesis block.
+3. (Optional) Add the flag `--state.live-pruning-retention <value>` for how long recent states are retained. Default value is 172800 (48 hours)
+4. Refer to the following link to set the DB location and restart the node with `--state.live-pruning` added [chaindata-change](../../misc/operation/chaindata-change.md) section.
