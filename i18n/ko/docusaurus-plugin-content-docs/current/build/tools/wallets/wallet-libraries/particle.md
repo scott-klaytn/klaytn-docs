@@ -2,27 +2,27 @@
 sidebar_label: Particle Network
 ---
 
-# Particle Network를 dApp에 통합하기
+# Integrate Particle Network into a dApp
 
 ![](/img/build/tools/particle.png)
 
-## 소개
+## Introduction
 
-[Particle Network](https://particle.network)는 웹3.0의 인텐트 중심 모듈형 액세스 레이어입니다. 개발자는 Particle의 스마트 월렛 서비스(Smart Wallet-as-a-Service)를 통해 모듈형 커스터마이징이 가능한 EOA/AA 임베디드 월렛 구성요소를 통해 원활한 사용자 경험을 큐레이션할 수 있습니다. Particle은 키 관리에 MPC-TSS를 사용하여 Google 계정, 이메일 주소, 전화번호와 같은 웹2.0 계정을 통해 사용자 온보딩을 간소화할 수 있습니다.
+[Particle Network](https://particle.network) is the intent-centric, modular access layer of Web3. With Particle's Smart Wallet-as-a-Service, developers can curate a seamless user experience through modular and customizable EOA/AA embedded wallet components. Using MPC-TSS for key management, Particle can streamline user onboarding via their Web2 accounts –such as Google accounts, email addresses, and phone numbers.
 
-개발자는 모바일과 데스크톱 플랫폼 모두에서 사용할 수 있는 API와 SDK를 통해 다양한 시나리오에 걸쳐 Particle의 서비스형 월렛을 통합할 수 있으며, 특정 애플리케이션의 특정 요구 사항에 맞는 방식으로 맞춤화 및 구현할 수 있습니다.
+Through APIs and SDKs available on both mobile and desktop platforms, developers can integrate Particle’s Wallet-as-a-Service across a variety of scenarios, with the capacity to be customized and implemented in a way that matches the specific needs of a given application.
 
-안드로이드, iOS, 리액트 네이티브, 플러터, 유니티 등 다른 플랫폼에서 Particle Network를 활용하려면 Particle의 [문서](https://docs.particle.network)를 참조하시기 바랍니다.
+To leverage Particle Network on alternative platforms, such as Android, iOS, React Native, Flutter, & Unity, kindly refer to Particle’s [documentation](https://docs.particle.network).
 
-## 전제 조건
+## Prerequisites
 
-* 실행 중인 리액트 프로젝트(`npx create-react-app project-name`을 실행하여).
-* [Particle 대시보드](https://dashboard.particle.network)의 프로젝트 ID, 클라이언트 키, 앱 ID.
-* [WalletConnect 대시보드](https://cloud.walletconnect.com/)의 WalletConnect 프로젝트 ID.
+- A working react project (by executing `npx create-react-app project-name`)
+- A project ID, client key, and app ID from the [Particle dashboard](https://dashboard.particle.network).
+- A WalletConnect project ID from the [WalletConnect dashboard](https://cloud.walletconnect.com/).
 
-## 설치
+## Installation
 
-디앱에서 Particle Network, 특히 Particle 커넥트를 활용하려면 먼저 필요한 라이브러리를 설치해야 합니다. 이 외에도 [ethers.js](https://docs.ethers.org/v6/) 또는 [web3.js](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html)와 같은 표준 Web3 라이브러리를 사용하려면 테마도 설치해야 합니다. 이 가이드에서는 ethers.js를 사용하겠습니다.
+To leverage Particle Network, specifically Particle Connect, within your dApp, you'll need to first install the required libraries. In addition to this, if you'd like to use a standard Web3 library, such as [ethers.js](https://docs.ethers.org/v6/) or [web3.js](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html), then you'll need to install theme too. For  this guide, we'll be using ethers.js.
 
 ```bash
 npm install --save @particle-network/connectkit
@@ -31,9 +31,9 @@ npm install --save @particle-network/connectors
 npm install --save ethers	
 ```
 
-## Particle 커넥트 초기화
+## Initializing Particle Connect
 
-앞서 언급한 라이브러리를 성공적으로 설치했다면, `index.js`(또는 `.ts`) 파일로 이동하여 Particle 커넥트를 구성해야 합니다. 이를 위해서는 `App` 컴포넌트를 `ModalProvider`(`@particle-network/connectkit`에서 임포트)로 래핑하고 아래에 설명된 파라미터가 포함된 `옵션`을 전달해야 합니다.
+After successfully installing the aforementioned libraries, you'll need to head into your `index.js` (or `.ts`) file to configure Particle Connect. This specifically entails wrapping your `App` component with `ModalProvider` (imported from `@particle-network/connectkit`) and passing in `options`, which contains the parameters detailed below.
 
 ```js
 import { ModalProvider } from '@particle-network/connectkit';
@@ -79,9 +79,9 @@ root.render(
 );
 ```
 
-## 월렛 연결하기
+## Connecting Wallet
 
-`index.js` 파일 설정이 완료되면, 중앙의 "Connect Wallet" 버튼을 통해 사용자를 연결할 수 있습니다. 이렇게 하려면 `@particle-network/connectkit`에서 `ConnectButton`을 해당 CSS와 함께 가져오면 됩니다. `App` 컴포넌트 내에서 `ConnectButton`을 사용하면 연결을 용이하게 하는 표준 "Connect Wallet" 버튼이 나타납니다.
+With your `index.js` file setup, you can move onto connecting your users through a central "Connect Wallet" button. To do this, you can import `ConnectButton` from `@particle-network/connectkit` alongside its corresponding css. Upon using `ConnectButton` within your `App` component, a standard "Connect Wallet" button will appear to facilitate connection.
 
 ```js
 import '@particle-network/connectkit/dist/index.css';
@@ -92,10 +92,9 @@ export const App = () => {
 };
 ```
 
+## Getting Account and Balance
 
-## 계정 및 잔액 가져오기
-
-이제 `ConnectButton`을 통해 지갑이 성공적으로 연결되었으므로 연결된 사용자의 클레이튼 주소를 조회할 수 있습니다. 또한, `@particle-network/connectkit` 내의 `useParticleProvider`에서 검색한 해당 EIP-1193 공급자 객체를 전달하여 ethers.js를 통해 현재 잔액(KLAY)을 검색할 수 있습니다.
+With a wallet now successfully connected through `ConnectButton`, you can retrieve the users associated Klaytn address. Additionally, you can retrieve its current balance (in KLAY) through ethers.js, passing in the corresponding EIP-1193 provider object retrieved from `useParticleProvider` within `@particle-network/connectkit`.
 
 ```js
 import { useParticleProvider } from '@particle-network/connectkit';
@@ -134,9 +133,9 @@ return (
 }
 ```
 
-## 지갑 연결 끊기
+## Disconnecting Wallet
 
-사용자가 로그인하면 `useParticleConnect`에서 파생된 `disconnect`를 통해 프로그래밍 방식으로 로그아웃을 강제할 수 있습니다. 이렇게 하면 현재 활성 상태인 세션이 디앱에서 분리되어 사용자가 초기 상태로 돌아갑니다.
+Once a user has logged in, you can programmatically force a logout through `disconnect` derived from `useParticleConnect`. This will disconnect the current active session from your dApp, returning the user to their initial state.
 
 ```js
 import { useParticleConnect } from '@particle-network/connectkit';
@@ -165,9 +164,9 @@ return (
 }
 ```
 
-## 사용자 정보 가져오기
+## Getting User Info
 
-기존 웹3 지갑은 Particle 커넥트를 통한 연결 메커니즘으로 제공되지만, 이메일 주소, 구글 계정, 전화번호 등과 같은 소셜 계정을 통한 소셜 로그인도 가능합니다. 사용자가 Web2 계정으로 로그인하기로 결정한 경우, `@particle-network/auth-core`에서 `getUserInfo`를 호출하면 이름, 이메일, 지갑 주소 등 주요 세부 정보가 포함된 객체를 반환할 수 있습니다.
+While traditional Web3 wallets are offered as connection mechanisms through Particle Connect, social logins through social accounts such as your email address, Google account, phone number, etc. are also available. If a user decides to log in with a Web2 account, you'll have the ability to call `getUserInfo` from `@particle-network/auth-core`, which will return an object containing key details such as their name, email, wallet addresses, etc.
 
 ```js
 import  { getUserInfo }  from  '@particle-network/auth-core';
@@ -187,9 +186,9 @@ return (
   );
 ```
 
-## 메시지 서명
+## Signing Messages
 
-공급자가 초기화되고(`useParticleProvider`를 통해) ethers.js 인스턴스에 전달되면 `signer.signMessage`를 통해 평소와 같이 메시지 서명을 시작할 수 있으며, 사용자가 확인할 수 있도록 서명 팝업이 직접 표시됩니다. 그 구체적인 성격은 사용자가 선택한 연결 메커니즘에 따라 달라집니다.
+With a provider initialized (through `useParticleProvider`) and passed into your ethers.js instance, message signing can be initiated as usual through `signer.signMessage`.This will directly display a signature popup for the user to confirm. Its specific nature will depend on which connection mechanism the user chose.
 
 ```js
  // add to the existing useState hook.
@@ -227,9 +226,9 @@ return (
 
 ```
 
-## 네이티브 트랜잭션 보내기
+## Sending Native Transaction
 
-`signer.signMessage`와 마찬가지로 동일한 공급자 메커니즘을 사용하여 네이티브 트랜잭션을 보낼 수 있으며, 이 경우 KLAY를 사용할 수 있습니다. 이는 `signer.sendTransaction`을 통해 `to`, `value` 등과 같은 표준 필드를 전달하여 수행할 수 있습니다.
+Similar to `signer.signMessage`, you can use the same provider mechanism to send a native transaction, with KLAY in this case. This can be done through `signer.sendTransaction`, passing in standard fields such as `to`, `value`, and so on.
 
 ```js
     // add to the existing useState hook.
@@ -272,11 +271,11 @@ return (
 
 ```
 
-## 스마트 컨트랙트 작업하기
+## Working with a Smart Contract
 
-1. **컨트랙트 배포하기**
+1. **Deploying a Contract**
 
-외부 Web3 지갑을 사용하든, 포함된 소셜 로그인 임베디드 지갑을 사용하든, Particle을 통해 컨트랙트 배포와 같은 더 복잡한 트랜잭션도 가능합니다. 이에 대한 예시는 아래와 같습니다.
+More complex transactions, such as contract deployments, are also possible through Particle, whether you're using an external Web3 wallet or the included social login embedded wallet. An example of this is shown below.
 
 ```js
 // add to the existing useState hook.
@@ -355,9 +354,9 @@ return (
   );
 ```
 
-이와 유사하게, `useParticleProvider`에서 파생된 Particle 연결 공급자를 활용하여 동일한 ethers.js 인스턴스를 사용하여 기존(배포된) 컨트랙트에 직접 쓰기 트랜잭션을 보낼 수 있습니다. 프론트엔드에서 이 기능은 컨트랙트 배포, 메시지 서명 또는 트랜잭션 요청의 기능을 모방합니다.
+Similarly, you can send write transactions directly to an existing (deployed) contract using the same ethers.js instance leveraging the Particle Connect provider derived from `useParticleProvider`. On the frontend, this functionality will mimic that of a contract deployment, message signature, or transaction request.
 
-2. **컨트랙트에 쓰기**
+2. **Writing to a Contract**
 
 ```js
   // add to existing useState hook
@@ -446,9 +445,9 @@ return (
 );
 ```
 
-3. **컨트랙트에서 읽기**
+3. **Reading from a Contract**
 
-지갑 자체를 사용하지 않고 순수하게 공급자만 사용하면 표준 ethers.js 인스턴스를 통해 컨트랙트에서 읽기 전용 메서드를 호출할 수 있습니다. 이 메커니즘은 이러한 작업과 관련된 일반적인 구조에서 벗어나지 않으며, 여기서 가장 큰 차이점은 통합된 `provider` 객체를 사용한다는 것입니다.
+Without using the wallet itself, purely the provider, read-only methods can be called on contracts through a standard ethers.js instance. This mechanism won't deviate from the typical structure associated with such an action, the primary difference here is the usage of the integrated `provider` object.
 
 ```js
 // add to existing useState hook
@@ -524,6 +523,6 @@ return (
   )
 ```
 
-## 다음 단계
+## Next Steps
 
-Particle Network(Particle 커넥트, Particle 인증 및 기타 SDK)에 관한 추가 가이드는 [Particle Network 문서](https://docs.particle.network) 및 [Particle Network 깃허브 계정](https://github.com/Particle-Network)을 참조하세요. 또한, Particle Network의 서비스, 향후 릴리스 및 기술 스택에 대한 자세한 내용은 [Particle Network 블로그](https://blog.particle.network)를 참조하시기 바랍니다. 또한, 이 가이드에 사용된 코드의 전체 구현은 [GitHub](https://github.com/klaytn/examples/tree/main/wallet-libraries/particle-sample)에서 확인할 수 있습니다.
+For additional guides regarding Particle Network (Particle Connect, Particle Auth, and other SDKs), please refer to the [Particle Network docs](https://docs.particle.network) and the [Particle Network GitHub account](https://github.com/Particle-Network). Additionally, you may want to visit the [Particle Network blog](https://blog.particle.network) for additional information on Particle Network's services, upcoming releases, and tech stack. Also, you can find the full implementation of the code for this guide on [GitHub](https://github.com/klaytn/examples/tree/main/wallet-libraries/particle-sample).
