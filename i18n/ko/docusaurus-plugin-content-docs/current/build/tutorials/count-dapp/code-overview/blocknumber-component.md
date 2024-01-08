@@ -1,15 +1,15 @@
-# BlockNumber 컴포넌트
+# Blocknumber Component
 
 `src/components/BlockNumber.js`:
 
-## `BlockNumber` 컴포넌트 <a id="blocknumber-component"></a>
+## `BlockNumber` component <a id="blocknumber-component"></a>
 
-1\) 전체 코드\
-2\) `BlockNumber` 컴포넌트의 역할\
-3\) `getBlockNumber` 메서드 상세 정보\
-4\) `getBlockNumber`의 간헐적 호출
+1\) Full code\
+2\) BlockNumber component's role\
+3\) `getBlockNumber` method in detail\
+4\) Call `getBlockNumber` intervally
 
-### 1\) 전체 코드 <a id="1-full-code"></a>
+### 1) Full code <a id="1-full-code"></a>
 
 ```javascript
 import React, { Component } from 'react'
@@ -81,12 +81,12 @@ class BlockNumber extends Component {
 export default BlockNumber
 ```
 
-### 2\) BlockNumber 컴포넌트의 역할 <a id="2-blocknumber-component-s-role"></a>
+### 2) BlockNumber component's role <a id="2-blocknumber-component-s-role"></a>
 
-`BlockNumber` 컴포넌트의 역할은 클레이튼의 현재 블록 번호를 표시하는 것입니다.  
-이 컴포넌트는 매초마다 `caver.klay.getBlockNumber()`를 호출하여 현재 블록 번호를 Klaytn 노드에 요청합니다. 이 컴포넌트는 응답을 받으면 `this.setState({ currentBlockNumber: blockNumber })`를 통해 DOM을 다시 렌더링합니다.
+`BlockNumber` component's role is showing Klaytn's current block number.\
+It requests the current block number to the Klaytn node by calling `caver.klay.getBlockNumber()` every second. This component re-renders DOM through `this.setState({ currentBlockNumber: blockNumber })` upon receiving the response.
 
-### 3\) `getBlockNumber` 메서드 자세히 보기 <a id="3-getblocknumber-method-in-detail"></a>
+### 3) `getBlockNumber` method in detail <a id="3-getblocknumber-method-in-detail"></a>
 
 ```javascript
 /**
@@ -100,15 +100,15 @@ getBlockNumber = async () => {
 }
 ```
 
-`getBlockNumber` 메서드는 비동기 함수로 선언됩니다. 함수를 비동기로 선언하면 비동기 값\(프로미스\)을 쉽게 처리할 수 있습니다. `cav.klay.getBlockNumber`는 프로미스를 반환하며, `await` 키워드를 추가하면 결과를 쉽게 처리할 수 있습니다.
+`getBlockNumber` method is declared as an async function. Declaring a function as async makes dealing with asynchronous value(promise) easy. `cav.klay.getBlockNumber` returns a promise, and the result can be handled easily by appending `await` keyword.
 
-비동기 대기 키워드에 대한 자세한 내용은 JavaScript MDN 사이트 [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)를 참조하세요.
+For further information about async-await keyword, see javascript's MDN site [https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function)
 
-`cav.klay.getBlockNumber()`에서 반환된 현재 블록 번호를 `blockNumber`에 할당하고 나서, `this.setState` React API를 호출합니다. `this.setState({ currentBlockNumber: blockNumber })`는 말 그대로 상태 속성 `currentBlockNumber`를 `blockNumber`로 설정합니다. `this.setState(nextState)`는 현재 상태를 업데이트하고 컴포넌트를 다시 렌더링합니다.
+After assigning the current block number returned from `cav.klay.getBlockNumber()` to `blockNumber`, we call `this.setState` React API. `this.setState({ currentBlockNumber: blockNumber })` literally sets the state property `currentBlockNumber` to `blockNumber`. `this.setState(nextState)` updates the current state and re-renders the component.
 
-React의 this.setState와 렌더링 메커니즘에 대한 자세한 내용은 React의 공식 사이트 [https://reactjs.org/docs/state-and-lifecycle.html](https://reactjs.org/docs/state-and-lifecycle.html)에서 확인할 수 있습니다.
+For further detail about React's this.setState and rendering mechanism, visit React's official site [https://reactjs.org/docs/state-and-lifecycle.html](https://reactjs.org/docs/state-and-lifecycle.html)
 
-### 4\) `getBlockNumber`를 간헐적으로 호출하기 <a id="4-call-getblocknumber-intervally"></a>
+### 4) Call `getBlockNumber` intervally <a id="4-call-getblocknumber-intervally"></a>
 
 ```javascript
 /**
@@ -119,7 +119,7 @@ componentDidMount() {
 }
 ```
 
-튜토리얼 앱에 현재 블록 번호를 생생하게 표시하고 싶기 때문에 매 초마다 `getBlockNumber`를 호출합니다(1000ms\). 이를 위해 `setInterval` 함수를 사용할 수 있습니다. `setInterval(func, delay)`은 주어진 함수를 주어진 지연 시간으로 반복해서 호출합니다. `setInterval` 함수는 나중에 이 간격을 지우는 데 사용될 간격 ID를 반환하므로 `this.intervalId` 변수에 저장합니다.
+Since we want our tutorial app to show current block number lively, we call `getBlockNumber` every second (1000ms). We can use `setInterval` function to do this. `setInterval(func, delay)` calls the given function repeatedly with given delay. `setInterval` function returns an interval id which will be used to clear this interval later, so we store it to `this.intervalId` variable.
 
 ```javascript
 /**
@@ -131,5 +131,4 @@ componentWillUnmount() {
 }
 ```
 
-컴포넌트가 마운트 해제되면 간격을 제거하여 현재 블록 번호 가져오기를 중지합니다.
-
+When the component unmounts, stop getting the current block number by removing the interval.
