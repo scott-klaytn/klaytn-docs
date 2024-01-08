@@ -1,21 +1,21 @@
-# 스마트 컨트랙트 테스트
+# Test Smart Contracts
 
-이 섹션에서는 스마트 컨트랙트를 테스트하는 방법을 소개합니다. 블록체인의 모든 트랜잭션은 되돌릴 수 없으므로 스마트 컨트랙트를 배포하기 전에 테스트하는 것이 중요합니다.
+In this section, we'll introduce how to test smart contracts. Because any transaction on the blockchain is not reversible, testing your smart contract is crucial before you deploy the contract.
 
-## Truffle을 이용한 테스트 <a href="#testing-with-truffle" id="testing-with-truffle"></a>
+## Testing with Truffle <a href="#testing-with-truffle" id="testing-with-truffle"></a>
 
-Truffle은 자동화된 테스트 프레임워크를 제공합니다. 이 프레임워크를 사용하면 두 가지 방법으로 간단하고 관리하기 쉬운 테스트를 작성할 수 있습니다:
+Truffle provides an automated testing framework. This framework lets you write simple and manageable tests in two different ways:
 
-* `JavaScript`와 `TypeScript`에서는 애플리케이션과 마찬가지로 외부에서 컨트랙트를 행사할 수 있습니다.
-* `Solidity`의 경우, 사전, 베어투메탈 시나리오에서 컨트랙트를 행사할 수 있습니다.
+- In `Javascript` and `TypeScript`, for exercising your contracts from the outside world, just like application.
+- In `Solidity`, for exercising your contracts in advances, bare-to-the-metal scenarios.
 
-### 1) 시작하기 <a href="#1-getting-started" id="1-getting-started"></a>
+### 1. Getting started <a href="#1-getting-started" id="1-getting-started"></a>
 
-[Truffle을 이용한 배포 가이드](./deploy/deploy.md#truffle)에 따라 컨트랙트를 생성하고 배포하겠습니다. 하지만 배포하기 전에 테스트 목적으로 컨트랙트에 설정자 함수 `setGreet`을 추가하겠습니다. 소스 코드는 아래와 같습니다.
+We will follow the [Deployment Guide using Truffle](./deploy/deploy.md#truffle) to create a contract and deploy it. But, before we deploy it, we will add a setter function `setGreet` to the contract for testing purpose. The source code is given below.
 
-**참고: 테스트를 위해 컨트랙트를 일부 수정했습니다.
+**NOTE:** We have made some modifications to the contract for testing.
 
-아래는 KlaytnGreeting 컨트랙트 소스 코드입니다.
+Below is KlaytnGreeting contract source code.
 
 ```
 pragma solidity 0.5.6;
@@ -52,19 +52,19 @@ contract KlaytnGreeter is Mortal {
 }
 ```
 
-1)의 `greet()` 함수가 "안녕하세요, 클레이튼입니다" 메시지를 제대로 반환하는지, 2) `setGreet()` 함수가 새로운 인사말 메시지를 제대로 설정하고 소유자가 아닌 계정이 인사말 업데이트를 시도하면 되돌아가는지 테스트해 보겠습니다.
+We will test 1) `greet()` function whether it returns "Hello, Klaytn" message properly, 2) `setGreet()` function whether it set new greeting message properly and reverts when non-owner account attempts to update the greeting.
 
-먼저 일반 Assertion에는 Chai Assertion 라이브러리(또는 여러분이 사용하는 다른 Assertion 라이브러리)를 설치하고, 스마트 컨트랙트 Assertion에는 Truffle Assertion 라이브러리를 설치합니다.
+First, we will install the Chai assertions library (or any different assertions library you use) for generic assertions, and the truffle-assertions library for the smart contract assertions.
 
 ```
 npm install --save-dev chai truffle-assertions
 ```
 
-### 2) Solidity에서 작성 테스트 <a href="#2-writing-test-in-solidity" id="2-writing-test-in-solidity"></a>
+### 2. Writing test in Solidity <a href="#2-writing-test-in-solidity" id="2-writing-test-in-solidity"></a>
 
-Solidity로 테스트하는 것은 JavaScript 테스트보다 조금 더 직관적일 수 있습니다. Solidity 테스트 컨트랙트는 JavaScript 테스트와 함께 .sol 파일로 저장됩니다.
+Testing with Solidity can be a little bit more intuitive than JavaScript tests. Solidity test contracts live alongside JavaScript tests as .sol files.
 
-test` 폴더에 `TestKlaytnGreeting.sol`이라는 파일을 생성합니다. Truffle 제품군은 테스트를 위한 헬퍼 라이브러리를 제공하므로 이를 임포트해야 합니다. Solidity 테스트 예제를 살펴보겠습니다:
+Create a file called `TestKlaytnGreeting.sol` in the `test` folder. The Truffle suite provides us with helper libraries for testing, so we need to import those. Let's take a look at the example Solidity test:
 
 ```
 pragma solidity ^0.5.6;
@@ -74,10 +74,10 @@ import "truffle/DeployedAddresses.sol";
 import "../contracts/HashMarket.sol";
 ```
 
-* Assert : `Assert.equals()`, `Assert.greaterThan()` 등과 같은 다양한 테스트 함수에 액세스할 수 있습니다.
-* DeployedAddresses : 컨트랙트를 변경할 때마다 새 주소로 다시 배포해야 합니다. 이 라이브러리를 통해 배포된 컨트랙트 주소를 얻을 수 있습니다.
+- Assert : It gives us access to various testing functions, like `Assert.equals()`, `Assert.greaterThan()`, etc.
+- DeployedAddresses : Every time you change your contract, you must redeploy it to a new address. You can get the deployed contract addresses through this library.
 
-이제 테스트 코드를 작성해 보겠습니다.
+Now, Let's write a test code.
 
 ```
 pragma solidity ^0.5.6;
@@ -101,7 +101,7 @@ contract TestKlaytnGreeter {
 }
 ```
 
-Solidity 테스트 코드를 실행합니다.
+Run your Solidity test code.
 
 ```
 $ truffle test
@@ -137,8 +137,8 @@ Compiling your contracts...
       at process._tickCallback (internal/process/next_tick.js:68:7)
 ```
 
-이런 실패했습니다. 오류 메시지인 `Error: greeting message should match (Tested: Hello, Klaytn, Against: Hello Klaytn)`를 확인해 보겠습니다. _string memory expectedGreet = "Hello Klaytn"_ 에서 `',(쉼표)'`가 누락된 것을 확인할 수 있습니다.
-코드를 수정하고 테스트를 다시 실행합니다.
+Oops, we failed. Let's check the error message,`Error: greeting message should match (Tested: Hello, Klaytn, Against: Hello Klaytn)`. I can notice the missed `',(comma)'` at _string memory expectedGreet = "Hello Klaytn"_.\
+Fix the code and run the test again.
 
 ```
 $ truffle test
@@ -159,15 +159,15 @@ Compiling your contracts...
   1 passing (5s)
 ```
 
-축하합니다! 테스트가 통과되었습니다.
+Congratulations! Your test has passed.
 
-### 3) JavaScript 작성 테스트 <a href="#3-writing-test-in-javascript" id="3-writing-test-in-javascript"></a>
+### 3. Writing test in JavaScript <a href="#3-writing-test-in-javascript" id="3-writing-test-in-javascript"></a>
 
-Truffle은 [Mocha](https://mochajs.org/) 테스트 프레임워크와 [Chai](https://www.chaijs.com/) Assertion 라이브러리를 사용하여 JavaScript 테스트를 위한 견고한 프레임워크를 제공합니다. JavaScript 테스트는 더 많은 유연성을 제공하고 더 복잡한 테스트를 작성할 수 있게 해줍니다.
+Truffle uses the [Mocha](https://mochajs.org/) testing framework and [Chai](https://www.chaijs.com/) assertion library to provide a solid framework for JavaScript test. JavaScript test gives you more flexibility and enables you to write more complex tests.
 
-`test` 디렉터리에 파일을 생성하고 이름을 `0_KlaytnGreeting.js`로 지정해 보겠습니다.
+Let's create a file and name it `0_KlaytnGreeting.js` under `test` directory.\\
 
-테스트 코드는 다음과 같습니다:
+The test code is:
 
 ```javascript
 // Interacting directly with KlaytnGreeter contract
@@ -210,23 +210,24 @@ contract("KlaytnGreeter", async(accounts) => {
 });
 ```
 
-`Mocha` 단위 테스트가 생소하신 분들은 [Mocha 문서](https://mochajs.org/#getting-started)를 확인하시기 바랍니다.
+If you are unfamiliar with `Mocha` unit test, please check the [Mocha document](https://mochajs.org/#getting-started).
 
-* `describe()` 대신 `contract()`를 사용하세요.
-  구조적으로, Truffle 테스트 코드는 Mocha의 일반적인 테스트 코드와 크게 다르지 않아야 합니다. 테스트에는 Mocha가 자동화된 테스트로 인식할 수 있는 코드가 포함되어야 합니다. Mocha와 Truffle 테스트의 차이점은 `contract()` 함수입니다.
-  
-  **참고** `contract()` 함수와 사용 가능한 클레이튼 계정을 지정하기 위한 `accounts` 배열을 사용한다는 점에 유의하세요.
-* 테스트 내 컨트랙트 추상화
+- Use `contract()` instead of `describe()`
 
-  Truffle은 테스트 중에 어떤 컨트랙트와 상호작용해야 하는지 감지할 방법이 없으므로, 컨트랙트를 명시적으로 지정해야 합니다. 이를 위한 한 가지 방법은 `artifacts.require()` 메서드를 사용하는 것입니다.
-* `it` 구문
+  Structurally, the Truffle test code shouldn't be much different from the usual test code of Mocha. Your test should contain the code that Mocha will recognize it as an automated test. The difference between Mocha and Truffle test is the contract() function.
 
-  이것은 설명과 함께 각 테스트 케이스를 나타냅니다. 테스트 실행 시 콘솔에 설명이 인쇄됩니다.
-* `Truffle-Assertion` 라이브러리
+  **NOTE** the use of the `contract()` function, and the `accounts` array for specifying available Klaytn accounts.
+- Contract abstractions within your tests
 
-  이 라이브러리를 사용하면 `truffleAssert.reverts()` 및 `truffleAssert.fails()` 함수를 제공하여 리버트 또는 기타 실패를 쉽게 테스트할 수 있습니다.
+  Since Truffle has no way of detecting which contract you'll need to interact with during test, you should specify the contract explicitly. One way to do this is by using the `artifacts.require()` method.
+- `it` syntax
 
-출력은 다음과 같아야 합니다:
+  This represents each test case with description. The description will print on the console on test-run.
+- `truffle-assertion` library
+
+  This library allows you to easily test reverts or other failures by offering the `truffleAssert.reverts()` and `truffleAssert.fails()` functions.
+
+The output should like the following:
 
 ```
 Using network 'development'.
@@ -247,14 +248,14 @@ Compiling your contracts...
   3 passing (158ms)
 ```
 
-축하합니다! 테스트가 통과되었습니다.
+Congratulations! Your test has passed.
 
-### 4) 테스트 지정하기 <a href="#4-specifying-test" id="4-specifying-test"></a>
+### 4. Specifying test <a href="#4-specifying-test" id="4-specifying-test"></a>
 
-실행할 테스트 파일을 선택할 수 있습니다.
+You can choose the test file to be executed.
 
 ```
 truffle test ./test/0_KlaytnGreeting.js
 ```
 
-자세한 내용은 [Truffle 테스트](https://www.trufflesuite.com/docs/truffle/testing/testing-your-contracts) 및 [Truffle 명령어](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#test)에서 확인하시기 바랍니다.
+For more details, please check [Truffle testing](https://www.trufflesuite.com/docs/truffle/testing/testing-your-contracts) and [Truffle commands](https://www.trufflesuite.com/docs/truffle/reference/truffle-commands#test) for details.
