@@ -1,4 +1,4 @@
-# 디렉터리 구조
+# Directory Structure
 
 ```text
 |-- contracts
@@ -24,46 +24,40 @@
     |-- App.js
 ```
 
-`contracts/`: Solidity 컨트랙트 파일을 포함합니다.
+`contracts/`: Contains Solidity contract files.
 
-`migrations/`: 스마트 컨트랙트 배포를 처리하는 JavaScript 파일을 포함합니다.
+`migrations/`: Contains JavaScript files that handle smart contract deployments.
 
-`truffle.js`: Truffle 구성을 포함합니다.
+`truffle.js`: Contains Truffle configurations.
 
-`static/`: 이미지 및 글꼴과 같은 정적 파일을 포함합니다.
+`static/`: Contains static files, such as images and fonts.
 
-`src/index.js`: 앱의 인덱스 파일. ReactDOM.render 로직이 여기에 있습니다.
+`src/index.js`: App's index file. ReactDOM.render logic is in here.
 
-`src/App.js`: 앱의 루트 컴포넌트 파일.
+`src/App.js`: App's root component file.
 
-`src/styles`: 스타일시트와 관련된 전반적인 스타일 정의입니다.
+`src/styles`: Overall style definition regarding stylesheet.
 
-`src/redux`: 컨트랙트와 상호작용하고 결과 데이터를 추적하는 API 함수를 생성합니다.
+`src/redux`: Creates API functions that interact with the contract and keep track of consequent data.
 
-`src/klaytn`: 클레이튼과의 상호작용을 지원하는 파일들이 들어 있습니다.
+`src/klaytn`: Contains files that support interaction with the Klaytn.
 
-* `src/klaytn/caver.js`: 설정된 설정 내에서 caver-js를 인스턴스화합니다.
+- `src/klaytn/caver.js`: Instantiates caver-js within the configured settings.
 
-  (참조) caver-js는 클레이튼 노드에 연결하고, 클레이튼에 배포된 노드 및 스마트 컨트랙트와 상호작용하는 RPC 호출 라이브러리입니다.
+  cf) caver-js is a RPC call library which makes connections to the Klaytn node, interacts with the nodes and smart contracts deployed on Klaytn.
 
-* `src/klaytn/Klaystagram.js`: caver-js API를 사용하여 컨트랙트 인스턴스를 생성합니다. 인스턴스를 통해 컨트랙트와 상호작용할 수 있습니다.
+- `src/klaytn/Klaystagram.js`: Creates an instance of the contract using the caver-js API. You can interact with the contract through the instance.
 
-`src/pages`: Klaystagram 앱을 구성하는 두 개의 페이지 파일을 포함합니다.
+`src/pages`: Contains two page files that compose Klaystagram app.
 
-* `src/pages/AuthPage.js`: 가입 및 로그인 양식을 포함합니다. 가입 양식에서 개인키를 생성하여 앱에서 로그인할 때 사용할 수 있습니다.
+- `src/pages/AuthPage.js`: Contains sign up and login form. You can generate private key in the sign up form and use it to login on the app.
 
-* `src/pages/FeedPage.js`: 컨트랙트에서 사진 데이터를 읽어와 사용자에게 보여줍니다. 또한 사용자는 FeedPage에서 자신의 사진을 업로드할 수 있습니다.
+- `src/pages/FeedPage.js`: Reads photo data from the contract and show them to users. Also users can upload their pictures in FeedPage.
 
-`src/components`: 페이지를 구성하는 컴포넌트 파일을 포함합니다.
+`src/components`: Contains component files that compose page.
 
-* `src/components/Feed.js`: 컨트랙트에서 데이터를 읽고 사진을 표시합니다.
+- `src/components/Feed.js`: Reads data from contract and displays photos.
 
-* `src/components/UploadPhoto.js`: 컨트랙트에 트랜잭션을 전송하여 사진을 업로드합니다.
+- `src/components/UploadPhoto.js`: Uploads photo by sending transaction to contract.
 
-* `src/components/TransferOwnership.js`: 트랜잭션을 전송하여 사진의 소유권을 이전합니다.
-
-
- 
-
-
-
+- `src/components/TransferOwnership.js`: Transfers photo's ownership by sending transaction.
