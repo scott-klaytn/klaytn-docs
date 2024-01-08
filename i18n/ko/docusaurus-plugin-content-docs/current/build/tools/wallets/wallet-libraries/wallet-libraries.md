@@ -1,6 +1,6 @@
-# 지갑 라이브러리
+# Wallet Libraries
 
-잘 알려진 지갑 라이브러리를 dApp에 통합하는 방법을 살펴봅시다.
+Let's see how to integrate well-known wallet libraries into dApp.
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
