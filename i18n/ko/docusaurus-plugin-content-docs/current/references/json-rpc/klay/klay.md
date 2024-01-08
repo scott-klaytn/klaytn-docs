@@ -1,17 +1,15 @@
 ---
-description: >-
-  계정, 블록, 트랜잭션, 노드와 관련된 API입니다.
-
+description: APIs related to accounts, blocks, transactions, and nodes.
 ---
 
 # klay
 
-네임스페이스 `klay`는 계정, 블록, 트랜잭션과 관련된 기능을 제공합니다.
-네트워크 또는 노드 구성, 필터 등과 관련된 함수를 제공합니다.
-아래 목록은 현재 클레이튼에서 지원되는 API 함수를 열거한 것입니다.
-
+The namespace `klay` provides functions related to accounts, blocks, transactions,
+configurations of networks or nodes, filters, and so on.
+The list below enumerates the API functions that are currently supported in Klaytn.
 
 ### [Account](./account.md) <a id="account"></a>
+
 - [klay_accountCreated](./account.md#klay_accountcreated)
 - [klay_accounts](./account.md#klay_accounts)
 - [klay_encodeAccountKey](./account.md#klay_encodeaccountkey)
@@ -24,8 +22,8 @@ description: >-
 - [klay_isContractAccount](./account.md#klay_iscontractaccount)
 - [klay_sign](./account.md#klay_sign)
 
-
 ### [Block](./block.md) <a id="block"></a>
+
 - [klay_blockNumber](./block.md#klay_blocknumber)
 - [klay_getHeaderByNumber](./block.md#klay_getheaderbynumber)
 - [klay_getHeaderByHash](./block.md#klay_getheaderbyhash)
@@ -44,8 +42,8 @@ description: >-
 - [klay_syncing](./block.md#klay_syncing)
 - [klay_getRewards](./block.md#klay_getrewards)
 
-
 ### [Transaction](./transaction.md) <a id="transaction"></a>
+
 - [klay_call](./transaction.md#klay_call)
 - [klay_estimateGas](./transaction.md#klay_estimategas)
 - [klay_estimateComputationCost](./transaction.md#klay_estimatecomputationcost)
@@ -63,7 +61,8 @@ description: >-
 - [klay_getDecodedAnchoringTransactionByHash](./transaction.md#klay_getDecodedAnchoringTransactionByHash)
 - [klay_resend](../eth/transaction.md#klay_resend)
 
-### [Config](./config.md) <a id="configuration"></a>
+### [Configuration](./config.md) <a id="configuration"></a>
+
 - [klay_chainID](./config.md#klay_chainid)
 - [klay_clientVersion](./config.md#klay_clientversion)
 - [klay_gasPrice](./config.md#klay_gasprice)
@@ -74,10 +73,12 @@ description: >-
 - [klay_rewardbase](./config.md#klay_rewardbase)
 
 ### [Gas](./gas.md) <a id="gas"></a>
+
 - [klay_feeHistory](./gas.md#klay_feehistory)
 - [klay_maxPriorityFeePerGas](./gas.md#klay_maxpriorityfeepergas)
 
 ### [Filter](./filter.md) <a id="filter"></a>
+
 - [klay_getFilterChanges](./filter.md#klay_getfilterchanges)
 - [klay_getFilterLogs](./filter.md#klay_getfilterlogs)
 - [klay_getLogs](./filter.md#klay_getlogs)
@@ -88,10 +89,9 @@ description: >-
 - [klay_uninstallFilter](./filter.md#klay_uninstallfilter)
 - [klay_unsubscribe](./filter.md#klay_unsubscribe)
 
+### [Miscellaneous](./misc.md) <a id="miscellaneous"></a>
 
-### [기타](./misc.md) <a id="miscellaneous"></a>
 - [klay_sha3](./misc.md#klay_sha3)
 - [klay_recoverFromTransaction](./misc.md#klay_recoverFromTransaction)
 - [klay_recoverFromMessage](./misc.md#klay_recoverFromMessage)
 - [klay_forkStatus](./misc.md#klay_forkStatus)
-
