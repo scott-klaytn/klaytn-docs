@@ -1,23 +1,23 @@
-# 메타버스 패키지
+# Metaverse Package
 
-## 진입 장벽 낮추기 <a href="#lowering-the-barrier-to-entry" id="lowering-the-barrier-to-entry"></a>
+## Lowering the barrier to entry <a href="#lowering-the-barrier-to-entry" id="lowering-the-barrier-to-entry"></a>
 
-![Klaytn은 내장된 L2 솔루션을 포함한 엔드투엔드 통합을 제공합니다](/img/learn/mainnet-integration.png)
+![Klaytn offers end-to-end integration including a built-in L2 solution](/img/learn/mainnet-integration.png)
 
-블록체인 기술이 메타버스의 중요한 신뢰 계층으로 작용할 것임은 분명합니다.
+It is clear that blockchain technology will serve as the critical trust layer for the metaverse.
 
-그러나 블록체인 기술의 초기 단계와 올바른 도구와 구성 요소를 선택해야 하는 어려움 사이에서 블록체인 개발은 여전히 장애물로 가득 차 있습니다.
+However, between the fledgling state of blockchain tech and the difficulty of selecting the right tools and components, blockchain development is still filled with hurdles.
 
-그렇기 때문에 저희는 메타버스 빌더가 최대한 원활하게 블록체인 세계에 진입할 수 있도록 설계된 엔드투엔드 패키지를 준비했습니다.
+That’s why we put together an end-to-end package that’s designed to help builders of metaverse enter the blockchain world as smoothly as possible.
 
-## 클레이튼의 '메타버스 패키지' <a href="#klaytns-metaverse-package" id="klaytns-metaverse-package"></a>
+## Klaytn’s ‘Metaverse Package’ <a href="#klaytns-metaverse-package" id="klaytns-metaverse-package"></a>
 
-기본 인프라: 엔드투엔드 블록체인 통합 및 구축을 위한 도구 세트 맞춤형 L2 솔루션 SDK 및 스마트 컨트랙트 라이브러리 지갑 및 체인 탐색기 분산 스토리지 솔루션 오라클 지원 브릿지
+Primary Infrastructure: Tool sets for end-to-end blockchain integration and building Customized L2 solution SDKs and smart contract libraries Wallets and chain explorers Distributed storage solutions Oracle support Bridges
 
-보조 인프라: 제품 및 서비스 지원을 위한 에코시스템 통합/추상화 서비스 스테이블코인 통합 DAO NFT 마켓플레이스 DEX 및 DeFi 전통 금융 인터페이스
+Secondary Infrastructure: Ecosystem for supporting products and services Integration/abstraction services Stablecoin integrations DAOs NFT Marketplaces DEX and DeFi Traditional finance interfaces
 
-- 이 패키지는 전담 패키지 관리자가 관리합니다.
+• This package will be managed by our dedicated package manager.
 
-- 빌더는 레이어 2를 쉽게 빌드하고 커스터마이즈할 수 있을 뿐만 아니라 에셋을 생성/전송할 수도 있습니다.
+• Builders can easily build and customize Layer 2 as well as create/transfer assets.
 
-메타버스 패키지를 사용하면 블록체인의 복잡성이 더 이상 여러분의 열망을 실현하는 데 방해가 되지 않습니다.
+With our metaverse package, the complexity of blockchain will no longer get in the way of realizing your aspirations.
