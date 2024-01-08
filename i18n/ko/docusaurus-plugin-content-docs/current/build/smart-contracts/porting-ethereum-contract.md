@@ -1,41 +1,41 @@
-# 이더리움 컨트랙트 가져오기
+# Import Ethereum Contracts
 
-대부분의 경우 클레이튼에서 이더리움 컨트랙트를 수정하지 않고 사용할 수 있습니다.
-하지만 다음 두 가지 문제에 유의하세요.  
+In most cases, you can use Ethereum contracts on Klaytn without any modification.
+However, be aware of the following two issues.
 
-## Solidity 지원 <a id="solidity-support"></a>
+## Solidity Support <a id="solidity-support"></a>
 
-* Baobab 네트워크는 현재 **London** 이더리움 가상머신(EVM)과 호환됩니다.
-* Cypress 네트워크는 현재 **London** 이더리움 가상 머신(EVM)과 호환됩니다.
+- Baobab network is currently compatible with **London** Ethereum Virtual Machine (EVM).
+- Cypress network is currently compatible with **London** Ethereum Virtual Machine (EVM).
 
 :::note
 
-v1.7.0 프로토콜 업그레이드 - **Istanbul** 하드포크 아이템과 클레이튼 자체 아이템을 포함한 호환되지 않는 변경 사항.
-Baobab 네트워크의 경우 블록 번호 `#75,373,312`, Cypress 네트워크의 경우 `#86,816,005`부터 활성화되었습니다.
+v1.7.0 Protocol Upgrade - incompatible changes including **Istanbul** hard fork items and Klaytn's own items.
+It has been enabled from block number `#75,373,312` in case of Baobab network and `#86,816,005` for the Cypress network.
 
-v1.7.3 프로토콜 업그레이드 - **London** 하드포크의 기본 수수료를 포함한 호환되지 않는 변경 사항.
-Baobab 네트워크의 경우 블록 번호 '#80,295,291', Cypress 네트워크의 경우 '#86,816,005'부터 활성화되었습니다.
+v1.7.3 Protocol Upgrade - incompatible changes including Base Fee from the **London** hard fork.
+It has been enabled from block number `#80,295,291` in case of Baobab network and `#86,816,005` for the Cypress network.
 
-v1.8.0 프로토콜 업그레이드 - **London** 하드포크의 기본 수수료를 포함한 호환되지 않는 변경 사항.
-Baobab 네트워크의 경우 블록 번호 '#86,513,895', Cypress 네트워크의 경우 '#86,816,005'부터 활성화되었습니다.
+v1.8.0 Protocol Upgrade - incompatible changes including Base Fee from the **London** hard fork.
+It has been enabled from block number `#86,513,895` in case of Baobab network and `#86,816,005` for the Cypress network.
 
 :::
 
-클레이튼의 다른 EVM 버전과의 하위 호환성은 보장되지 않습니다.
-따라서 프로토콜 업그레이드 상태에 따라 올바른 타겟 옵션으로 Solidity 코드를 컴파일할 것을 권장합니다.
+Backward compatibility is not guaranteed with other EVM versions on Klaytn.
+Thus, it is highly recommended compiling Solidity code with the correct target option according to the protocol upgrade status.
 
-* Baobab: --evm-version london
-* Cypress: --evm-version london
-* 기타(프라이빗/서비스체인): 프로토콜 업그레이드 상태에 따라 결정됨
+- Baobab: --evm-version london
+- Cypress: --evm-version london
+- Others(private/service chain): determined according to the protocol upgrade status
 
-[solc의 EVM 버전 설정 방법](https://solidity.readthedocs.io/en/latest/using-the-compiler.html#setting-the-evm-version-to-target)을 참조하세요.
+Please refer to [how to set the EVM version of solc](https://solidity.readthedocs.io/en/latest/using-the-compiler.html#setting-the-evm-version-to-target).
 
-명령의 예는 아래와 같습니다:
+An example command is shown below:
 
 ```
 $ solc --evm-version london contract.sol
 ```
 
-## 분리된 키 쌍(Key Pairs) <a id="decoupled-key-pairs"></a>
+## Decoupled Key Pairs <a id="decoupled-key-pairs"></a>
 
-클레이튼 [주소에서 키 쌍 분리](../../learn/accounts.md#decoupling-key-pairs-from-addresses). 사용자가 [계정을 업데이트](../../learn/transactions/basic.md#txtypeaccountupdate)하는 경우 특정 계정의 개인 키가 다른 키로 대체됩니다. 대부분의 경우 비즈니스 로직에는 영향을 미치지 않습니다. 그러나 비즈니스 로직에 ecrecover가 포함된 경우에는 validateSender 사용을 고려해야 합니다. 자세한 내용은 [여기](../../learn/computation/precompiled-contracts.md)를 참조하세요.
+Klaytn [decouples key pairs from addresses](../../learn/accounts.md#decoupling-key-pairs-from-addresses). If user [updates account](../../learn/transactions/basic.md#txtypeaccountupdate), the private key for a specific account is replaced with another one. Most cases this will not affect your business logic. However if your business logic includes ecrecover, you should consider using validateSender. For more details, refer to [here](../../learn/computation/precompiled-contracts.md).
