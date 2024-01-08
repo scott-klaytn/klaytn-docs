@@ -1,27 +1,27 @@
 # Truffle
 
-## Truffle과의 호환성 <a id="compatibility-with-truffle"></a>
+## Compatibility with Truffle <a id="compatibility-with-truffle"></a>
 
-클레이튼에서는 Solidity로 작성된 스마트 컨트랙트를 Truffle을 통해 컴파일하고 배포할 수 있습니다. 현재 클레이튼은 이 글을 쓰는 시점에 최신 버전인 Truffle v5.0.26까지 지원합니다. Truffle에 대한 자세한 내용은 아래 웹사이트에서 확인할 수 있습니다.
+In Klaytn, a smart contract written in Solidity can be compiled and deployed via Truffle. At the moment, Klaytn supports up to Truffle v5.0.26, the latest version at the time of writing. Please find details about Truffle on the websites below.
 
-- [Truffle 개요](https://trufflesuite.com/docs/truffle/overview)
-- [Truffle 저장소](https://github.com/trufflesuite/truffle)
+- [Truffle overview](https://trufflesuite.com/docs/truffle/overview)
+- [Truffle repository](https://github.com/trufflesuite/truffle)
 
-Truffle은 다음과 같이 설치할 수 있습니다:
+You can install Truffle as the following:
 
 ```text
 $ sudo npm install -g truffle
 ```
 
-로컬 EN을 실행 중인 경우 Truffle 프레임워크를 사용하여 컨트랙트를 직접 배포할 수 있습니다. 자세한 내용은 이 [링크](../deploy/ken.md#deploying-a-smart-contract-using-truffle)를 참조하세요.
+If you have a local EN running, you can deploy contracts directly with truffle framework. For more details, refer to this [link](../deploy/ken.md#deploying-a-smart-contract-using-truffle).
 
-원격 EN 노드로 배포하려면 [Truffle 지갑 공급자 클레이튼](https://www.npmjs.com/package/truffle-hdwallet-provider-klaytn)을 사용해야 합니다.
+If you want to deploy with a remote EN node, you should use [truffle-hdwallet-provider-klaytn](https://www.npmjs.com/package/truffle-hdwallet-provider-klaytn).
 
-## Truffle-hdwallet-provider-klaytn 구성하기 <a id="configuring-truffle-hdwallet-provider-klaytn"></a>
+## Configuring truffle-hdwallet-provider-klaytn <a id="configuring-truffle-hdwallet-provider-klaytn"></a>
 
-Truffle-hdwallet-provider-klaytn은 truffle-hdwallet-provider에서 포크된 JavaScript HD 지갑 공급자입니다.
+truffle-hdwallet-provider-klaytn is a JavaScript HD wallet provider forked from truffle-hdwallet-provider.
 
-다음과 같이 설치합니다:
+Install as the following:
 
 ```text
 $ nvm use 10
@@ -33,9 +33,9 @@ $ nvm use 12 # for node v12 and higher
 $ yarn install truffle-hdwallet-provider-klaytn@1.4.1
 ```
 
-`Truffle-config.js`를 아래와 같이 설정합니다.
+Set `truffle-config.js` as below.
 
-### 니모닉 사용 <a id="using-a-mnemonic"></a>
+### Using a mnemonic <a id="using-a-mnemonic"></a>
 
 ```javascript
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
@@ -142,7 +142,7 @@ module.exports = {
 };
 ```
 
-### 개인 키 사용 <a id="using-a-private-key"></a>
+### Using a private key <a id="using-a-private-key"></a>
 
 ```javascript
 const HDWalletProvider = require("truffle-hdwallet-provider-klaytn");
@@ -249,17 +249,17 @@ module.exports = {
 };
 ```
 
-**경고: 니모닉 또는 개인 키가 노출되지 않도록 각별히 주의하세요.**
+**WARNING: Be very careful not to expose your mneomonic or private key.**
 
-클레이튼에 배포하기 :
+Deploying on Klaytn :
 
 ```bash
 $ truffle deploy --network baobab  # testnet
 $ truffle deploy --network cypress # mainnet
 ```
 
-클레이튼에서 트랜잭션 만들기 :
-([Truffle 문서 빠른 시작 - 프로젝트 생성하기](https://www.trufflesuite.com/docs/truffle/quickstart#creating-a-project)의 예제 사용)
+Making transaction on Klaytn :
+(using an example from [Truffle Docs quick start - Creating a project](https://www.trufflesuite.com/docs/truffle/quickstart#creating-a-project))
 
 ```bash
 $ truffle console --network baobab
