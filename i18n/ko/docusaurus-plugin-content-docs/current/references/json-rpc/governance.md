@@ -1,73 +1,72 @@
 ---
-description: >-
-  클레이튼 거버넌스와 관련된 API입니다.
-
+description: APIs related to the Klaytn Governance.
 ---
 
 # governance
 
-네트워크의 거버넌스를 위해 Klaytn은 `governance` 네임스페이스에서 다음과 같은 API를 제공합니다.
+For the governance of the network, Klaytn provides the following APIs under `governance` namespace.
 
-클레이튼에는 세 가지 거버넌스 모드가 있습니다.
-* `none`: 네트워크에 참여하는 모든 노드가 구성을 변경할 수 있는 권한을 가집니다.
-* `single`: 지정된 노드 하나만 구성을 변경할 수 있는 권한이 있습니다.
-* `ballot`: 투표권이 있는 모든 노드가 변경에 투표할 수 있습니다. 전체 투표권의 절반 이상이 모이면 투표가 통과됩니다.
+In Klaytn, there are three different governance modes.
 
-거버넌스 모드에 따라 제안자는 단가, 최소 스테이킹 금액 등과 같은 네트워크 파라미터에 대해 투표할 수 있습니다.
-제안자가 되려면 후보 노드는 최소한의 KLAY를 예치해야 합니다.
-자격을 갖춘 모든 노드는 항상 블록을 제안할 수 있지만, 제안할 수 있는 기회는 지분 금액에 따라 제한됩니다.
+- `none`: All nodes participating in the network have the right to change the configuration.
+- `single`: Only one designated node has the right to change the configuration.
+- `ballot`: All nodes which have voting power can vote for a change. When more than half of total voting power gathered, the vote passes.
 
-일정 기간 내에 제안자가 될 수 있는 슬롯 수(기회 수)를 결정하기 위해 스테이킹 비율을 계산할 때,
-숫자를 반올림하여 노드에 슬롯이 할당되지 않을 수 있습니다.
-그러나 최소한의 KLAY를 예치한 적격 노드에게는 슬롯이 보장됩니다.
+Based on the governance mode, a proposer is able to cast a vote about network parameters such as unit price, minimum staking amount, etc.
+In order to be a proposer, the candidate nodes are required to deposit a minimum amount of KLAY.
+All the qualified nodes are always eligible to propose a block, but the chance is propositional to the stake amount.
 
-즉, 자격이 없는 노드(충분한 양의 KLAY를 스테이킹하지 않은 노드)는 블록을 제안하거나 검증할 기회가 주어지지 않습니다.
+When calculating the staking proportions to determine the number of slots(the number of chances) to become a proposer within a certain period,
+it is possible that a node may not be allocated any slots as a result of rounding numbers.
+However, a slot is guaranteed to a qualified node that has deposited a minimum amount of KLAY.
 
-**주의**
-- 거버넌스 노드는 예외적으로 항상 `single`` 모드에서 자격이 부여됩니다.
-- 블록이 제안될 때 투표가 진행됩니다. 이 투표는 블록이 제안된 epoch를 포함하여 두 개의 epoch 이후에 적용됩니다.
-예외적으로 추가 검증자/제거 검증자만 즉시 적용됩니다.
+That is, if a node is not qualified - the node does not stake enough amount of KLAY - it won't be given a chance to propose nor validate a block.
+
+**Caveat**
+
+- A governing node is always qualified in `single` mode as an exception.
+- A vote will be casted when a block is proposed. This vote is applied after two epochs including the epoch where the block is proposed.
+  As an exception, only addValidator/removeValidator is applied immediately.
 
 ## governance_vote <a id="governance_vote"></a>
 
-`vote` 메서드는 새로운 투표를 제출합니다. 거버넌스 모드에 따라 노드에 투표 권한이 있는 경우 투표를 할 수 있습니다. 그렇지 않은 경우 오류 메시지가 반환되고 투표가 무시됩니다.
+The `vote` method submits a new vote. If the node has the right to vote based on governance mode, the vote can be placed. If not, an error message will be returned and the vote will be ignored.
 
-**매개변수**
+**Parameters**
 
-- `key` : 변경할 구성 설정의 이름입니다. 키의 형식은 `domain.field`입니다.
-- `value` : 각 키에 대한 다양한 유형의 값입니다.
-  
-| Key | 설명
-| -------------- | ------------------------------------------------------------ |
-| `"governance.governancemode"`| `STRING`. 세 가지 거버넌스 모드 중 하나입니다. `"none"`, `"single"`, `"ballot"`||.
-| `"governance.governingnode"`| `ADDRESS`. 지정된 거버넌스 노드의 주소. 거버넌스 모드가 `"single"`인 경우에만 작동합니다(예: `"0xe733cb4d279da696f30d470f8c04decb54fcb0d2"` |).
-| `"governance.unitprice"`| `NUMBER`. 단위 가스 가격. 예: `25000000000`|
-| `"governance.addvalidator"`| `ADDRESS`. 새 검증자 후보의 주소. 예: `0xe733cb4d279da696f30d470f8c04decb54fcb0d2`|
-| `"governance.removevalidator"`| `ADDRESS`. 제거해야 하는 현재 유효성 검사기의 주소. 예: `0xe733cb4d279da696f30d470f8c04decb54fcb0d2`|
-| `"governance.deriveshaimpl"`| `NUMBER`. 블록 헤더에 트랜잭션 해시 및 영수증 해시를 생성하는 정책입니다. 사용 가능한 옵션은 [여기](https://github.com/klaytn/klaytn/blob/v1.10.0/blockchain/types/derive_sha.go#L34)를 참조하세요. 예: `2`(파생샤콘캣) | `"거버넌스
-| `"governance.govparamcontract"`| `ADDRESS`. GovParam 컨트랙트의 주소. 예: `0xe733cb4d279da696f30d470f8c04decb54fcb0d2`|
-| `"istanbul.epoch"` | `NUMBER`. 투표가 블록 단위로 수집되는 기간입니다. epoch가 종료되면 통과되지 않은 모든 투표가 지워집니다. 예: `86400`|
-| `"istanbul.committeesize"`| `NUMBER`. 위원회의 검증자 수.(체인 구성에서 `sub`) 예: `7`|
-| `"reward.mintingamount"`| `STRING`. 블록이 생성될 때 발행되는 peb의 양입니다. 값은 큰따옴표로 묶어야 합니다. 예: `"9600000000000000000"`|| `"reward.ratio"`.
-| `"reward.ratio"`| `STRING`. CN/KGF/KIR에 대한 분포율을 `"/"`로 구분합니다. 모든 값의 합은 `100`이어야 합니다. 예: `"50/40/10"`은 CN 50%, KGF 40%, KIR 10% 를 의미합니다.
-| `"reward.kip82ratio"`| `STRING`. 블록 제안자와 스트라이커의 분배 비율을 `"/"`로 구분합니다. 모든 값의 합은 `"100"`이어야 합니다. 자세한 내용은 [KIP-82](https://github.com/klaytn/kips/blob/master/KIPs/kip-82.md)를 참고하세요. 예를 들어 `"20/80"`은 제안자가 20%를, 스트라이커가 80%를 가져간다는 의미입니다. |
-| `"reward.useginicoeff"`| `BOOL`. Gini 계수를 사용할지 여부를 설정합니다. `true`, `false`|
-| `"reward.deferredtxfee"`| `BOOL`. 제안자에게 트랜잭션 수수료를 제공하는 방식입니다. true이면 트랜잭션 수수료가 블록 보상과 합산되어 제안자, KIR, KGF에게 분배된다는 의미입니다. 그렇지 않으면 트랜잭션 수수료가 모두 제안자에게 지급됩니다. `true`, `false`|
-| `"reward.minimumstake"`| `STRING`. CN(컨센서스 노드)이 되기 위해 필요한 Klay의 양입니다. 값은 큰따옴표로 묶어야 합니다. 예: `"5000000"`|
-| `"kip71.lowerboundbasefee"` | `NUMBER`. 가능한 가장 낮은 기본 수수료입니다. 자세한 내용은 [KIP-71](https://github.com/klaytn/kips/blob/main/KIPs/kip-71.md) 참조. 예: `25000000000` || `"kip71.lowerboundbasefee"| `NUMBER`.
-| `"kip71.upperboundbasefee"` | `NUMBER`. 가능한 가장 높은 기본 수수료. 예: `750000000000` | `750000000000`.
-| `"kip71.gastarget"` | `NUMBER`. 기본 수수료가 달성하고자 하는 블록 가스. 부모 블록이 가스 목표보다 많으면 기본 수수료가 증가하고, 부모 블록이 가스 목표보다 적으면 기본 수수료가 감소합니다. 예: `30000000` | `30000000`.
-| `"kip71.basefeedenominator"` | `NUMBER`. 기본 수수료가 변경되는 속도를 제어합니다. 예: `20` | `20`.
-| `"kip71.maxblockgasusedforbasefee"` | `NUMBER`. 기본 수수료 계산에서 인식되는 최대 블록 가스. 예: `60000000` | `NUMBER`.
+- `Key` : Name of the configuration setting to be changed. Key has the form of `domain.field`
+- `Value` : Various types of value for each key.
 
+| Key                                 | Description                                                                                                                                                                                                                                                                                       |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `"governance.governancemode"`       | `STRING`. One of the three governance modes. `"none"`, `"single"`, `"ballot"`                                                                                                                                                                                                                     |
+| `"governance.governingnode"`        | `ADDRESS`. Designated governing node's address. It only works if the governance mode is `"single"` e.g.,`"0xe733cb4d279da696f30d470f8c04decb54fcb0d2"`                                                                                                                                            |
+| `"governance.unitprice"`            | `NUMBER`. Price of unit gas. e.g., `25000000000`                                                                                                                                                                                                                                                  |
+| `"governance.addvalidator"`         | `ADDRESS`. Address of a new validator candidate. e.g., `0xe733cb4d279da696f30d470f8c04decb54fcb0d2`                                                                                                                                                                                               |
+| `"governance.removevalidator"`      | `ADDRESS`. Address of a current validator which need to be removed. e.g., `0xe733cb4d279da696f30d470f8c04decb54fcb0d2`                                                                                                                                                                            |
+| `"governance.deriveshaimpl"`        | `NUMBER`. Policy to generate the transaction hash and receipt hash in a block header. See [here](https://github.com/klaytn/klaytn/blob/v1.10.0/blockchain/types/derive_sha.go#L34) for available options. e.g., `2` (DeriveShaConcat)                                          |
+| `"governance.govparamcontract"`     | `ADDRESS`. Address of the GovParam contract. e.g., `0xe733cb4d279da696f30d470f8c04decb54fcb0d2`                                                                                                                                                                                                   |
+| `"istanbul.epoch"`                  | `NUMBER`. A period in which votes are gathered in blocks. When an epoch end, all votes which haven't been passed will be cleared. e.g., `86400`                                                                                                                                                   |
+| `"istanbul.committeesize"`          | `NUMBER`. The number of validators in a committee.(`sub` in chain configuration) e.g., `7`                                                                                                                                                                                     |
+| `"reward.mintingamount"`            | `STRING`. Amount of Peb minted when a block is generated. Double quotation marks are needed for a value. e.g., `"9600000000000000000"`                                                                                                                                                            |
+| `"reward.ratio"`                    | `STRING`. Distribution rate for a CN/KGF/KIR separated by `"/"`. The sum of all values has to be `100`. e.g., `"50/40/10"` meaning CN 50%, KGF 40%, KIR 10%                                                                                                                                       |
+| `"reward.kip82ratio"`               | `STRING`. Distribution ratio of the block proposer to stakers separated by `"/"`. The sum of all values has to be `"100"`. See [KIP-82](https://github.com/klaytn/kips/blob/master/KIPs/kip-82.md) for further details. e.g., `"20/80"` means that the proposer takes 20% while stakers take 80%. |
+| `"reward.useginicoeff"`             | `BOOL`. Use the Gini coefficient or not. `true`, `false`                                                                                                                                                                                                                                          |
+| `"reward.deferredtxfee"`            | `BOOL`. The way of giving transaction fee to a proposer. If true, it means the tx fee will be summed up with block reward and distributed to the proposer, KIR and KGF. If not, all tx fee will be given to the proposer. `true`, `false`                                                         |
+| `"reward.minimumstake"`             | `STRING`. Amount of Klay required to be a CN (Consensus Node). Double quotation marks are needed for a value. e.g., `"5000000"`                                                                                                                                                |
+| `"kip71.lowerboundbasefee"`         | `NUMBER`. The lowest possible base fee. See [KIP-71](https://github.com/klaytn/kips/blob/main/KIPs/kip-71.md) for further details. e.g., `25000000000`                                                                                                                                            |
+| `"kip71.upperboundbasefee"`         | `NUMBER`. The highest possible base fee. e.g., `750000000000`                                                                                                                                                                                                                                     |
+| `"kip71.gastarget"`                 | `NUMBER`. The block gas that base fee wants to achieve. The base fee increases when parent block contains more than gas target, and decreases when parent block contains less than gas target. e.g., `30000000`                                                                                   |
+| `"kip71.basefeedenominator"`        | `NUMBER`. Controls how fast base fee changes. e.g., `20`                                                                                                                                                                                                                                          |
+| `"kip71.maxblockgasusedforbasefee"` | `NUMBER`. The maximum block gas perceived in base fee calculation. e.g., `60000000`                                                                                                                                                                                                               |
 
-**반환 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| string | 투표 제출 결과
+| Type   | Description               |
+| ------ | ------------------------- |
+| String | Result of vote submission |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.vote ("governance.governancemode", "ballot")
@@ -106,22 +105,21 @@ description: >-
 "You don't have the right to vote"
 ```
 
-
 ## governance_showTally <a id="governance_showtally"></a>
 
-`showTally` 속성은 거버넌스 투표의 현재 집계 결과를 제공합니다. 집계된 찬성률을 백분율로 표시합니다. 50%가 넘으면 투표가 통과됩니다.
+The `showTally` property provides the current tally of governance votes. It shows the aggregated approval rate in percentage. When it goes over 50%, the vote passes.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| Tally | 각 투표의 가치 및 찬성률(백분율)
+| Type  | Description                                       |
+| ----- | ------------------------------------------------- |
+| Tally | Each vote's value and approval rate in percentage |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.showTally
@@ -136,23 +134,22 @@ description: >-
 }]
 ```
 
-
 ## governance_totalVotingPower <a id="governance_totalvotingpower"></a>
 
-`totalVotingPower` 속성은 CN이 보유한 모든 투표권의 합계를 제공합니다. 각 CN은 1.0 ~ 2.0의 투표권을 가집니다.
-`"none"`, `"single"` 거버넌스 모드에서는 `totalVotingPower`이 아무런 정보를 제공하지 않습니다.
+The `totalVotingPower` property provides the sum of all voting power that CNs have. Each CN has 1.0 \~ 2.0 voting power.
+In `"none"`, `"single"` governance mode, `totalVotingPower` don't provide any information.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| Float | 총 투표권 또는 오류 메시지 |
+| Type  | Description                         |
+| ----- | ----------------------------------- |
+| Float | Total Voting Power or error message |
 
-**예시**
+**Example**
 
 ```javascript
 // In "ballot" governance mode
@@ -164,23 +161,22 @@ description: >-
 "In current governance mode, voting power is not available"
 ```
 
-
 ## governance_myVotingPower <a id="governance_myvotingpower"></a>
 
-`myVotingPower` 속성은 노드의 투표권을 제공합니다. 투표권은 1.0 ~ 2.0이 될 수 있습니다.
-`"none"`, `"single"` 거버넌스 모드에서 `totalVotingPower`는 어떠한 정보도 제공하지 않습니다.
+The `myVotingPower` property provides the voting power of the node. The voting power can be 1.0 \~ 2.0.
+In `"none"`, `"single"` governance mode, `totalVotingPower` don't provide any information.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| Float | 노드의 투표권 또는 오류 메시지 |
+| Type  | Description                          |
+| ----- | ------------------------------------ |
+| Float | Node's Voting Power or error message |
 
-**예시**
+**Example**
 
 ```javascript
 // In "ballot" governance mode
@@ -192,22 +188,21 @@ description: >-
 "In current governance mode, voting power is not available"
 ```
 
-
 ## governance_myVotes <a id="governance_myvotes"></a>
 
-`myVotes` 속성은 해당 epoch에서 내 투표 정보를 제공합니다. 각 투표는 사용자 노드가 새 블록을 생성할 때 블록에 저장됩니다. 현재 epoch가 종료되면 이 정보는 지워집니다.
+The `myVotes` property provides my vote information in the epoch. Each vote is stored in a block when the user's node generates a new block. After current epoch ends, this information is cleared.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| Vote List | 해당 epoch에서 노드의 투표 상태 <br />- `BlockNum`: 해당 투표가 저장된 블록 번호 <br />- `Casted`: 이 투표가 블록에 저장되었는지 여부<br />- `키/`value`: 투표의 내용입니다.
+| Type      | Description                                                                                                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Vote List | Node's Voting status in the epoch.<br/>- `BlockNum`: The block number that this vote is stored.<br/>- `Casted`: If this vote is stored in a block or not.<br/>- `Key/Value`: The content of the vote. |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.vote("governance.governancemode", "ballot")
@@ -225,28 +220,28 @@ description: >-
 
 ## governance_getChainConfig <a id="governance_getchainconfig"></a>
 
-`getChainConfig`는 특정 블록의 체인 구성을 반환합니다.
-파라미터가 설정되지 않은 경우, 가장 최근 블록의 체인 구성을 반환합니다.
+The `getChainConfig` returns the chain configuration at a specific block.
+If the parameter is not set, it returns the chain configuration at the latest block.
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-| --- | --- |
-| QUANTITY \| TAG | 정수 또는 16진수 블록 번호, 또는 [기본 블록 매개변수](klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
+| Type            | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in the [default block parameter](klay/block.md#the-default-block-parameter). |
 
 :::note
 
-참고: 블록 번호는 최신 블록 번호보다 클 수 있으며, 이 경우 API는 현재 체인 상태를 기준으로 임시 값을 반환합니다. 향후 거버넌스 매개변수는 추가 거버넌스 투표 또는 GovParam 컨트랙트 상태 변경을 통해 변경될 수 있습니다.
+NOTE: The block number can be larger than the latest block number, in which case the API returns the tentative value based on the current chain state. The future governance parameters are subject to change via additional governance votes or GovParam contract state changes.
 
 :::
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON |주어진 블록 번호의 체인 구성 |
+| Type | Description                                   |
+| ---- | --------------------------------------------- |
+| JSON | Chain configuration at the given block number |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.getChainConfig()
@@ -291,38 +286,38 @@ description: >-
 
 ## governance_chainConfig <a id="governance_chainconfig"></a>
 
-`chainConfig` 속성은 최신 체인 구성을 제공합니다.
-이는 매개변수가 비어 있는 `chainConfigAt()`와 동일합니다.
+The `chainConfig` property provides the latest chain configuration.
+This is equivalent to `chainConfigAt()` with an empty parameter.
 
 :::caution
 
-`governance_chainConfig` API는 Klaytn v1.11부터 더 이상 사용되지 않습니다([klaytn#1783](https://github.com/klaytn/klaytn/pull/1783) 참조).
-대신 <a href="#governance_getchainconfig">`governance_getChainConfig`</a>를 사용하세요.
+`governance_chainConfig` API will be deprecated since Klaytn v1.11 (see [klaytn#1783](https://github.com/klaytn/klaytn/pull/1783)).
+Use <a href="#governance_getchainconfig">`governance_getChainConfig`</a> instead.
 
-참고: RPC API는 v1.11부터 더 이상 사용되지 않습니다. 그러나 Klaytn JavaScript 콘솔의 `governance.chainConfig` 프로퍼티는
-는 Klaytn v1.10.2부터 제거되었습니다.
+NOTE: the RPC API will be deprecated since v1.11. However, the `governance.chainConfig` property in the Klaytn JavaScript console
+is removed since Klaytn v1.10.2.
 
 :::
 
 :::note
 
-참고: Klaytn v1.10.0 이전 버전에서는 이 API가 초기 체인 구성을 반환했습니다.
-그러나 혼동을 줄 수 있는 이름으로 인해 Klaytn v1.10.0부터 업데이트되었습니다.
-초기 체인 구성을 조회하려면 `chainConfigAt(0)`을 대신 사용하세요.
+NOTE: In versions earlier than Klaytn v1.10.0, this API returned the initial chain configuration.
+However, due to its confusing name, it is updated since Klaytn v1.10.0.
+To query the initial chain configuration, use `chainConfigAt(0)` instead.
 
 :::
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 현재 체인 구성
+| Type | Description                 |
+| ---- | --------------------------- |
+| JSON | Current chain configuration |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.chainConfig
@@ -366,35 +361,35 @@ description: >-
 
 ## governance_chainConfigAt <a id="governance_chainconfigat"></a>
 
-`chainConfigAt`은 특정 블록의 체인 구성을 반환합니다.
-매개변수가 설정되지 않은 경우, 가장 최근 블록의 체인 구성을 반환합니다.
+The `chainConfigAt` returns the chain configuration at a specific block.
+If the parameter is not set, it returns the chain configuration at the latest block.
 
 :::caution
 
-`governance_chainConfigAt` API는 Klaytn v1.11부터 더 이상 사용되지 않습니다([klaytn#1783](https://github.com/klaytn/klaytn/pull/1783) 참조).
-대신 <a href="#governance_getchainconfig">`governance_getChainConfig`</a>를 사용하세요.
+`governance_chainConfigAt` API will be deprecated since Klaytn v1.11 (see [klaytn#1783](https://github.com/klaytn/klaytn/pull/1783)).
+Use <a href="#governance_getchainconfig">`governance_getChainConfig`</a> instead.
 
 :::
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-| --- | --- |
-| QUANTITY \| TAG | 정수 또는 16진수 블록 번호, 또는 [기본 블록 매개변수](klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
+| Type            | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in the [default block parameter](klay/block.md#the-default-block-parameter). |
 
 :::note
 
-참고: 블록 번호는 최신 블록 번호보다 클 수 있으며, 이 경우 API는 현재 체인 상태를 기준으로 임시 값을 반환합니다. 향후 거버넌스 매개변수는 추가 거버넌스 투표 또는 GovParam 컨트랙트 상태 변경을 통해 변경될 수 있습니다.
+NOTE: The block number can be larger than the latest block number, in which case the API returns the tentative value based on the current chain state. The future governance parameters are subject to change via additional governance votes or GovParam contract state changes.
 
 :::
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 주어진 블록 번호의 체인 구성 | 
+| Type | Description                                   |
+| ---- | --------------------------------------------- |
+| JSON | Chain configuration at the given block number |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.chainConfigAt()
@@ -438,19 +433,19 @@ description: >-
 
 ## governance_nodeAddress <a id="governance_nodeaddress"></a>
 
-`nodeAddress` 속성은 사용자가 사용 중인 노드의 주소를 제공합니다. 노드키에서 파생되며 합의 메시지에 서명하는 데 사용됩니다. 그리고 `"governingnode"`의 값은 검증자의 노드 주소 중 하나이어야 합니다.
+The `nodeAddress` property provides the address of the node that a user is using. It is derived from the nodekey and used to sign consensus messages. And the value of `"governingnode"` has to be one of validator's node address.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| ADDRESS | 노드의 20바이트 주소 |
+| Type    | Description               |
+| ------- | ------------------------- |
+| ADDRESS | 20 BYTE address of a node |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.nodeAddress
@@ -459,27 +454,27 @@ description: >-
 
 ## governance_getParams <a id="governance_getparams"></a>
 
-`getParams`는 특정 블록의 거버넌스 파라미터를 반환합니다.
+The `getParams` returns governance parameters at a specific block.
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-| ------------- | ------------------------------------------------------------ |
-| QUANTITY \| TAG | 정수 또는 16진수 블록 번호, 또는 [기본 블록 매개변수](klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
+| Type            | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in the [default block parameter](klay/block.md#the-default-block-parameter). |
 
 :::note
 
-참고: 블록 번호는 최신 블록 번호보다 클 수 있으며, 이 경우 API는 현재 체인 상태를 기준으로 임시 값을 반환합니다. 향후 거버넌스 매개변수는 추가 거버넌스 투표 또는 GovParam 컨트랙트 상태 변경을 통해 변경될 수 있습니다.
+NOTE: The block number can be larger than the latest block number, in which case the API returns the tentative value based on the current chain state. The future governance parameters are subject to change via additional governance votes or GovParam contract state changes.
 
 :::
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 거버넌스 매개변수
+| Type | Description           |
+| ---- | --------------------- |
+| JSON | governance parameters |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.getParams(89)
@@ -510,40 +505,40 @@ description: >-
 
 ## governance_itemsAt <a id="governance_itemsat"></a>
 
-`itemAt`은 특정 블록에서 거버넌스 매개변수를 반환합니다.
+The `itemsAt` returns governance parameters at a specific block.
 
 :::caution
 
-`governance_itemsAt` API는 Klaytn v1.11부터 더 이상 사용되지 않습니다([klaytn#1783](https://github.com/klaytn/klaytn/pull/1783) 참조).
-대신 <a href="#governance_getparams">`governance_getParams`</a>를 사용하세요.
+`governance_itemsAt` API will be deprecated since Klaytn v1.11 (see [klaytn#1783](https://github.com/klaytn/klaytn/pull/1783)).
+Use <a href="#governance_getparams">`governance_getParams`</a> instead.
 
 :::
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-| ------------- | ------------------------------------------------------------ |
-| QUANTITY \| TAG | 정수 또는 16진수 블록 번호, 또는 [기본 블록 매개변수](klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
-
-:::note
- 
-참고: Klaytn v1.7.0 이전 버전에서는 정수 블록 번호, 문자열 `"earliest"` 및 `"latest"`만 사용할 수 있습니다.
-
-:::
+| Type            | Description                                                                                                                                                                |
+| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in the [default block parameter](klay/block.md#the-default-block-parameter). |
 
 :::note
 
-참고: 블록 번호는 최신 블록 번호보다 클 수 있으며, 이 경우 API는 현재 체인 상태를 기준으로 임시 값을 반환합니다. 향후 거버넌스 매개변수는 추가 거버넌스 투표 또는 GovParam 컨트랙트 상태 변경을 통해 변경될 수 있습니다.
+NOTE: In versions earlier than Klaytn v1.7.0, only integer block number, the string `"earliest"` and `"latest"` are available.
 
 :::
 
-**리턴 값**
+:::note
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 거버넌스 항목
+NOTE: The block number can be larger than the latest block number, in which case the API returns the tentative value based on the current chain state. The future governance parameters are subject to change via additional governance votes or GovParam contract state changes.
 
-**예시**
+:::
+
+**Return Value**
+
+| Type | Description      |
+| ---- | ---------------- |
+| JSON | governance items |
+
+**Example**
 
 ```javascript
 > governance.itemsAt(89)
@@ -574,19 +569,19 @@ description: >-
 
 ## governance_pendingChanges <a id="governance_pendingchanges"></a>
 
-`pendingChanges`은 충분한 수의 투표를 받았지만 아직 확정되지 않은 항목의 목록을 반환합니다. 현재 epoch가 끝나면 이러한 변경 사항이 확정되고 그 결과는 다음 epoch 이후의 epoch부터 적용됩니다.
+The `pendingChanges` returns the list of items that have received enough number of votes but not yet finalized. At the end of the current epoch, these changes will be finalized and the result will be in effect from the epoch after next epoch.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| Vote List | 키와 값으로 구성된 pendingChanges |
+| Type      | Description                                           |
+| --------- | ----------------------------------------------------- |
+| Vote List | Currently pending changes composed of keys and values |
 
-**예제**
+**Example**
 
 ```javascript
 > governance.pendingChanges
@@ -596,21 +591,22 @@ description: >-
 }
 ```
 
-## governance_votes <a id="governance_vote"></a>
+## governance_votes <a id="governance_votes"></a>
 
-`votes`는 해당 epoch의 모든 노드의 투표를 반환합니다. 이러한 투표는 각 블록의 헤더에서 수집됩니다.
+The `votes` returns the votes from all nodes in the epoch. These votes are gathered from the header of each block.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| Vote List | 키, 값, 노드 주소로 구성된 현재 투표 |
+| Type      | Description                                               |
+| --------- | --------------------------------------------------------- |
+| Vote List | Current votes composed of keys, values and node addresses |
 
-**예제**
+**Example**
+
 ```javascript
 > governance.votes
 [{
@@ -625,59 +621,65 @@ description: >-
 ```
 
 ## governance_idxCache <a id="governance_idxcache"></a>
-`idxCache` 속성은 메모리 캐시에 있는 현재 idxCache의 배열을 반환합니다. idxCache에는 거버넌스 변경이 발생한 블록 번호가 포함됩니다. 캐시에는 기본적으로 최대 1000개의 블록 번호가 메모리에 저장될 수 있습니다.
 
-**매개변수**
+The `idxCache` property returns an array of current idxCache in the memory cache. idxCache contains the block numbers where governance change happened. The cache can have up to 1000 block numbers in memory by default.
 
-없음
+**Parameters**
 
-**리턴 값**
+None
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| uint64 array | 거버넌스 변경이 발생한 블록 번호 |
+**Return Value**
 
-**예제**
+| Type         | Description                                    |
+| ------------ | ---------------------------------------------- |
+| uint64 array | Block numbers where governance change happened |
+
+**Example**
+
 ```javascript
 > governance.idxCache
 [0, 30]
 ```
 
 ## governance_idxCacheFromDb <a id="governance_idxcachefromdb"></a>
-`idxCacheFromDb`는 거버넌스 변경이 발생한 모든 블록 번호가 포함된 배열을 반환합니다. `idxCacheFromDb`의 결과는 `idxCache`의 결과와 같거나 더 깁니다.
 
-**매개변수**
+The `idxCacheFromDb` returns an array that contains all block numbers on which a governance change ever happened. The result of `idxCacheFromDb` is the same or longer than that of `idxCache`
 
-없음
+**Parameters**
 
-**리턴 값**
+None
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| uint64 array | 거버넌스 변경이 발생한 모든 블록 번호 |
+**Return Value**
 
-**예제**
+| Type         | Description                                          |
+| ------------ | ---------------------------------------------------- |
+| uint64 array | Every block numbers where governance change happened |
+
+**Example**
+
 ```javascript
 > governance.idxCacheFromDb
 [0, 30]
 ```
 
 ## governance_itemCacheFromDb <a id="governance_itemcachefromdb"></a>
-`itemCacheFromDb` 함수는 주어진 블록에 저장된 거버넌스 정보를 반환합니다. 주어진 블록에 변경 사항이 저장되지 않은 경우 함수는 `null`을 반환합니다.
 
-**매개변수**
+The `itemCacheFromDb` returns the governance information stored in the given block. If no changes were stored in the given block, the function returns `null`.
 
-| 유형 | 설명
-| ------------- | ------------------------------------------------------------ |
-| uint64 | 블록에 적용된 거버넌스 변경 사항을 쿼리할 블록 번호입니다. |
+**Parameters**
 
-**리턴 값**
+| Type   | Description                                                      |
+| ------ | ---------------------------------------------------------------- |
+| uint64 | A block number to query the governance change made in the block. |
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 특정 블록에 저장된 거버넌스 정보 |
+**Return Value**
 
-**예제**
+| Type | Description                                    |
+| ---- | ---------------------------------------------- |
+| JSON | Stored governance information at a given block |
+
+**Example**
+
 ```javascript
 > governance.itemCacheFromDb(0)
 {
@@ -696,34 +698,36 @@ description: >-
   reward.useginicoeff: false
 }
 ```
+
 ## governance_getStakingInfo <a id="governance_getstakinginfo"></a>
 
-`getStakingInfo`는 특정 블록의 스테이크 정보를 반환합니다. 결과에는 다음과 같은 정보가 포함됩니다.
-- `BlockNum`: 스테이킹 정보가 주어진 블록 번호입니다.
-- `CouncilNodeAddrs`: 컨센서스 노드의 주소입니다.
-- `CouncilRewardAddrs`: 연결된 노드의 블록 보상이 전송되는 주소입니다.
-- `CouncilStakingAddrs`: 관련 노드가 스테이킹를 위해 배포하는 컨트랙트 주소입니다.
-- `CouncilStakingAmounts`: 관련 노드가 스테이킹하는 KLAY의 양입니다.
-- `Gini`: Gini 계수.
-- `KIRAddr`: KIR의 컨트랙트 주소.
-- `PoCAddr`: KGF의 컨트랙트 주소. PoC는 KGF의 이전 이름입니다.
-- `UseGini`: Gini 계수 사용 여부에 대한 부울 값입니다.
+The `getStakingInfo` returns staking information at a specific block. The result includes the following information.
 
-모든 주소와 스테이킹 금액의 순서가 일치한다는 점에 유의하세요.
+- `BlockNum`: The block number at which the staking information is given.
+- `CouncilNodeAddrs`: The addresses of the consensus node.
+- `CouncilRewardAddrs`: The addresses to which the block reward of the associated nodes is sent.
+- `CouncilStakingAddrs`: The contract addresses in which the associated nodes deploy for staking.
+- `CouncilStakingAmounts`: The amount of KLAY which the associated nodes stake.
+- `Gini`: Gini coefficient.
+- `KIRAddr`: The contract address of KIR.
+- `PoCAddr`: The contract address of KGF. PoC is the previous name of KGF.
+- `UseGini`: The boolean value whether or not the Gini coefficient is used.
 
-**매개변수**
+Note that the order of all addresses and the staking amounts are matched.
 
-| 유형 | 설명
-| ------------- | ------------------------------------------------------------ |
-| QUANTITY \| TAG | 블록 번호의 정수 또는 [기본 블록 매개변수](./klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다.
+**Parameters**
 
-**리턴 값**
+| Type            | Description                                                                                                                                                         |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| QUANTITY \| TAG | Integer of a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the [default block parameter](./klay/block.md#the-default-block-parameter). |
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 스테이킹 정보
+**Return Value**
 
-**예시**
+| Type | Description         |
+| ---- | ------------------- |
+| JSON | Staking information |
+
+**Example**
 
 ```javascript
 > governance.getStakingInfo("latest")
@@ -741,28 +745,29 @@ description: >-
 ```
 
 ## governance_getRewardsAccumulated<a id="governance_getRewardsAccumulated"></a>
-주어진 블록 범위 `[first, last]` 내에서 누적된 리워드 정보를 반환합니다.
+
+Returns the rewards information accumulated within the given block range `[first, last]`.
 
 :::note
 
-참고: 리소스 고갈로부터 엔드포인트를 보호하려면 차단 범위가 604800(약 7일) 미만이어야 합니다.
+NOTE: The block range should be less than 604800 (about 7 days) to protect endpoints from the resource exhaustion.
 
 :::
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-| ------------- | ------------------------------------------------------------ |
-| QUANTITY \| TAG | 누적 시작(첫 번째) 블록 번호(포함). 블록 번호의 정수 또는 [기본 블록 매개변수](./klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다.
-| QUANTITY \| TAG | 누적 종료(마지막) 블록 번호, 포함. 블록 번호의 정수, 또는 [기본 블록 매개변수](./klay/block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다.
+| Type            | Description                                                                                                                                                                                                                                |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| QUANTITY \| TAG | Accumulation start (first) block number, inclusive. Integer of a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the [default block parameter](./klay/block.md#the-default-block-parameter). |
+| QUANTITY \| TAG | Accumulation end (last) block number, inclusive. Integer of a block number, or the string `"earliest"`, `"latest"` or `"pending"`, as in the [default block parameter](./klay/block.md#the-default-block-parameter).    |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| ------ | ------------------------------------ |
-| JSON | 리워드 정보
+| Type | Description         |
+| ---- | ------------------- |
+| JSON | Rewards information |
 
-**예시**
+**Example**
 
 ```javascript
 > governance.getRewardsAccumulated(123400489,123416489)
@@ -818,4 +823,3 @@ description: >-
     }
 }
 ```
-
