@@ -1,22 +1,22 @@
-# 기타
+# Miscellaneous
 
 ## eth_hashrate <a id="eth_hashrate"></a>
 
-노드가 채굴 중인 초당 해시 수를 반환합니다.
+Returns the number of hashes per second that the node is mining with.
 
-클레이튼에는 작업증명 메커니즘이 없기 때문에 항상 `0x0`을 반환한다는 점에 유의하세요.
+Please note that it always return `0x0` because there is no PoW mechanism in Klaytn.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|----------|----------------------------------|
-| QUANTITY | 초당 해시 수입니다.
+| Type     | Description                      |
+| -------- | -------------------------------- |
+| QUANTITY | The number of hashes per second. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -32,21 +32,21 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_getHashrate <a id="eth_gethashrate"></a>
 
-노드가 채굴 중인 초당 해시 수를 반환합니다.
+Returns the number of hashes per second that the node is mining with.
 
-클레이튼에는 작업증명 메커니즘이 없기 때문에 항상 `0`을 반환한다는 점에 유의하세요.
+Please note that it always return `0` because there is no PoW mechanism in Klaytn.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|----------|----------------------------------|
-| QUANTITY | 초당 해시 수입니다.
+| Type     | Description                      |
+| -------- | -------------------------------- |
+| QUANTITY | The number of hashes per second. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -62,21 +62,21 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_getWork <a id="eth_getwork"></a>
 
-현재 블록의 해시, 시드해시, 충족해야 할 경계 조건("target")을 반환합니다.
+Returns the hash of the current block, the seedHash, and the boundary condition to be met ("target").
 
-클레이튼에는 작업증명 메커니즘이 없으므로 항상 `errNoMiningWork`를 반환한다는 점에 유의하시기 바랍니다.
+Please note that it always return `errNoMiningWork` because there is no PoW mechanism in Klaytn.
 
-**파라미터**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명 |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------|
-| 32-byte DATA Array | 현재 블록 헤더 pow-hash 목록, DAG에 사용되는 시드 해시, 경계 조건("target"), 2^256 / difficulty. |
+| Type                  | Description                                                                                                                                      |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Array of 32-byte DATA | List of current block header pow-hash, the seed hash used for the DAG, the boundary condition ("target"), 2^256 / difficulty. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -93,28 +93,27 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
+## eth_submitWork <a id="eth_submitwork"></a>
 
-## eth_submitWork <a id="eth_submitWork"></a>
+Used for submitting a proof-of-work solution.
 
-작업 증명 솔루션을 제출할 때 사용합니다.
+Please note that it always return `false` because there is no PoW mechanism in Klaytn.
 
-클레이튼에는 작업증명 메커니즘이 없으므로 항상 `false`를 반환한다는 점에 유의하세요.
+**Parameters**
 
-**파라미터**
+| Type         | Description                                         |
+| ------------ | --------------------------------------------------- |
+| 8-byte DATA  | The nonce found (64 bits)        |
+| 32-byte DATA | The header’s pow-hash (256 bits) |
+| 32-byte DATA | The mix digest (256 bits)        |
 
-| 유형 | 설명 |
-|--------------|----------------------------------|
-| 8-byte DATA | 발견한 nonce(64비트) |
-| 32-byte DATA | 헤더의 pow-hash (256비트) |
-| 32-byte DATA | 믹스 다이제스트 (256비트) |
+**Return Value**
 
-**리턴 값**
+| Type    | Description                                                      |
+| ------- | ---------------------------------------------------------------- |
+| Boolean | Returns true if the provided solution is valid, otherwise false. |
 
-| 유형 | 설명 |
-|-----------|--------------------------------------------------------------------|
-| bool | 제공된 솔루션이 유효하면 참을 반환하고, 그렇지 않으면 거짓을 반환합니다.   |
-
-**예제**
+**Example**
 
 ```shell
 // Request
@@ -128,27 +127,26 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
-
 ## eth_submitHashrate <a id="eth_submithashrate"></a>
 
-마이닝 해시레이트를 제출할 때 사용됩니다.
+Used for submitting mining hashrate.
 
-클레이튼에는 작업증명 메커니즘이 없으므로 항상 `false`를 반환한다는 점에 유의하시기 바랍니다.
+Please note that it always return `false` because there is no PoW mechanism in Klaytn.
 
-**파라미터**
+**Parameters**
 
-| 이름 | 유형 | 설명 |
-|----------|--------------|------------------------------------------------------------------|
-| hashrate | 32-byte DATA | 해시레이트의 16진수 문자열 표현(32바이트). |
-| id | 32-byte DATA | 클라이언트를 식별하는 임의의 16진수(32바이트) ID입니다.        |
+| Name     | Type         | Description                                                                         |
+| -------- | ------------ | ----------------------------------------------------------------------------------- |
+| hashrate | 32-byte DATA | A hexadecimal string representation (32 bytes) of the hash rate. |
+| id       | 32-byte DATA | A random hexadecimal(32 bytes) ID identifying the client.        |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명 |
-|-----------|--------------------------------------------------------------------------|
-| bool | 제출이 성공적으로 완료되면 true를 반환하고 그렇지 않으면 false를 반환합니다. |
+| Type    | Description                                                              |
+| ------- | ------------------------------------------------------------------------ |
+| Boolean | Returns true if submitting went through succesfully and false otherwise. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -164,26 +162,26 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_createAccessList <a id="eth_createaccesslist"></a>
 
-이 메서드는 주어진 '트랜잭션'을 기반으로 'accessList'를 생성합니다.
-`accessList`에는 발신자 계정과 사전 컴파일을 제외한 트랜잭션이 읽고 쓴 모든 스토리지 슬롯과 주소가 포함됩니다.
-이 메서드는 [`eth_call`](./transaction.md#eth_call)과 동일한 트랜잭션 호출 객체 및 `blockNumberOrTag` 객체를 사용합니다.
-accessList는 가스비 증가로 인해 접근이 불가능해진 컨트랙트를 해제하는 데 사용할 수 있습니다.
-트랜잭션에 `accessList`를 추가한다고 해서 액세스 목록이 없는 트랜잭션에 비해 가스 사용량이 감소하는 것은 아닙니다.
+This method creates an `accessList` based on a given `Transaction`.
+The `accessList` contains all storage slots and addresses read and written by the transaction, except for the sender account and the precompiles.
+This method uses the same transaction call object and `blockNumberOrTag` object as [`eth_call`](./transaction.md#eth_call).
+An accessList can be used to unstuck contracts that became inaccessible due to gas cost increases.
+Adding an `accessList` to your transaction does not necessary result in lower gas usage compared to a transaction without an access list.
 
 **Parameters**
 
-| 이름             | 유형                | 설명                                                                                              |
-|------------------|---------------------|----------------------------------------------------------------------------------------------------------|
-| callObject       | Object              | 트랜잭션 호출 객체입니다. 객체의 속성은 [`eth_call`](./transaction.md#eth_call)을 참조하세요. |
-| blockNumberOrTag | QUANTITY \| TAG | 정수 또는 16진수 블록 번호, 또는 [기본 블록 매개변수](./block.md#the-default-block-parameter)의 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. 블록 번호는 필수이며 지정된 트랜잭션이 실행되어야 하는 컨텍스트(상태)를 정의합니다. |
+| Name             | Type            | Description                                                                                                                                                                                                                                                                                                      |
+| ---------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| callObject       | Object          | The transaction call object. Refer to [`eth_call`](./transaction.md#eth_call) for the object's properties.                                                                                                                                                                                                       |
+| blockNumberOrTag | QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in [default block parameter](./block.md#the-default-block-parameter). The block number is mandatory and defines the context (state) against which the specified transaction should be executed. |
 
-**리턴 값**
+**Return Value**
 
-| 유형      | 설명                                                              |
-|-----------|--------------------------------------------------------------------------|
-| Object    | 트랜잭션에 사용된 주소 및 저장 키 목록과 액세스 목록이 추가될 때 소비된 가스를 반환합니다. |
+| Type   | Description                                                                                                              |
+| ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| Object | Returns list of addresses and storage keys used by the transaction, plus the gas consumed when the access list is added. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
