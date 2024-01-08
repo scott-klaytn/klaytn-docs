@@ -1,31 +1,34 @@
-# 멀티 채널
+# Multi-Channel
 
-클레이튼 노드는 **멀티 채널**로 실행할 수 있습니다.
+A Klaytn node can be run with **Multi-channel**.
 
-노드가 멀티채널 구성으로 실행되는 경우 통신을 위해 2개의 포트가 설정됩니다. 반면, 단일 채널 구성으로 노드가 실행되면 1개의 포트가 설정됩니다.
-2개의 멀티 채널 노드가 연결을 시도하는 경우 2개의 포트를 사용하여 연결이 설정됩니다. 그렇지 않으면 1개의 포트를 사용하여 통신합니다.
+If a node is executed with multi-channel configuration, 2 ports are set up for communication. On the otherhand, if a node is executed with single channel configuration, 1 port is set up.
+If 2 multi-channel nodes are trying to connect, a connection is established using 2 ports. Otherwise, they will use 1 port for communication.
 
-멀티채널 노드는 `--multichannel` 플래그를 통해 활성화할 수 있습니다. [`kend`](../nodes/endpoint-node/install-endpoint-nodes.md)를 사용하는 경우, [`kend.conf`](../nodes/endpoint-node/install-endpoint-nodes.md)의 `MULTICHANNEL=1` 문으로 인해 멀티채널이 기본적으로 활성화되어 있습니다. 멀티채널을 비활성화하려면 해당 문을 `MULTICHANNEL=0`으로 바꾸세요.
-특정 포트로 노드를 실행하려면 플래그 `port`와 `subport`를 사용할 수 있습니다. 접속하는 피어의 포트 값을 지정하려면 [KNI](./kni.md)를 확인하세요.
+A multi-channel node can be enabled through the flag `--multichannel`. If you use [`kend`](../nodes/endpoint-node/install-endpoint-nodes.md), multi-channel is enabled by default due to the statement `MULTICHANNEL=1` in [`kend.conf`](../nodes/endpoint-node/install-endpoint-nodes.md). To disable multi-channel, please replace the statement with `MULTICHANNEL=0`.
+If you want to run a node with specific ports, flags `port` and `subport` can be used. If you want to specify ports values of a connecting peer, check out [KNI](./kni.md).
 
-## 아키텍처 <a id="architecture"></a>
+## Architecture <a id="architecture"></a>
 
-![멀티채널 서버](/img/learn/multichannel.png)
+![Multi-Channel Server](/img/learn/multichannel.png)
 
-위 그림은 두 개의 멀티채널 노드 간의 연결을 보여줍니다.
-두 개의 포트, 메인포트(A)와 서브포트(B)는 서로 다른 메시지를 전송합니다.
-* **메인포트**(A)는 블록 및 합의 프로토콜과 관련된 메시지를 전송하는 데 사용됩니다.
-  * 블록 메시지에는 블록의 해시, 헤더, 본문, 수신 요청과 응답이 포함됩니다.
-  * 합의 메시지에는 요청, 준비, 준비, 커밋, 라운드체인지가 포함됩니다. 메시지의 의미는 [PBFT](./consensus-mechanism.md#pbft-practical-byzantine-fault-tolerance)에서 확인할 수 있습니다.
-* **서브포트**(B)는 트랜잭션 메시지를 전송하기 위한 것입니다.
+The picture above shows a connection between two multi-channel nodes.
+Two ports, mainport (A) and subport (B), transfer different messages.
 
-![단일 채널 서버](/img/learn/singlechannel.png)
+- **Mainport**(A) is used to transfer messages related to blocks and consensus protocols.
+  - Block messages include requests and responses of the hash, header, body and receipt of a block.
+  - Consensus messages include Request, Preprepare, Prepare, Commit and RoundChange. The meaning of the messages can be found in [PBFT](./consensus-mechanism.md#pbft-practical-byzantine-fault-tolerance).
+- **Subport**(B) is for transferring transaction messages.
 
-그림은 두 개의 단일 채널 노드 간 또는 단일 채널 노드와 다중 채널 노드 간의 연결을 보여줍니다. 이 경우 블록, 트랜잭션, 합의 프로토콜과 관련된 모든 메시지는 동일한 포트를 통해 전송됩니다.
+![Single Channel Server](/img/learn/singlechannel.png)
 
-## 포트 <a id="multichannel-port"></a>
+The picture shows a connection between two single channel nodes or between a single channel node and a multi-channel node.
+In this case, all messages related to blocks, transactions, and consensus protocols are transported via the same port.
 
-KNI에서 포트 번호를 설정하려면 [KNI 체계](./kni.md)를 참조하세요.
-* 단일 채널: 단일 채널 노드는 하나의 포트를 사용합니다(기본값은 32323).
-* 멀티 채널: 다중 채널 노드는 두 개의 포트를 사용합니다. 포트는 `port`와 `subport`로 지정할 수 있습니다. 클레이튼에서 `port`와 `subport`의 기본값은 각각 32323과 32324입니다.
-    * 멀티채널 노드에 연결할 때 `subport`를 설정하지 않을 수 있습니다. 이 경우 처음에는 클레이튼 노드가 단일 채널로 연결을 시도합니다. 핸드셰이크 과정에서 실제 상대방의 포트 번호가 공개됩니다. 상대방이 멀티채널 노드인 경우 진행 중인 연결이 취소되고 업데이트된 포트로 재연결됩니다.
+## Ports  <a id="multichannel-port"></a>
+
+To set port numbers in KNI, please refer to [the KNI scheme](./kni.md).
+
+- Single Channel : A single channel node uses one port (default is 32323).
+- Multi-Channel: A multi-channel node uses two ports. The ports can be specified in `port` and `subport`. In Klaytn, the default values of `port` and `subport` are 32323 and 32324, respectively.
+  - You might not set `subport` when connecting to multi-channel node. In this case, at first, a Klaytn node tries to connect using a single-channel. In handshake process, the actual peer's port numbers are revealed. If the peer is a multi-channel node, the ongoing connection will be canceled and a reconnection will be made with the updated ports.
