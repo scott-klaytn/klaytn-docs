@@ -1,4 +1,4 @@
-# 스토리지 레이어
+# Storage Layer
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
