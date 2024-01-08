@@ -1,59 +1,58 @@
-# 스마트 컨트랙트 배포
+# Deploy smart contracts
 
-## 1. Count dApp 클론 <a id="2-clone-count-dapp"></a>
+## 1. Clone Count DApp <a id="2-clone-count-dapp"></a>
 
-### 1\) Count dApp 리포지토리 클론 <a id="1-clone-count-dapp-repository"></a>
+### 1) Clone Count DApp repository <a id="1-clone-count-dapp-repository"></a>
 
 ```text
 $ git clone https://github.com/klaytn/countbapp
 ```
 
-### 2\) Count dApp 설치 및 실행 <a id="2-install-run-count-dapp"></a>
+### 2) Install & Run Count DApp <a id="2-install-run-count-dapp"></a>
 
-방금 복제한 패키지는 수정 없이 바로 실행할 수 있습니다.
+The package you just cloned is ready to launch without any modification.
 
-샘플 컨트랙트는 이미 Baobab 테스트넷에 배포되어 있으며, contract ABI는 저희 패키지에 포함되어 있습니다.  
-Count dApp 프론트엔드 코드는 처음에 Baobab 테스트넷의 스마트 컨트랙트에 연결하도록 구성됩니다.
+The sample contract is already deployed to the Baobab testnet, and the contract ABI is included in our package.\
+Count DApp frontend code is initially configured to connect to the smart contract on the Baobab testnet.
 
-앱을 바로 실행하여 작동 방식을 확인하려면 아래에 입력하세요.
+If you want to run the app right away and see how it works, type below.
 
-> 첫 페이지에 언급된 테스트 환경을 따르는 것을 적극 권장합니다.
+> We HIGHLY recommend you follow the test environment mentioned on the first page.
 
 ```text
 $ npm install
 $ npm run local
 ```
 
-&#9888; 작동하지 않는 경우 파일 및 디렉터리 권한을 확인하세요. '[오류: EACCES: 권한 거부](https://stackoverflow.com/questions/38323880/error-eacces-permission-denied)'가 발생하면 `sudo chmod -R 755 /yourProjectDirectoryName` 명령이 도움이 될 수 있습니다.
+⚠ Please check the file and directory permissions if it doesn't work. If you encounter '[Error: EACCES: permission denied](https://stackoverflow.com/questions/38323880/error-eacces-permission-denied)', the command `sudo chmod -R 755 /yourProjectDirectoryName` could be helpful for you.
 
-애플리케이션이 바로 팝업됩니다!
+Application will pop up right away!
 
-## 2. 스마트 컨트랙트 작성 <a id="4-write-smart-contract"></a>
+## 2. Write Smart Contract <a id="4-write-smart-contract"></a>
 
-1. 배경
-2. 변수 정의
-3. 함수 정의
-4. 더 많은 작업을 해봅시다.\
-  4.1. 변수 추가\
-  4.2. 기능 업데이트
+1. Background
+2. Define the variable
+3. Define functions
+4. Let's do something more \
+   4.1. Add a variable \
+   4.2. Update functions
 
+### 1) Background <a id="1-background"></a>
 
-### 1\) 배경 <a id="1-background"></a>
+We will make a super simple contract called "Count".
 
-"Count"라는 매우 간단한 컨트랙트를 만들겠습니다.
+a. There would be just one storage variable called `count`.\
+b. Users can increase `count` variable by 1 or decrease it by 1. So there would be two functions, `plus` function which increases `count` variable by 1, and `minus` function which decreases `count` variable by 1. That's all!
 
-a. `count`라는 저장 변수가 하나만 있을 것입니다.  
-b. 사용자는 `count` 변수를 1만큼 증가시키거나 1만큼 감소시킬 수 있습니다. 따라서 `count` 변수를 1만큼 증가시키는 `plus` 함수와 `count` 변수를 1만큼 감소시키는 `minus` 함수의 두 가지 함수가 있습니다. 그게 다입니다!
+### 2) Define the variable <a id="2-define-the-variable"></a>
 
-### 2\) 변수 정의 <a id="2-define-the-variable"></a>
-
-변수를 설정하기 전에 Solidity 버전을 지정해야 합니다. 0.5.6 안정 버전을 사용하겠습니다.
+Before setting a variable, we should specify the solidity version. Let's use 0.5.6 stable version.
 
 ```text
  solidity 0.5.6; // Specify solidity's version
 ```
 
-그런 다음 컨트랙트의 이름을 "Count"로 지정합니다.
+Then we will name our contract "Count".
 
 ```text
 pragma solidity 0.5.6;
@@ -63,7 +62,7 @@ contract Count { // set contract names to "Count"
 }
 ```
 
-변수 `count`를 `uint`(부호 없는 정수) 유형으로 선언하고 0으로 초기화해야 합니다.
+We need to declare the variable `count` as `uint`(unsigned integer) type, and initialize it to be 0.
 
 ```text
 pragma solidity 0.5.6;
@@ -73,11 +72,11 @@ contract Count {
 }
 ```
 
-### 3\) 함수 정의 <a id="3-define-functions"></a>
+### 3) Define functions <a id="3-define-functions"></a>
 
-`plus`와 `minus`라는 두 개의 함수가 필요합니다. 각 함수의 역할은 다음과 같습니다:\
-`plus` - `count`를 1씩 증가시킵니다. (카운트 = 카운트 + 1)\
-`minus` - `count`를 1만큼 감소시킵니다. (카운트 = 카운트 - 1)
+We need two functions, `plus` and `minus`. Each function's role is:\
+`plus` - increase the `count` by 1. (count = count + 1)\
+`minus` - decrease the `count` by 1. (count = count - 1)
 
 ```text
 pragma solidity 0.5.6;
@@ -95,20 +94,20 @@ contract Count {
 }
 ```
 
-참고\
-컨트랙트 외부에서 함수를 호출할 수 있도록 하려면 함수를 `public`으로 선언해야 합니다.
+_NOTE_\
+To allow the functions to be called outside the contract, functions should be declared as `public`.
 
 ```text
 function plus() public { … }
 ```
 
-### 4\) 뭔가 더 해봅시다 <a id="4-let-s-do-something-more"></a>
+### 4) Let's do something more <a id="4-let-s-do-something-more"></a>
 
-기능을 하나 더 추가하려고 합니다. 마지막 참가자의 지갑 주소를 기억하는 것은 어떨까요?
+We want to add one more feature. How about remembering the last participant's wallet address?
 
-#### 4-1\) 변수 추가 <a id="4-1-add-a-variable"></a>
+#### 4-1) Add a variable <a id="4-1-add-a-variable"></a>
 
-따라서 `lastParticipant`라는 변수를 `address` 유형으로 갖게 됩니다:\
+So we will have a variable, `lastParticipant` as `address` type:\
 `address public lastParticipant;`
 
 ```text
@@ -128,9 +127,9 @@ contract Count {
 }
 ```
 
-#### 4-2\) 함수 업데이트 <a id="4-2-update-functions"></a>
+#### 4-2) Update functions <a id="4-2-update-functions"></a>
 
-마지막 참가자의 주소를 추적하기 위해 아래와 같이 `lastParticipant`에 주소를 저장합니다:
+To track the last participant's address, we store the address to `lastParticipant` like the below:
 
 ```text
 pragma solidity 0.5.6;
@@ -151,45 +150,45 @@ contract Count {
 }
 ```
 
-_참고_\
-1\) `public` 변수나 함수를 `public`로 선언하면 블록체인 외부에서 접근할 수 있습니다. 즉, 프론트엔드 애플리케이션에서 이 변수나 함수에 접근할 수 있습니다. 프론트엔드 애플리케이션에서 컨트랙트 공개 메서드 및 변수와 상호작용하는 방법은 [Count 컴포넌트](code-overview/count-component.md) 챕터에서 확인할 수 있습니다.
+_NOTE_\
+1\) `public` If you declare a variable or a function as `public`, you can access them outside the blockchain, i.e., you can access this variable or function from your frontend application. You will see how to interact with the contract public methods and variables from the frontend application in the [Count componenent](code-overview/count-component.md) chapter.
 
 2\) `msg.sender`\
-`msg.sender`는 현재 트랜잭션을 시작한 주소입니다.  
-트랜잭션 발신자의 주소를 얻으려면 `msg.sender` 변수를 사용할 수 있습니다.
+`msg.sender` is the address that initiated the current transaction.\
+To get the address of the transaction sender we can use `msg.sender` variable.
 
 ```text
 lastParticipant = msg.sender;
 ```
 
-이 줄은 `lastParticipant`가 `msg.sender`를 갖도록 만듭니다.
+This line will make the `lastParticipant` to have the `msg.sender`.
 
-## 3. 배포 컨트랙트
+## 3. Deploy Contract
 
-1. Truffle 구성
-2. 배포 설정
-3. 배포
+1. truffle configuration
+2. Deploy setup
+3. Deploy
 
-### 1) Truffle 구성 <a href="#1-truffle-configuration" id="1-truffle-configuration"></a>
+### 1) truffle configuration <a href="#1-truffle-configuration" id="1-truffle-configuration"></a>
 
-`truffle-config.js` 파일은 컨트랙트 코드를 배포하는 방법을 설명합니다. Truffle-config.js에서 아래 항목을 구성할 수 있습니다.
+`truffle-config.js` file describes how to deploy your contract code. You can configure below items in truffle-config.js
 
-**1) 누가 컨트랙트를 배포할 것인가(어떤 클레이튼 계정이 컨트랙트를 배포할 것인가)?**\
-**2) 어느 네트워크에 배포할 것인가?**\
-**3) 컨트랙트를 배포하기 위해 얼마나 많은 가스를 지불할 의향이 있는가?**
+**1) Who will deploy the contract (Which Klaytn account will deploy the contract)?**\
+**2) Which network will you deploy to?**\
+**3) How many gas are you willing to pay to deploy the contract?**
 
-컨트랙트를 배포하는 방법에는 두 가지가 있는데, 첫 번째는 `private `key`를 사용하고 다른 하나는 `unlocked account`을 사용합니다.
+There are 2 different methods to deploy your contract, first one uses `private key`, the other one uses `unlocked account`.
 
-#### 배포 방법 1: 개인 키로 <a href="#deploy-method-1-by-private-key" id="deploy-method-1-by-private-key"></a>
+#### DEPLOY METHOD 1: By private key <a href="#deploy-method-1-by-private-key" id="deploy-method-1-by-private-key"></a>
 
-_경고: 개인키를 노출해서는 안 됩니다. 그렇지 않으면 계정이 해킹될 수 있습니다._
+_WARNING: You shouldn't expose your private key. Otherwise, your account would be hacked._
 
-개인 키를 사용하여 컨트랙트를 배포하려면 `provider` 옵션이 필요합니다.
+If you want to deploy your contract using the private key, `provider` option is needed.
 
-1\) 개인키를 `new HDWalletProvider()`의 첫 번째 인수로 전달합니다.\
-2\) `new HDWalletProvider()`의 두 번째 인자로 클레이튼 노드의 URL을 전달합니다.
+1\) Pass your private key as the 1st argument of `new HDWalletProvider()`.\
+2\) Pass your Klaytn node's URL as the 2nd argument of `new HDWalletProvider()`.
 
-예)
+example)
 
 ```javascript
 {
@@ -231,30 +230,29 @@ module.exports = {
 }
 ```
 
-위 코드에서 `networks` 속성을 참조하세요. 이 키에는 `provider`, `network_id`, `gas`, `gasPrice`의 4가지 속성을 가진 `baobab` 키가 있습니다.
+See `networks` property in the above code. It has `baobab` key which has 4 properties, `provider`, `network_id`, `gas`, `gasPrice`.
 
-`provider: 새로운 HDWalletProvider(PRIVATE_KEY, URL)` 줄은 컨트랙트 배포자 계정과 대상 네트워크 노드 URL을 알려줍니다.
+`provider: new HDWalletProvider(PRIVATE_KEY, URL)` line informs the contract deployer account and the target network node URL.
 
-`network_id : NETWORK_ID` 줄은 클레이튼의 네트워크 아이디를 지정합니다. Baobab 네트워크(테스트넷)의 경우 `1001`을 사용합니다.
+`network_id: NETWORK_ID` line specifies the network id in Klaytn. Use `1001` for the Baobab network (testnet).
 
-`gas: GASLIMIT` 줄은 컨트랙트를 배포하기 위해 얼마나 많은 가스 제한을 감내할 것인지 알려줍니다.
+`gas: GASLIMIT` line informs how much gas limit will you endure to deploy your contract.
 
-`gasPrice: null` 줄은 Truffle에게 가스 단위당 얼마의 가격을 지불할 것인지 알려줍니다. 현재 클레이튼에서는 가격이 `25000000000`로 고정되어 있습니다. 이 값을 `null`로 설정하면 Truffle은 고정된 가스 가격으로 값을 자동으로 설정합니다.
+`gasPrice: null` line informs truffle how much price will you pay per gas unit. Currently in Klaytn, the price is fixed to `25000000000`. If you set it to `null`, truffle will set the value with the fixed gas price automatically.
 
-#### 배포 방법 2: 잠금 해제된 계정으로 배포(어려움) <a href="#deploy-method-2-by-unlocked-account-difficult" id="deploy-method-2-by-unlocked-account-difficult"></a>
+#### DEPLOY METHOD 2: By unlocked account (difficult) <a href="#deploy-method-2-by-unlocked-account-difficult" id="deploy-method-2-by-unlocked-account-difficult"></a>
 
-잠금 해제된 계정으로 컨트랙트를 배포하려면 클레이튼 풀 노드가 있어야 합니다.
-`$ klay attach http://localhost:8551`를 입력하여 클레이튼 노드 콘솔에 접속합니다.\
-노드에 클레이튼 계정이 없는 경우, 콘솔에서 `personal.newAccount()`를 입력하여 계정을 생성합니다.\
-이미 계정이 있는 경우 `personal.unlockAccount()`를 통해 계정을 잠금 해제합니다.
+To deploy a contract by unlocked account, you should have your Klaytn full node.\
+Access your Klaytn node console by typing `$ klay attach http://localhost:8551` If you don't have a Klaytn account in the node, generate it by typing `personal.newAccount()` on the console.\
+If you already have one, unlock your account through `personal.unlockAccount()`.
 
-계정이 잠금 해제되었는지 확인한 후, `host`, `port`, `network_id`, `from` 속성을 설정해야 합니다.\
-1\) 배포할 네트워크(`host`, `port`, `network_id`)\
-2\) 배포할 대상(`from`) 3\) 컨트랙트를 배포하기 위해 감내할 가스 양(`gas`)
+After ensuring account is unlocked,\
+you should set the properties, `host`, `port`, `network_id`, and `from`. 1) Which network to deploy (`host`, `port`, `network_id`)\
+2\) Who will deploy (`from`) 3) How much gas will you endure to deploy your contract (`gas`)
 
-잠금 해제된 계정 주소를 `from`에 넣습니다. 자체 클레이튼 풀 노드를 실행하는 경우, 노드의 호스트를 `host`로, 노드의 포트를 `port`로 설정합니다.
+Put your unlocked account address on `from`. If you're running your own Klaytn full node, set the node's host to `host` and node's port to `port`.
 
-예)
+example)
 
 ```javascript
 {
@@ -267,7 +265,7 @@ module.exports = {
 }
 ```
 
-### 2) 배포 설정(어떤 컨트랙트를 배포하시겠습니까?) <a href="#2-deploy-setup-which-contract-do-you-want-to-deploy" id="2-deploy-setup-which-contract-do-you-want-to-deploy"></a>
+### 2. Deploy setup (Which contract do you want to deploy?) <a href="#2-deploy-setup-which-contract-do-you-want-to-deploy" id="2-deploy-setup-which-contract-do-you-want-to-deploy"></a>
 
 `migrations/2_deploy_contracts.js`:
 
@@ -301,47 +299,46 @@ module.exports = function (deployer) {
 }
 ```
 
-`contracts/` 디렉터리에 배포할 컨트랙트 코드를 지정할 수 있습니다.
-먼저, `const Count = artifacts.require('./Count.sol')`를 통해 이 파일에 있는 컨트랙트 파일(`Count.sol`)을 가져와야 합니다.
+You can specify which contract code will you deploy in your `contracts/` directory.\
+First, you should import your contract file (`Count.sol`) in this file through `const Count = artifacts.require('./Count.sol')`\
+And use `deployer` to deploy your contract, through `deployer.deploy(Count)`.\
+If you want to run some logic after deploying your contract, use `.then()`.\
+We want to store the contract ABI and the deployed address in files. `fs` node.js module is used to do it. (`fs.writeFile(filename, content, callback)`)\
+Through this post-process, we save our contract address and ABI as `deployedABI` and `deployedAddress` in the directory.\
+For further information about `artifacts.`, visit [truffle document site](https://trufflesuite.com/docs/truffle/getting-started/running-migrations#artifacts-require-).
 
-그리고 `deployer`를 사용하여 `deployer.deploy(Count)`를 통해 컨트랙트를 배포합니다.
-컨트랙트를 배포한 후 일부 로직을 실행하려면 `.then()`을 사용하세요.
-contract ABI와 배포된 주소를 파일에 저장하고 싶습니다. 이를 위해 `fs` node.js 모듈을 사용합니다. (`fs.writeFile(filename, content, callback)`)\.
+### 3. Deploy <a href="#3-deploy" id="3-deploy"></a>
 
-이 후처리를 통해 컨트랙트 주소와 ABI는 디렉터리에 `deployedABI`와 `deployedAddress`로 저장됩니다.\.
-`artifacts`에 대한 자세한 내용은 [Truffle 문서 사이트](https://trufflesuite.com/docs/truffle/getting-started/running-migrations#artifacts-require-)를 참고하세요.
+You need KLAY to deploy a contract. You can receive testnet KLAY on faucet.
 
-### 3) 배포 <a href="#3-deploy" id="3-deploy"></a>하기
+- On Klaytn wallet [https://baobab.wallet.klaytn.foundation/faucet](https://baobab.wallet.klaytn.foundation/faucet), there is a faucet providing 150 KLAY per 86400 blocks in Klaytn Baobab testnet. After creating your Klaytn account, run faucet to receive 150 KLAY.
 
-컨트랙트를 배포하려면 KLAY가 필요합니다. Faucet에서 테스트넷 KLAY를 받을 수 있습니다.
+![deploy](/img/build/tutorials/tutorial-3deploy.gif)
 
-* 클레이튼 지갑 [https://baobab.wallet.klaytn.foundation/faucet](https://baobab.wallet.klaytn.foundation/faucet)에는 클레이튼 Baobab 테스트넷의 86400 블록당 150 KLAY를 제공하는 퍼핏이 있습니다. 클레이튼 계정을 생성한 후 Faucet를 실행하면 150 KLAY를 받을 수 있습니다.
+Type `$ truffle deploy --network baobab`.\
+It will deploy your contract according to the configurations defined in `truffle-config.js` and `migrations/2_deploy_contracts.js`.
 
-![배포](/img/build/tutorials/tutorial-3deploy.gif)
+cf) `--reset` option\
+After deploying your contract, if you type `$ truffle deploy --network baobab` again, nothing will happen.\
+Because truffle deploys a contract only when there are changes in the contract, otherwise truffle will not do anything.\
+If you want to re-deploy your contract anyway, there is an option `--reset`.\
+If you provide this option, truffle will deploy your contract even the content of contract hasn't changed.\
+ex) `$ truffle deploy --reset --network baobab`
 
-`$ truffle deploy --network baobab`을 입력합니다.
-`Truffle-config.js` 및 `migrations/2_deploy_contracts.js`에 정의된 구성에 따라 컨트랙트를 배포합니다.
+To recap,
 
-참조) `--reset` 옵션\
-컨트랙트를 배포한 후 `$ truffle deploy --network baobab`을 다시 입력하면 아무 일도 일어나지 않습니다.
-Truffle은 컨트랙트에 변경이 있을 때만 컨트랙트를 배포하고, 그렇지 않으면 아무 작업도 하지 않기 때문입니다.
-어쨌든 컨트랙트를 다시 배포하고 싶다면 `--reset` 옵션이 있습니다.
-이 옵션을 제공하면 Truffle은 컨트랙트 내용이 변경되지 않은 경우에도 컨트랙트를 배포합니다.
-예) `$ truffle deploy --reset --network baobab`
+- `truffle-config.js` configures the `target network`, `deployer account`, and the `gas limit`.
+- `migrations/2_deploy_contracts.js` configures the `contract` to deploy.
+- `target network`: We deploy our contract to the node `https://public-en-baobab.klaytn.net`.
+- `deployer account`: '0xd0122fc8df283027b6285cc889f5aa624eac1d23' will deploy this contract.
+- `gas limit`: We can endure up to '20000000' gas for deploying our contract.
+- `contract`: We will deploy the Count contract.
 
-요약하자면,
+From the terminal output, you can see if the deployment has been succeeded and find the deployed address.
 
-* `truffle-config.js`는 `target network`, `deployer account` 및 `gas limit`을 구성합니다. 
-* `migrations/2_deploy_contracts.js`는 배포할 `contract`를 구성합니다.
-* `target network`: 노드 `https://public-en-baobab.klaytn.net`에 컨트랙트를 배포합니다.
-* `deployer account`: '0xd0122fc8df283027b6285cc889f5aa624eac1d23'이 이 컨트랙트를 배포합니다.
-* `gas limit`: 컨트랙트 배포를 위해 최대 '20000000' 가스까지 견딜 수 있습니다.
-* `contract`: Count 컨트랙트를 배포합니다.
+## 4. Run App
 
-터미널 출력에서 배포가 성공했는지 확인하고 배포된 주소를 찾을 수 있습니다.
+![run](/img/build/tutorials/tutorial-4run-app.gif)
 
-## 4. 앱 실행
-
-![실행](/img/build/tutorials/tutorial-4run-app.gif)
-
-브라우저에서 앱을 실행하고 `$ npm run local`을 입력합니다.
+Run our app in browser.\
+type `$ npm run local`
