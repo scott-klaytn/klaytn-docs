@@ -1,49 +1,52 @@
-# 합의 메커니즘
+# Consensus Mechanism
 
-합의 메커니즘(알고리즘)은 신뢰가 필요 없는 주체 간에 합의에 도달하는 방법입니다. 블록체인 기술에서는 블록이 유효한지 여부에 대한 합의에 도달하는 데 사용됩니다. 블록체인 네트워크의 성능은 채택된 합의 메커니즘의 성능에 따라 달라지며, 이는 블록체인 애플리케이션의 인지된 사용성에 상당한 영향을 미칩니다.
+A consensus mechanism (algorithm) is a way of reaching a consensus between trustless entities. In blockchain technology, it is used to reach a consensus about if a block is valid or not. The performance of blockchain networks relies on the performance of the adopted consensus mechanisms, and it has a significant impact on the perceived usability of the Blockchain Applications.
 
-클레이튼 메인넷 Cypress의 성능은 다음과 같습니다.
-- 초당 4,000개의 트랜잭션을 처리합니다.
-- 즉각적인 트랜잭션 완결성.
-- 1초의 블록 생성 시간.
-- 50개 이상의 합의 노드가 합의 프로세스에 참여할 수 있습니다.
+Klaytn Mainnet Cypress exhibits the following performance.
 
-이 문서에서는 클레이튼이 어떻게 고성능 합의 프로세스를 구현했는지 살펴보겠습니다.
+- Handles 4,000 transactions per second.
+- Immediate transaction finality.
+- One-second block generation time.
+- Over 50 consensus nodes can participate in the consensus process.
 
-## 배경 <a id="background"></a>
+In the document, we will go over how Klaytn implemented the high-performing consensus process.
 
-[비트코인](https://en.wikipedia.org/wiki/Bitcoin)은 [작업증명(Proof-of-Work)](https://en.wikipedia.org/wiki/Proof_of_work)을 사용하는 반면, 이더리움은 최근 노드의 지분으로 블록 생성 노드를 결정하는 [지분증명(Proof-of-Stake)](https://en.wikipedia.org/wiki/Proof_of_stake)으로 전환하고 있습니다. 일반적으로 이러한 알고리즘은 블록의 유효성을 결정할 때 노드 간의 통신이 필요하지 않습니다.
+## Background <a id="background"></a>
 
-따라서 이러한 시스템에서는 포크가 발생할 수 있으며, 이는 같은 높이에서 두 개 이상의 다른 블록이 만들어질 수 있음을 의미합니다. 일반적으로 포크 조건을 해결하기 위해 "가장 긴 체인이 승리한다"는 규칙이 적용됩니다. 이는 포크가 결국 하나의 정식 체인으로 합쳐진다는 것을 의미하지만, 일정 기간 동안 블록 목록이 더 짧은 체인에 속할 때 되돌아갈 수 있다는 의미이기도 합니다. 따라서 이러한 알고리즘에서는 블록과 트랜잭션의 완결성을 보장할 수 없습니다. 완결성은 일정 시간이 지난 후에야 확률적으로 달성될 수 있으며, 이 역시 100% 보장할 수 없습니다.
+[Bitcoin](https://en.wikipedia.org/wiki/Bitcoin) is using [PoW](https://en.wikipedia.org/wiki/Proof_of_work) (Proof-of-Work), whereas Ethereum has recently shifted to [PoS](https://en.wikipedia.org/wiki/Proof_of_stake) (Proof-of-Stake), which decides on the block generating nodes by the stake of the node. Usually, these algorithms involve no communication between nodes in determining the validities of blocks.
 
-이러한 최종성의 부족은 블록체인 플랫폼을 사용하는 고객 대면 서비스에서 매우 어려운 문제입니다. 포크가 해결되고 전송 후 트랜잭션이 되돌릴 수 없다고 믿을 수 있을 만큼 충분한 블록이 쌓일 때까지 기다려야 하기 때문입니다. 이는 사용자와 서비스 제공자 모두에게 부정적인 영향을 미칩니다.
+So in these systems, a fork can happen which means two or more different blocks can be made on the same height. Usually, the "Longest chain wins" rule is applied to solve the fork condition. It means that those forks will be merged into a single canonical chain eventually, but it also means a list of blocks can be reverted in some period of time when it belongs to the shorter chain. So in these algorithms, there is no guarantee of the finality of blocks and transactions. The finality can only be achieved probabilistically after a period of time, which is still can't be 100% guaranteed.
 
-이 문제의 간단한 예는 금융 서비스에서 확인할 수 있습니다. 사용자가 누군가에게 송금했는데, 송금 후 30~60분이 지날 때까지 서비스에서 송금이 유효한지 확인할 수 없다고 가정해 보겠습니다. 포크가 단일 체인으로 병합되고 송금 후 여러 블록이 쌓일 때까지 기다려야 트랜잭션이 되돌릴 수 없는지 확인할 수 있기 때문입니다.
+This lack of finality is a very difficult issue in customer-facing services that use blockchain platforms. Because it has to wait until forks are resolved and enough blocks are stacked after the transfer to believe the transaction is not reversible. This has a negative effect both on users and service providers.
 
-### PBFT(Practical Byzantine Fault Tolerance) <a id="pbft-practical-byzantine-fault-tolerance"></a>
-위와 같은 문제를 방지하려면 최종성을 보장하는 다른 알고리즘이 필요합니다. BFT 알고리즘은 1982년 램포트, 쇼스탁, 피즈에 의해 처음 [게시](https://dl.acm.org/citation.cfm?doid=357172.357176)된 알고리즘 중 하나입니다. 1999년에 미구엘 카스트로와 바바라 리스코프는 고성능 상태 머신 복제를 제공하는 "실용적인 비잔틴 장애 허용"([PBFT, Practical Byzantine Fault Tolerance](http://www.pmg.csail.mit.edu/papers/bft-tocs.pdf))을 도입했습니다.
+A simple example of this issue can be demonstrated in financial services. Say a user transferred money to someone, and the service can't verify that the transfer is valid until 30 to 60 minutes have passed. Because it has to wait until the forks have been merged into a single chain and several blocks are stacked after the transfer to be sure that the transaction is not reversible.
 
-위에서 설명한 작업 증명 알고리즘에서는 각 노드가 블록을 받고 검증하지만, 합의에 도달하기 위해 노드 간에 메시지를 교환하지 않습니다. 그러나 PBFT에서는 각 노드가 다른 참여 노드와 통신하여 합의에 도달하고, 노드들이 합의에 도달하는 즉시 블록의 완결성을 보장할 수 있습니다.
+### PBFT (Practical Byzantine Fault Tolerance)  <a id="pbft-practical-byzantine-fault-tolerance"></a>
 
-노드 간 통신은 기본적으로 아래와 같이 진행됩니다. 하지만 각 시스템의 특성을 반영하는 몇 가지 변형이 있습니다.
+To prevent the above issues, we need other algorithms that guarantee the finality. BFT algorithm is one of those, first [published](https://dl.acm.org/citation.cfm?doid=357172.357176) in 1982 by Lamport, Shostak, Pease. In 1999, Miguel Castro and Barbara Liskov introduced "Practical Byzantine Fault Tolerance" ([PBFT](http://www.pmg.csail.mit.edu/papers/bft-tocs.pdf)) which provides high-performance state machine replication.
 
-![PBFT 메시지 흐름](/img/learn/pbft.png)
+In the PoW algorithm stated above, though each node receives and validates blocks, there are no message exchanges between nodes to reach a consensus. But in PBFT, each node communicates with other participating nodes to reach a consensus and the finality of the block can be guaranteed as soon as nodes were able to reach a consensus.
 
-위 그림과 같이 PBFT에 참여하는 노드는 기본적으로 네트워크의 모든 노드와 여러 단계에 걸쳐 통신합니다. 노드 수가 증가함에 따라 통신량이 기하급수적으로 증가하기 때문에 이러한 특성으로 인해 노드 수가 제한됩니다.
+The communication between nodes basically progresses as shown below. But there are some variants which reflect each system's characteristics.
 
-## 클레이튼의 합의 메커니즘 <a id="consensus-mechanism-in-klaytn"></a>
-클레이튼은 엔터프라이즈 지원 및 서비스 중심 플랫폼을 목표로 하고 있습니다. 따라서 위에서 설명한 완결성 문제를 해결해야 하며, 네트워크는 많은 노드가 네트워크에 참여할 수 있어야 합니다. 이를 위해 클레이튼은 블록체인 네트워크의 특성에 맞게 수정하여 PBFT를 구현하는 Istanbul BFT의 최적화된 버전을 사용하고 있습니다.
+![PBFT message flow](/img/learn/pbft.png)
 
-Klaytn에는 CN(컨센서스 노드), PN(프록시 노드), EN(엔드포인트 노드)의 세 가지 유형의 노드가 있습니다. CN은 CCO(코어 셀 운영자)가 관리하며 블록 생성을 담당합니다. 이러한 블록은 네트워크의 모든 노드에 의해 검증됩니다. 이 네트워크 토폴로지에 대한 자세한 내용은 [여기](./learn.md#klaytn-network-topology)를 참조하시기 바랍니다.
+As shown above, a participating node in PBFT basically communicates with all nodes in the network in several phases. This characteristic limits the number of nodes because the communication volume increases exponentially as the number of nodes increases.
 
-![네트워크 토폴로지](/img/learn/klaytn_network_node.png)
+## Consensus Mechanism in Klaytn <a id="consensus-mechanism-in-klaytn"></a>
 
-클레이튼은 Istanbul BFT를 채택하고 개선하여 빠른 완결성을 달성했습니다. 각 블록마다 검증과 합의가 이루어지기 때문에 포크가 없고 합의가 이루어지는 즉시 블록의 완결성이 보장됩니다.
+Klaytn is aiming to be an Enterprise-ready and Service-centric platform. Therefore we need to solve the finality problem written above and the network should be able to allow many nodes to participate in the network. To make this possible, Klaytn is using an optimized version of Istanbul BFT, which implements PBFT with modifications to deal with blockchain network's characteristics.
 
-또한 BFT 알고리즘에서 통신량이 증가하는 문제는 무작위로 선정된 '위원회'를 활용하여 해결합니다. CN들은 집합적으로 '위원회'를 구성하고 블록 생성 시마다 VRF(Verifiable Random Function, 검증 가능한 랜덤 함수)를 사용하여 일부가 '위원회'의 멤버로 선정됩니다.
+In Klaytn, there are three types of nodes, CN (Consensus Node), PN (Proxy Node) and EN (Endpoint Node). CNs are managed by CCOs (Core Cell Operators) and are in charge of block generation. These blocks are verified by all nodes in the network. Please refer to [here](./learn.md#klaytn-network-topology) to know more about this network topology.
 
-![협의회 및 위원회의 개념](/img/learn/council-committee.png)
+![Network topology](/img/learn/klaytn_network_node.png)
 
-합의 메시지는 위원회 구성원 간에만 주고받기 때문에 총 CN 수가 증가하더라도 통신량은 설계된 수준 이하로 제한될 수 있습니다.
+Klaytn achieves fast finality by adopting and improving Istanbul BFT. Because validation and consensus are done for each block there is no fork and the block's finality is guaranteed instantly as soon as the consensus is made.
 
-현재 클레이튼 메인넷 Cypress는 1초 블록 생성 간격으로 초당 4,000개의 트랜잭션을 처리할 수 있는 높은 처리량을 제공합니다. 현재 50개 이상의 컨센서스 노드가 CNN(합의 노드 네트워크)에 참여할 수 있으며, 클레이튼이 알고리즘을 지속적으로 최적화함에 따라 그 수는 계속 늘어날 것입니다.
+And also the issue of increasing communication volume in the BFT algorithm is solved by utilizing randomly selected `Committee`. CNs collectively form a `Council` and on each block generation, part of them are selected as a member of `Committee` using a VRF (Verifiable Random Function).
+
+![Concept of council and committee](/img/learn/council-committee.png)
+
+Because consensus messages are exchanged only between the committee members, the communication volume can be limited under the designed level even though the total number of CNs increases.
+
+Currently, Klaytn Mainnet Cypress can provide a high throughput of 4,000 transactions per second with one-second block generation interval. More than 50 consensus nodes can participate in the CNN (Consensus Node Network) at the moment and the number will continuously increase as Klaytn continues to aggressively optimize the algorithm.
