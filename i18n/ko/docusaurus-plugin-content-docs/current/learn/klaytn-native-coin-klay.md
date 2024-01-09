@@ -1,20 +1,20 @@
-# Klaytn native coin - KLAY
+# 클레이튼 네이티브 코인 - KLAY
 
 ## KLAY <a id="klay"></a>
 
-KLAY is the main internal transferable cryptocurrency of Klaytn and is used to pay transaction fees when creating or executing smart contracts or when transferring KLAY.
+KLAY는 클레이튼의 주요 내부 전송 가능한 암호화폐로, 스마트 컨트랙트를 생성하거나 실행할 때 또는 KLAY를 전송할 때 트랜잭션 수수료를 지불하는 데 사용됩니다.
 
-KLAY is a necessary element--a fuel--for operating the Klaytn distributed application platform. It is a form of payment made by the clients of the platform to the consensus nodes (CNs) executing the requested operations. To put it another way, KLAY is an incentive; it ensures that developers write high-quality applications (wasteful code costs more) and that the network remains healthy (CNs are compensated for the resources they contribute).
+KLAY는 클레이튼 분산 애플리케이션 플랫폼을 운영하기 위한 필수 요소, 즉 연료입니다. 이는 플랫폼의 클라이언트가 요청된 작업을 실행하는 컨센서스 노드 (CN)에게 지불하는 형태입니다. 다시 말해, KLAY는 인센티브이며, 개발자가 고품질의 애플리케이션을 작성하고(낭비적인 코드는 더 많은 비용이 들며) 네트워크가 건강하게 유지되도록 하며(CN은 기여한 리소스에 대해 보상을 받습니다), 이를 통해 개발자가 더 많은 보상을 받도록 합니다.
 
-## Units of KLAY <a id="units-of-klay"></a>
+## KLAY 단위 <a id="units-of-klay"></a>
 
-Klaytn uses the following unit system for KLAY.
+클레이튼은 다음과 같은 단위 시스템을 사용합니다.
 
-- `peb` is the smallest currency unit.
-- `ston` is an alias for `Gpeb` and introduced for convenience.
-- A `KLAY` is 10^18 peb.
+- `peb`는 가장 작은 화폐 단위입니다.
+- `ston`은 `Gpeb`의 별칭으로 편의상 도입되었습니다.
+- `KLAY`는 10^18peb입니다.
 
-| Unit  | peb value | peb                                       |
+| unit  | peb 값     | peb                                       |
 | :---- | :-------- | :---------------------------------------- |
 | peb   | 1 peb     | 1                                         |
 | kpeb  | 10^3 peb  | 1,000                                     |
@@ -29,9 +29,9 @@ Klaytn uses the following unit system for KLAY.
 | GKLAY | 10^27 peb | 1,000,000,000,000,000,000,000,000,000     |
 | TKLAY | 10^30 peb | 1,000,000,000,000,000,000,000,000,000,000 |
 
-#### APIs Related to KLAY Units <a id="apis-related-to-klay-units"></a>
+#### KLAY 유닛 관련 API <a id="apis-related-to-klay-units"></a>
 
-`klay.toPeb` and `klay.fromPeb` are convenient APIs for converting between KLAY units.
+`klay.toPeb`과 `klay.fromPeb`은 KLAY 단위 간 변환을 위한 편리한 API입니다.
 
 ```text
 $ ./klay attach data/dd/klay.ipc
@@ -52,7 +52,7 @@ $ ./klay attach data/dd/klay.ipc
 "25000000000000000000"
 ```
 
-You can get the list of all units supported by `klay.toPeb` and `klay.fromPeb` by sending an invalid unit string such as the one below.
+아래와 같이 잘못된 단위 문자열을 보내면 `klay.toPeb` 및 `klay.fromPeb`에서 지원하는 모든 단위의 목록을 가져올 수 있습니다.
 
 ```text
 > klay.toPeb(1, "something-does-not-exist")
