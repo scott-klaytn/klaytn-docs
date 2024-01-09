@@ -2,19 +2,19 @@
 
 ## eth_coinbase <a id="eth_coinbase"></a>
 
-클라이언트 코인베이스 주소를 반환합니다.
+Returns the client coinbase address.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|----------------|---------------------------------|
-| 20-byte DATA | 현재 코인베이스 주소입니다.
+| Type         | Description                   |
+| ------------ | ----------------------------- |
+| 20-byte DATA | The current coinbase address. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -28,22 +28,21 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
-
 ## eth_etherbase <a id="eth_etherbase"></a>
 
-클라이언트 이더베이스 주소를 반환합니다.
+Returns the client etherbase address.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|----------------|--------------------------------|
-| 20-byte DATA | 현재 이더베이스 주소입니다.
+| Type         | Description                    |
+| ------------ | ------------------------------ |
+| 20-byte DATA | The current etherbase address. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -57,22 +56,21 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
-
 ## eth_chainId <a id="eth_chainid"></a>
 
-요청된 노드에 설정된 현재 체인아이디를 반환합니다.
+Return current chainId set on the requested node.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|-----------|-------------------------------------|
-| QUANTITY | 요청된 노드에 설정된 체인 아이디입니다. |
+| Type     | Description                         |
+| -------- | ----------------------------------- |
+| QUANTITY | Chain id set on the requested node. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -86,24 +84,24 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
-
 ## eth_gasPrice <a id="eth_gasprice"></a>
 
-현재 가스당 가격을 peb 단위로 반환합니다.
+Returns the current price per gas in peb.
 
-**참고**: 이 API는 이더리움과 다른 동작 방식을 가지고 있습니다. 이더리움처럼 가스 가격을 제안하는 대신 클레이튼의 가스 가격을 반환합니다.
+**NOTE**: This API has different behavior from Ethereum's and
+returns a gas price of Klaytn instead of suggesting a gas price as in Ethereum.
 
-**매개변수**
+**Parameters**
 
-없음
+None
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|------------|--------------------------------------------|
-| QUANTITY | 현재 가스 가격(peb)의 정수입니다.   |
+| Type     | Description                              |
+| -------- | ---------------------------------------- |
+| QUANTITY | Integer of the current gas price in peb. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -116,4 +114,3 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
   "result": "0xAE9F7BCC00" // 250,000,000,000 peb = 250 ston (Gwei)
 }
 ```
-

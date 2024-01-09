@@ -1,29 +1,30 @@
-# 환경 설정
+# Set up environment
 
-> **\[중요\] 이 튜토리얼에서는 환경 설정 시 [첫 페이지](count-dapp.md#testing-environment)에 명시된 버전을 따라야 합니다. caver-js.를 다운로드하기 전에 nvm을 사용하여 노드 버전을 10.16.0으로 변경하시기 바랍니다**.
+> **[MUST] For this tutorial, you must follow the versions specified on the [first page](count-dapp.md#testing-environment) when you are setting up the environment. Please change the node version to 10.16.0 by using nvm before downloading caver-js.**
 
-## 1. Node.js(npm) 설치 <a id="1-install-node-js-npm"></a>
+## 1. Install Node.js (npm) <a id="1-install-node-js-npm"></a>
 
-- 공식 사이트(https://nodejs.org/)에서 Node.js(npm)를 다운로드합니다.
-- 다운로드 파일을 클릭하여 패키지를 설치합니다.
-- 터미널에 `$ node --version`을 입력하여 `node`가 성공적으로 설치되었는지 확인합니다.  
-    ```
-    v10.16.0
-    ```
+- Download Node.js (npm) from the official site: https\://nodejs.org/
+- Install the package by clicking the download file.
+- Type `$ node --version` in your terminal to verify `node` has been successfully installed.
+  ```
+  v10.16.0
+  ```
 
-&#9888; 이 글을 작성하는 시점에 `caver-js`와 호환되는 최신 LTS 버전은 10.16.0입니다. 그 이상의 노드 버전을 사용 중이라면 `caver-js`를 설치할 수 없습니다. 노드를 재설치하거나 [NVM(Node Version Manager)](https://github.com/nvm-sh/nvm)을 사용하여 안정적인 환경을 설정하세요.
+⚠ At the time of writing, the latest LTS version that is compatible with `caver-js` is 10.16.0. If you have a higher Node version, `caver-js` cannot be installed. Reinstall the Node or use [NVM (Node Version Manager)](https://github.com/nvm-sh/nvm) to set up a stable environment.
 
-## 2. Truffle 설치 <a id="2-install-truffle"></a>
-Truffle은 컨트랙트 파일을 컴파일하고 배포하는 데 유용한 도구입니다.
+## 2. Install Truffle <a id="2-install-truffle"></a>
 
-> Truffle을 사용하는 경우에만 `nvm`을 사용하여 노드 버전을 12.0.0으로 설정합니다.
+Truffle is a great tool for compiling and deploying contract files.
 
-- `$ nvm install 12.0.0` 입력
-- `$ nvm use 12.0.0` 입력
-- 터미널에 `$ sudo npm install -g truffle`을 입력하여 Truffle을 설치합니다.
-- 터미널에 `$ truffle version`을 입력하여 `truffle`이 성공적으로 설치되었는지 확인합니다.  
-- (**Truffle을 사용하여 스마트 컨트랙트 배포하기**)
-- Truffle을 사용한 후 노드 v10.16.0으로 돌아오려면 `$ nvm use 10.16.0`을 입력합니다.
+> Use `nvm` to set the node version to 12.0.0 only if you are using truffle.
 
-&#9888; 버전이 5보다 낮으면 Truffle 버전 5를 설치하세요.  
+- Type `$ nvm install 12.0.0`
+- Type `$ nvm use 12.0.0`
+- Type `$ sudo npm install -g truffle` in your terminal to install the truffle.
+- Type `$ truffle version` in your terminal to verify `truffle` has been installed successfully.
+- (**Deploy your smart contract by using truffle**)
+- Type `$ nvm use 10.16.0` to come back node v10.16.0 after using truffle.
+
+⚠ If the version is lower than 5, install the truffle version 5.\
 `$ sudo npm install -g truffle@5`

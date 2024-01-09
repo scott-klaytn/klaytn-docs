@@ -2,36 +2,36 @@
 sidebar_label: Web3Auth
 ---
 
-# Web3Auth를 dApp에 통합하기
+# Integrate Web3Auth into a dApp
 
 ![](/img/build/tools/klaytnXweb3Auth.png)
 
-## 소개
+## Introduction
 
-[Web3Auth](https://web3auth.io/docs/)는 dApp이나 지갑에 플러그인되는 지갑 인프라입니다. Web3 지갑과 애플리케이션을 위한 플러그형 인증 인프라 역할을 합니다. Web3Auth의 뛰어난 사용자 편의성을 통해 주류 및 암호화폐 네이티브 모두 단 몇 분 만에 온보딩할 수 있습니다.
+[Web3Auth](https://web3auth.io/docs/) is a wallet infrastructure that is plugged into dApps or wallets. It serves as a pluggable authentication infrastructure for web3 wallets and applications. With Web3Auth's excellent user excellence, both mainstream and crypto natives may be onboarded in a matter of minutes.
 
-지갑 인프라로서 모든 소셜 로그인, 웹 및 모바일 네이티브 플랫폼, 지갑, 기타 키 관리 방법을 즉시 지원합니다. 이 가이드가 끝날 때쯤이면, 여러분은 클레이튼 네트워크에 구축된 탈중앙화 웹 애플리케이션에 Web3Auth를 통합하게 될 것입니다. 다른 플랫폼(안드로이드, iOS, 리액트 네이티브, 플러터, 유니티)에 Web3Auth를 통합하려면 이 [가이드](https://web3auth.io/docs/pnp/introduction)를 참고하시기 바랍니다.
+As a wallet infrastructure, it provides out-of-the-box support for all social logins, web and mobile native platforms, wallets, and other key management methods. By the end of this guide, you will have integrated Web3Auth into your decentralized web application built on the Klaytn Network. To integrate Web3Auth into other platforms (Android, iOS, React Native, Flutter, & Unity), kindly refer to this [guide](https://web3auth.io/docs/pnp/introduction).
 
-## 전제 조건
+## Prerequisite
 
-* 작동하는 리액트 프로젝트(`npx create-react-app project-name` 실행)
-* 필요한 지갑 설치([Coinbase Wallet](https://www.coinbase.com/wallet/downloads), [MetaMask](https://metamask.io/download/)).
-* RPC 엔드포인트: 지원되는 [엔드포인트 공급자](../../../../references/service-providers/public-en.md) 중 하나에서 얻을 수 있습니다.
-* [Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 KLAY 테스트: 충분한 KLAY로 계정에 자금을 충전합니다.
-* [Web3Auth 대시보드](https://dashboard.web3auth.io/)에서 클라이언트 ID를 받습니다.
+- A working react project (by executing `npx create-react-app project-name`)
+- Install the necessary wallets ([Coinbase Wallet](https://www.coinbase.com/wallet/downloads), [Metamask](https://metamask.io/download/)).
+- RPC Endpoint: you can get this from one of the supported [endpoint providers](../../../../references/service-providers/public-en.md).
+- Test KLAY from [Faucet](https://baobab.wallet.klaytn.foundation/faucet): fund your account with sufficient KLAY.
+- Get your Client ID from [Web3Auth Dashboard](https://dashboard.web3auth.io/).
 
-## 설치
+## Installation
 
-dApp에서 Web3Auth를 사용하려면 먼저 필요한 라이브러리와 SDK를 설치해야 합니다. 따라서 ethers.js와 Web3Auth 웹 SDK를 설정해야 합니다. [ethers.js](https://docs.ethers.org/v6/) 또는 [web3.js](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html) 라이브러리와 함께 Web3Auth를 사용하여 Klaytn 블록체인과 통신할 수 있습니다. 이 가이드에서는 ethers.js를 사용하겠습니다.
+To make use of Web3Auth in your dApp, you must install the required libraries and SDK first. Hence, you'll need to set up ethers.js, and the Web3Auth Web SDK. You can use Web3Auth together with either [ethers.js](https://docs.ethers.org/v6/) or [web3.js](https://web3js.readthedocs.io/en/v1.2.8/getting-started.html) libraries to communicate with the Klaytn blockchain. We'll be using ethers.js throughout this guide.
 
 ```bash
 npm install --save @web3auth/modal
 npm install --save ethers	
 ```
 
-## Web3Auth 및 공급자 인스턴스 초기화하기
+## Initializing Web3Auth and Provider Instance
 
-필요한 라이브러리를 성공적으로 설치한 다음에는 Web3Auth 인스턴스를 초기화하고, Web3Auth 공급자 인스턴스를 useState() 훅에 설정하고, useState() 훅에 init() 함수를 설정합니다.
+After successfully installing the needed libraries, next is to initialize the Web3Auth instance, set the Web3Auth provider instance in a useState() hook and also the init() function in a useEffect() hook.
 
 ```js
 import { Web3Auth } from "@web3auth/modal";
@@ -71,9 +71,9 @@ useEffect(() => {
 }, []);
 ```
 
-## 지갑 연결하기
+## Connecting Wallet
 
-`App.js` 파일의 앱 함수 내에서 web3Auth 인스턴스의 [connect()](https://web3auth.io/docs/sdk/web/no-modal/usage#logging-in-the-user) 메서드를 호출하여 지갑 연결을 시작합니다.
+Inside your App function in your `App.js` file, call the [connect()](https://web3auth.io/docs/sdk/web/no-modal/usage#logging-in-the-user) method on the web3Auth instance to initiate the connection of your wallet.
 
 ```js
 const connectWallet = async() => {
@@ -93,13 +93,13 @@ const connectWallet = async() => {
 
 ![](/img/build/tools/web3Auth.png)
 
-## 유틸리티 함수 설정
+## Setting up Utils function
 
-이 가이드에서는 유틸리티 함수인 `truncateAddress()`를 사용하겠습니다. truncateAddress() 함수는 유효한 주소를 받아 전달된 주소의 읽기 쉬운 형식으로 반환합니다. 아래 단계는 프로젝트에서 유틸리티 함수를 설정하고 사용하는 방법을 보여줍니다.
+In this guide, we will be making use of utils function: `truncateAddress()`. The truncateAddress() function takes in a valid address and returns a more readable format of the address passed in. The following steps below show how to set up and use the utils function in your project.
 
-**1단계**: `src` 루트 폴더에 `utils.js` 파일을 생성합니다.
+**Step 1**: Create a `utils.js` file in the `src` root folder.
 
-새로 만든 utils.js 파일에 다음 코드를 붙여넣습니다.
+Paste the following code in the newly created utils.js file.
 
 ```js
 export const truncateAddress = (address) => {
@@ -112,15 +112,15 @@ export const truncateAddress = (address) => {
   };
 ```
 
-**2단계**: `App.js` 파일에서 함수를 가져옵니다.
+**Step 2**: Import the function in your `App.js` file.
 
 ```js
 import { truncateAddress } from "./utils";
 ```
 
-## 계정 및 잔액 가져오기
+## Getting Account and balance
 
-Web3Auth 인스턴스에서 `connect()` 메서드를 호출하여 지갑을 성공적으로 연결했다면 공급자 및 서명자 객체를 사용하여 사용자 계정과 잔액을 가져올 수 있습니다.
+Having connected your wallet successfully by calling the `connect()` method on the Web3Auth instance, you can get the user account and its balance by using the provider and signer object.
 
 ```js
   const [web3auth, setWeb3auth] = useState(null);
@@ -164,9 +164,9 @@ return (
 }
 ```
 
-## 지갑 연결 해제하기
+## Disconnecting Wallet
 
-지갑과의 연결 해제는 Web3Auth 인스턴스에서 [logout()](https://web3auth.io/docs/sdk/web/no-modal/usage#logging-out-the-user) 메서드를 사용하여 수행할 수 있습니다. 또한 상태를 새로고침하여 이전에 저장된 연결 데이터를 모두 지우는 것도 좋은 방법 중 하나입니다.
+Disconnecting from the wallet is achieved by using the [logout()](https://web3auth.io/docs/sdk/web/no-modal/usage#logging-out-the-user) method on the Web3Auth instance. Also, one good practice is to refresh the state to clear any previously stored connection data.
 
 ```js
 function App() {
@@ -195,9 +195,9 @@ return (
 }
 ```
 
-## 체인 전환하기
+## Switching Chains
 
-Web3Auth를 사용하여 체인을 전환하려면 먼저 [addChain()](https://web3auth.io/docs/sdk/web/no-modal/usage#add-chain) 메서드를 호출하여 연결된 어댑터에 원하는 체인 구성을 추가한 다음 [switchChain()](https://web3auth.io/docs/sdk/web/no-modal/usage#switch-chain) 메서드를 호출해야 합니다.
+To switch chains using Web3Auth, you must firstly add the desired chain config to a connected adapter by calling the [addChain()](https://web3auth.io/docs/sdk/web/no-modal/usage#add-chain) method, then proceed to calling the [switchChain()](https://web3auth.io/docs/sdk/web/no-modal/usage#switch-chain) method.
 
 ```js
 const switchChain = async () => {
@@ -228,8 +228,9 @@ return (
 );
 ```
 
-## 사용자 정보 가져오기
-Web3Auth의 고유한 기능은 소셜 로그인입니다. 사용자가 소셜 플랫폼을 사용하여 로그인하면 Web3Auth 인스턴스는 로그인한 사용자에 대한 몇 가지 정보를 반환합니다. 로그인한 사용자 정보를 가져오는 방법은 Web3Auth 인스턴스에서 getUserInfo() 메서드를 호출하는 것만큼 간단합니다.
+## Getting User Info
+
+A unique feature of Web3Auth is social logins. Once a user login using their social platforms, Web3Auth instance returns some information about the logged in user. Getting the logged in user information is as simple as calling the getUserInfo() method on the Web3Auth instance.
 
 ```js
  // add to the existing useState hook.
@@ -252,9 +253,9 @@ Web3Auth의 고유한 기능은 소셜 로그인입니다. 사용자가 소셜 �
   );
 ```
 
-## 메시지 서명하기
+## Signing Messages
 
-공급자 및 서명자 객체를 초기화하면 사용자는 임의의 문자열에 서명할 수 있습니다.
+Having initialised the provider and signer object, users can sign an arbitrary string.
 
 ```js
  // add to the existing useState hook.
@@ -292,9 +293,9 @@ return (
 
 ```
 
-## 네이티브 트랜잭션 보내기
+## Sending Native Transaction
 
-한 사용자에서 다른 사용자로 KLAY를 보내는 것과 같은 네이티브 트랜잭션을 수행할 수 있습니다.
+You can perform native transactions, like sending KLAY from one user to another.
 
 ```js
     // add to the existing useState hook.
@@ -337,11 +338,11 @@ return (
 
 ```
 
-## 스마트 컨트랙트로 작업하기
+## Working with a Smart Contract
 
-1. **컨트랙트 배포하기**
+1. **Deploying a Contract**
 
-애플리케이션 바이너리 인터페이스(ABI)와 컨트랙트 바이트 코드가 주어지면 스마트 컨트랙트를 배포할 수 있습니다.
+You can deploy a smart contract given its Application Binary Interface(ABI) and its contract byte code.
 
 ```js
 // add to the existing useState hook.
@@ -420,9 +421,9 @@ return (
   );
 ```
 
-Web3Auth 공급자 및 서명자 개체를 사용하면 블록체인에 배포된 스마트 컨트랙트에 쓰기 및 읽기와 같은 컨트랙트 상호 작용을 할 수 있습니다.
+With the Web3Auth provider and signer object, you can make contract interactions such as writing to and reading from a smart contract deployed on the blockchain.
 
-2. **컨트랙트 작성하기**
+2. **Writing to a Contract**
 
 ```js
   // add to existing useState hook
@@ -511,7 +512,7 @@ return (
 );
 ```
 
-3. **컨트랙트에서 읽기**
+3. **Reading from a Contract**
 
 ```js
 // add to existing useState hook
@@ -587,7 +588,7 @@ return (
   )
 ```
 
-## 문제 해결
+## TroubleShooting
 
 **Polyfill node core module error**
 
@@ -595,7 +596,8 @@ return (
 BREAKING CHANGES: webpack<5 used to include polyfills for node.js core modules by default.
 ```
 
-이 오류는 웹팩 버전 5를 사용할 때 발생합니다. 이 버전에서는 NodeJS 폴리필이 더 이상 기본적으로 지원되지 않습니다. 이 문제를 해결하려면 이 [가이드](https://web3auth.io/docs/troubleshooting/webpack-issues)를 참조하세요.
+This error occurs when you use webpack version 5. In this version, NodeJS polyfills is no longer supported by default. To solve this issue, refer to this [guide](https://web3auth.io/docs/troubleshooting/webpack-issues).
 
-## 다음 단계
-Web3Auth에 대한 자세한 가이드는 [Web3Auth 문서](https://web3auth.io/docs/connect-blockchain/klaytn) 및 [Web3Auth Github 리포지토리](https://github.com/web3auth)를 참조하세요. 또한 이 가이드에 사용된 코드의 전체 구현은 [GitHub](https://github.com/klaytn/examples/tree/main/wallet-libraries/web3Auth-sample)에서 확인할 수 있습니다.
+## Next Step
+
+For more in-depth guides on Web3Auth, please refer to the [Web3Auth Docs](https://web3auth.io/docs/connect-blockchain/klaytn) and [Web3Auth Github repository](https://github.com/web3auth). Also, you can find the full implementation of the code for this guide on [GitHub](https://github.com/klaytn/examples/tree/main/wallet-libraries/web3Auth-sample).

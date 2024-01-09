@@ -1,7 +1,7 @@
-# 크로스 체인
+# Cross-chain
 
-크로스 체인 메시징 프로토콜은 원래 고립되어 있고 독립적인 체인을 서로 연결하여 서로 간에 유동성과 상태를 이동할 수 있도록 상호 운용성을 높이는 것을 목표로 합니다. 이러한 프로토콜은 서로 다른 블록체인 네트워크 간에 자산을 전송하기 위한 규칙과 프로세스를 설정합니다. 이제 여러 블록체인은 크로스체인 메시징 프로토콜 덕분에 독립적인 시스템 간에 쉽게 상호 작용하고 협업하며 데이터를 교환할 수 있게 되었습니다.
+Cross-chain messaging protocols seek to connect chains that are originally isolated and independent together, hence making them interoperable to the point of moving liquidity and state between themselves. These protocols set the rules and processes for transferring assets between different blockchain networks. Multiple blockchains may now interact, collaborate, and exchange data with ease between their independent systems thanks to cross-chain messaging protocols, which made it possible.
 
-클레이튼 네트워크와 호환되는 크로스체인 메시징 프로토콜은 아래와 같습니다.
+The cross-chain messaging protocols that are compatible with the Klaytn network are listed below.
 
-* [LayerZero](https://layerzero.gitbook.io/docs/)
+- [LayerZero](https://layerzero.gitbook.io/docs/)

@@ -1,12 +1,12 @@
-# 계정 관리
+# Manage Accounts
 
-## 계정 나열하기 <a id="list-your-accounts"></a>
+## List Your Accounts <a id="list-your-accounts"></a>
 
-이렇게 하면 데이터 디렉터리 아래에 생성된 모든 계정 목록이 반환됩니다.
+This will return the list of all accounts created under the data directory.
 
 ### ken <a id="ken"></a>
 
-명령줄에서 다음을 사용하여 CLI를 호출합니다:
+From the command line, call the CLI with:
 
 ```bash
 $ ken account list --datadir <DATADIR>
@@ -15,33 +15,33 @@ Account #0: {bfc22a57999459b0c2ce6337deb9287e7a970e02} keystore:///Users/usernam
 Account #1: {47bd2e9565cbe1789454718d6cf1778d7ea557aa} keystore:///Users/username/kend_home/keystore/UTC--2019-03-26T07-04-44.840061000Z--47bd2e9565cbe1789454718d6cf1778d7ea557aa
 ```
 
-**참고**: 다른 노드에서 키스토어 파일을 복사하거나 파일을 제거하면 반환되는 계정 목록의 순서가 변경될 수 있습니다. 따라서 인덱스에 의존하지 않거나 키스토어 파일을 복사하거나 제거할 경우 스크립트에서 계정 인덱스를 확인하고 업데이트해야 합니다.
+**NOTE**: This order of returned account list can change if you copy keystore files from other nodes or remove the files. Therefore, make sure you either do not rely on the index or make sure if you copy or remove keystore files you check and update your account indexes in your scripts.
 
-### JavaScript 콘솔 <a id="javascript-console"></a>
+### JavaScript Console <a id="javascript-console"></a>
 
-콘솔을 사용하는 경우:
+When using the console:
 
 ```javascript
 > klay.accounts
 ["bfc22a57999459b0c2ce6337deb9287e7a970e02", "47bd2e9565cbe1789454718d6cf1778d7ea557aa"]
 ```
 
-## 계정 잠금 해제 <a id="unlock-accounts"></a>
+## Unlock Accounts <a id="unlock-accounts"></a>
 
-비대화형으로 계정을 사용하려면 계정을 잠금 해제해야 합니다.
+If you want to use an account non-interactively, you need to unlock it.
 
 ### ken <a id="ken"></a>
 
-쉼표로 구분된 계정 목록 \(16진수 또는 인덱스\)를 인수로 받는 `--unlock "{address},{address}"` 옵션을 사용하여 명령줄에서 EN을 시작하면 한 세션에 대해 프로그래밍 방식으로 계정 잠금을 해제할 수 있습니다. 이 옵션은 RPC를 통해 dApp에서 계정을 사용하고자 할 때 유용합니다. `--unlock`은 목록에서 첫 번째 계정을 잠금 해제합니다. 프로그래밍 방식으로 계정을 만들었을 때 유용하며, 실제 계정을 몰라도 잠금을 해제할 수 있습니다.
+You can unlock accounts and start the EN on the command line with the `--unlock "{address},{address}"` option which takes a comma-separated list of accounts (in hex or index) as an argument so you can unlock the accounts programmatically for one session. This is useful if you want to use your account from dApps via RPC. `--unlock` will unlock the first account in the list. This is useful when you created your account programmatically, you do not need to know the actual account to unlock it.
 
-계정을 만들고 계정을 잠금 해제하여 노드를 시작합니다:
+Create an account and start a node with the account unlocked:
 
 ```bash
 $ ken account new --password <(echo this is not secret) --datadir <DATADIR>
 $ ken --password <(echo "this is not secret") --unlock primary --datadir <DATADIR> --rpccorsdomain localhost --verbosity 6 2>> log.log
 ```
 
-특정 계정이 잠금 해제된 상태에서 노드를 시작하려면 계정 목록에서 주소 위치를 참조하는 주소 또는 인덱스 \(생성 순서에 해당\)를 사용하면 됩니다.
+If you want to start a node with a specific account unlocked, you can use an address or an index which refers to the address position in the account list (and corresponds to the order of creation).
 
 ```bash
 $ ken --unlock "0" --datadir <DATADIR>
@@ -49,40 +49,40 @@ $ ken --unlock "2" --datadir <DATADIR>
 $ ken --unlock "bfc22a57999459b0c2ce6337deb9287e7a970e02" --datadir <DATADIR>
 ```
 
-명령줄을 통해 여러 계정을 잠금 해제할 수 있습니다. 이 경우 잠금 해제 인수는 쉼표로 구분된 계정 주소 또는 인덱스 목록입니다.
+The command line allows you to unlock multiple accounts. In this case, the argument to unlock is a comma-separated list of account addresses or indexes.
 
 ```bash
 $ ken --unlock "0x407d73d8a49eeb85d32cf465507dd71d507100c1,0,5,e470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32" --datadir <DATADIR>
 ```
 
-이 구조를 비대화형으로 사용하는 경우 비밀번호 파일에는 해당 계정의 각 비밀번호가 한 줄에 하나씩 포함되어야 합니다.
+If this construction is used non-interactively, your password file will need to contain the respective passwords for the accounts in question, one per line.
 
-### JavaScript 콘솔 <a id="javascript-console"></a>
+### JavaScript Console <a id="javascript-console"></a>
 
-콘솔에서 \(초 단위\) 기간 동안 \(한 번에 하나씩\) 계정을 잠금 해제할 수도 있습니다.
+On the console you can also unlock accounts (one at a time) for a duration (in seconds).
 
 ```javascript
 > personal.unlockAccount(address, "password", 300)
 ```
 
-콘솔 기록이 기록되므로 계정이 노출될 수 있으므로 비밀번호 인수를 사용하지 않는 것이 좋습니다. 주의하십시오.
+Note that we do NOT recommend using the password argument here, since the console history is logged, so you may compromise your account. You have been warned.
 
-## 계정 잔액 확인 <a id="check-account-balance"></a>
+## Check Account Balance <a id="check-account-balance"></a>
 
 ### ken <a id="ken"></a>
 
-해당 없음
+n/a
 
-### JavaScript 콘솔 <a id="javascript-console"></a>
+### JavaScript Console <a id="javascript-console"></a>
 
-계정 잔액을 확인하려면:
+To check your account balance:
 
 ```javascript
 > klay.fromPeb(klay.getBalance("{account}"), "KLAY")
 6.5
 ```
 
-JavaScript 함수를 사용하여 모든 잔액을 인쇄합니다:
+Print all balances with a JavaScript function:
 
 ```javascript
 function checkAllBalances() {
@@ -101,7 +101,7 @@ function checkAllBalances() {
 };
 ```
 
-그런 다음 이를 실행할 수 있습니다:
+That can then be executed with:
 
 ```javascript
 > checkAllBalances();
@@ -111,13 +111,13 @@ klay.accounts[2]: 0xe470b1a7d2c9c5c6f03bbaa8fa20db6d404a0c32  balance: 1 KLAY
 klay.accounts[3]: 0xf4dd5c3794f1fd0cdc0327a83aa472609c806e99  balance: 6 KLAY
 ```
 
-이 함수는 `ken`을 재시작하면 사라지므로 자주 사용하는 함수를 저장해두면 나중에 호출할 때 유용하게 사용할 수 있습니다.
+Since this function will disappear after restarting `ken`, it can be helpful to store commonly used functions to be called later.
 
-먼저 컴퓨터의 파일에 `checkAllBalances()` 함수 정의를 저장합니다. 예를 들어, `/Users/username/klayload.js`입니다. 그런 다음 대화형 콘솔에서 파일을 로드합니다:
+First, save the `checkAllBalances()` function definition to a file on your computer. For example, `/Users/username/klayload.js`. Then load the file from the interactive console:
 
 ```javascript
 > loadScript("/Users/username/klayload.js")
 true
 ```
 
-이 파일은 마치 수동으로 명령을 입력한 것처럼 JavaScript 환경을 수정합니다. 자유롭게 실험해 보세요!
+The file will modify your JavaScript environment as if you have typed the commands manually. Feel free to experiment!

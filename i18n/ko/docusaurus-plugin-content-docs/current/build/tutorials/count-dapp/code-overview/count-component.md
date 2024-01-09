@@ -1,17 +1,17 @@
-# Count 컴포넌트
+# Count Component
 
-`src/components/Count.js`는 다음과 같이 구성됩니다.
+`src/components/Count.js` goes as follows,
 
-## `Count` 컴포넌트 <a href="#count-component" id="count-component"></a>
+## `Count` component <a href="#count-component" id="count-component"></a>
 
-1\) 전체 코드\
-2\) `count` 컴포넌트의 역할\
-3\) 컨트랙트와 상호작용하는 방법\
-4\) 컨트랙트와 상호작용하는 방법: `getCount` 메서드\
-5\) 컨트랙트와 상호작용: `setPlus` 메서드\
-6\) 트랜잭션 수명 주기
+1\) Full code\
+2\) `Count` component's role\
+3\) How to interact with contract?\
+4\) Interact with contract: `getCount` method\
+5\) Interact with contract: `setPlus` method\
+6\) Transaction life cycle
 
-### 1) 전체 코드 <a href="#1-full-code" id="1-full-code"></a>
+### 1. Full code <a href="#1-full-code" id="1-full-code"></a>
 
 ```javascript
 import React, { Component } from 'react'
@@ -197,36 +197,36 @@ class Count extends Component {
 export default Count
 ```
 
-### 2) `Count` 컴포넌트의 역할 <a href="#2-count-component-s-role" id="2-count-component-s-role"></a>
+### 2. `Count` component's role <a href="#2-count-component-s-role" id="2-count-component-s-role"></a>
 
-`Count` 컴포넌트의 역할은 클레이튼 블록체인에 배포된 Count 컨트랙트와 상호작용하는 것입니다.
+`'Count'` component's role is interacting with Count contract deployed on the Klaytn blockchain.
 
-Count.sol에서 다음과 같이 여러 변수와 함수를 선언했습니다.
+In Count.sol, we declared several variables and functions like below:
 
-* `count`
-* `lastParticipant`
-* `plus`: `count` 저장소 변수를 1씩 증가시킵니다. (count = count + 1)
-* `minus`: `count` 저장소 변수를 1씩 감소시킵니다. (count = count - 1)
+- `count`
+- `lastParticipant`
+- `plus`: increase `count` storage variable by 1. (count = count + 1)
+- `minus`: decrease `count` storage variable by 1. (count = count - 1)
 
-Count.js 컴포넌트에는 Count 컨트랙트의 함수 및 변수와 상호작용하는 메서드가 있습니다.
+In Count.js component, we have methods to interact with the functions and variables of the Count contract.
 
-### 3) 컨트랙트와 상호작용하는 방법 <a href="#3-how-to-interact-with-contract" id="3-how-to-interact-with-contract"></a>
+### 3. How to interact with contract? <a href="#3-how-to-interact-with-contract" id="3-how-to-interact-with-contract"></a>
 
-컨트랙트와 상호작용하기 위해서는 배포된 컨트랙트의 컨트랙트 인스턴스가 필요합니다.
-컨트랙트 인스턴스는 caver-js의 `caver.klay.Contract(ABI, contractAddress)` API를 통해 만들 수 있습니다. 자세한 내용은 [caver.klay.Contract](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.Contract.md#new-contract)를 참고하세요.
+To interact with the contract, we need a contract instance of the deployed contract.\
+The contract instance can be made through `caver.klay.Contract(ABI, contractAddress)` API of caver-js. For more details, see [caver.klay.Contract](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.Contract.md#new-contract).
 
-`Contract ABI`(애플리케이션 바이너리 인터페이스)를 사용하면 caver는 컨트랙트 메서드를 로컬 함수인 것처럼 호출할 수 있습니다.
-예를 들어,\
+With `Contract ABI`(Application Binary Interface), caver can call the contract method as if it is a local function,\
+for example)\
 `contractInstance.methods.count().call()`\
 `contractInstance.methods.plus().send({ ... })`\
 `contractInstance.methods.minus().send({ ... })`
 
-`Contract address`는 컨트랙트를 컴파일하고 배포한 후 `build/contracts/Count.json` 파일에서 확인할 수 있습니다. 테스트 편의를 위해 클레이튼 테스트넷에 컨트랙트를 배포하고 디렉터리에 `deployedABI`와 `deployedAddress` 파일을 포함시켰습니다. 이 파일에는 Count 컨트랙트의 ABI와 배포된 컨트랙트 주소가 포함되어 있습니다.
-웹팩 구성 덕분에 변수를 통해 이 파일에 액세스할 수 있습니다. (`DEPLOYED_ADDRESS`, `DEPLOYED_ABI`)
+`Contract address` can be found in the `build/contracts/Count.json` file after compiling and deploying the contract. For your testing convenience, we deployed the contract to the Klaytn testnet, and included the `deployedABI` and `deployedAddress` files in the directory. Those files contain the ABI of the Count contract and the deployed contract address.\
+Thanks to the webpack configuration, we can access them via variables. (`DEPLOYED_ADDRESS`, `DEPLOYED_ABI`)
 
-예)\
-`DEPLOYED_ADDRESS`는 배포된 연락처 ddress를 반환합니다.\
-`DEPLOYED_ABI`는 카운트 contract ABI를 반환합니다.
+For example)\
+`DEPLOYED_ADDRESS` returns the deployed contact ddress.\
+`DEPLOYED_ABI` returns the Count contract ABI.
 
 ```javascript
 constructor() {
@@ -242,9 +242,9 @@ constructor() {
 }
 ```
 
-`this.countContract = new cav.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS)`는 배포된 `Count` 컨트랙트와 상호작용할 컨트랙트 인스턴스를 생성하고, `DEPLOYED_ABI`와 `DEPLOYED_ADDRESS`를 `cav.klay.Contract` API에 전달합니다. 그리고 이 컨트랙트 인스턴스는 `this.countContract`에 저장됩니다.
+`this.countContract = new cav.klay.Contract(DEPLOYED_ABI, DEPLOYED_ADDRESS)` creates a contract instance to interact with the deployed `Count` contract, by passing `DEPLOYED_ABI` and `DEPLOYED_ADDRESS` to the `cav.klay.Contract` API. And this contract instance is stored to `this.countContract`.
 
-### 4) 컨트랙트와 상호작용: `getCount` 메서드 <a href="#4-interact-with-contract-getcount-method" id="4-interact-with-contract-getcount-method"></a>
+### 4. Interact with contract: `getCount` method <a href="#4-interact-with-contract-getcount-method" id="4-interact-with-contract-getcount-method"></a>
 
 ```javascript
 getCount = async () => {
@@ -264,16 +264,16 @@ getCount = async () => {
 }
 ```
 
-컨트랙트 인스턴스가 있으므로 컨트랙트 메서드를 호출할 수 있습니다. 컨트랙트 인스턴스에는 `methods`라는 프로퍼티가 있습니다.
-여기에는 컨트랙트의 함수(예: `count`, `lastParticipant`, `plus`, `minus`)가 포함됩니다.
+Since we have a contract instance, we can call contract methods. Contract instance has a property, `methods`.\
+It contains the functions of the contract, for example, `count`, `lastParticipant`, `plus`, and `minus`.
 
-위 코드에서 `getCount` 함수는 컨트랙트 함수 호출이 프로미스 객체를 반환하기 때문에 `async`로 선언되어 있습니다. `this.countContract.methods.count().call()`를 호출하여 `count`를 가져올 수 있습니다.
+In the above code, `getCount` function is declared as `async`, since contract function call returns a promise object. We can fetch the `count` by calling `this.countContract.methods.count().call()`.
 
-`lastParticipant` 주소는 `this.countContract.methods.lastParticipant().call()`를 호출하여 가져올 수 있습니다.
+We can fetch the `lastParticipant` address by calling `this.countContract.methods.lastParticipant().call()`.
 
-이러한 변수를 가져온 후, 받은 값으로 상태 속성인 `count`와 `lastParticipant`를 설정합니다.
+After fetching those variables, we set the state properties, `count` and `lastParticipant` with the received values.
 
-컨트랙트 메서드 호출에 대한 자세한 내용은 [caver.klay.Contract](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.Contract.md#methods)를 참조하세요.
+For further information about calling contract methods, see [caver.klay.Contract](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.Contract.md#methods)
 
 ```javascript
 componentDidMount() {
@@ -285,10 +285,10 @@ componentWillUnmount() {
 }
 ```
 
-1초마다 `count` 변수를 가져오고 싶으면 `setInterval`을 사용하면 됩니다. 이는 `BlockNumber.js`의 `getBlockNumber`에서 `caver.klay.getBlockNumber()`를 간격으로 호출하는 것과 동일합니다.
+We want to fetch the `count` variable per 1 second, it can be achieved by `setInterval`.
+It is the same as we did in the `getBlockNumber` in `BlockNumber.js` which calls `caver.klay.getBlockNumber()` intervally.
 
-### 5) 컨트랙트와 상호작용: `setPlus` 메서드 <a href="#5-interact-with-contract-setplus-method" id="5-interact-with-contract-setplus-method"></a>
-
+### 5. Interact with contract: `setPlus` method <a href="#5-interact-with-contract-setplus-method" id="5-interact-with-contract-setplus-method"></a>
 
 ```javascript
 setPlus = () => {
@@ -330,12 +330,12 @@ setPlus = () => {
 }
 ```
 
-`setPlus` 함수는 Count 컴포넌트에서 가장 중요한 부분입니다. 컨트랙트 함수 `plus`를 호출하여 컨트랙트와 상호작용합니다. 이 함수 역시 컨트랙트 메서드이므로 `this.counterContract.methods`에 포함되어 있습니다.
+`setPlus` function is the most important part in Count component. It interacts with the contract by calling contract function `plus`. Since this function is also a contract method, it is contained in the `this.counterContract.methods`.
 
-다만, 데이터를 읽기만 하는 `count`, `lastParticipant`와 달리 `plus` 함수는 클레이튼 블록체인에 데이터를 **쓰는 역할**을 합니다.
-데이터를 읽는 것은 무료이지만, 데이터를 쓰는 것은 연산과 저장소 사용에 따른 비용이 발생합니다. 비용은 사용된 `gas`의 양으로 측정됩니다.
+However, unlike `count` and `lastParticipant` that just reads data, `plus` function **writes data** to the Klaytn blockchain.\
+Reading data is free, however writing data incurs cost for the use of computation and storage. The cost is measured by the amount of `gas` used.
 
-따라서 트랜잭션을 전송하려면 트랜잭션 수수료를 부담할 클레이튼 노드를 알리기 위해 `from:` 속성이 필요합니다. `gas:` 속성은 트랜잭션 발신자가 트랜잭션에 대해 지불하고자 하는 최대 가스 양을 정의합니다.
+By this reason, sending a transaction needs `from:` property to inform the Klaytn node who is responsible for the transaction fee. `gas:` property defines the maximum amount of gas the transaction sender is willing to pay for the transaction.
 
 ```javascript
 this.countContract.methods.plus().send({
@@ -344,7 +344,7 @@ this.countContract.methods.plus().send({
 })
 ```
 
-트랜잭션을 보내려면 `.call()` 대신 `.send()`를 사용하세요.
+To send a transaction, use `.send()` instead of `.call()`.
 
 ```javascript
 .send({
@@ -353,7 +353,7 @@ this.countContract.methods.plus().send({
 })
 ```
 
-### 6) 트랜잭션 수명 주기 <a href="#6-transaction-life-cycle" id="6-transaction-life-cycle"></a>
+### 6. Transaction life cycle <a href="#6-transaction-life-cycle" id="6-transaction-life-cycle"></a>
 
 ```javascript
 try{
@@ -377,15 +377,15 @@ try{
 }
 ```
 
-트랜잭션을 전송한 후 라이프사이클에 따라 트랜잭션 상태를 확인할 수 있습니다.
+After sending a transaction, you can get the transaction status along the life cycle.
 
-`transactionHash` 이벤트는 트랜잭션 해시를 가져올 때 발생합니다. 네트워크를 통해 트랜잭션을 전송하기 전에 사용할 수 있습니다.
+`transactionHash` event is fired when you get the transaction hash. It is available before sending the transaction over the network.
 
-트랜잭션 영수증을 받을 수 있을 때 `receipt` 이벤트가 발생합니다. 이는 트랜잭션이 블록에 들어갔음을 의미합니다. 트랜잭션이 포함된 블록 번호는 `receipt.blockNumber`로 확인할 수 있습니다.
+`receipt` is fired,when you can get the transaction receipt. It means you transaction got into the block. You can get the block number that contains your transaction by `receipt.blockNumber`.
 
-`error`는 트랜잭션 전송 중 에러가 발생했을 때 발생합니다.
+`error` is fired when an error occurred while sending a transaction.
 
-참고) `settingDirection`은 로딩 표시기(gif)를 표시하는 데 사용됩니다. 트랜잭션이 블록에 포함되면 `settingDirection`에 `null`을 할당하여 로딩 표시기를 제거합니다.
+cf) `settingDirection` is used to display a loading indicator(gif). Once the transaction is included in a block, remove the loading indicator by assigning `null` to `settingDirection`.
 
 ```javascript
 <button
@@ -398,16 +398,16 @@ try{
 </button>
 ```
 
-"+" 버튼을 클릭하여 이 함수를 호출할 수 있습니다.
+You can call this function by clicking + button.
 
-"+" 버튼을 클릭한 후 요약하면 다음과 같습니다.
+To recap, after clicking + button,
 
-1. 컨트랙트 메서드인 `plus`를 호출하는 트랜잭션을 전송합니다.
-2. 트랜잭션을 전송한 직후 트랜잭션 해시를 받게 됩니다.\
-   3-a. 트랜잭션이 처리되어 블록에 포함되면 트랜잭션 영수증을 받게 됩니다.\
-   3-b. 트랜잭션을 전송하는 동안 오류가 발생하면 오류를 받게 됩니다. 그리고 `receipt` 블록은 절대 호출되지 않습니다.
+1. You will send a transaction which calls the contract method, `plus`.
+2. Just after sending a transaction, you will receive the transaction hash.\
+   3-a. After your transaction has been processed and included in a block, you will receive the transaction receipt.\
+   3-b. If there were errors while sending a transaction, you will receive an error. And `receipt` block will never be called.
 
-`plus` 메서드를 호출하는 전체 코드는 아래와 같습니다:
+Full code for invoking `plus` method is as below:
 
 ```javascript
 try{
@@ -431,9 +431,9 @@ try{
 }
 ```
 
-### 블록체인에서 내 트랜잭션을 확인하려면 어떻게 해야 하나요? <a href="#5-interact-with-contract-setplus-method" id="5-interact-with-contract-setplus-method"></a>
+### How can I check my transaction in the blockchain? <a href="#how-can-i-check-my-transaction-in-the-blockchain" id="how-can-i-check-my-transaction-in-the-blockchain"></a>
 
-![거래 확인](/img/build/tutorials/tutorial-check-your-transaction.gif)
+![check-transaction](/img/build/tutorials/tutorial-check-your-transaction.gif)
 
-트랜잭션을 전송한 후 클레이튼스콥을 통해 트랜잭션 내역을 확인할 수 있습니다.
-`https://baobab.scope.klaytn.com/tx/${txHash}`에서 확인할 수 있습니다.
+After sending a transaction, you can check your transaction detail using Klaytnscope.\
+Check it in `https://baobab.scope.klaytn.com/tx/${txHash}`.

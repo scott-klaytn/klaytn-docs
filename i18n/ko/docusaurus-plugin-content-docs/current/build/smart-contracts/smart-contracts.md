@@ -1,10 +1,10 @@
-# 스마트 컨트랙트
+# Smart Contracts
 
-이 섹션에서는 스마트 컨트랙트 개발을 위한 개발 리소스에 대해 설명합니다.
+This section covers the development resources for the Smart Contract development.
 
-스마트 컨트랙트를 작성하기 위해 현재 클레이튼은 [Solidity](https://github.com/ethereum/solidity)를 기본 프로그래밍 언어로 지원하고 있습니다. Solidity가 클레이튼에서 채택된 이유는 이더리움의 사실상 표준 컨트랙트 프로그래밍 언어이며, 많은 사용자 기반과 활발한 커뮤니티를 보유하고 있기 때문입니다. 이더리움 dApp 개발자들이 기존 스마트 컨트랙트를 쉽게 실험하거나 클레이튼으로 이전할 수 있도록 사용자들에게 익숙한 개발 경험을 제공하기로 결정했습니다.
+To write smart contracts, Klaytn currently supports [Solidity](https://github.com/ethereum/solidity) as the primary programming language. Solidity is adopted in Klaytn because it is a _de facto_ standard contract programming language for Ethereum and has a large user base and an active community. The Klaytn team decided to provide the users with familiar development experience so that the Ethereum DApp developers could easily experiment with or migrate their existing smart contracts to Klaytn.
 
-클레이튼은 향후 다른 프로그래밍 언어를 사용하여 스마트 컨트랙트를 작성하는 것도 지원할 계획입니다. 클레이튼 팀은 개발자들이 수용할 수 있는 다양한 프로그래밍 언어를 조사하고 있습니다.
+In the future, Klaytn also plans to support writing smart contracts using other programming languages. The Klaytn team is investigating various favorable programming languages that developers might embrace.
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

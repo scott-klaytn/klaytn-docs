@@ -2,29 +2,28 @@
 
 ## eth_call <a id="eth_call"></a>
 
-블록체인에 트랜잭션을 생성하지 않고 즉시 새 메시지 호출을 실행합니다. eth_call 메서드는
-내부 컨트랙트 상태를 쿼리하거나, 컨트랙트에 코딩된 유효성 검사를 실행하거나, 트랜잭션을 실시간으로 실행하지 않고도 트랜잭션의 효과를 테스트하는 데에도 사용할 수 있습니다.
+Executes a new message call immediately, without creating a transaction on the block chain. The eth_call method can be used to query internal contract state, to execute validations coded into a contract or even to test what the effect of a transaction would be without running it live.
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명
-|------------------|---------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| callObject | Object | 트랜잭션 호출 객체입니다. 객체의 속성은 다음 표를 참조하세요.                                                                                                                                                                                                                     |
-| blockNumberOrTag | QUANTITY \| TAG | 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](./block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. 블록 번호는 필수이며 지정된 트랜잭션이 실행되어야 하는 컨텍스트(상태)를 정의합니다. |
-| stateOverrideSet | Object | 상태 오버라이드 세트는 선택적 주소-상태 매핑으로, 각 항목은 호출을 실행하기 전에 임시로 재정의할 일부 상태를 지정합니다.                                                                                                                                   |
+| Name             | Type            | Description                                                                                                                                                                                                                                                                                                      |
+| ---------------- | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| callObject       | Object          | The transaction call object. See the next table for the object's properties.                                                                                                                                                                                                                                     |
+| blockNumberOrTag | QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"` as in [default block parameter](./block.md#the-default-block-parameter). The block number is mandatory and defines the context (state) against which the specified transaction should be executed. |
+| stateOverrideSet | Object          | The state override set is an optional address-to-state mapping, where each entry specifies some state to be ephemerally overridden prior to executing the call.                                                                                                                                                  |
 
-`callObject`에는 다음과 같은 속성이 있습니다:
+`callObject` has the following properties:
 
-| 이름 | 유형 | 설명
-|----------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| from | 20-byte DATA | (선택 사항) 트랜잭션이 전송된 것으로 시뮬레이션되는 주소입니다. 주소를 지정하지 않으면 `0x00...0` 주소가 사용됩니다.                                 |
-| to | 20-byte DATA | (선택 사항) 트랜잭션이 전송되는 주소입니다.                                                                                                                    |
-| gas | QUANTITY | (선택 사항) 무한 루프를 피하기 위한 코드 실행의 최대 가스 허용량. 기본값은 2^63 또는 노드 운영자가 --rpc.gascap을 통해 지정한 값입니다.
-| gasPrice | QUANTITY | (선택 사항) 실행 중 각 가스 단위에 대한 지불을 시뮬레이션할 `peb`의 수입니다. 기본값은 `0`peb입니다.                                                         |
-| value | QUANTITY | (선택 사항) 트랜잭션과 함께 전송을 시뮬레이션할 `peb`의 양입니다. 기본값은 `0`입니다.                                                                       |
-| input | DATA | (선택 사항) 메서드 서명 및 인코딩된 매개변수의 해시입니다. `data` 필드를 대체하지만 이전 버전과의 호환성을 위해 `data` 필드는 계속 지원됩니다.      |
+| Name     | Type         | Description                                                                                                                                                                          |
+| -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| from     | 20-byte DATA | (optional) Address the transaction is simulated to have been sent from. The `0x00..0` address is used if no address is specified.                                 |
+| to       | 20-byte DATA | (optional) Address the transaction is sent to.                                                                                                                    |
+| gas      | QUANTITY     | (optional) Maximum gas allowance for the code execution to avoid infinite loops. Defaults to 2^63 or whatever value the node operator specified via --rpc.gascap. |
+| gasPrice | QUANTITY     | (optional) Number of `peb` to simulate paying for each unit of gas during execution. Defaults to `0` peb.                                                         |
+| value    | QUANTITY     | (optional) Amount of `peb` to simulate sending along with the transaction. Defaults to `0`.                                                                       |
+| input    | DATA         | (optional) Hash of the method signature and encoded parameter. It replaces `data` field, but `data` field is still supported for backward compatibility.          |
 
-**예시 - callObject**
+**Example - callObject**
 
 ```json
 {
@@ -35,26 +34,26 @@
 }
 ```
 
-`stateOverrideSet`에는 다음과 같은 속성이 있습니다:
+`stateOverrideSet` has the following properties:
 
-| 이름 | 유형 | 설명
-|-----------|----------|--------------------------------------------------------------------------------------------------------------------|
-| balance | QUANTITY | (선택 사항) 호출을 실행하기 전에 계정에 설정할 가짜 잔액입니다.                                          |
-| nonce | QUANTITY | (선택 사항) 호출을 실행하기 전에 계정에 설정할 가짜 nonce입니다.                                            |
-| code | DATA | (선택 사항) 호출을 실행하기 전에 계정에 주입할 가짜 EVM 바이트코드입니다.                                 |
-| state | Object | (선택 사항) 호출을 실행하기 전에 계정 저장소의 모든 슬롯을 재정의할 가짜 키-값 매핑입니다.          |
-| stateDiff | Object | (선택 사항) 호출을 실행하기 전에 계정 저장소의 개별 슬롯을 재정의하기 위한 가짜 키-값 매핑입니다.   |
+| Name      | Type     | Description                                                                                                                         |
+| --------- | -------- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| balance   | Quantity | (optional) Fake balance to set for the account before executing the call.                                        |
+| nonce     | Quantity | (optional) Fake nonce to set for the account before executing the call.                                          |
+| code      | DATA     | (optional) Fake EVM bytecode to inject into the account before executing the call.                               |
+| state     | Object   | (optional) Fake key-value mapping to override all slots in the account storage before executing the call.        |
+| stateDiff | Object   | (optional) Fake key-value mapping to override individual slots in the account storage before executing the call. |
 
-상태 재정의 세트의 목표는 여러 가지가 있습니다:
+The goal of the state override set is manyfold:
 
-* dApp이 체인에 배포하는 데 필요한 컨트랙트 코드의 양을 줄이기 위해 사용할 수 있습니다. 단순히 내부 상태를 반환하거나
-  내부 상태를 반환하거나 사전 정의된 유효성 검사를 수행하는 코드는 체인에서 벗어나 온디맨드 방식으로 노드에 공급할 수 있습니다.
-* 체인에 배포된 코드를 사용자 정의 메서드로 확장하여 스마트 컨트랙트 분석에 사용할 수 있습니다.
-  호출하여 사용할 수 있습니다. 이렇게 하면 커스텀 코드를 실행하기 위해 샌드박스에서 전체 상태를 다운로드하고 재구성할 필요가 없습니다.
-* 이미 배포된 대규모 컨트랙트 모음에서 일부 코드나 상태를 선택적으로 재정의하여 스마트 컨트랙트를 디버깅하는 데 사용할 수 있습니다.
-  코드 또는 상태를 선택적으로 재정의하고 실행이 어떻게 변경되는지 확인하여 스마트 컨트랙트를 디버깅하는 데 사용할 수 있습니다. 전문화된 도구가 필요할 수 있습니다.
+- It can be used by DApps to reduce the amount of contract code needed to be deployed on chain. Code that simply returns
+  internal state or does pre-defined validations can be kept off chain and fed to the node on-demand.
+- It can be used for smart contract analysis by extending the code deployed on chain with custom methods and invoking
+  them. This avoids having to download and reconstruct the entire state in a sandbox to run custom code against.
+- It can be used to debug smart contracts in an already deployed large suite of contracts by selectively overriding some
+  code or state and seeing how execution changes. Specialized tooling will probably be necessary.
 
-**예시 - stateOverrideSet**
+**Example - stateOverrideSet**
 
 ```json
 {
@@ -70,19 +69,19 @@
 }
 ```
 
-**예시**
+**Example**
 
-의미 있는 방식으로 통화를 테스트하려면 아래와 같이 테스트 환경을 설정해야 합니다.
+To test call in meaningful way, you need to setup test environment like below.
 
-* KIP-7 컨트랙트를 배포하여 호출을 테스트하거나 이미 배포된 컨트랙트와 함께 사용할 수 있습니다.
-  * 이 예제에서는 KIP-7 컨트랙트 함수 `totalSupply`를 사용하여 호출이 작동하는지 여부를 확인하겠습니다.
-  * `totalSupply`를 호출하려면 `0x18160ddd`라는 함수 시그니처를 알고 있어야 합니다.
+- Deploy KIP-7 Contract to test call or you can use it with already deployed one.
+  - We will use KIP-7 contract function `totalSupply` to check whether call is working or not in this example.
+  - To call `totalSupply` you should know about its function signature which is `0x18160ddd`.
 
-이 예제에서는
+In this example:
 
-* KIP-7 컨트랙트 주소: `0xbE3892d33620bE5aca8c75D39e7401871194d290` (기존 컨트랙트를 사용해야 합니다.
-  주소를 사용해야 합니다.)
-* 발신자 주소: `0xca7a99380131e6c76cfa622396347107aeedca2d`
+- The address of KIP-7 contract: `0xbE3892d33620bE5aca8c75D39e7401871194d290` (You should use an existing contract
+  address.)
+- The address of caller: `0xca7a99380131e6c76cfa622396347107aeedca2d`
 
 ```shell
 curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0", "method": "eth_call", "params": [{"from": "0xca7a99380131e6c76cfa622396347107aeedca2d", "to": "0xbE3892d33620bE5aca8c75D39e7401871194d290", "input": "0x18160ddd"}, "latest"], "id": 1}' http://localhost:8551
@@ -90,16 +89,16 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0", "method": "et
 {"jsonrpc":"2.0","id":1,"result":"0x0000000000000000000000000000000000000000000000000de0b6b3a7640000"}
 ```
 
-**예시 - StateOverrides**
+**Example - StateOverrides**
 
-위의 예제에 따라 상태 재정의 기능을 사용하여 호출을 테스트해 보겠습니다.
+Following the example above, let's test call using state overrides feature.
 
-* 이미 배포된 KIP-7 컨트랙트의 주소인 `0xbE3892d33620bE5aca8c75D39e7401871194d290`의 바이트코드로 대체합니다.
-  의 주소입니다(위 예시 확인).
-* 대체할 바이트코드는
-  는 `6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680632e64cec114604e5780636057361d146076575b600080fd5b348015605957600080fd5b50606060a0565b6040518082815260200191505060405180910390f35b348015608157600080fd5b50609e6004803603810190808035906020019092919050505060a9565b005b60008054905090565b80600081905550505600a165627a7a723058207783dba41884f73679e167576362b7277f88458815141651f48ca38c25b498f80029`
+- We will replace the bytecode of `0xbE3892d33620bE5aca8c75D39e7401871194d290` which is the address of KIP-7 contract
+  already deployed above (Check the above example).
+- The bytecode to be replaced
+  is `6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680632e64cec114604e5780636057361d146076575b600080fd5b348015605957600080fd5b50606060a0565b6040518082815260200191505060405180910390f35b348015608157600080fd5b50609e6004803603810190808035906020019092919050505060a9565b005b60008054905090565b80600081905550505600a165627a7a723058207783dba41884f73679e167576362b7277f88458815141651f48ca38c25b498f80029`
   .
-  * 이 바이트코드의 원본 소스 코드는 아래와 같습니다.
+  - The original source code of this bytecode is below.
 
 ```solidity
 pragma solidity ^0.4.24;
@@ -130,9 +129,9 @@ contract Storage {
 }
 ```
 
-이제 `0xbE3892d33620bE5aca8c75D39e7401871194d290`(KIP-7 컨트랙트)의 상태를 다른 컨트랙트의
-바이트 코드(스토리지 컨트랙트)
-스토리지 컨트랙트의 `retrieve`(함수 서명: `0x2e64cec1`)를 호출합니다.
+Now let's override the state of `0xbE3892d33620bE5aca8c75D39e7401871194d290` (KIP-7 contract) with another contract's
+byte code (Storage contract)
+and call `retrieve` (function signature: `0x2e64cec1`) of Storage contract.
 
 ```shell
 curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0", "method": "eth_call", "params": [{"from": "0xca7a99380131e6c76cfa622396347107aeedca2d", "to": "0xbE3892d33620bE5aca8c75D39e7401871194d290", "input": "0x2e64cec1"}, "latest", {"0xbE3892d33620bE5aca8c75D39e7401871194d290": {"code":"0x6080604052600436106049576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680632e64cec114604e5780636057361d146076575b600080fd5b348015605957600080fd5b50606060a0565b6040518082815260200191505060405180910390f35b348015608157600080fd5b50609e6004803603810190808035906020019092919050505060a9565b005b60008054905090565b80600081905550505600a165627a7a723058207783dba41884f73679e167576362b7277f88458815141651f48ca38c25b498f80029"}}], "id": 1}' http://localhost:8551
@@ -142,28 +141,28 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0", "method": "et
 
 ## eth_estimateGas <a id="eth_estimategas"></a>
 
-트랜잭션을 완료하는 데 필요한 가스 양에 대한 추정치를 생성하고 반환합니다. 트랜잭션
-은 블록체인에 추가되지 않습니다. 추정치는 EVM 메커니즘을 비롯한 다양한 이유로 인해 트랜잭션이 실제로 사용하는 가스 양보다 훨씬 많을 수 있습니다.
-가스 양보다 훨씬 많을 수 있으며, 이는 EVM 메커니즘과 노드 성능 등 다양한 이유로 인해 발생할 수 있습니다.
+Generates and returns an estimate of how much gas is necessary to allow the transaction to complete. The transaction
+will not be added to the blockchain. Note that the estimate may be significantly more than the amount of gas actually
+used by the transaction, for a variety of reasons including EVM mechanics and node performance.
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명
-|------------|--------|-------------------------------------------------------------------------------|
-| callObject | Object | 트랜잭션 호출 객체입니다. 객체의 속성은 다음 표를 참조하세요. |
+| Name       | Type   | Description                                                                  |
+| ---------- | ------ | ---------------------------------------------------------------------------- |
+| callObject | Object | The transaction call object. See the next table for the object's properties. |
 
-`callObject`에는 다음과 같은 속성이 있습니다:
+`callObject` has the following properties:
 
-| 이름 | 유형 | 설명
-|----------|--------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| from | 20-byte DATA | (선택 사항) 트랜잭션이 전송된 것으로 시뮬레이션되는 주소입니다. 주소를 지정하지 않으면 `0x00...0` 주소가 사용됩니다.                                 |
-| to | 20-byte DATA | (선택 사항) 트랜잭션이 전송되는 주소입니다.                                                                                                                    |
-| gas | QUANTITY | (선택 사항) 무한 루프를 피하기 위한 코드 실행의 최대 가스 허용량. 기본값은 2^63 또는 노드 운영자가 --rpc.gascap을 통해 지정한 값입니다.
-| gasPrice | QUANTITY | (선택 사항) 실행 중 각 가스 단위에 대한 지불을 시뮬레이션할 `peb`의 수입니다. 기본값은 `0`peb입니다.                                                         |
-| value | QUANTITY | (선택 사항) 트랜잭션과 함께 전송을 시뮬레이션할 `peb`의 양입니다. 기본값은 `0`입니다.                                                                       |
-| input | DATA | (선택 사항) 메서드 서명 및 인코딩된 매개변수의 해시입니다. `data` 필드를 대체하지만 이전 버전과의 호환성을 위해 `data` 필드는 계속 지원됩니다.  |
+| Name     | Type         | Description                                                                                                                                                                          |
+| -------- | ------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| from     | 20-byte DATA | (optional) Address the transaction is simulated to have been sent from. The `0x00..0` address is used if no address is specified.                                 |
+| to       | 20-byte DATA | (optional) Address the transaction is sent to.                                                                                                                    |
+| gas      | QUANTITY     | (optional) Maximum gas allowance for the code execution to avoid infinite loops. Defaults to 2^63 or whatever value the node operator specified via --rpc.gascap. |
+| gasPrice | QUANTITY     | (optional) Number of `peb` to simulate paying for each unit of gas during execution. Defaults to `0` peb.                                                         |
+| value    | QUANTITY     | (optional) Amount of `peb` to simulate sending along with the transaction. Defaults to `0`.                                                                       |
+| input    | DATA         | (optional) Hash of the method signature and encoded parameter. It replaces `data` field, but `data` field is still supported for backward compatibility.          |
 
-**예시 - callObject**
+**Example - callObject**
 
 ```json
 {
@@ -174,13 +173,13 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0", "method": "et
 }
 ```
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|----------|-------------------------|
-| QUANTITY | 사용한 가스 양입니다. |
+| Type     | Description             |
+| -------- | ----------------------- |
+| QUANTITY | The amount of gas used. |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -195,24 +194,24 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc": "2.0", "method": "e
 
 ## eth_getTransactionByBlockHashAndIndex <a id="eth_gettransactionbyblockhashandindex"></a>
 
-블록 해시 및 트랜잭션 인덱스 위치별로 트랜잭션에 대한 정보를 반환합니다.
+Returns information about a transaction by block hash and transaction index position.
 
-이 API를 사용하기 전에 [주의-트랜잭션](./caution.md#transaction)을 확인하세요.
+Please check the [Caution-Transaction](./caution.md#transaction) before using this API.
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-|--------------|--------------------------------------------|
-| 32-byte DATA | 블록의 해시.                           |
-| QUANTITY | 트랜잭션 인덱스 위치의 정수입니다. |
+| Type         | Description                                |
+| ------------ | ------------------------------------------ |
+| 32-byte DATA | Hash of a block.                           |
+| QUANTITY     | Integer of the transaction index position. |
 
-**리턴 값**
+**Return Value**
 
-[eth_getTransactionByHash](#eth_gettransactionbyhash)를 참조하세요.
+See [eth_getTransactionByHash](#eth_gettransactionbyhash)
 
-**예시**
+**Example**
 
-다양한 트랜잭션 유형의 예시를 보려면 [eth_getTransactionByHash](#eth_gettransactionbyhash)를 확인하세요.
+To see examples of various transaction types, check [eth_getTransactionByHash](#eth_gettransactionbyhash)
 
 ```shell
 // Request
@@ -244,24 +243,24 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_getTransactionByBlockNumberAndIndex <a id="eth_gettransactionbyblocknumberandindex"></a>
 
-블록 번호와 트랜잭션 인덱스 위치별로 트랜잭션에 대한 정보를 반환합니다.
+Returns information about a transaction by block number and transaction index position.
 
-이 API를 사용하기 전에 [주의-트랜잭션](./caution.md#transaction)을 확인하세요.
+Please check the [Caution-Transaction](./caution.md#transaction) before using this API.
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-|---------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| QUANTITY \| TAG | 정수 또는 16진수 블록 번호 또는 [기본 블록 매개변수](./block.md#the-default-block-parameter)에서와 같이 `"earliest"`, `"latest"` 또는 `"pending"` 문자열입니다. |
-| QUANTITY | 트랜잭션 인덱스 위치입니다.                                                                                                                                          |
+| Type            | Description                                                                                                                                                              |
+| --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| QUANTITY \| TAG | Integer or hexadecimal block number, or the string `"earliest"`, `"latest"` or `"pending"`  as in the [default block parameter](./block.md#the-default-block-parameter). |
+| QUANTITY        | The transaction index position.                                                                                                                                          |
 
-**리턴 값**
+**Return Value**
 
-[eth_getTransactionByHash](#eth_gettransactionbyhash)를 참조하세요.
+See [eth_getTransactionByHash](#eth_gettransactionbyhash)
 
-**예시**
+**Example**
 
-다양한 트랜잭션 유형의 예시를 보려면 [eth_getTransactionByHash](#eth_gettransactionbyhash)를 확인하세요.
+To see examples of various transaction types, check [eth_getTransactionByHash](#eth_gettransactionbyhash)
 
 ```shell
 // Request
@@ -293,43 +292,45 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_getTransactionByHash <a id="eth_gettransactionbyhash"></a>
 
-트랜잭션 해시로 요청된 트랜잭션에 대한 정보를 반환합니다.
+Returns the information about a transaction requested by transaction hash.
 
-이 API를 사용하기 전에 [주의-트랜잭션](./caution.md#transaction)을 확인하세요.
+Please check the [Caution-Transaction](./caution.md#transaction) before using this API.
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-|--------------|------------------------|
-| 32-byte DATA | 트랜잭션 해시. |
+| Type         | Description            |
+| ------------ | ---------------------- |
+| 32-byte DATA | Hash of a transaction. |
 
-**리턴 값**
+**Return Value**
 
-트랜잭션 유형에 따라 트랜잭션 필드가 달라질 수 있습니다. 현재 이더리움의 트랜잭션 유형은 다음 세 가지입니다: Legacy, [AccessList](https://eips.ethereum.org/EIPS/eip-2930), [DynamicFee](https://eips.ethereum.org/EIPS/eip-1559).
+Fields of transaction can be different based on transaction types. Currently, there are three types of transactions in
+Ethereum(Legacy, [AccessList](https://eips.ethereum.org/EIPS/eip-2930)
+, [DynamicFee](https://eips.ethereum.org/EIPS/eip-1559)).
 
-`Object` - 트랜잭션 오브젝트, 또는 트랜잭션을 찾을 수 없는 경우 `null`입니다:
+`Object` - A transaction object, or `null` when no transaction was found:
 
-**레거시 트랜잭션**
+**Legacy Transaction**
 
-| 이름 | 유형 | 설명
-|------------------|---------------|------------------------------------------------------------------------------------|
-| blockHash | 32-byte DATA | 이 트랜잭션이 있던 블록의 해시입니다. 보류 중일 때는 `null`입니다.        |
-| blockNumber | QUANTITY | 이 트랜잭션이 있던 블록 번호입니다. 보류 중인 경우 `null`.             |
-| from | 20-byte DATA | 발신자의 주소.                                                             |
-| gas | QUANTITY | 발신자가 제공한 가스.                                                        |
-| gasPrice | QUANTITY | 발신자가 제공한 가스 가격(단위: peb).                                           |
-| hash | 32-byte DATA | 트랜잭션의 해시.                                                           |
-| input | DATA | 트랜잭션과 함께 전송된 데이터입니다.                                          |
-| nonce | QUANTITY | 발신자가 이 트랜잭션 이전에 수행한 트랜잭션 수입니다.                   |
-| to | 20-byte DATA | 수신자의 주소. 컨트랙트 생성 트랜잭션인 경우 `null`.        |
-| value | QUANTITY | 이 트랜잭션과 함께 전송된 값의 정수입니다.                                      |
-| transactionIndex  | QUANTITY | 블록에서 트랜잭션 인덱스 위치의 정수입니다. 보류 중일 때는 `null`입니다. |
-| type | QUANTITY | 트랜잭션의 유형을 나타내는 정수입니다.                               |
-| v | QUANTITY | ECDSA 복구 ID.
-| r | 32-byte DATA | ECDSA 서명 r.
-| s | 32-byte DATA | ECDSA 서명 s.
+| Name             | Type         | Description                                                                        |
+| ---------------- | ------------ | ---------------------------------------------------------------------------------- |
+| blockHash        | 32-byte DATA | Hash of the block where this transaction was in. `null` when it is pending.        |
+| blockNumber      | QUANTITY     | Block number where this transaction was in. `null` when it is pending.             |
+| from             | 20-byte DATA | Address of the sender.                                                             |
+| gas              | QUANTITY     | Gas provided by the sender.                                                        |
+| gasPrice         | QUANTITY     | Gas price provided by the sender in peb.                                           |
+| hash             | 32-byte DATA | Hash of the transaction.                                                           |
+| input            | DATA         | The data sent along with the transaction.                                          |
+| nonce            | QUANTITY     | The number of transactions made by the sender prior to this one.                   |
+| to               | 20-byte DATA | Address of the receiver. `null` when it is a contract creation transaction.        |
+| value            | QUANTITY     | Integer of values sent with this transaction.                                      |
+| transactionIndex | QUANTITY     | Integer of the transaction index position in the block. `null` when it is pending. |
+| type             | QUANTITY     | An integer representing the type of the transaction.                               |
+| v                | QUANTITY     | ECDSA recovery id.                                                                 |
+| r                | 32-byte DATA | ECDSA signature r.                                                                 |
+| s                | 32-byte DATA | ECDSA signature s.                                                                 |
 
-**예시 - Legacy 트랜잭션**
+**Example - Legacy Transaction**
 
 ```shell
 // Request
@@ -359,29 +360,29 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
-**AccessList 트랜잭션**
+**AccessList Transaction**
 
-| 이름 | 유형 | 설명
-|------------------|---------------|------------------------------------------------------------------------------------|
-| blockHash | 32-byte DATA | 이 트랜잭션이 있던 블록의 해시입니다. 보류 중일 때는 `null`입니다.        |
-| blockNumber | QUANTITY | 이 트랜잭션이 있던 블록 번호입니다. 보류 중인 경우 `null`.             |
-| from | 20-byte DATA | 발신자의 주소.                                                             |
-| gas | QUANTITY | 발신자가 제공한 가스.                                                        |
-| gasPrice | QUANTITY | 발신자가 제공한 가스 가격(단위: peb).                                           |
-| hash | 32-byte DATA | 트랜잭션의 해시.                                                           |
-| input | DATA | 트랜잭션과 함께 전송된 데이터입니다.                                          |
-| nonce | QUANTITY | 이 트랜잭션 이전에 발신자가 수행한 트랜잭션 수입니다.                   |
-| to | 20-byte DATA | 수신자의 주소. 컨트랙트 생성 트랜잭션인 경우 `null`.        |
-| value | QUANTITY | 이 트랜잭션과 함께 전송된 값의 정수입니다.                                      |
-| transactionIndex  | QUANTITY | 블록에서 트랜잭션 인덱스 위치의 정수입니다. 보류 중일 때는 `null`입니다. |
-| type | QUANTITY | 트랜잭션의 유형을 나타내는 정수입니다.                               |
-| accessList | Array | [accessList](https://eips.ethereum.org/EIPS/eip-2930)의 배열입니다.                 |
-| chainId | QUANTITY | 요청된 노드에 설정된 체인 아이디입니다.                                                |
-| v | QUANTITY | ECDSA 복구 ID.
-| r | 32-byte DATA | ECDSA 서명 r.
-| s | 32-byte DATA | ECDSA 서명 s.
+| Name             | Type         | Description                                                                        |
+| ---------------- | ------------ | ---------------------------------------------------------------------------------- |
+| blockHash        | 32-byte DATA | Hash of the block where this transaction was in. `null` when it is pending.        |
+| blockNumber      | QUANTITY     | Block number where this transaction was in. `null` when it is pending.             |
+| from             | 20-byte DATA | Address of the sender.                                                             |
+| gas              | QUANTITY     | Gas provided by the sender.                                                        |
+| gasPrice         | QUANTITY     | Gas price provided by the sender in peb.                                           |
+| hash             | 32-byte DATA | Hash of the transaction.                                                           |
+| input            | DATA         | The data sent along with the transaction.                                          |
+| nonce            | QUANTITY     | The number of transactions made by the sender prior to this one.                   |
+| to               | 20-byte DATA | Address of the receiver. `null` when it is a contract creation transaction.        |
+| value            | QUANTITY     | Integer of values sent with this transaction.                                      |
+| transactionIndex | QUANTITY     | Integer of the transaction index position in the block. `null` when it is pending. |
+| type             | QUANTITY     | An integer representing the type of the transaction.                               |
+| accessList       | Array        | An array of [accessList](https://eips.ethereum.org/EIPS/eip-2930).                 |
+| chainId          | QUANTITY     | Chain id set on the requested node.                                                |
+| v                | QUANTITY     | ECDSA recovery id.                                                                 |
+| r                | 32-byte DATA | ECDSA signature r.                                                                 |
+| s                | 32-byte DATA | ECDSA signature s.                                                                 |
 
-**예시 - AccessList 트랜잭션**
+**Example - AccessList Transaction**
 
 ```shell
 // Request
@@ -420,31 +421,31 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 }
 ```
 
-**DynamicFee 트랜잭션**
+**DynamicFee Transaction**
 
-| 이름 | 유형 | 설명
-|----------------------|---------------|------------------------------------------------------------------------------------|
-| blockHash | 32-byte DATA | 이 트랜잭션이 있던 블록의 해시입니다. 보류 중일 때는 `null`입니다.        |
-| blockNumber | QUANTITY | 이 트랜잭션이 있던 블록 번호입니다. 보류 중인 경우 `null`.             |
-| from | 20-byte DATA | 발신자의 주소.                                                             |
-| gas | QUANTITY | 발신자가 제공한 가스.                                                        |
-| gasPrice | QUANTITY | 발신자가 제공한 가스 가격(단위: peb).                                           |
-| maxFeePerGas | QUANTITY | 트랜잭션을 실행하기 위해 지불할 최대 금액입니다.                            |
-| maxPriorityFeePerGas | QUANTITY | 동적 수수료 트랜잭션에 대한 가스 팁 상한(단위: peb).                                    |
-| hash | 32-byte DATA | 트랜잭션의 해시입니다.                                                           |
-| input | DATA | 트랜잭션과 함께 전송된 데이터입니다.                                          |
-| nonce | QUANTITY | 이 트랜잭션 이전에 발신자가 수행한 트랜잭션 수입니다.                   |
-| to | 20-byte DATA | 수신자의 주소. 컨트랙트 생성 트랜잭션인 경우 `null`.        |
-| value | QUANTITY | 이 트랜잭션과 함께 전송된 값의 정수입니다.                                      |
-| transactionIndex  | QUANTITY | 블록에서 트랜잭션 인덱스 위치의 정수입니다. 보류 중일 때는 `null`입니다. |
-| type | QUANTITY | 트랜잭션의 유형을 나타내는 정수입니다.                               |
-| accessList | Array | [accessList](https://eips.ethereum.org/EIPS/eip-2930)의 배열입니다.                 |
-| chainId | QUANTITY | 요청된 노드에 설정된 체인 아이디입니다.                                                |
-| v | QUANTITY | ECDSA 복구 ID.
-| r | 32-byte DATA | ECDSA 서명 r.
-| s | 32-byte DATA | ECDSA 서명 s.
+| Name                 | Type         | Description                                                                        |
+| -------------------- | ------------ | ---------------------------------------------------------------------------------- |
+| blockHash            | 32-byte DATA | Hash of the block where this transaction was in. `null` when it is pending.        |
+| blockNumber          | QUANTITY     | Block number where this transaction was in. `null` when it is pending.             |
+| from                 | 20-byte DATA | Address of the sender.                                                             |
+| gas                  | QUANTITY     | Gas provided by the sender.                                                        |
+| gasPrice             | QUANTITY     | Gas price provided by the sender in peb.                                           |
+| maxFeePerGas         | QUANTITY     | A maximum amount to pay for the transaction to execute.                            |
+| maxPriorityFeePerGas | QUANTITY     | Gas tip cap for dynamic fee transaction in peb.                                    |
+| hash                 | 32-byte DATA | Hash of the transaction.                                                           |
+| input                | DATA         | The data sent along with the transaction.                                          |
+| nonce                | QUANTITY     | The number of transactions made by the sender prior to this one.                   |
+| to                   | 20-byte DATA | Address of the receiver. `null` when it is a contract creation transaction.        |
+| value                | QUANTITY     | Integer of values sent with this transaction.                                      |
+| transactionIndex     | QUANTITY     | Integer of the transaction index position in the block. `null` when it is pending. |
+| type                 | QUANTITY     | An integer representing the type of the transaction.                               |
+| accessList           | Array        | An array of [accessList](https://eips.ethereum.org/EIPS/eip-2930).                 |
+| chainId              | QUANTITY     | Chain id set on the requested node.                                                |
+| v                    | QUANTITY     | ECDSA recovery id.                                                                 |
+| r                    | 32-byte DATA | ECDSA signature r.                                                                 |
+| s                    | 32-byte DATA | ECDSA signature s.                                                                 |
 
-**예시 - DynamicFee 트랜잭션**
+**Example - DynamicFee Transaction**
 
 ```shell
 // Request
@@ -487,39 +488,39 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_getTransactionReceipt <a id="eth_gettransactionreceipt"></a>
 
-트랜잭션 해시별로 트랜잭션 영수증을 반환합니다.
+Returns the receipt of a transaction by transaction hash.
 
-**참고**: 보류 중인 거래에는 영수증을 사용할 수 없습니다.
+**NOTE**: The receipt is not available for pending transactions.
 
-이 API를 사용하기 전에 [주의-TransactionReceipt](./caution.md#transaction_receipt)을 확인하시기 바랍니다.
+Please check the [Caution-TransactionReceipt](./caution.md#transaction_receipt) before using this API.
 
-**매개변수**
+**Parameters**
 
-| 이름 | 유형 | 설명
-|--------|--------------|------------------------|
-| hash | 32-byte DATA | 트랜잭션의 해시입니다. |
+| Name | Type         | Description            |
+| ---- | ------------ | ---------------------- |
+| Hash | 32-byte DATA | Hash of a transaction. |
 
-**리턴 값**
+**Return Value**
 
-`Object` - 트랜잭션 영수증 객체, 영수증을 찾을 수 없는 경우 `null`입니다.
+`Object` - A transaction receipt object, or `null` when no receipt was found
 
-| 이름 | 유형 | 설명
-|-------------------|-------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| blockHash | 32-byte DATA | 이 트랜잭션이 있었던 블록의 해시입니다.
-| blockNumber | QUANTITY | 트랜잭션이 있었던 블록 번호입니다.
-| contractAddress | DATA | 트랜잭션이 컨트랙트 생성인 경우 생성된 컨트랙트 주소, 그렇지 않으면 `null`입니다.
-| cumulativeGasUsed | QUANTITY | 이 트랜잭션이 블록에서 실행되었을 때 사용된 총 가스 양입니다.                                                                                                                                             |
-| effectiveGasPrice | QUANTITY | 발신자 계정에서 공제된 가스당 실제 값입니다. EIP-1559 이전에는 트랜잭션의 가스 가격과 같습니다. 이후에는 baseFeePerGas + min(maxFeePerGas - baseFeePerGas, maxPriorityFeePerGas)와 같습니다.
-| from | 20-byte DATA | 발신자의 주소.                                                                                                                                                                                                    |
-| logs | Array  | 이 트랜잭션이 생성한 로그 오브젝트의 배열입니다.                                                                                                                                                                   |
-| logsBloom | 256-byte DATA | 라이트 클라이언트가 관련 로그를 빠르게 검색할 수 있는 블룸 필터.
-| status | QUANTITY | `1`(성공) 또는 `0`(실패) 중 하나입니다.                                                                                                                                                                                    |
-| to | 20-byte DATA | 수신자의 주소. 컨트랙트 생성 트랜잭션인 경우 `null`.                                                                                                                                               |
-| transactionHash | 32-byte DATA | 트랜잭션의 해시입니다.                                                                                                                                                                                                  |
-| transactionIndex  | QUANTITY | 블록에서 트랜잭션 인덱스 위치의 정수입니다.                                                                                                                                                                   |
-| type | QUANTITY | 트랜잭션의 유형을 나타내는 정수입니다.                                                                                                                                                                      |
+| Name              | Type          | Description                                                                                                                                                                                                                                  |
+| ----------------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| blockHash         | 32-byte DATA  | Hash of the block where this transaction was in.                                                                                                                                                                                             |
+| blockNumber       | QUANTITY      | The block number where this transaction was in.                                                                                                                                                                                              |
+| contractAddress   | DATA          | The contract address created, if the transaction was a contract creation, otherwise `null`.                                                                                                                                                  |
+| cumulativeGasUsed | QUANTITY      | The total amount of gas used when this transaction was executed in the block.                                                                                                                                                                |
+| effectiveGasPrice | QUANTITY      | The actual value per gas deducted from the senders account. Before EIP-1559, this is equal to the transaction's gas price. After, it is equal to baseFeePerGas + min(maxFeePerGas - baseFeePerGas, maxPriorityFeePerGas). |
+| from              | 20-byte DATA  | Address of the sender.                                                                                                                                                                                                                       |
+| logs              | Array         | Array of log objects, which this transaction generated.                                                                                                                                                                                      |
+| logsBloom         | 256-byte DATA | Bloom filter for light clients to quickly retrieve related logs.                                                                                                                                                                             |
+| status            | QUANTITY      | Either `1` (success) or `0` (failure).                                                                                                                                                                 |
+| to                | 20-byte DATA  | Address of the receiver. `null` when it is a contract creation transaction.                                                                                                                                                                  |
+| transactionHash   | 32-byte DATA  | Hash of the transaction.                                                                                                                                                                                                                     |
+| transactionIndex  | QUANTITY      | Integer of the transaction index position in the block.                                                                                                                                                                                      |
+| type              | QUANTITY      | An integer representing the type of the transaction.                                                                                                                                                                                         |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -566,23 +567,23 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_sendRawTransaction <a id="eth_sendrawtransaction"></a>
 
-새 메시지 호출 트랜잭션 또는 서명된 트랜잭션에 대한 컨트랙트 생성을 생성합니다.
+Creates a new message call transaction or a contract creation for signed transactions.
 
-**매개변수**
+**Parameters**
 
-| 유형 | 설명
-|--------|------------------------------|
-| data | 서명된 트랜잭션 데이터입니다. |
+| Type | Description                  |
+| ---- | ---------------------------- |
+| DATA | The signed transaction data. |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-|--------------|--------------------------------------------------------------------------------|
-| 32-byte DATA | 트랜잭션 해시 또는 트랜잭션을 아직 사용할 수 없는 경우 0 해시입니다. |
+| Type         | Description                                                                    |
+| ------------ | ------------------------------------------------------------------------------ |
+| 32-byte DATA | The transaction hash or the zero hash if the transaction is not yet available. |
 
-컨트랙트를 배포한 경우, [eth_getTransactionReceipt](#eth_gettransactionreceipt)를 사용하여 컨트랙트 주소를 가져옵니다.
+If you deployed a contract, use [eth_getTransactionReceipt](#eth_gettransactionreceipt) to get the contract address.
 
-**예시**
+**Example**
 
 ```shell
 params: ["0x02f8738203e982022980850ba43b740082f61894a2a8854b1802d8cd5de631e690817c253d6a9153888ac7230489e8000080c001a0493a13b7eb1ad33c0b9043e4de1f2a5e8736407c8f039dd91b8bcba847c6b21ca0060b8063e42f8acc2bcc7d9d2e454491666452f3683cbc0dd768604b27bce6e3"]
@@ -602,41 +603,39 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_sendTransaction <a id="eth_sendtransaction"></a>
 
-주어진 파라미터로 트랜잭션을 구성하고, 발신자의 개인키로 트랜잭션에 서명하고, 트랜잭션을 클레이튼 네트워크에
-트랜잭션을 클레이튼 네트워크에 전파합니다.
+Constructs a transaction with given parameters, signs the transaction with a sender's private key and propagates the
+transaction to Klaytn network.
 
-**참고**: 서명할 주소는 잠금 해제되어 있어야 합니다.
+**NOTE**: The address to sign with must be unlocked.
 
-**매개변수**:
+**Parameters**:
 
-| 이름 | 유형 | 설명
-|-----------------|--------|--------------------------------------------------------------------------------------|
-| transactionArgs | Object | transactionArgs | Object | 트랜잭션 인수의 객체입니다. 객체의 속성은 아래 표를 참조하세요. |
+| Name            | Type   | Description                                                                          |
+| --------------- | ------ | ------------------------------------------------------------------------------------ |
+| transactionArgs | Object | An object of transaction arguments. See the table below for the object's properties. |
 
-`transactionArgs`에는 다음과 같은 속성이 있습니다:
+`transactionArgs` has the following properties:
 
-| 이름 | 유형 | 설명
-|----------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| from | 20-byte DATA | 트랜잭션이 전송된 주소입니다.                                                                                                                             |
-| to | 20-byte DATA | (새 컨트랙트 생성 시 필요하지 않음) 트랜잭션이 전달되는 주소입니다.                                                                               |
-| gas | QUANTITY | (선택 사항) 트랜잭션 실행을 위해 제공된 가스의 정수입니다. 사용하지 않은 가스를 반환합니다.
-| maxFeePerGas | QUANTITY | (선택 사항) 트랜잭션 실행을 위해 지불할 최대 금액입니다. |
-| maxPriorityFeePerGas | QUANTITY | (선택 사항) 동적 수수료 트랜잭션에 대한 가스 팁 상한(peb 단위). |
-| input | DATA | (선택 사항) 메서드 서명 및 인코딩된 매개변수의 해시입니다. `data` 필드를 대체하지만 이전 버전과의 호환성을 위해 `data` 필드는 계속 지원됩니다.   |
-| value | QUANTITY | (선택 사항) 이 트랜잭션과 함께 전송된 값의 정수입니다.                                                                                                                |
-| nonce | QUANTITY | (선택 사항) nonce의 정수입니다.                                                                                                                                          |
+| Name                 | Type         | Description                                                                                                                                                                         |
+| -------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from                 | 20-byte DATA | The address from which the transaction is sent.                                                                                                                                     |
+| to                   | 20-byte DATA | (not required when creating a new contract) The address to which the transaction is directed.                                                                    |
+| gas                  | QUANTITY     | (optional) The integer of the gas provided for the transaction's execution. It will return unused gas.                                                           |
+| maxFeePerGas         | QUANTITY     | (optional) The maximum amount to pay for the transaction's execution.                                                                                            |
+| maxPriorityFeePerGas | QUANTITY     | (optional) Gas tip cap for dynamic fee transaction in peb.                                                                                                       |
+| input                | DATA         | (optional) The hash of the method signature and the encoded parameter. It replaces `data` field, but `data` field is still supported for backward compatibility. |
+| value                | QUANTITY     | (optional) The integer of values sent with this transaction.                                                                                                     |
+| nonce                | QUANTITY     | (optional) The integer of a nonce.                                                                                                                               |
 
+**Return Value**
 
+| Type         | Description                                                                    |
+| ------------ | ------------------------------------------------------------------------------ |
+| 32-byte DATA | The transaction hash or the zero hash if the transaction is not yet available. |
 
-**리턴 값**
+If you deployed a contract, use [eth_getTransactionReceipt](#eth_gettransactionreceipt) to get the contract address.
 
-| 유형 | 설명
-|--------------|--------------------------------------------------------------------------------|
-| 32-byte DATA | 트랜잭션 해시 또는 트랜잭션을 아직 사용할 수 없는 경우 0 해시입니다. |
-
-컨트랙트를 배포한 경우, [eth_getTransactionReceipt](#eth_gettransactionreceipt)를 사용하여 컨트랙트 주소를 가져옵니다.
-
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -652,57 +651,57 @@ curl -H "Content-Type: application/json" --data '{"jsonrpc":"2.0","method":"eth_
 
 ## eth_signTransaction <a id="eth_signtransaction"></a>
 
-나중에 eth_sendRawTransaction을 사용하여 네트워크에 제출할 수 있는 트랜잭션에 서명합니다.
+Signs a transaction that can be submitted to the network at a later time using with eth_sendRawTransaction.
 
-**참고**: 서명할 주소는 잠금 해제되어 있어야 합니다.
+**NOTE**: The address to sign with must be unlocked.
 
-**매개변수**:
+**Parameters**:
 
-| 이름 | 유형 | 설명
-|-----------------|--------|--------------------------------------------------------------------------------------|
-| transactionArgs | Object | 트랜잭션 인수의 객체입니다. 객체의 속성은 아래 표를 참조하세요. |
+| Name            | Type   | Description                                                                          |
+| --------------- | ------ | ------------------------------------------------------------------------------------ |
+| transactionArgs | Object | An object of transaction arguments. See the table below for the object's properties. |
 
-`transactionArgs`에는 다음과 같은 속성이 있습니다:
+`transactionArgs` has the following properties:
 
-| 이름 | 유형 | 설명
-|----------------------|-----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| from | 20-byte DATA | 트랜잭션이 전송된 주소입니다.                                                                                                                     |
-| to | 20-byte DATA | (새 컨트랙트 생성 시 필요하지 않음) 트랜잭션이 전달되는 주소입니다.                                                                       |
-| gas | QUANTITY | 트랜잭션 실행을 위해 제공된 가스의 정수입니다. 사용하지 않은 가스를 반환합니다.
-| maxFeePerGas | QUANTITY | 트랜잭션 실행에 지불할 최대 금액입니다. |
-| maxPriorityFeePerGas | QUANTITY | 동적 수수료 트랜잭션에 대한 가스 팁 상한(peb 단위)입니다.  |
-| input | DATA | (선택 사항) 메서드 서명의 해시 및 인코딩된 매개변수입니다. `data` 필드를 대체하지만 이전 버전과의 호환성을 위해 `data` 필드는 계속 지원됩니다.  |
-| value | QUANTITY | (선택 사항) 이 트랜잭션과 함께 전송된 값의 정수입니다.                                                                                                        |
-| nonce | QUANTITY | nonce의 정수입니다.                                                                                                                                             |
+| Name                 | Type         | Description                                                                                                                                                                         |
+| -------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from                 | 20-byte DATA | The address from which the transaction is sent.                                                                                                                                     |
+| to                   | 20-byte DATA | (not required when creating a new contract) The address to which the transaction is directed.                                                                    |
+| gas                  | QUANTITY     | The integer of the gas provided for the transaction's execution. It will return unused gas.                                                                                         |
+| maxFeePerGas         | QUANTITY     | The maximum amount to pay for the transaction's execution.                                                                                                                          |
+| maxPriorityFeePerGas | QUANTITY     | Gas tip cap for dynamic fee transaction in peb.                                                                                                                                     |
+| input                | DATA         | (optional) The hash of the method signature and the encoded parameter. It replaces `data` field, but `data` field is still supported for backward compatibility. |
+| value                | QUANTITY     | (optional) The integer of values sent with this transaction.                                                                                                     |
+| nonce                | QUANTITY     | The integer of a nonce.                                                                                                                                                             |
 
-**리턴 값**
+**Return Value**
 
-`Object` - 서명된 트랜잭션 객체입니다.
+`Object` - The signed transaction object.
 
-| 이름 | 유형 | 설명
-|------|--------|-------------------------------------------------------------------------|
-| raw | DATA | `rawTransaction` 문자열(RLP 인코딩된 트랜잭션 문자열).           |
-| tx | Object | 트랜잭션 개체입니다. 객체의 속성은 다음 표를 참조하세요. |
+| Name | Type   | Description                                                                      |
+| ---- | ------ | -------------------------------------------------------------------------------- |
+| raw  | DATA   | A `rawTransaction` string (a RLP-encoded transaction string). |
+| tx   | Object | The transaction object. See the next table for the object's properties.          |
 
-tx`에는 다음과 같은 속성이 있습니다:
+`tx` has the following properties:
 
-| 이름 | 유형 | 설명
-|----------------------|-----------------|-------------------------------------------------------------------------------------------------|
-| Type | QUANTITY | 트랜잭션 유형을 나타내는 정수입니다.                                            |
-| nonce | QUANTITY | 트랜잭션이 있었던 블록 번호입니다.
-| gasPrice | QUANTITY | 발신자가 제공한 가스 가격(peb 단위). 레거시 트랜잭션이 아닌 경우 `null`.            |
-| maxFeePerGas | QUANTITY | 트랜잭션을 실행하기 위해 지불할 최대 금액입니다. 레거시 트랜잭션인 경우 `null`. |
-| maxPriorityFeePerGas | QUANTITY | 동적 수수료 트랜잭션에 대한 가스 팁 상한(peb 단위)입니다. 레거시 트랜잭션인 경우 `null`.         |
-| gas | QUANTITY | 발신자가 제공한 가스.                                                                     |
-| value | QUANTITY | 이 트랜잭션과 함께 전송된 값의 정수입니다.                                                   |
-| v | QUANTITY | ECDSA 복구 ID.
-| r | 32-byte DATA | ECDSA 서명 r.
-| s | 32-byte DATA | ECDSA 서명 s.
-| chainId | QUANTITY | 요청 노드에 설정된 체인 아이디입니다.                                                             |
-| accessList | Array | [accessList](https://eips.ethereum.org/EIPS/eip-2930)의 배열.                              |
-| hash | 32-byte DATA | 트랜잭션의 해시입니다.                                                                        |
+| Name                 | Type         | Description                                                                                     |
+| -------------------- | ------------ | ----------------------------------------------------------------------------------------------- |
+| type                 | QUANTITY     | An integer representing the type of the transaction.                                            |
+| nonce                | QUANTITY     | The block number where this transaction was in.                                                 |
+| gasPrice             | QUANTITY     | Gas price provided by the sender in peb. `null` when it is not a legacy transaction.            |
+| maxFeePerGas         | QUANTITY     | A maximum amount to pay for the transaction to execute. `null` when it is a legacy transaction. |
+| maxPriorityFeePerGas | QUANTITY     | Gas tip cap for dynamic fee transaction in peb. `null` when it is a legacy transaction.         |
+| gas                  | QUANTITY     | Gas provided by the sender.                                                                     |
+| value                | QUANTITY     | Integer of values sent with this transaction.                                                   |
+| v                    | QUANTITY     | ECDSA recovery id.                                                                              |
+| r                    | 32-byte DATA | ECDSA signature r.                                                                              |
+| s                    | 32-byte DATA | ECDSA signature s.                                                                              |
+| chainId              | QUANTITY     | Chain id set on the requested node.                                                             |
+| accessList           | Array        | An array of [accessList](https://eips.ethereum.org/EIPS/eip-2930).                              |
+| hash                 | 32-byte DATA | Hash of the transaction.                                                                        |
 
-**예시**
+**Example**
 
 ```json
 {
@@ -733,17 +732,18 @@ tx`에는 다음과 같은 속성이 있습니다:
 
 ## eth_fillTransaction <a id="eth_filltransaction"></a>
 
-주어진 서명되지 않은 트랜잭션의 기본값(nonce, gas, gasPrice 또는 1559 필드)을 채우고 호출자에게 반환반환하여 추가 처리(서명 + 브로드캐스트)를 진행합니다.
+Fills the defaults (nonce, gas, gasPrice or 1559 fields) on a given unsigned transaction, and returns it to the caller
+for further processing (signing + broadcast).
 
-**매개변수**:
+**Parameters**:
 
-매개변수는 eth_sendTransaction과 동일합니다. [eth_sendtransaction](#eth_sendtransaction)을 참조하세요.
+Parameters are same with eth_sendTransaction. See [eth_sendtransaction](#eth_sendtransaction).
 
-**반환 값**
+**Return value**
 
-[eth_signTransaction](#eth_signtransaction)을 참조하세요.
+See [eth_signTransaction](#eth_signtransaction).
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -778,19 +778,20 @@ curl http://localhost:8551 -H "Content-Type: application/json" --data '{"jsonrpc
 
 ## eth_pendingTransactions <a id="eth_pendingtransactions"></a>
 
-트랜잭션 풀에 있고 발신 주소가 이 노드가 관리하는 계정 중 하나인 트랜잭션을 반환합니다.
+Returns the transactions that are in the transaction pool and have a from address that is one of the accounts this node
+manages.
 
-**매개변수**:
+**Parameters**:
 
-없음
+None
 
-**반환 값**
+**Return value**
 
-| 이름 | 유형 | 설명
-|---------------------|---------------|------------------------------------------------------------------------------------------------------------------|
-| pendingTransactions | Array | 트랜잭션 배열입니다. 반환된 트랜잭션 객체에 대해서는 [eth_signTransaction](#eth_signtransaction)를 참조하세요.
+| Name                | Type  | Description                                                                                                                         |
+| ------------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| pendingTransactions | Array | An array of transactions. For the returned transaction object, See [eth_signTransaction](#eth_signtransaction) |
 
-**예시**
+**Example**
 
 ```shell
 // Request
@@ -826,49 +827,44 @@ curl http://localhost:8551 -H "Content-Type: application/json" --data '{"jsonrpc
 }
 ```
 
-
 ## eth_resend <a id="eth_resend"></a>
 
-트랜잭션을 다시 보냅니다.
+Resends a transaction.
 
-지정된 트랜잭션을 풀에서 제거하고 새로운 가스 가격과 한도로 다시 삽입합니다.
+It will remove the given transaction from the pool and reinsert it with the new gas price and limit.
 
-**참고**: 서명할 주소는 잠금 해제되어 있어야 합니다.
+**NOTE**: The address to sign with must be unlocked.
 
-**매개변수**:
+**Parameters**:
 
-| 이름 | 유형 | 설명
-|-----------------|--------|--------------------------------------------------------------------------------------|
-| transactionArgs | Object | 트랜잭션 인수의 객체입니다. 객체의 속성은 아래 표를 참조하세요. |
-| gasPrice | QUANTITY | 변경할 가스 가격의 정수 | 가스
-| gas | QUANTITY | (선택 사항) 변경할 가스의 정수입니다.
+| Name            | Type     | Description                                                                          |
+| --------------- | -------- | ------------------------------------------------------------------------------------ |
+| transactionArgs | Object   | An object of transaction arguments. See the table below for the object's properties. |
+| gas price       | QUANTITY | Integer of the gasPrice to change                                                    |
+| gas             | QUANTITY | (optional) Integer of the gas to change                           |
 
-`transactionArgs`에는 다음과 같은 속성이 있습니다:
+`transactionArgs` has the following properties:
 
-| 이름 | 유형 | 설명
-|----------------------|-----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| from | 20-byte DATA | 트랜잭션이 전송된 주소입니다.                                                                                                                             |
-| to | 20-byte DATA | 트랜잭션이 전달되는 주소입니다.                                                                               |
-| gas | QUANTITY | (선택 사항) 트랜잭션 실행을 위해 제공된 가스의 정수입니다. 사용하지 않은 가스를 반환합니다.
-| maxFeePerGas | QUANTITY | (선택 사항) 트랜잭션 실행에 지불할 최대 금액입니다. |
-| maxPriorityFeePerGas | QUANTITY | (선택 사항) 동적 수수료 트랜잭션에 대한 가스 팁 상한(peb 단위).          |
-| input | DATA | (선택 사항) 메서드 서명 및 인코딩된 매개변수의 해시입니다. `data` 필드를 대체하지만 이전 버전과의 호환성을 위해 `data` 필드는 계속 지원됩니다.   |
-| value | QUANTITY | (선택 사항) 이 트랜잭션과 함께 전송된 값의 정수입니다.                                                                                                                |
-| nonce | QUANTITY | (선택 사항) nonce의 정수입니다.                                                                                                                                          |
+| Name                 | Type         | Description                                                                                                                                                                         |
+| -------------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| from                 | 20-byte DATA | The address from which the transaction is sent.                                                                                                                                     |
+| to                   | 20-byte DATA | The address to which the transaction is directed.                                                                                                                                   |
+| gas                  | QUANTITY     | (optional) The integer of the gas provided for the transaction's execution. It will return unused gas.                                                           |
+| maxFeePerGas         | QUANTITY     | (optional) The maximum amount to pay for the transaction's execution.                                                                                            |
+| maxPriorityFeePerGas | QUANTITY     | (optional) Gas tip cap for dynamic fee transaction in peb.                                                                                                       |
+| input                | DATA         | (optional) The hash of the method signature and the encoded parameter. It replaces `data` field, but `data` field is still supported for backward compatibility. |
+| value                | QUANTITY     | (optional) The integer of values sent with this transaction.                                                                                                     |
+| nonce                | QUANTITY     | (optional) The integer of a nonce.                                                                                                                               |
 
-**리턴 값**
+**Return Value**
 
-| 유형 | 설명
-| --- | --- |
-| 32-byte DATA | transactionHash |
+| Type         | Description          |
+| ------------ | -------------------- |
+| 32-byte DATA | The transaction hash |
 
-
-**예시**
+**Example**
 
 ```shell
 > var tx = eth.pendingTransactions()[0]
 > eth.resend(tx, 750000000000, 300000)
 ```
-
-
-

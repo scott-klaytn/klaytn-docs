@@ -1,48 +1,46 @@
-# Auth 컴포넌트
+# Auth Component
 
 `src/components/Auth.js`:
 
-## `Auth` 컴포넌트 <a href="#auth-component" id="auth-component"></a>
+## `Auth` component <a href="#auth-component" id="auth-component"></a>
 
-1\) 배경\
-2\) `Auth` 컴포넌트 개요\
-3\) `Auth` 컴포넌트 기능: 사용자가 개인키를 입력하여 로그인할 수 있습니다.\
-4\) `Auth` 컴포넌트 기능: 사용자가 키스토어 파일을 가져와서 비밀번호를 입력하여 로그인할 수 있습니다.\
-5\) `Auth` 컴포넌트 기능: 사용자가 브라우저에서 로그아웃하고 지갑 인스턴스 정보를 지울 수 있습니다.
+1\) Background\
+2\) `Auth` component overview\
+3\) `Auth` component feature: User can input private key to login.\
+4\) `Auth` component feature: User can import a keystore file and input password to log in.\
+5\) `Auth` component feature: User can logout and clear the wallet instance information from the browser.
 
-### 1) 배경 <a href="#1-background" id="1-background"></a>
+### 1. Background <a href="#1-background" id="1-background"></a>
 
-블록체인 기반 앱에서는 일반적으로 스마트 컨트랙트와 상호작용합니다.
-컨트랙트와의 상호작용에는 두 가지 유형이 있습니다.
+In a blockchain-based app, we usually interact with smart contracts.\
+There are 2 types of interactions with a contract.\
+`1) Read data from a contract.` `2) Write data to a contract.`
 
-* 컨트랙트에서 데이터 읽기
-* 컨트랙트에 데이터 쓰기
+It is cost-free to read data from contracts.\
+On the other hand, there is a cost for writing data to contract.
 
-컨트랙트에서 데이터를 읽는 데는 비용이 들지 않습니다.
-반면에 컨트랙트에 데이터를 쓰는 데는 비용이 발생합니다.
+cf) `Sending a transaction`\
+Writing data to contracts or blockchain is called 'sending a transaction'.\
+For example, if you send 5 KLAY to your friend, you could think of it as `writing data to the blockchain that I sent 5 KLAY to my friend`.\
+Calling a contract method is the same. You could think of it as `writing data onto the contract that I set variable X to 100`. All actions related to writing data to blockchain or contract is called `sending a transaction`.
 
-참고) `트랜잭션 보내기`\
-컨트랙트나 블록체인에 데이터를 쓰는 것을 '트랜잭션 전송'이라고 합니다.
-예를 들어 친구에게 5 KLAY를 보내면 '내가 친구에게 5 KLAY를 보냈다는 데이터를 블록체인에 쓴다'고 생각하시면 됩니다.
-컨트랙트 메서드를 호출하는 것도 마찬가지입니다. '내가 변수 X를 100으로 설정했다는 데이터를 컨트랙트에 쓴다'고 생각하시면 됩니다. 블록체인이나 컨트랙트에 데이터를 쓰는 모든 행위를 '트랜잭션 전송'이라고 합니다.
+To write data to contract, you should have a Klaytn account which has KLAY to pay for the transaction fee.\
+`Auth` component helps you log in to your app.
 
-컨트랙트에 데이터를 쓰려면 트랜잭션 수수료를 지불할 KLAY가 있는 클레이튼 계정이 있어야 합니다.
-`Auth` 컴포넌트는 앱에 로그인하는 데 도움이 됩니다.
+### 2. `Auth` component overview <a href="#2-auth-component-overview" id="2-auth-component-overview"></a>
 
-### 2) `Auth` 컴포넌트 개요 <a href="#2-auth-component-overview" id="2-auth-component-overview"></a>
+`'Auth.js'` component is the longest code in our tutorial app, so we will break down the code and go over one by one.
 
-`Auth.js` 컴포넌트는 튜토리얼 앱에서 가장 긴 코드이므로 코드를 세분화하여 하나씩 살펴 보겠습니다.
+This component provides the following user interface. ![auth-component](/img/build/tutorials/tutorial-auth-component.png)
 
-이 컴포넌트는 다음과 같은 사용자 인터페이스를 제공합니다. ![Auth 컴포넌트](/img/build/tutorials/tutorial-auth-component.png)
+Main features are:\
+1\) User can input private key to login.\
+2\) User can import a keystore file and input password to login.\
+3\) User can logout and clear the wallet instance information from the browser.
 
-주요 기능은 다음과 같습니다.\
-1\) 사용자가 개인 키를 입력하여 로그인할 수 있습니다.\
-2\) 사용자가 키스토어 파일을 가져와 비밀번호를 입력하여 로그인할 수 있습니다.\
-3\) 사용자가 브라우저에서 로그아웃하고 지갑 인스턴스 정보를 지울 수 있습니다.
+### 3. `Auth` component feature: User can input private key to login. <a href="#3-auth-component-feature-user-can-input-private-key-to-login" id="3-auth-component-feature-user-can-input-private-key-to-login"></a>
 
-### 3) `Auth` 컴포넌트 기능: 사용자가 개인키를 입력하여 로그인할 수 있습니다. <a href="#3-auth-component-feature-user-can-input-private-key-to-login" id="3-auth-component-feature-user-can-input-private-key-to-login"></a>
-
-개인 키로 로그인하려면 `integrateWallet` 메서드가 필요합니다.
+`integrateWallet` method is needed to login with private key.
 
 ```javascript
 integrateWallet = (privateKey) => {
@@ -53,28 +51,28 @@ integrateWallet = (privateKey) => {
 }
 ```
 
-인자로 `privateKey`를 받아 지갑 인스턴스를 생성하는 `integateWallet` 함수를 사용합니다.
+`integateWallet` function takes `privateKey` as an argument, use it to generate a wallet instance.
 
-1행: `const walletInstance = cav.klay.accounts.privateKeyToAccount(privateKey)`\
-이 함수는 `privateKeyToAccount` API로 만든 지갑 인스턴스를 `walletInstance` 변수에 저장합니다.
+Line 1: `const walletInstance = cav.klay.accounts.privateKeyToAccount(privateKey)`\
+It stores the wallet instance made by `privateKeyToAccount` API to the `walletInstance` variable.
 
-2행: `cav.klay.accounts.wallet.add(walletInstance)`\
-트랜잭션을 전송하려면 `cav.klay.accounts.wallet.add(walletInstance)`를 통해 caver에 지갑 인스턴스를 추가해야 합니다.
+Line 2: `cav.klay.accounts.wallet.add(walletInstance)`\
+To send a transaction, you should add a wallet instance to caver through `cav.klay.accounts.wallet.add(walletInstance)`.
 
-3행: `sessionStorage.setItem('walletInstance', JSON.stringify(walletInstance))`\
-`sessionStorage.setItem`는 브라우저의 세션 저장소에 값을 저장하는 데 사용되는 브라우저 API입니다.
-튜토리얼 앱 페이지를 새로고침해도 로그인 상태를 잃지 않도록 하기 위해 지갑 인스턴스를 세션 스토리지에 JSON string로 저장했습니다.
+Line 3: `sessionStorage.setItem('walletInstance', JSON.stringify(walletInstance))`\
+`sessionStorage.setItem` is a browser API used for storing a value to the browser's session storage.\
+Since we want not to lose our logged-in status even we refresh our tutorial app page, we stored our wallet instance to the session storage as a JSON string.
 
-참고) 세션 저장소의 항목은 사용자가 브라우저 탭을 닫으면 사라집니다.
+cf) Items in the session storage disappears when the user closes the browser tab.
 
-4행: `this.reset()`\
-현재 컴포넌트의 상태를 초기 상태로 재설정하여 입력을 지웁니다.
+Line 4: `this.reset()`\
+It resets the current component's state to the initial state to clear your input.
 
-caver-js의 `privateKeyToAccount` API에 대한 자세한 내용은 [caver.klay.accounts.privateKeyToAccount](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#privatekeytoaccount)를 참조하세요.
+For further information about `privateKeyToAccount` API of caver-js, see [caver.klay.accounts.privateKeyToAccount](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#privatekeytoaccount)
 
-### 4) `Auth` 컴포넌트 기능: 사용자가 키스토어 파일을 가져와서 비밀번호를 입력하여 로그인할 수 있습니다. <a href="#4-auth-component-feature-user-can-import-keystore-file-and-input-password-to-log" id="4-auth-component-feature-user-can-import-keystore-file-and-input-password-to-log"></a>
+### 4. `Auth` component feature: User can import keystore file and input password to login. <a href="#4-auth-component-feature-user-can-import-keystore-file-and-input-password-to-log" id="4-auth-component-feature-user-can-import-keystore-file-and-input-password-to-log"></a>
 
-키 저장소와 비밀번호로 로그인하려면 `handleImport` 및 `handleLogin` 메서드가 필요합니다.
+`handleImport` and `handleLogin` methods are needed to login with a keystore and password.
 
 ```javascript
 /**
@@ -113,16 +111,15 @@ handleImport = (e) => {
 }
 ```
 
-사용자로부터 파일을 가져오려면 `FileReader` 브라우저 API를 사용합니다.
-`e.target.files[0]`에는 파일에 대한 메타 정보가 포함됩니다. 파일의 내용을 읽으려면 `fileReader.readAsText(keystore)` API를 호출합니다.
-`fileReader.readAsText(keystore)`를 호출한 후 `fileReader.onload` 함수가 실행되어 파일의 내용을 `e.target.result`로 가져옵니다.
-키스토어 파일을 가져온 후 비밀번호 입력을 받습니다.
+To import a file from user, we use `FileReader` browser API.\
+`e.target.files[0]` contains meta information for the file. To read the content of the file, we call `fileReader.readAsText(keystore)` API.\
+After calling `fileReader.readAsText(keystore)`, `fileReader.onload` function fires to take the content of the file as `e.target.result`.\
+After importing the keystore file, we get password input.
 
-참고) 키 저장소에는 암호화된 개인키가 포함되어 있습니다. 실제 개인 키를 얻기 위해 키 저장소의 암호를 해독하려면 일치하는 비밀번호가 필요합니다.
+cf) Keystore contains an encrypted private key. We need the matching password to decrypt the keystore to get the actual private key.\
+_WARNING Don't expose your keystore file to another person!_
 
-_경고: 키스토어 파일을 다른 사람에게 노출하지 마세요!_
-
-비밀번호를 `<input>` 요소에 입력합니다. 입력한 값은 `handleChange` 메서드를 통해 `password` 상태로 저장됩니다.
+Fill password into `<input>` element. Entered value will be stored as `password` state through `handleChange` method.
 
 ```markup
 <input
@@ -134,9 +131,8 @@ _경고: 키스토어 파일을 다른 사람에게 노출하지 마세요!_
 />
 ```
 
-키스토어 파일과 비밀번호가 모두 준비되었습니다. 이제 `cav.klay.accounts.decrypt(키스토어, 비밀번호)` API를 통해 키스토어 파일을 복호화하여 개인키를 추출할 수 있습니다.
-
-이 API는 개인키가 포함된 지갑 인스턴스를 반환합니다. 개인키를 가져온 후 앞서 살펴본 `integrateWallet` 메서드를 사용할 수 있습니다.
+Both the keystore file and its password are ready. We can now decrypt the keystore file to extract the private key through `cav.klay.accounts.decrypt(keystore, password)` API.\
+This API returns a wallet instance containing the private key. After importing the private key, we can use `integrateWallet` method we've visited earlier.
 
 ```javascript
 handleLogin = () => {
@@ -158,13 +154,13 @@ handleLogin = () => {
 }
 ```
 
-비밀번호로 키스토어 파일을 해독하는 방법에 대한 자세한 내용은 [caver.klay.accounts.decrypt](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#decrypt)를 참조하세요.
+For further information about decrypting keystore file with password, see [caver.klay.accounts.decrypt](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#decrypt)
 
-### 5) `Auth` 컴포넌트 기능: 사용자가 로그아웃하고 브라우저에서 지갑 인스턴스 정보를 제거할 수 있습니다. <a href="#5-auth-component-feature-user-can-logout-remove-wallet-instance-information-from" id="5-auth-component-feature-user-can-logout-remove-wallet-instance-information-from"></a>
+### 5. `Auth` component feature: User can logout, remove wallet instance information from browser. <a href="#5-auth-component-feature-user-can-logout-remove-wallet-instance-information-from" id="5-auth-component-feature-user-can-logout-remove-wallet-instance-information-from"></a>
 
-'로그아웃'은 브라우저와 caver에서 지갑 인스턴스를 제거하는 것을 의미합니다.
-`cav.klay.accounts.wallet.clear()`는 caver에서 모든 지갑 인스턴스를 제거합니다.
-`sessionStorage.removeItem('walletInstance')`는 브라우저의 세션 스토리지에서 지갑 인스턴스를 제거합니다.
+'logout' means removing the wallet instance from the browser and caver.\
+`cav.klay.accounts.wallet.clear()` removes all wallet instances from caver.\
+`sessionStorage.removeItem('walletInstance')` removes the wallet instance from the browser's session storage.
 
 ```javascript
 /**
@@ -179,4 +175,4 @@ removeWallet = () => {
 }
 ```
 
-caver-js에서 지갑 인스턴스를 지우는 방법에 대한 자세한 내용은 [caver.klay.accounts.wallet.clear](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#wallet-clear)를 참조하세요.
+For further information about clearing a wallet instance from caver-js, see [caver.klay.accounts.wallet.clear](../../../../references/sdk/caver-js-1.4.1/api/caver.klay.accounts.md#wallet-clear)

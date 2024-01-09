@@ -1,50 +1,50 @@
-# KEN으로 스마트 컨트랙트 배포하기
+# Deploy smart contract using KEN
 
 ![](/img/build/get-started/klaytnXken.png)
 
-시작하기 전에 몇 가지 클레이튼 관련 용어에 대해 알아봅시다.
+Before you start, let's get familiar with several Klaytn-specific terms.
 
-* **엔드포인트 노드 \(EN\)**: 클레이튼 네트워크에 대한 JSON-RPC API 요청을 처리하는 노드입니다. 엔드포인트 노드는 컨센서스에 참여하지 않습니다.  
-* **KLAY**: 클레이튼 네이티브 코인.
-* **caver-js**: 클레이튼 JSON-RPC API의 JavaScript 구현.
-* **Baobab**: 클레이튼 테스트넷
-* **Cypress**: 클레이튼 메인넷
+- **Endpoint Node (EN)**: A node that handles the JSON-RPC API requests to the Klaytn network. Endpoint Node does not participate in the consensus.
+- **KLAY**: Klaytn native coin.
+- **caver-js**: A JavaScript implementation of Klaytn JSON-RPC APIs.
+- **Baobab**: Klaytn testnet
+- **Cypress**: Klaytn mainnet
 
-이 단계별 가이드는 Baobab 테스트넷의 엔드포인트 노드 \(EN\)을 시작하고 새 계정으로 기본 스마트 컨트랙트를 구축하는 과정을 단계별로 안내합니다. 이 튜토리얼은 EN을 설정하는 방법과 EN을 통해 스마트 컨트랙트를 배포하는 방법의 두 부분으로 구성되어 있습니다.
+This step by step guide will walk you through the process of launching an Endpoint Node (EN) of Baobab testnet and building a basic smart contract with your new account. The tutorial consists of two parts, setting up an EN and deploying a smart contract through your EN.
 
-> 스마트 컨트랙트를 배포하고 트랜잭션을 제출하려면 KLAY에서 트랜잭션 수수료가 필요하기 때문에 본 가이드에서는 **Baobab** 테스트넷을 사용합니다. 개발 목적으로 테스트넷 KLAY는 [Baobab Faucet](https://baobab.wallet.klaytn.foundation/faucet)에서 받을 수 있습니다.
+> This guide uses the **Baobab** testnet because deploying a smart contract and submitting a transaction require transaction fees in KLAY. For the development purpose, testnet KLAY can be obtained from the [Baobab faucet](https://baobab.wallet.klaytn.foundation/faucet).
 
-## 엔드포인트 노드 시작 <a href="#launch-an-en" id="launch-an-en"></a>
+## Launch an Endpoint Node <a href="#launch-an-en" id="launch-an-en"></a>
 
-### 엔드포인트 노드 다운로드 및 초기화(EN) <a href="#download-and-initialize-an-endpoint-node-en" id="download-and-initialize-an-endpoint-node-en"></a>
+### Download and Initialize an Endpoint Node (EN) <a href="#download-and-initialize-an-endpoint-node-en" id="download-and-initialize-an-endpoint-node-en"></a>
 
-제공된 [ken 바이너리 패키지](../../../nodes/downloads/downloads.md#get-the-packages)의 압축을 풀고 파일을 klaytn 폴더에 복사합니다.
+Unzip the provided [ken binary package](../../../nodes/downloads/downloads.md#get-the-packages) and copy the files into the klaytn folder.
 
-**참고**: `ken`으로 시작하는 적절한 패키지를 다운로드하세요.
+**Note**: Please download appropriate package starting with `ken`.
 
-Mac 사용자의 경우, 다음 명령으로 다운로드한 파일의 압축을 풉니다.
+For Mac users, unzip the downloaded file with the following command.
 
 ```bash
 $ tar zxf ken-baobab-vX.X.X-X-darwin-amd64.tar.gz
 $ export PATH=$PATH:$PWD/ken-darwin-amd64/bin
 ```
 
-Linux 사용자의 경우, 다음 명령으로 다운로드한 파일의 압축을 풉니다.
+For Linux users, unzip the downloaded file with the following command.
 
 ```bash
 $ tar zxf ken-baobab-vX.X.X-X-linux-amd64.tar.gz
 $ export PATH=$PATH:$PWD/ken-linux-amd64/bin
 ```
 
-블록체인 데이터를 저장할 데이터 디렉터리를 만들어야 합니다. 이 튜토리얼에서는 홈 디렉터리에 `kend_home` 폴더를 만들겠습니다.
+You should create a data directory to store the blockchain data. In this tutorial, we will create a `kend_home` folder in the home directory.
 
 ```bash
 $ mkdir -p ~/kend_home
 ```
 
-### EN 구성하기 <a href="#configuring-the-en" id="configuring-the-en"></a>
+### Configuring the EN <a href="#configuring-the-en" id="configuring-the-en"></a>
 
-구성 파일인 `kend.conf`는 `ken-xxxxx-amd64/conf/` 아래에 있습니다. 설정 가능한 파라미터에 대한 자세한 내용은 [EN 구성 가이드](../../../misc/operation/configuration.md)를 참고하시기 바랍니다. Baobab 테스트넷의 EN을 실행하려면 아래와 같이 `kend.conf` 파일을 업데이트합니다.
+The configuration file, `kend.conf`, is located under `ken-xxxxx-amd64/conf/`. For the details of configurable parameters, you can refer to the [EN Configuration Guide](../../../misc/operation/configuration.md). To launch an EN of Baobab testnet, please update the `kend.conf` file accordingly as follows.
 
 ```
 # cypress, baobab is only available if you don't specify NETWORK_ID.
@@ -57,27 +57,27 @@ RPC_API="klay,net" # net module should be opened for truffle later on.
 DATA_DIR=~/kend_home
 ```
 
-### EN 론칭하기 <a href="#launching-the-en" id="launching-the-en"></a>
+### Launching the EN <a href="#launching-the-en" id="launching-the-en"></a>
 
-EN을 실행하려면 다음 명령을 실행합니다.
+To launch the EN, execute the following command.
 
 ```bash
 $ kend start
  Starting kend: OK
 ```
 
-### EN 확인 <a href="#checking-the-en" id="checking-the-en"></a>
+### Checking the EN <a href="#checking-the-en" id="checking-the-en"></a>
 
-EN이 실행 중인지 확인하려면 다음 명령을 실행하세요.
+To check if the EN is running, execute the following command.
 
 ```bash
 $ kend status
 kend is running
 ```
 
-### EN 로그 확인하기 <a href="#checking-the-log-of-the-en" id="checking-the-log-of-the-en"></a>
+### Checking the log of the EN <a href="#checking-the-log-of-the-en" id="checking-the-log-of-the-en"></a>
 
-EN의 로그를 확인하려면 다음 명령을 실행하세요.
+To check the log of the EN, execute the following command.
 
 ```bash
 $ tail -f ~/kend_home/logs/kend.out
@@ -86,15 +86,15 @@ INFO[03/26,15:37:49 +09] [5] Imported new chain segment                blocks=1 
 ...
 ```
 
-### 문제 해결 <a href="#troubleshooting" id="troubleshooting"></a>
+### Troubleshooting <a href="#troubleshooting" id="troubleshooting"></a>
 
-클레이튼 엔드포인트 노드 실행에 문제가 있는 경우 [문제 해결](../../../misc/operation/troubleshooting.md)을 참고하시기 바랍니다.
+Please refer to the [Troubleshooting](../../../misc/operation/troubleshooting.md) if you have trouble in launching the Klaytn Endpoint Node.
 
-## 계정 충전하기 <a id="top-up-your-account"></a>
+## Top up your Account <a id="top-up-your-account"></a>
 
-### 콘솔에 연결하기 <a id="attaching-to-the-console"></a>
+### Attaching to the Console <a id="attaching-to-the-console"></a>
 
-클레이튼 엔드포인트 노드는 JavaScript 콘솔과 함께 제공됩니다. 콘솔 명령줄에서 EN에 클레이튼 API 호출의 일부를 시작할 수 있습니다. JavaScript 콘솔에 접속하려면 다음 명령을 실행하세요.
+Klaytn Endpoint Node comes with JavaScript console. From the console command line, you can initiate part of Klaytn API calls to your EN. To attach to the JavaScript console, execute the following command.
 
 ```bash
 $ ken attach ~/kend_home/klay.ipc
@@ -107,13 +107,13 @@ Welcome to the Klaytn JavaScript console
  >
 ```
 
-**참고**: 모든 블록을 다운로드할 때까지 기다려야 합니다. 콘솔에 `klay.blockNumber`를 입력하고 현재 블록 번호와 일치하는지 [여기](https://baobab.scope.klaytn.com/)에서 확인합니다 .
+**NOTE**: You must wait until it downloads all the blocks. Enter `klay.blockNumber` in a console and check whether it matches the current block number [here](https://baobab.scope.klaytn.com/)
 
-**참고**: 사용 가능한 기능 목록을 보려면 `klay` 또는 `personal`을 입력하세요.
+**NOTE**: Type `klay` or `personal` to get the list of available functions.
 
-### 클레이튼 계정 생성하기 <a id="creating-a-new-klaytn-account"></a>
+### Creating a New Klaytn Account <a id="creating-a-new-klaytn-account"></a>
 
-JavaScript 콘솔에서 새 클레이튼 계정을 생성하려면 다음 명령을 실행합니다. 입력한 비밀번호로 개인키가 암호화됩니다.
+To create a new Klaytn account from the JavaScript console, execute the following command. Your private key will be encrypted with the passphrase you enter.
 
 ```javascript
 > personal.newAccount()
@@ -122,20 +122,20 @@ Repeat passphrase:
 "0x75a59b94889a05c03c66c3c84e9d2f8308ca4abd" # created account address
 ```
 
-키스토어 파일은 `kend.conf`에 설정된 EN 데이터 디렉터리 `DATA_DIR`의 `keystore` 폴더에 생성됩니다. 빠른 시작 기본 지침을 따르는 경우 `~/kend_home/keystore/`가 되어야 합니다.
+Keystore file will be created under `keystore` folder in the EN data directory, `DATA_DIR` set in the `kend.conf`. If you follows the quick start default guideline, it must be `~/kend_home/keystore/`.
 
 ```javascript
 $ ls ~/kend_home/keystore/
 UTC--2019-06-24T11-20-15.590879000Z--75a59b94889a05c03c66c3c84e9d2f8308ca4abd
 ```
 
-### 클레이튼 계정 잠금 해제하기 <a id="unlocking-the-klaytn-account"></a>
+### Unlocking the Klaytn Account <a id="unlocking-the-klaytn-account"></a>
 
-생성한 계정을 잠금 해제하려면 다음 명령을 실행합니다. 300초 동안 계정이 잠금 해제됩니다. 
+To unlock the created account, execute the following command. It unlocks the account for 300 seconds.
 
-**참고**: 잠금 해제 시간을 수동으로 설정하려면 이 [링크](../../../references/json-rpc/personal.md#personal_unlockaccount)를 참조하세요. 
+**Note**: If you want to manually set the unlock duration, refer to this [link](../../../references/json-rpc/personal.md#personal_unlockaccount).
 
-**`경고`**: 계정 잠금 해제는 신중하게 수행하지 않으면 매우 위험할 수 있습니다. 해커가 EN을 해킹하면 해커가 토큰을 탈취할 가능성이 있습니다. 더 안전한 방법을 사용하려면 [개인키를 사용한 배포 가이드](../../tutorials/count-dapp/deploy-contracts.md#deploy-method-1-by-private-key)를 참조하세요.
+**`WARNING`**: Unlocking an account could be very dangerous if not done carefully. There are chances that your tokens will be taken away by hackers if your EN is hacked by a hacker. To use safer method, refer to this [deployment guide using private key](../../tutorials/count-dapp/deploy-contracts.md#deploy-method-1-by-private-key)
 
 ```javascript
 > personal.unlockAccount('75a59b94889a05c03c66c3c84e9d2f8308ca4abd') # account address to unlock
@@ -144,64 +144,67 @@ Passphrase: # enter your passphrase
 true
 ```
 
-### Baobab Faucet에서 테스트넷 KLAY 받기 <a id="getting-testnet-klay-from-the-baobab-faucet"></a>
+### Getting testnet KLAY from the Baobab Faucet <a id="getting-testnet-klay-from-the-baobab-faucet"></a>
 
-* KlaytnWallet에서 Baobab Faucet 사용하기.
-* [https://baobab.wallet.klaytn.foundation](https://baobab.wallet.klaytn.foundation/)에 접속합니다.
-* 월렛에서 새 계정을 생성하거나 위의 EN JavaScript 콘솔에서 생성한 키스토어 파일을 사용하여 월렛에 로그인할 수 있습니다.
-* 왼쪽 창 메뉴에서 "KLAY Faucet"로 이동하여 "Run Faucet" 버튼을 클릭하고 150 KLAY를 받습니다.
+- Using the Baobab faucet in KlaytnWallet.
 
-  KLAY Faucet은 24시간에 한 번씩 실행할 수 있습니다.
+- Access [https://baobab.wallet.klaytn.foundation](https://baobab.wallet.klaytn.foundation/).
 
-* KLAY를 받기 위해 새 계정을 생성한 경우, EN에서 생성한 계정으로 KLAY를 보내세요.
+- You can either create a new account from the Wallet or use the keystore file you created from the EN JavaScript console above to log into the Wallet.
 
-### 계정 잔액 확인하기 <a id="checking-the-balance-in-your-account"></a>
+- Go to "KLAY Faucet" from the left pane menu, and click the "Run Faucet" button to get 150 KLAY.
 
-계정 잔액을 확인하려면 다음 명령을 실행하세요.
+  You can run the KLAY Faucet once every 24 hours.
 
-기본 단위는 peb \(1 KLAY = 10^18 peb\)입니다. KLAY 단위에 대한 자세한 정보는 [KLAY 단위](../../../learn/klaytn-native-coin-klay.md#units-of-klay)에서 확인할 수 있습니다.
+- If you created a new account to get KLAY, then send the KLAY to your created account on the EN.
+
+### Checking the Balance in Your Account <a id="checking-the-balance-in-your-account"></a>
+
+To see the balance of your account, execute the following command.
+
+The default unit is peb (1 KLAY = 10^18 peb). More information about KLAY units can be found at [Units of KLAY](../../../learn/klaytn-native-coin-klay.md#units-of-klay).
 
 ```javascript
 > klay.getBalance('75a59b94889a05c03c66c3c84e9d2f8308ca4abd') # enter your account address
 1e+21  # 1000 KLAY
 ```
 
-### 콘솔 종료하기 <a id="exiting-the-console"></a>
+### Exiting the Console <a id="exiting-the-console"></a>
 
-JavaScript 콘솔을 종료하려면 다음 명령을 실행합니다.
+To leave the javascript console, execute the following command.
 
 ```javascript
 > exit
 $
 ```
 
-## 개발 도구 설치 <a id="install-development-tools"></a>
+## Install Development Tools <a id="install-development-tools"></a>
 
-### caver-js 설치하기 <a id="installing-caver-js"></a>
+### Installing caver-js <a id="installing-caver-js"></a>
 
-이렇게 klaytn 프로젝트 디렉터리를 생성하는 것이 좋습니다:
+We recommend to create a klaytn project directory such that:
 
 ```bash
 $ mkdir $HOME/klaytn
 ```
 
-> 진행하려면 `npm`과 `node.js`가 설치되어 있어야 합니다. 시스템에 설치하려면 [get-npm](https://www.npmjs.com/get-npm) 및 [node.js](https://nodejs.org/en/)를 참조하세요.
+> You need `npm` and `node.js` installed to proceed. Please refer to [get-npm](https://www.npmjs.com/get-npm) and [node.js](https://nodejs.org/en/) for installation on your system.
 
-[caver-js](../../../references/sdk/caver-js/caver-js.md)는 클레이튼 네트워크를 위한 JSON RPC 프레임워크입니다(이더리움의 web3.js에 해당). caver-js를 설치에 앞서에 `npm init` 명령어를 통해 `package.json` 파일을 생성한 후, `npm install caver-js`를 입력해 caver-js를 설치해야 합니다.
+​[caver-js](../../../references/sdk/caver-js/caver-js.md) is a JSON RPC framework for the Klaytn network (equivalent to web3.js in Ethereum). Before installing caver-js, you must generate `package.json` file via `npm init` command, and then type `npm install caver-js` to install caver-js.
 
 ```bash
 $ npm init # initialize npm at the klaytn project directory
 $ npm install caver-js
 ```
 
-**참고**: caver-js를 이미 설치한 경우 최신 버전으로 업데이트하세요.
+**NOTE**: If you already installed caver-js, please update it to the latest version.
 
 ```bash
 $ npm cache clean --force # initialize npm cache
 $ npm install caver-js@latest # update caver-js to the latest version
 ```
 
-caver-js를 업데이트하는 동안 다음과 같은 오류가 발생하면 `websocket` 디렉터리에서 `.git` 폴더를 제거하세요.
+If you receive the following errors while updating the caver-js, remove `.git` folder in the `websocket` directory.
 
 ```bash
 npm ERR! path /Users/username/klaytn/node_modules/websocket
@@ -217,22 +220,22 @@ npm ERR!     /Users/username/.npm/_logs/2019-06-25T01_49_37_032Z-debug.log​
 $ rm /Users/username/klaytn/node_modules/websocket/.git
 ```
 
-**참고:** web3.js에서 `web3.eth...`로 시작하는 모든 함수 호출의 경우 `caver.klay...`로 대체해야 합니다.
+**Note:** For all the function calls that begin with `web3.eth...` in web3.js, should be replaced with `caver.klay...`.
 
-`web3.eth.sendTransaction({ ... })` \(X\)
+`web3.eth.sendTransaction({ ... })` (X)
 
-`caver.klay.sendTransaction({ ... })` \(O\)
+`caver.klay.sendTransaction({ ... })` (O)
 
-### Truffle 설치하기 <a id="installing-truffle"></a>
+### Installing Truffle <a id="installing-truffle"></a>
 
-이 튜토리얼에서는 Truffle을 사용하여 Solidity로 작성된 스마트 컨트랙트를 컴파일하고 배포합니다. 현재 Klaytn은 Truffle 버전 4.1.15를 지원합니다. Truffle에 대한 자세한 내용은 다음 사이트를 참고하세요:
+In this tutorial, Truffle is used to compile and deploy smart contracts written in Solidity. Currently, Klaytn supports Truffle version 4.1.15. For further information about Truffle, refer to the following sites:
 
-* Truffle 저장소 - [https://github.com/trufflesuite/truffle](https://github.com/trufflesuite/truffle)
-* Truffle 문서 - [https://trufflesuite.com/docs](https://trufflesuite.com/docs)
+- Truffle repository - [https://github.com/trufflesuite/truffle](https://github.com/trufflesuite/truffle)​
+- Truffle documents - [https://trufflesuite.com/docs](https://trufflesuite.com/docs)​
 
-Truffle을 전역적 또는 지역적으로 설치할 수 있습니다.
+We can install Truffle either globally or locally:
 
-* 전역적으로 설치하려면 다음 명령을 실행합니다.
+- Globally using npm by executing the following commands:
 
 ```bash
 $ sudo npm install -g truffle@4.1.15
@@ -241,9 +244,9 @@ $ sudo npm install solc@0.5.6
 $ cd -
 ```
 
-또는
+or
 
-* 지역적으로 설치하려면 다음 명령을 실행합니다.
+- Locally, i.e., in your local directory, by executing the followings:
 
 ```bash
 # Assuming you are in $HOME/klaytn/.
@@ -255,16 +258,16 @@ $ ln -s node_modules/truffle/build/cli.bundled.js truffle
 $ export PATH=`pwd`:$PATH
 ```
 
-### vvisp 설치하기 <a id="installing-vvisp"></a>
+### Installing vvisp <a id="installing-vvisp"></a>
 
-vvisp는 스마트 컨트랙트 개발을 위한 사용하기 쉬운 CLI 도구/프레임워크이며, [HEACHI LABS](https://henesis.io/)에서 제공합니다. 명령어 하나로 클레이튼 스마트 컨트랙트의 환경 설정, 배포, 실행을 쉽게 할 수 있습니다. Truffle 프레임워크를 지원하므로 Truffle에 익숙한 개발자도 어려움 없이 vvisp를 사용할 수 있습니다.
+vvisp is an easy-to-use cli tool/framework for developing smart contracts, provided by [HEACHI LABS](https://henesis.io/). You can easily set environment, deploy and execute Klaytn smart contracts with a single-command. It supports the Truffle framework, so developers familiar with Truffle can use vvisp without difficulty.
 
-여기서는 vvisp를 설치하고 이를 이용해 클레이튼 dApp 개발 환경을 설정하는 방법을 소개합니다.
+Here, we introduce how to install vvisp and use it to set up the Klaytn dApp development environment.
 
-* vvisp 리포지토리 - [https://github.com/HAECHI-LABS/vvisp](https://github.com/HAECHI-LABS/vvisp)
-* vvisp 문서 - [https://github.com/HAECHI-LABS/vvisp/blob/dev/README_KLAYTN.md](https://github.com/HAECHI-LABS/vvisp/blob/dev/README_KLAYTN.md)
+- vvisp repository - [https://github.com/HAECHI-LABS/vvisp](https://github.com/HAECHI-LABS/vvisp)​
+- vvisp document - [https://github.com/HAECHI-LABS/vvisp/blob/dev/README_KLAYTN.md](https://github.com/HAECHI-LABS/vvisp/blob/dev/README_KLAYTN.md)​
 
-다음 명령어를 실행하여 npm 또는 yarn이 있는 경우 vvisp를 쉽게 설치할 수 있습니다:
+vvisp can be easily installed if you have npm or yarn by executing the following command:
 
 ```bash
 $ npm install -g @haechi-labs/vvisp
@@ -272,9 +275,7 @@ $ npm install -g @haechi-labs/vvisp
 $ yarn global add @haechi-labs/vvisp
 ```
 
-설치가 완료되면 vvisp 명령을 사용하여 제대로 설치되었는지 확인할 수 있습니다.
-
-**참고**: **v2.1.0** 이상의 버전을 사용해야 합니다.
+Upon installation, you can utilize the vvisp command to ensure it has been installed properly. **NOTE**: You should use version over **v2.1.0**.
 
 ```bash
 $ vvisp
@@ -307,30 +308,30 @@ $ vvisp --version
 v2.1.0
 ```
 
-## 스마트 컨트랙트 배포 <a id="deploy-a-smart-contract"></a>
+## Deploy a Smart Contract <a id="deploy-a-smart-contract"></a>
 
-이제 클레이튼 스마트 컨트랙트를 개발하고 배포할 준비가 되었습니다!
+Now we are ready to develop and deploy Klaytn smart contracts!
 
-### 프로젝트 디렉터리 만들기 <a id="creating-a-project-directory"></a>
+### Creating a Project Directory <a id="creating-a-project-directory"></a>
 
-먼저 소스 코드가 있는 디렉터리를 만듭니다.
+First of all, create a directory where the source code locates.
 
 ```bash
 $ mkdir klaytn-testboard
 $ cd klaytn-testboard
 ```
 
-### Truffle 초기화하기 <a id="initializing-truffle"></a>
+### Initializing Truffle <a id="initializing-truffle"></a>
 
-컨트랙트 배포를 위해 Truffle을 초기화합니다.
+Initialize Truffle for contract deployment.
 
 ```bash
 $ truffle init
 ```
 
-### Solidity에서 간단한 스마트 컨트랙트 작성하기 <a id="writing-a-simple-smart-contract-in-solidity"></a>
+### Writing a Simple Smart Contract in Solidity <a id="writing-a-simple-smart-contract-in-solidity"></a>
 
-`klaytn-testboard/contracts` 디렉터리에 `KlaytnGreeter.sol`을 생성합니다.
+Create `KlaytnGreeter.sol` at `klaytn-testboard/contracts` directory.
 
 ```bash
 $ cd contracts
@@ -338,7 +339,7 @@ $ touch KlaytnGreeter.sol
 $ vi KlaytnGreeter.sol
 ```
 
-KlaytnGreeter.sol에 다음 코드를 작성합니다.
+Write the following code in KlaytnGreeter.sol.
 
 ```text
 pragma solidity 0.5.6;
@@ -365,7 +366,7 @@ contract KlaytnGreeter is Mortal {
 }
 ```
 
-### 마이그레이션 스크립트 수정하기 <a id="modifying-the-migration-script"></a>
+### Modifying the Migration Script <a id="modifying-the-migration-script"></a>
 
 ```bash
 $ cd ..
@@ -373,7 +374,7 @@ $ cd migrations
 $ vi 1_initial_migration.js
 ```
 
-1_initial_migration.js`를 다음과 같이 수정합니다.
+Modify `1_initial_migration.js` as the following.
 
 ```javascript
 const Migrations = artifacts.require("./Migrations.sol");
@@ -384,18 +385,18 @@ module.exports = function(deployer) {
 };
 ```
 
-### Truffle을 사용하여 스마트 컨트랙트 배포하기 <a id="deploying-a-smart-contract-using-truffle"></a>
+### Deploying a Smart Contract using Truffle <a id="deploying-a-smart-contract-using-truffle"></a>
 
-Truffle.js에 클레이튼의 네트워크 정보를 입력합니다.
+Enter Klaytn's network information into truffle.js.
 
-**`경고`**: 현재 Klaytn Baobab 네트워크의 가스 가격은 25Gpeb \(**다른 숫자를 사용하려고 하면 오류를 반환합니다**\)로 고정되어 있습니다.
+**`WARNING`**: Currently Klaytn Baobab network's gasPrice is fixed to 25 Gpeb (**It returns an error if you attempt to use any other number**).
 
 ```bash
 $ cd ..
 $ vi truffle-config.js
 ```
 
-아래와 같이 구성을 수정합니다.
+Modify configuration as below
 
 ```javascript
 // truffle-config.js
@@ -418,13 +419,13 @@ module.exports = {
 };
 ```
 
-다음 명령을 사용하여 컨트랙트를 배포합니다.
+Deploy the contract using the following command.
 
-**참고**: 배포할 네트워크를 선택하려면 `--network`를 사용하고 덮어쓰려면 `--reset`을 사용합니다.
+**NOTE**: Use `--network` to select which network to deploy and `--reset` to overwrite.
 
-**참고**: 클레이튼 노드가 실행 중인지 확인하세요.
+**NOTE**: Make sure that your Klaytn node is running.
 
-컨트랙트 주소 뒤에 `KlaytnGreeter`'가 표시됩니다:
+Your contract address is displayed followed `KlaytnGreeter`:
 
 ```bash
 $ truffle deploy --network klaytn --reset
@@ -441,7 +442,7 @@ Saving successful migration to network...
 Saving artifacts...
 ```
 
-**`경고`**: 계정이 잠겨 있으면 오류를 반환합니다.
+**`WARNING`**: It returns an error when your account is locked.
 
 ```bash
 Running migration: 1_initial_migration.js
@@ -451,7 +452,7 @@ Error encountered, bailing. Network state unknown. Review successful transaction
 Error: authentication needed: password or unlock
 ```
 
-이렇게 계정을 잠금 해제할 수 있습니다.
+This is how you unlock your account.
 
 ```javascript
 > personal.unlockAccount('0x775a59b94889a05c03c66c3c84e9d2f8308ca4abd')
@@ -460,22 +461,22 @@ Passphrase:
 true
 ```
 
-이제 준비가 완료되었습니다. 다시 배포해 보세요.
+And then you are ready to go. Try deploy again.
 
-## 배포 확인 <a id="check-the-deployment"></a>
+## Check the Deployment <a id="check-the-deployment"></a>
 
-### caver-js를 사용하여 배포된 바이트 코드 확인하기 <a id="checking-the-deployed-byte-code-using-caver-js"></a>
+### Checking the Deployed Byte Code using caver-js <a id="checking-the-deployed-byte-code-using-caver-js"></a>
 
-배포된 스마트 컨트랙트의 바이트 코드를 확인하려면 `getCode`를 사용합니다.
+Use `getCode` for checking the byte code of the deployed smart contract.
 
-먼저 테스트 파일을 만들어서 엽니다.
+First, create a test file and open it.
 
 ```bash
 $ touch test-klaytn.js
 $ open test-klaytn.js
 ```
 
-다음 테스트 코드를 작성합니다. 방금 배포한 컨트랙트 주소를 입력해야 합니다.
+Write the following test code. Make sure you enter the contract address you just deployed.
 
 ```javascript
 // test-klaytn.js
@@ -486,20 +487,20 @@ const contractAddress = '0x65ca27ed42abeef230a37317a574058ff1372b34'
 caver.klay.getCode(contractAddress).then(console.log);
 ```
 
-코드를 실행합니다.
+Run the code.
 
 ```bash
 $ node test-klaytn.js
 0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff16806341c0e1b514610051578063cfae321714610068575b600080fd5b34801561005d57600080fd5b506100666100f8565b005b34801561007457600080fd5b5061007d610189565b6040518080602001828103825283818151815260200191508051906020019080838360005b838110156100bd5780820151818401526020810190506100a2565b50505050905090810190601f1680156100ea5780820380516001836020036101000a031916815260200191505b509250505060405180...
 ```
 
-### 배포된 스마트 컨트랙트에서 함수 호출하기 <a id="calling-functions-in-the-deployed-smart-contract"></a>
+### Calling functions in the Deployed Smart Contract <a id="calling-functions-in-the-deployed-smart-contract"></a>
 
-JavaScript를 사용하여 컨트랙트에서 `greet()`를 호출합니다.
+Use JavaScript to call the `greet()` in the contract.
 
-**참고**: 스마트 컨트랙트에서 특정 함수를 호출하기 위해서는 ABI \(Application Binary Interface\) 파일이 필요합니다. Truffle은 컨트랙트를 배포할 때 `./build/contracts/`에 `abi` 속성이 포함된 .json 파일을 자동으로 생성합니다.
+**NOTE**: In order to call specific functions in smart contracts, you need an ABI (Application Binary Interface) file. When Truffle deploys your contract, it automatically creates .json file at `./build/contracts/` which contains `abi` property.
 
-위에 작성한 테스트 코드에 다음 줄을 추가합니다.
+Append the following lines to the test code written above.
 
 ```javascript
 // test-klaytn.js
@@ -516,7 +517,7 @@ const klaytnGreeter = new caver.klay.Contract(KlaytnGreeter.abi, contractAddress
 klaytnGreeter.methods.greet().call().then(console.log);
 ```
 
-테스트 코드를 실행합니다.
+Run the test code.
 
 ```bash
 $ node test-klaytn.js
@@ -524,4 +525,4 @@ $ node test-klaytn.js
 Hello, Klaytn # This is from KlyatnGreeter.methods.greet()
 ```
 
-**"안녕하세요, 클레이튼입니다"라는 메시지가 표시되면 작업을 완료한 것입니다. 축하합니다!**
+**If you got "Hello, Klaytn", you've completed the task. Congrats!**

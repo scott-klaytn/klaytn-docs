@@ -1,9 +1,10 @@
-# 자주 쓰는 명령어
+# Frequently Used Commands
 
-## 클레이튼 디렉터리(일반적으로 "클레이튼 DIR") 찾는 방법
+## How to find the Klaytn Directory (Normally “Klaytn DIR”)
 
----
-클레이튼 디렉터리는 `kcn` 또는 `kpn` 설정에서 확인할 수 있습니다. 설정 파일은 `/etc/kcnd/conf` 또는 `/etc/kpnd/conf` 아래에 있습니다.
+***
+
+You can check Klaytn directory at `kcn` or `kpn` config. Config file is located under `/etc/kcnd/conf` or `/etc/kpnd/conf`.
 
 ```bash
 cat /etc/kcnd/conf/kcnd.conf (or /etc/kpnd/conf/kpnd.conf)
@@ -13,10 +14,11 @@ DATA_DIR=/var/kcnd/data/
 LOG_DIR=/var/kcnd/logs/
 ```
 
-## 클레이튼 콘솔에 접속하는 방법
+## How to connect to Klaytn Console
 
----
-클레이튼 API에 연결하여 노드 및 네트워크 상태를 확인합니다.
+***
+
+Connect to Klaytn API to check node and network status.
 
 ```bash
 # execute the command below in the Klaytn DATA_DIR Path
@@ -24,7 +26,7 @@ $ sudo kcn attach klay.ipc
 > 
 ```
 
-## 유용한 API
+## Useful APIs
 
 ```bash
 # Check current block Number
@@ -44,7 +46,7 @@ $ sudo kcn attach klay.ipc
   > admin.removePeer("kni")
 ```
 
-## API 결과만 가져오기
+## How to get the API Result only
 
 ```jsx
 # execute the command below in the Klaytn DATA_DIR Path

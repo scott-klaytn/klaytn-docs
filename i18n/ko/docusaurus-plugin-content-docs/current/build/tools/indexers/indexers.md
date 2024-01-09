@@ -1,7 +1,7 @@
-# 인덱서
+# Indexers
 
-블록체인 인덱서는 블록체인 기술에 사용되는 도구로, 블록체인에 저장된 데이터의 검색, 쿼리, 액세스의 효율성과 속도를 개선합니다. 블록체인 데이터의 체계적인 데이터베이스를 생성하고 유지하여 사용자가 전체 블록체인을 처음부터 처리할 필요 없이 정보를 빠르게 검색할 수 있도록 합니다.
+Blockchain indexers are tools used in the context of blockchain technology to improve the efficiency and speed of searching, querying, and accessing data stored on a blockchain. They create and maintain organized databases of the blockchain's data, allowing users to quickly retrieve information without needing to process the entire blockchain from scratch.
 
-클레이튼과 통합하여 블록체인 인덱싱 서비스를 제공하는 공급자는 다음과 같습니다:
+The following providers have integrated with Klaytn to deliver blockchain indexing services:
 
-* [SubQuery Network](https://academy.subquery.network/)
+- [SubQuery Network](https://academy.subquery.network/)
