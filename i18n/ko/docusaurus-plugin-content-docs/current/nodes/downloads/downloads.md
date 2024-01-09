@@ -1,12 +1,12 @@
 ---
-sidebar_label: Node Package Downloads
+sidebar_label: 노드 패키지 다운로드
 ---
 
-# Download
+# 다운로드
 
-## Get the Packages <a id="get-the-packages"></a>
+## 패키지 받기 <a id="get-the-packages"></a>
 
-You can get the packages for CN, PN, EN, SCN, SPN and SEN.
+CN, PN, EN, SCN, SPN 및 SEN용 패키지를 받을 수 있습니다.
 
 - [v1.12.0](./v1.12.0.md)
 - [v1.11.1](./v1.11.1.md)
@@ -44,9 +44,9 @@ You can get the packages for CN, PN, EN, SCN, SPN and SEN.
 - [v0.9.6](./v0.9.6.md)
 - [v0.8.2](./v0.8.2.md)
 
-## Get the Sources <a id="get-the-sources"></a>
+## 소스 가져오기 <a id="get-the-sources"></a>
 
-You can retrieve the source code through Git. Documentation is hosted on GoDoc.
+Git을 통해 소스 코드를 검색할 수 있습니다. 문서는 GoDoc에서 호스팅됩니다.
 
 - [github/klaytn](https://github.com/klaytn/klaytn)
 - [godoc/klaytn](https://godoc.org/github.com/klaytn/klaytn)
