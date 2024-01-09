@@ -1,16 +1,16 @@
-# Create Accounts
+# 계정 만들기
 
-## Creating a New Account <a id="creating-a-new-account"></a>
+## 새 계정 만들기 <a id="creating-a-new-account"></a>
 
-This will create a new account and print the address on the screen. A keystore file is created under the data directory.
+이렇게 하면 새 계정이 생성되고 화면에 주소가 인쇄됩니다. 데이터 디렉터리 아래에 키스토어 파일이 생성됩니다.
 
-**Klaytn Keystore File**
+**클레이튼 키스토어(keystore) 파일**
 
-When you create an account, a keystore file is created. The keystore file is an encrypted version of your unique Klaytn private key that you will use to sign your transactions. The keystore file name has the following format:
+계정을 생성하면 키스토어 파일이 생성됩니다. 키스토어 파일은 트랜잭션에 서명할 때 사용할 고유한 클레이튼 개인키의 암호화된 버전입니다. 키스토어 파일 이름은 다음과 같은 형식입니다:
 
 - `UTC--<created_at UTC ISO8601>-<address hex>`
 
-It is safe to transfer the entire directory or the individual keystore file therein between Klaytn nodes. Note that in case you are adding keys to your node from a different node, the order of accounts may change. So make sure you do not rely on the index in your scripts or code snippets.
+클레이튼 노드 간에 전체 디렉터리 또는 그 안에 있는 개별 키스토어 파일을 전송하는 것은 안전합니다. 다른 노드에서 노드에 키를 추가하는 경우 계정 순서가 변경될 수 있습니다. 따라서 스크립트나 코드 스니펫의 인덱스에 의존하지 않도록 주의하세요.
 
 ### ken <a id="ken"></a>
 
@@ -20,7 +20,7 @@ $ ken account new --password <passwordfile> --datadir <DATADIR>
 $ ken account new --password <(echo $mypassword) --datadir <DATADIR>
 ```
 
-**`WARNING`**: Note that using a password file is meant for testing only; it is a bad idea to save your password in a file or expose it in any other way. If you use the password flag with a password file, best to make sure the file is not readable or even listable for anyone but you. You achieve this with:
+**`경고`**: 비밀번호 파일은 테스트용으로만 사용해야 하며, 비밀번호를 파일에 저장하거나 다른 방식으로 노출하는 것은 좋지 않습니다. 비밀번호 파일에 비밀번호 플래그를 사용하는 경우, 본인 외의 다른 사람이 파일을 읽거나 나열할 수 없도록 하는 것이 가장 좋습니다. You achieve this with:
 
 ```bash
 $ touch /path/to/password
@@ -30,23 +30,23 @@ I type my pass here
 ^D
 ```
 
-### JavaScript Console <a id="javascript-console"></a>
+### JavaScript 콘솔 <a id="javascript-console"></a>
 
-On the console, you can call the following function to create an account:
+콘솔에서 다음 함수를 호출하여 계정을 만들 수 있습니다:
 
 ```javascript
 > personal.newAccount("passphrase")
 ```
 
-The account is saved in an encrypted format. You **must** remember this passphrase to unlock your account in the future.
+계정은 암호화된 형식으로 저장됩니다. 나중에 계정을 잠금 해제하려면 이 비밀번호를 **반드시** 기억해야 합니다.
 
-## Importing an Account <a id="importing-an-account"></a>
+## 계정 가져오기 <a id="importing-an-account"></a>
 
-You can import an account using a keyfile. The keyfile is assumed to contain an unencrypted private key as canonical EC raw bytes encoded into hex. In simpler terms, it is a private key in plain text without the leading `0x`.
+키 파일(keyfile)을 사용하여 계정을 가져올 수 있습니다. 키 파일에는 암호화되지 않은 개인 키가 16진수로 인코딩된 표준 EC Raw 바이트가 포함된 것으로 가정합니다. 간단히 말해서 선행 '0x'가 없는 일반 텍스트로 된 개인 키입니다.
 
-This imports an unencrypted private key from the given keyfile, creates a new account, generates a keystore file under the data directory, and prints the address in the console. You must remember the passphrase to unlock your account in the future.
+이렇게 하면 지정된 키 파일에서 암호화되지 않은 개인 키를 가져와서 새 계정을 만들고, 데이터 디렉터리 아래에 키스토어 파일을 생성한 다음 콘솔에 주소를 인쇄합니다. 나중에 계정을 잠금 해제하려면 비밀번호를 기억해 두어야 합니다.
 
-**NOTE**: If you can directly copy your keystore files to another Klaytn instance, this import/export mechanism is not needed.
+**참고**: 키스토어 파일을 다른 클레이튼 인스턴스로 직접 복사할 수 있다면 이 가져오기/내보내기 메커니즘이 필요하지 않습니다.
 
 ### ken <a id="ken-1"></a>
 
@@ -55,7 +55,7 @@ $ ken account import --datadir <datadir> <keyfile>
 $ ken account import --password <passwordfile> --datadir <datadir> <keyfile>
 ```
 
-### JavaScript Console <a id="javascript-console-1"></a>
+### JavaScript 콘솔 <a id="javascript-console-1"></a>
 
 ```bash
 > personal.importRawKey('{private key}', 'mypassword')
